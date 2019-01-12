@@ -1,0 +1,4 @@
+# depslib dependency file v1.0
+1546637597 source:/home/steven/Documents/Programming/OpenCV_cpp/OPENCV_Sandbox/main.cpp
+	<opencv2/opencv.hpp>
+

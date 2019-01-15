@@ -4,7 +4,7 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "/home/steven/Documents/Programming/OpenCV_cpp/OPENCV_Sandbox/main.cpp" "/home/steven/Documents/Programming/OpenCV_cpp/OPENCV_Sandbox/build/CMakeFiles/OPENCV_Sandbox.dir/main.cpp.o"
+  "/home/steven/Documents/Programming/USUPACR/OPENCV_Sandbox/main.cpp" "/home/steven/Documents/Programming/USUPACR/OPENCV_Sandbox/build/CMakeFiles/OPENCV_Sandbox.dir/main.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 

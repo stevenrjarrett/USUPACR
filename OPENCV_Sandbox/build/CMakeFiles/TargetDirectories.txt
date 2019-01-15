@@ -1,3 +1,3 @@
-/home/steven/Documents/Programming/OpenCV_cpp/OPENCV_Sandbox/build/CMakeFiles/edit_cache.dir
-/home/steven/Documents/Programming/OpenCV_cpp/OPENCV_Sandbox/build/CMakeFiles/rebuild_cache.dir
-/home/steven/Documents/Programming/OpenCV_cpp/OPENCV_Sandbox/build/CMakeFiles/OPENCV_Sandbox.dir
+/home/steven/Documents/Programming/USUPACR/OPENCV_Sandbox/build/CMakeFiles/edit_cache.dir
+/home/steven/Documents/Programming/USUPACR/OPENCV_Sandbox/build/CMakeFiles/rebuild_cache.dir
+/home/steven/Documents/Programming/USUPACR/OPENCV_Sandbox/build/CMakeFiles/OPENCV_Sandbox.dir

@@ -580,3 +580,31 @@ Linking C executable cmTC_38793
 make[1]: Leaving directory '/home/steven/Documents/Programming/OpenCV_cpp/OPENCV_Sandbox/build/CMakeFiles/CMakeTmp'
 
 
+Determining if the include file pthread.h exists passed with the following output:
+Change Dir: /home/steven/Documents/Programming/USUPACR/OPENCV_Sandbox/build/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/make" "cmTC_ceff8/fast"
+/usr/bin/make -f CMakeFiles/cmTC_ceff8.dir/build.make CMakeFiles/cmTC_ceff8.dir/build
+make[1]: Entering directory '/home/steven/Documents/Programming/USUPACR/OPENCV_Sandbox/build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_ceff8.dir/CheckIncludeFile.c.o
+/usr/bin/cc    -fPIC    -o CMakeFiles/cmTC_ceff8.dir/CheckIncludeFile.c.o   -c /home/steven/Documents/Programming/USUPACR/OPENCV_Sandbox/build/CMakeFiles/CMakeTmp/CheckIncludeFile.c
+Linking C executable cmTC_ceff8
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_ceff8.dir/link.txt --verbose=1
+/usr/bin/cc  -fPIC     CMakeFiles/cmTC_ceff8.dir/CheckIncludeFile.c.o  -o cmTC_ceff8 -rdynamic 
+make[1]: Leaving directory '/home/steven/Documents/Programming/USUPACR/OPENCV_Sandbox/build/CMakeFiles/CMakeTmp'
+
+
+Determining if the function pthread_create exists in the pthread passed with the following output:
+Change Dir: /home/steven/Documents/Programming/USUPACR/OPENCV_Sandbox/build/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/make" "cmTC_a9307/fast"
+/usr/bin/make -f CMakeFiles/cmTC_a9307.dir/build.make CMakeFiles/cmTC_a9307.dir/build
+make[1]: Entering directory '/home/steven/Documents/Programming/USUPACR/OPENCV_Sandbox/build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_a9307.dir/CheckFunctionExists.c.o
+/usr/bin/cc    -fPIC -DCHECK_FUNCTION_EXISTS=pthread_create   -o CMakeFiles/cmTC_a9307.dir/CheckFunctionExists.c.o   -c /usr/share/cmake-3.5/Modules/CheckFunctionExists.c
+Linking C executable cmTC_a9307
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_a9307.dir/link.txt --verbose=1
+/usr/bin/cc  -fPIC -DCHECK_FUNCTION_EXISTS=pthread_create    CMakeFiles/cmTC_a9307.dir/CheckFunctionExists.c.o  -o cmTC_a9307 -rdynamic -lpthread 
+make[1]: Leaving directory '/home/steven/Documents/Programming/USUPACR/OPENCV_Sandbox/build/CMakeFiles/CMakeTmp'
+
+

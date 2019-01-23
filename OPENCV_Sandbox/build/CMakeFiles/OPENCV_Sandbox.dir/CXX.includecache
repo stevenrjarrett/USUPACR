@@ -6,11 +6,7 @@
 
 #IncludeRegexTransform: 
 
-/home/steven/Documents/Programming/USUPACR/OPENCV_Sandbox/main.cpp
-tracking.cpp
-/home/steven/Documents/Programming/USUPACR/OPENCV_Sandbox/tracking.cpp
-
-/home/steven/Documents/Programming/USUPACR/OPENCV_Sandbox/tracking.cpp
+/home/steven/Documents/Programming/USUPACR/OPENCV_Sandbox/Tracking_matching_Dual-camera.cpp
 opencv2/opencv.hpp
 -
 opencv2/tracking.hpp
@@ -19,6 +15,10 @@ opencv2/core/ocl.hpp
 -
 cmath
 -
+
+/home/steven/Documents/Programming/USUPACR/OPENCV_Sandbox/main.cpp
+Tracking_matching_Dual-camera.cpp
+/home/steven/Documents/Programming/USUPACR/OPENCV_Sandbox/Tracking_matching_Dual-camera.cpp
 
 /usr/local/include/opencv/cxcore.h
 opencv2/core/core_c.h

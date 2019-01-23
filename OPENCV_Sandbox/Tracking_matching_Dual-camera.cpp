@@ -6,6 +6,31 @@
 using namespace cv;
 using namespace std;
 
+// Macros
+
+#define PI 3.141592653589
+#define CDIST 0.30             // Center distance between cameras
+
+// Header
+
+cv::Rect2d MatchImage( cv::Mat& img, cv::Mat& templ, const int match_method = TM_SQDIFF);
+
+// Global Variables
+
+bool use_mask = false;
+
+// Custom data types
+
+struct coordinate
+{
+    double x,y,z;
+    coordinate(double _x=0, double _y=0, double _z=0):
+        x(_x),
+        y(_y),
+        z(_z)
+    {}
+};
+
 // Convert to string
 #define SSTR( x ) static_cast< std::ostringstream & >( \
 ( std::ostringstream() << std::dec << x ) ).str()
@@ -56,53 +81,51 @@ int main(int argc, char **argv)
         return 1;
     }
 
-    // Read first frame
-    Mat frame;
-    bool ok = video.read(frame);
+    // Read first lframe
+    Mat lframe, rframe;
+    bool ok = video.read(lframe);
+//    bool ok2 = video2.read(rframe);
 
     // Define initial bounding box
-    Rect2d bbox(3*frame.cols/8, frame.rows/4, frame.cols/4, frame.rows/2);
+    Rect2d lbbox(3*lframe.cols/8, lframe.rows/4, lframe.cols/4, lframe.rows/2);
+    Rect2d rbbox;
     while(true)
     {
-    //    Rect2d bbox(frame.rows/4, frame.cols/4, 3*frame.rows/4, 3*frame.cols/4);
+    //    Rect2d lbbox(lframe.rows/4, lframe.cols/4, 3*lframe.rows/4, 3*lframe.cols/4);
 
         // Uncomment the line below to select a different bounding box
-        // bbox = selectROI(frame, false);
+        // lbbox = selectROI(lframe, false);
         // Display bounding box.
-        rectangle(frame, bbox, Scalar( 255, 0, 0 ), 2, 1 );
-        imshow("Tracking", frame);
+        rectangle(lframe, lbbox, Scalar( 255, 0, 0 ), 2, 1 );
+        imshow("Tracking", lframe);
 
         char c = cv::waitKey(30);
         if(c=='\n' || c==13 || c==27)
             break;
 
-        video.read(frame);
+        video.read(lframe);
 
     }
 
-    tracker->init(frame, bbox);
+    tracker->init(lframe, lbbox);
 
-    double angle = 0.0;
-
-    while(video.read(frame))
+    double al = 0.0,
+           ar = 0.0;
+    coordinate person;
+    while(video.read(lframe) && video2.read(rframe))
     {
         // Start timer
         double timer = (double)getTickCount();
 
         // Update the tracking result
-        bool ok = tracker->update(frame, bbox);
-
-        // get the template image for image matching
-        Mat imgTemplate;
-        frame(bbox).copyTo(imgTemplate);
-
-        // create the result matrix
+        bool ok = tracker->update(lframe, lbbox);
 
         // Match the image
-
-        // Normalize and find the best match
-
-        // Display best result
+        if(ok)
+        {
+            Mat templ = lframe(lbbox);
+            rbbox = MatchImage(rframe, templ);
+        }
 
         // Calculate Frames per second (FPS)
         float fps = getTickFrequency() / ((double)getTickCount() - timer);
@@ -110,30 +133,56 @@ int main(int argc, char **argv)
         if (ok)
         {
             // Tracking success : Draw the tracked object
-            rectangle(frame, bbox, Scalar( 255, 0, 0 ), 2, 1 );
+            rectangle(lframe, lbbox, Scalar( 255, 0, 0 ), 2, 1 );
+            rectangle(rframe, rbbox, Scalar( 255, 0, 0 ), 2, 1 );
 
-            // calculate angle
-            double xcntr = bbox.x+bbox.width/2;
-            double x = xcntr - (frame.cols/2);
-            angle = 180.0/3.1415926*atan(x/((double)frame.cols/2)*tan(3.1415926/6));//x/((double)frame.cols/2) * 30.0;
+            // calculate distance
+                // Angle 1
+                double lxcntr = lbbox.x+lbbox.width/2;
+                double lx = lxcntr - (lframe.cols/2);
+                double langle = atan(lx/((double)lframe.cols/2)*tan(3.1415926/6));//x/((double)lframe.cols/2) * 30.0;
+                al = PI/2 - langle; // angle to be used for calculations
+                // Angle 2
+                double rxcntr = rbbox.x+rbbox.width/2;
+                double rx = rxcntr - (rframe.cols/2);
+                double rangle = atan(rx/((double)rframe.cols/2)*tan(3.1415926/6));//x/((double)lframe.cols/2) * 30.0;
+                ar = PI/2 + rangle;
+                //
+                double a3 = PI - al - ar;          //3rd angle of camera-camera-person triangle
+                double d1 = CDIST*(sin(ar)/sin(a3));  // distance from left camera to person
+                person.y = d1*sin(al);
+                person.x = d1*cos(al) - CDIST/2;
+
+//                std::cout << "a3 = " << a3 << '\n'
+//                          << "d1 = " << d1 << '\n'
+//                          << "x  = " << person.x << '\n'
+//                          << "y  = " << person.y << "\n\n";
+
         }
         else
         {
             // Tracking failure detected.
-            putText(frame, "Tracking failure detected", Point(100,80), FONT_HERSHEY_SIMPLEX, 0.75, Scalar(0,0,255),2);
+            putText(lframe, "Tracking failure detected", Point(10,80), FONT_HERSHEY_SIMPLEX, 0.75, Scalar(0,0,255),2);
         }
 
-        // Display tracker type on frame
-        putText(frame, trackerType + " Tracker", Point(100,20), FONT_HERSHEY_SIMPLEX, 0.75, Scalar(50,170,50),2);
+        // Display tracker type on lframe
+        putText(lframe, trackerType + " Tracker", Point(10,20), FONT_HERSHEY_SIMPLEX, 0.75, Scalar(100,100,255),2);
 
-        // Display FPS on frame
-        putText(frame, "FPS : " + SSTR(int(fps)), Point(100,50), FONT_HERSHEY_SIMPLEX, 0.75, Scalar(50,170,50), 2);
+        // Display FPS on lframe
+        putText(lframe, "FPS : " + SSTR(int(fps)), Point(10,50), FONT_HERSHEY_SIMPLEX, 0.75, Scalar(100,100,255), 2);
 
-        // Display angle on frame
-        putText(frame, "Angle : " + SSTR(angle), Point(100,70), FONT_HERSHEY_SIMPLEX, 0.75, Scalar(50,170,50), 2);
+        // Display langle on lframe
+        putText(lframe, "Angle : " + SSTR(180.0/PI*al), Point(10,70), FONT_HERSHEY_SIMPLEX, 0.75, Scalar(100,100,255), 2);
+        putText(rframe, "Angle : " + SSTR(180.0/PI*ar), Point(10,20), FONT_HERSHEY_SIMPLEX, 0.75, Scalar(100,100,255), 2);
 
-        // Display frame.
-        imshow("Tracking", frame);
+        //Display person's position on frame
+        putText(rframe, "Distance to person:   " + SSTR(person.y), Point(10,50), FONT_HERSHEY_SIMPLEX, 0.75, Scalar(100,100,255), 2);
+        putText(rframe, "Distance from center: " + SSTR(person.x), Point(10,70), FONT_HERSHEY_SIMPLEX, 0.75, Scalar(100,100,255), 2);
+
+
+        // Display lframe.
+        imshow("Tracking", lframe);
+        imshow("Matching", rframe);
 
         // Exit if ESC pressed.
         int k = waitKey(1);
@@ -143,4 +192,70 @@ int main(int argc, char **argv)
         }
 
     }
+}
+
+
+
+/**
+  * @MatchImage
+  *
+*/
+
+cv::Rect2d MatchImage( cv::Mat& img, cv::Mat& templ, const int match_method)
+{
+  cv::Mat mask;
+  cv::Mat result;
+  //! [copy_source]
+  /// Source image to display
+  Mat img_display;
+  img.copyTo( img_display );
+  //! [copy_source]
+
+  //! [create_result_matrix]
+  /// Create the result matrix
+  int result_cols =  img.cols - templ.cols + 1;
+  int result_rows = img.rows - templ.rows + 1;
+
+  result.create( result_rows, result_cols, CV_32FC1 );
+  //! [create_result_matrix]
+
+  //! [match_template]
+  /// Do the Matching and Normalize
+  bool method_accepts_mask = (TM_SQDIFF == match_method || match_method == TM_CCORR_NORMED);
+  if (use_mask && method_accepts_mask)
+    { matchTemplate( img, templ, result, match_method, mask); }
+  else
+    { matchTemplate( img, templ, result, match_method); }
+  //! [match_template]
+
+  //! [normalize]
+  normalize( result, result, 0, 1, NORM_MINMAX, -1, Mat() );
+  //! [normalize]
+
+  //! [best_match]
+  /// Localizing the best match with minMaxLoc
+  double minVal; double maxVal; Point minLoc; Point maxLoc;
+  Point matchLoc;
+
+  minMaxLoc( result, &minVal, &maxVal, &minLoc, &maxLoc, Mat() );
+  //! [best_match]
+
+  //! [match_loc]
+  /// For SQDIFF and SQDIFF_NORMED, the best matches are lower values. For all the other methods, the higher the better
+  if( match_method  == TM_SQDIFF || match_method == TM_SQDIFF_NORMED )
+    { matchLoc = minLoc; }
+  else
+    { matchLoc = maxLoc; }
+  //! [match_loc]
+
+  //! [imshow]
+  /// Show me what you got
+//  rectangle( img_display, matchLoc, Point( matchLoc.x + templ.cols , matchLoc.y + templ.rows ), Scalar::all(0), 2, 8, 0 );
+//  rectangle( result, matchLoc, Point( matchLoc.x + templ.cols , matchLoc.y + templ.rows ), Scalar::all(0), 2, 8, 0 );
+//
+//  imshow( image_window, img_display );
+//  imshow( result_window, result );
+  //! [imshow]
+
+  return cv::Rect2d(matchLoc, Point( matchLoc.x + templ.cols , matchLoc.y + templ.rows ));
 }

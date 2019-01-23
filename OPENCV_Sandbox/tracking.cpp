@@ -17,7 +17,7 @@ int main(int argc, char **argv)
     // vector <string> trackerTypes(types, std::end(types));
 
     // Create a tracker
-    string trackerType = trackerTypes[4];
+    string trackerType = trackerTypes[3];
 
     Ptr<Tracker> tracker;
 
@@ -46,7 +46,7 @@ int main(int argc, char **argv)
     }
     #endif
     // Read video
-    VideoCapture video(1);
+    VideoCapture video(0);
 
     // Exit if video is not opened
     if(!video.isOpened())

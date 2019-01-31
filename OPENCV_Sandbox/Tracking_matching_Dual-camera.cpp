@@ -71,8 +71,8 @@ int main(int argc, char **argv)
     }
     #endif
     // Read video
-    VideoCapture video(0);
-    VideoCapture video2(1);
+    VideoCapture video(1);
+    VideoCapture video2(2);
 
     // Exit if video is not opened
     if(!video.isOpened())

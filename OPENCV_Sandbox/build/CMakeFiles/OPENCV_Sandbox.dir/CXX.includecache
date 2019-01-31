@@ -6,7 +6,17 @@
 
 #IncludeRegexTransform: 
 
-/home/nvidia/Documents/USUPACR/OPENCV_Sandbox/main.cpp
+/home/nvidia/Documents/USUPACR/OPENCV_Sandbox/Tracking_matching_Dual-camera.cpp
 opencv2/opencv.hpp
 -
+opencv2/tracking.hpp
+-
+opencv2/core/ocl.hpp
+-
+cmath
+-
+
+/home/nvidia/Documents/USUPACR/OPENCV_Sandbox/main.cpp
+Tracking_matching_Dual-camera.cpp
+/home/nvidia/Documents/USUPACR/OPENCV_Sandbox/Tracking_matching_Dual-camera.cpp
 

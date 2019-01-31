@@ -31,6 +31,28 @@ struct coordinate
     {}
 };
 
+void bboxFix( const cv::Mat& img, cv::Rect2d& box)
+{
+    if(box.x < 0)
+    {
+        box.width += box.x;
+        box.x = 0;
+    }
+    if(box.y < 0)
+    {
+        box.height += box.y;
+        box.y = 0;
+    }
+    if(box.x+box.width >= img.cols)
+    {
+        box.width = img.cols-1-box.x;
+    }
+    if(box.y+box.height >= img.rows)
+    {
+        box.height = img.rows-1-box.y;
+    }
+}
+
 // Convert to string
 #define SSTR( x ) static_cast< std::ostringstream & >( \
 ( std::ostringstream() << std::dec << x ) ).str()
@@ -42,7 +64,7 @@ int main(int argc, char **argv)
     // vector <string> trackerTypes(types, std::end(types));
 
     // Create a tracker
-    string trackerType = trackerTypes[4];
+    string trackerType = trackerTypes[6];
 
     Ptr<Tracker> tracker;
 
@@ -64,10 +86,10 @@ int main(int argc, char **argv)
             tracker = TrackerMedianFlow::create();
         if (trackerType == "GOTURN")
             tracker = TrackerGOTURN::create();
-//        if (trackerType == "MOSSE")
-//            tracker = TrackerMOSSE::create();
-//        if (trackerType == "CSRT")
-//            tracker = TrackerCSRT::create();
+        if (trackerType == "MOSSE")
+            tracker = TrackerMOSSE::create();
+        if (trackerType == "CSRT")
+            tracker = TrackerCSRT::create();
     }
     #endif
     // Read video
@@ -82,7 +104,7 @@ int main(int argc, char **argv)
     }
 
     // Read first lframe
-    Mat lframe, rframe;
+    Mat lframe, rframe, templ;
     bool ok = video.read(lframe);
 //    bool ok2 = video2.read(rframe);
 
@@ -119,12 +141,24 @@ int main(int argc, char **argv)
 
         // Update the tracking result
         bool ok = tracker->update(lframe, lbbox);
+        bboxFix(lframe, lbbox);
 
         // Match the image
         if(ok)
         {
-            Mat templ = lframe(lbbox);
-            rbbox = MatchImage(rframe, templ);
+//            try
+//            {
+                templ = lframe(lbbox);
+                rbbox = MatchImage(rframe, templ);
+//            }
+//            catch(...)
+//            {
+//                std::cout << "Ok, so here's the bbox:\n"
+//                          << "  x = " << lbbox.x << "\n"
+//                          << "  y = " << lbbox.y << "\n"
+//                          << "  w = " << lbbox.width << "\n"
+//                          << "  h = " << lbbox.height << std::endl;
+//            }
         }
 
         // Calculate Frames per second (FPS)

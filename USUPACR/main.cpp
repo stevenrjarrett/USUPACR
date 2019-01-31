@@ -28,7 +28,7 @@ int main()
     /// Initialize
         // Joystick
         // IMU
-        // Cameras/autonomous functionc++ library for linux xbox one controller
+        // Cameras/autonomous function
         // Communication with Arduino
 
 

@@ -1,0 +1,3 @@
+/home/nvidia/Documents/USUPACR/USUPACR/build/CMakeFiles/edit_cache.dir
+/home/nvidia/Documents/USUPACR/USUPACR/build/CMakeFiles/rebuild_cache.dir
+/home/nvidia/Documents/USUPACR/USUPACR/build/CMakeFiles/USUPACR.dir

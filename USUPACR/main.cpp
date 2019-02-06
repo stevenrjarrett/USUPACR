@@ -21,14 +21,21 @@ bool Manual_Only = false;
 ///////////////////////////////////////// Header ////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////
 
+# include "XBoxOne.hpp"
+
 int main()
 {
     std::cout << "USU PACR Control Program" << std::endl;
 
     /// Initialize
         // Joystick
+//        XBoxOne controller("/dev/input/event8");
+        int controller = open("/dev/input/event8", 0_RDONLY);
+        if(controller == 0)
+        {
+            }
         // IMU
-        // Cameras/autonomous functionc++ library for linux xbox one controller
+        // Cameras/autonomous function
         // Communication with Arduino
 
 

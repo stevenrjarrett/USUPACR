@@ -1,0 +1,26 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/nvidia/Documents/USUPACR/USUPACR/main.cpp
+iostream
+-
+iomanip
+-
+vector
+-
+cstdio
+-
+fcntl.h
+-
+unistd.h
+-
+sys/ioctl.h
+-
+linux/joystick.h
+-
+

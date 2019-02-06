@@ -39,6 +39,18 @@
 			<Option link="0" />
 		</Unit>
 		<Unit filename="include/XBoxOne.h" />
+		<Unit filename="libenjoy/src/libenjoy.c">
+			<Option compilerVar="CC" />
+			<Option compile="0" />
+			<Option link="0" />
+		</Unit>
+		<Unit filename="libenjoy/src/libenjoy.h" />
+		<Unit filename="libenjoy/src/libenjoy_linux.c">
+			<Option compilerVar="CC" />
+			<Option compile="0" />
+			<Option link="0" />
+		</Unit>
+		<Unit filename="libenjoy/src/libenjoy_linux.h" />
 		<Unit filename="main.cpp" />
 		<Unit filename="src/XBoxOne.cpp" />
 		<Extensions>

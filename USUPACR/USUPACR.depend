@@ -1,0 +1,54 @@
+# depslib dependency file v1.0
+1549494993 source:/home/steven/Documents/Programming/USUPACR/USUPACR/src/XBoxOne.cpp
+	"XBoxOne.h"
+	<stdio.h>
+	<unistd.h>
+	<thread>
+	<iostream>
+	<pthread.h>
+	"../libenjoy/src/libenjoy.h"
+	"../libenjoy/src/libenjoy_linux.h"
+	"../libenjoy/src/libenjoy.c"
+	"../libenjoy/src/libenjoy_linux.c"
+
+1549494592 /home/steven/Documents/Programming/USUPACR/USUPACR/include/XBoxOne.h
+	<thread>
+	"../libenjoy/src/libenjoy.h"
+	"../libenjoy/src/libenjoy_linux.h"
+
+1549491517 /home/steven/Documents/Programming/USUPACR/USUPACR/libenjoy/src/libenjoy.h
+	<stdint.h>
+
+1549491517 /home/steven/Documents/Programming/USUPACR/USUPACR/libenjoy/src/libenjoy_linux.h
+	<linux/joystick.h>
+	<stdint.h>
+
+1549494995 source:/home/steven/Documents/Programming/USUPACR/USUPACR/main.cpp
+	<iostream>
+	<unistd.h>
+	"include/XBoxOne.h"
+
+1549491517 /home/steven/Documents/Programming/USUPACR/USUPACR/libenjoy/src/libenjoy.c
+	<stdlib.h>
+	<string.h>
+	<limits.h>
+	"libenjoy.h"
+	"libenjoy_p.h"
+
+1549491517 /home/steven/Documents/Programming/USUPACR/USUPACR/libenjoy/src/libenjoy_p.h
+	<stdint.h>
+
+1549491517 /home/steven/Documents/Programming/USUPACR/USUPACR/libenjoy/src/libenjoy_linux.c
+	<sys/stat.h>
+	<limits.h>
+	<stdio.h>
+	<stdint.h>
+	<stdlib.h>
+	<string.h>
+	<sys/fcntl.h>
+	<unistd.h>
+	<errno.h>
+	"libenjoy.h"
+	"libenjoy_linux.h"
+	"libenjoy_p.h"
+

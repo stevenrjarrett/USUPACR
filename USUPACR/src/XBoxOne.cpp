@@ -142,23 +142,23 @@ void XBoxOne::run()
 
 void XBoxOne::setAxis(int id, int val)
 {
-        joyL_x,
-        joyL_y,
-        joyR_x,
-        joyR_y;
+//        joyL_x,
+//        joyL_y,
+//        joyR_x,
+//        joyR_y;
 }
 
-void XBoxOne::setBtn(int id, int val)
+void XBoxOne::setBtn(int id, bool val)
 {
-        btnUP
-        btnDOWN
-        btnLEFT
-        btnRIGHT
-        btnA
-        btnB
-        btnX
-        btnY
-        btnLBumper
-        btnRBumper
+//        btnUP
+//        btnDOWN
+//        btnLEFT
+//        btnRIGHT
+//        btnA
+//        btnB
+//        btnX
+//        btnY
+//        btnLBumper
+//        btnRBumper
 }
 

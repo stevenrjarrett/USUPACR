@@ -6,15 +6,15 @@
 
 #IncludeRegexTransform: 
 
-/home/steven/Documents/Programming/USUPACR/USUPACR/include/XBoxOne.h
+/home/nvidia/Documents/USUPACR/USUPACR/include/XBoxOne.h
 thread
 -
 ../libenjoy/src/libenjoy.h
-/home/steven/Documents/Programming/USUPACR/USUPACR/libenjoy/src/libenjoy.h
+/home/nvidia/Documents/USUPACR/USUPACR/libenjoy/src/libenjoy.h
 ../libenjoy/src/libenjoy_linux.h
-/home/steven/Documents/Programming/USUPACR/USUPACR/libenjoy/src/libenjoy_linux.h
+/home/nvidia/Documents/USUPACR/USUPACR/libenjoy/src/libenjoy_linux.h
 
-/home/steven/Documents/Programming/USUPACR/USUPACR/libenjoy/src/libenjoy.c
+/home/nvidia/Documents/USUPACR/USUPACR/libenjoy/src/libenjoy.c
 stdlib.h
 -
 string.h
@@ -22,15 +22,15 @@ string.h
 limits.h
 -
 libenjoy.h
-/home/steven/Documents/Programming/USUPACR/USUPACR/libenjoy/src/libenjoy.h
+/home/nvidia/Documents/USUPACR/USUPACR/libenjoy/src/libenjoy.h
 libenjoy_p.h
-/home/steven/Documents/Programming/USUPACR/USUPACR/libenjoy/src/libenjoy_p.h
+/home/nvidia/Documents/USUPACR/USUPACR/libenjoy/src/libenjoy_p.h
 
-/home/steven/Documents/Programming/USUPACR/USUPACR/libenjoy/src/libenjoy.h
+/home/nvidia/Documents/USUPACR/USUPACR/libenjoy/src/libenjoy.h
 stdint.h
 -
 
-/home/steven/Documents/Programming/USUPACR/USUPACR/libenjoy/src/libenjoy_linux.c
+/home/nvidia/Documents/USUPACR/USUPACR/libenjoy/src/libenjoy_linux.c
 sys/stat.h
 -
 limits.h
@@ -50,35 +50,35 @@ unistd.h
 errno.h
 -
 libenjoy.h
-/home/steven/Documents/Programming/USUPACR/USUPACR/libenjoy/src/libenjoy.h
+/home/nvidia/Documents/USUPACR/USUPACR/libenjoy/src/libenjoy.h
 libenjoy_linux.h
-/home/steven/Documents/Programming/USUPACR/USUPACR/libenjoy/src/libenjoy_linux.h
+/home/nvidia/Documents/USUPACR/USUPACR/libenjoy/src/libenjoy_linux.h
 libenjoy_p.h
-/home/steven/Documents/Programming/USUPACR/USUPACR/libenjoy/src/libenjoy_p.h
+/home/nvidia/Documents/USUPACR/USUPACR/libenjoy/src/libenjoy_p.h
 
-/home/steven/Documents/Programming/USUPACR/USUPACR/libenjoy/src/libenjoy_linux.h
+/home/nvidia/Documents/USUPACR/USUPACR/libenjoy/src/libenjoy_linux.h
 linux/joystick.h
 -
 stdint.h
 -
 
-/home/steven/Documents/Programming/USUPACR/USUPACR/libenjoy/src/libenjoy_p.h
+/home/nvidia/Documents/USUPACR/USUPACR/libenjoy/src/libenjoy_p.h
 stdint.h
 -
 
-/home/steven/Documents/Programming/USUPACR/USUPACR/main.cpp
+/home/nvidia/Documents/USUPACR/USUPACR/main.cpp
 iostream
 -
 unistd.h
 -
 include/XBoxOne.h
-/home/steven/Documents/Programming/USUPACR/USUPACR/include/XBoxOne.h
+/home/nvidia/Documents/USUPACR/USUPACR/include/XBoxOne.h
 src/XBoxOne.cpp
-/home/steven/Documents/Programming/USUPACR/USUPACR/src/XBoxOne.cpp
+/home/nvidia/Documents/USUPACR/USUPACR/src/XBoxOne.cpp
 
-/home/steven/Documents/Programming/USUPACR/USUPACR/src/XBoxOne.cpp
+/home/nvidia/Documents/USUPACR/USUPACR/src/XBoxOne.cpp
 ../include/XBoxOne.h
-/home/steven/Documents/Programming/USUPACR/USUPACR/include/XBoxOne.h
+/home/nvidia/Documents/USUPACR/USUPACR/include/XBoxOne.h
 stdio.h
 -
 unistd.h
@@ -90,11 +90,11 @@ iostream
 pthread.h
 -
 ../libenjoy/src/libenjoy.h
-/home/steven/Documents/Programming/USUPACR/USUPACR/libenjoy/src/libenjoy.h
+/home/nvidia/Documents/USUPACR/USUPACR/libenjoy/src/libenjoy.h
 ../libenjoy/src/libenjoy_linux.h
-/home/steven/Documents/Programming/USUPACR/USUPACR/libenjoy/src/libenjoy_linux.h
+/home/nvidia/Documents/USUPACR/USUPACR/libenjoy/src/libenjoy_linux.h
 ../libenjoy/src/libenjoy.c
-/home/steven/Documents/Programming/USUPACR/USUPACR/libenjoy/src/libenjoy.c
+/home/nvidia/Documents/USUPACR/USUPACR/libenjoy/src/libenjoy.c
 ../libenjoy/src/libenjoy_linux.c
-/home/steven/Documents/Programming/USUPACR/USUPACR/libenjoy/src/libenjoy_linux.c
+/home/nvidia/Documents/USUPACR/USUPACR/libenjoy/src/libenjoy_linux.c
 

@@ -51,7 +51,7 @@ int main()
         //wait for a little bit
         usleep(EXECUTIVE_WAIT_TIME);
 //        std::cout << "Beginning of executive loop" << std::endl;
-        if(!EStop)
+        if(!EStop && controller.isConnected())
         {
             //read inputs
             controller.printALL();

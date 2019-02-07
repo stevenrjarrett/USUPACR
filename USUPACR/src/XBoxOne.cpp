@@ -41,6 +41,8 @@ void XBoxOne::start()
 void XBoxOne::stop()
 {
     isRunning = false;
+    std::cout << "Stopping controller" << std::endl;
+    pollingThread.join();
 }
 
 bool XBoxOne::isConnected()
@@ -74,9 +76,10 @@ void XBoxOne::run()
     //Wait until you have a connection
     while(info->count == 0)
     {
+        std::cout << "Waiting for connection:" << std::endl;
         usleep(1000000);
         libenjoy_enumerate(ctx);
-        std::cout << "Waiting for connection:" << std::endl;
+        info = libenjoy_get_info_list(ctx);
     }
     connected = true;
 
@@ -91,7 +94,7 @@ void XBoxOne::run()
 
         printf("Success!\n");
         printf("Axes: %d btns: %d\n", libenjoy_get_axes_num(joy),libenjoy_get_buttons_num(joy));
-        std::cout << "Am I running: " << isRunning << std::endl;
+//        std::cout << "Am I running: " << isRunning << std::endl;
         while(isRunning)
         {
             // Value data are not stored in library. if you want to use
@@ -103,24 +106,20 @@ void XBoxOne::run()
                 switch(ev.type)
                 {
                 case LIBENJOY_EV_AXIS:
-                    printf("%u: axis %d val %d\n", ev.joy_id, ev.part_id, ev.data);
+//                    printf("%u: axis %d val %d\n", ev.joy_id, ev.part_id, ev.data);
                     setAxis(ev.part_id, ev.data);
                     break;
                 case LIBENJOY_EV_BUTTON:
-                    printf("%u: button %d val %d\n", ev.joy_id, ev.part_id, ev.data);
+//                    printf("%u: button %d val %d\n", ev.joy_id, ev.part_id, ev.data);
                     setBtn(ev.part_id, ev.data);
                     break;
                 case LIBENJOY_EV_CONNECTED:
-                    printf("%u: status changed: %d\n", ev.joy_id, ev.data);
+//                    printf("%u: status changed: %d\n", ev.joy_id, ev.data);
                     connected = bool(ev.data);
                     break;
                 }
             }
-//#ifdef __linux
             usleep(50000);
-//#else
-//                Sleep(50);
-//#endif
             counter += 50;
             if(counter >= 1000)
             {
@@ -142,23 +141,112 @@ void XBoxOne::run()
 
 void XBoxOne::setAxis(int id, int val)
 {
-//        joyL_x,
-//        joyL_y,
-//        joyR_x,
-//        joyR_y;
+    switch(id)
+    {
+    case 0:
+        joyL_x = val;
+        break;
+    case 1:
+        joyL_y = val;
+        break;
+    case 2:
+        joyLTrigger = val;
+        break;
+    case 3:
+        joyR_x = val;
+        break;
+    case 4:
+        joyR_y = val;
+    case 5:
+        joyRTrigger = val;
+    case 6:
+        if(val<0) // left arrow
+        {
+            btnLEFT  = true;
+            btnRIGHT = false;
+        }
+        else if(val>0) // right arrow
+        {
+            btnLEFT  = false;
+            btnRIGHT = true;
+        }
+        else // val==0 // no arrow pressed
+        {
+            btnLEFT  = false;
+            btnRIGHT = false;
+        }
+        break;
+    case 7:
+        if(val<0) // up arrow
+        {
+            btnDOWN = false;
+            btnUP   = true;
+        }
+        else if(val>0) // down arrow
+        {
+            btnDOWN = true;
+            btnUP   = false;
+        }
+        else // val==0 // no arrow pressed
+        {
+            btnDOWN = false;
+            btnUP   = false;
+        }
+        break;
+    }
 }
 
-void XBoxOne::setBtn(int id, bool val)
+void XBoxOne::setBtn(int id, int val)
 {
-//        btnUP
-//        btnDOWN
-//        btnLEFT
-//        btnRIGHT
-//        btnA
-//        btnB
-//        btnX
-//        btnY
-//        btnLBumper
-//        btnRBumper
+    switch(id)
+    {
+    case 0: // A
+        btnA = val;
+        break;
+    case 1: // B
+        btnB = val;
+        break;
+    case 2: // X
+        btnX = val;
+        break;
+    case 3: // Y
+        btnY = val;
+        break;
+    case 4: // left bumper
+        btnLBumper = val;
+        break;
+    case 5: // right bumper
+        btnRBumper = val;
+        break;
+    case 6:
+        btn6 = val;
+        break;
+    case 7:
+        btn7 = val;
+        break;
+//    default:
+//        break;
+    }
 }
 
+void XBoxOne::printALL()
+{
+    std::cout << "UP\t"    << btnUP   << '\n';
+    std::cout << "DOWN\t"  << btnDOWN << '\n';
+    std::cout << "LEFT\t"  << btnLEFT << '\n';
+    std::cout << "RIGHT\t" << btnRIGHT << '\n';
+    std::cout << "A\t" << btnA << '\n';
+    std::cout << "B\t" << btnB << '\n';
+    std::cout << "Y\t" << btnY << '\n';
+    std::cout << "X\t" << btnX << '\n';
+    std::cout << "6\t" << btn6 << '\n';
+    std::cout << "7\t" << btn7 << '\n';
+    std::cout << "lBumper\t"  << btnLBumper << '\n';
+    std::cout << "rBumper\t"  << btnRBumper << '\n';
+    std::cout << "Left x\t"   << joyL_x << '\n';
+    std::cout << "Left y\t"   << joyL_y << '\n';
+    std::cout << "Right x\t"  << joyR_x << '\n';
+    std::cout << "Right y\t"  << joyR_y << '\n';
+    std::cout << "lTrigger\t" << joyLTrigger << '\n';
+    std::cout << "rTrigger\t" << joyRTrigger << std::endl;
+}

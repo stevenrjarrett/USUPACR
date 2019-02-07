@@ -8,7 +8,7 @@
 ///////////////////////////////////////// Macros ////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////
 
-#define EXECUTIVE_WAIT_TIME 1000000 // microseconds
+#define EXECUTIVE_WAIT_TIME 100000 // microseconds
 
 /////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////// Global Variables ////////////////////////////////////
@@ -50,11 +50,14 @@ int main()
     {
         //wait for a little bit
         usleep(EXECUTIVE_WAIT_TIME);
-        std::cout << "Beginning of executive loop" << std::endl;
+//        std::cout << "Beginning of executive loop" << std::endl;
         if(!EStop)
         {
             //read inputs
+            controller.printALL();
             //decide what to do and set variables
+            if(controller.lBumper())
+                break;
         }
         else
         {
@@ -62,6 +65,7 @@ int main()
             rSpeed = 0;
         }
     }
+    controller.stop();
     return 0;
 }
 

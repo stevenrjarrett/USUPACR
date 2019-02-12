@@ -3,6 +3,7 @@
 #include <unistd.h>
 #include "include/XBoxOne.h"
 #include "src/XBoxOne.cpp"
+#include <fstream>
 
 /////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////// Macros ////////////////////////////////////////
@@ -23,6 +24,8 @@ bool Manual_Only = false;
 ///////////////////////////////////////// Header ////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////
 
+void sendSerial(int val);
+
 //# include "XBoxOne.hpp"
 
 int main()
@@ -40,6 +43,7 @@ int main()
         // IMU
         // Cameras/autonomous function
         // Communication with Arduino
+        std::ofstream motorArduino("/dev/ttyACM0");
 
 
     // For now, we're only doing manual control.
@@ -51,10 +55,15 @@ int main()
         //wait for a little bit
         usleep(EXECUTIVE_WAIT_TIME);
 //        std::cout << "Beginning of executive loop" << std::endl;
+
         if(!EStop && controller.isConnected())
         {
             //read inputs
-            controller.printALL();
+            lSpeed = abs(controller.L_y()*800);
+            rSpeed = abs(controller.R_y()*800);
+            motorArduino << int(lSpeed) << std::endl;
+//            controller.printALL();
+            std::cout << "Value sent: " << int(lSpeed) << std::endl;
             //decide what to do and set variables
             if(controller.lBumper())
                 break;
@@ -68,6 +77,4 @@ int main()
     controller.stop();
     return 0;
 }
-
-
 

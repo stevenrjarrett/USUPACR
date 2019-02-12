@@ -243,10 +243,10 @@ void XBoxOne::printALL()
     std::cout << "7\t" << btn7 << '\n';
     std::cout << "lBumper\t"  << btnLBumper << '\n';
     std::cout << "rBumper\t"  << btnRBumper << '\n';
-    std::cout << "Left x\t"   << joyL_x << '\n';
-    std::cout << "Left y\t"   << joyL_y << '\n';
-    std::cout << "Right x\t"  << joyR_x << '\n';
-    std::cout << "Right y\t"  << joyR_y << '\n';
+    std::cout << "Left x\t"   << L_x() << '\n';
+    std::cout << "Left y\t"   << L_y() << '\n';
+    std::cout << "Right x\t"  << R_x() << '\n';
+    std::cout << "Right y\t"  << R_y() << '\n';
     std::cout << "lTrigger\t" << joyLTrigger << '\n';
     std::cout << "rTrigger\t" << joyRTrigger << std::endl;
 }

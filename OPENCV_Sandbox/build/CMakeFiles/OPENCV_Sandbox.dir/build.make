@@ -43,10 +43,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/nvidia/Documents/USUPACR/OPENCV_Sandbox
+CMAKE_SOURCE_DIR = /home/steven/Documents/Programming/USUPACR/OPENCV_Sandbox
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/nvidia/Documents/USUPACR/OPENCV_Sandbox/build
+CMAKE_BINARY_DIR = /home/steven/Documents/Programming/USUPACR/OPENCV_Sandbox/build
 
 # Include any dependencies generated for this target.
 include CMakeFiles/OPENCV_Sandbox.dir/depend.make
@@ -59,16 +59,16 @@ include CMakeFiles/OPENCV_Sandbox.dir/flags.make
 
 CMakeFiles/OPENCV_Sandbox.dir/main.cpp.o: CMakeFiles/OPENCV_Sandbox.dir/flags.make
 CMakeFiles/OPENCV_Sandbox.dir/main.cpp.o: ../main.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nvidia/Documents/USUPACR/OPENCV_Sandbox/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/OPENCV_Sandbox.dir/main.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/OPENCV_Sandbox.dir/main.cpp.o -c /home/nvidia/Documents/USUPACR/OPENCV_Sandbox/main.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/steven/Documents/Programming/USUPACR/OPENCV_Sandbox/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/OPENCV_Sandbox.dir/main.cpp.o"
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/OPENCV_Sandbox.dir/main.cpp.o -c /home/steven/Documents/Programming/USUPACR/OPENCV_Sandbox/main.cpp
 
 CMakeFiles/OPENCV_Sandbox.dir/main.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/OPENCV_Sandbox.dir/main.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/nvidia/Documents/USUPACR/OPENCV_Sandbox/main.cpp > CMakeFiles/OPENCV_Sandbox.dir/main.cpp.i
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/steven/Documents/Programming/USUPACR/OPENCV_Sandbox/main.cpp > CMakeFiles/OPENCV_Sandbox.dir/main.cpp.i
 
 CMakeFiles/OPENCV_Sandbox.dir/main.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/OPENCV_Sandbox.dir/main.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/nvidia/Documents/USUPACR/OPENCV_Sandbox/main.cpp -o CMakeFiles/OPENCV_Sandbox.dir/main.cpp.s
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/steven/Documents/Programming/USUPACR/OPENCV_Sandbox/main.cpp -o CMakeFiles/OPENCV_Sandbox.dir/main.cpp.s
 
 CMakeFiles/OPENCV_Sandbox.dir/main.cpp.o.requires:
 
@@ -90,65 +90,63 @@ OPENCV_Sandbox_EXTERNAL_OBJECTS =
 
 OPENCV_Sandbox: CMakeFiles/OPENCV_Sandbox.dir/main.cpp.o
 OPENCV_Sandbox: CMakeFiles/OPENCV_Sandbox.dir/build.make
-OPENCV_Sandbox: /usr/lib/aarch64-linux-gnu/libopencv_cudabgsegm.so.3.4.5
-OPENCV_Sandbox: /usr/lib/aarch64-linux-gnu/libopencv_superres.so.3.4.5
-OPENCV_Sandbox: /usr/lib/aarch64-linux-gnu/libopencv_cudaobjdetect.so.3.4.5
-OPENCV_Sandbox: /usr/lib/aarch64-linux-gnu/libopencv_cudastereo.so.3.4.5
-OPENCV_Sandbox: /usr/lib/aarch64-linux-gnu/libopencv_videostab.so.3.4.5
-OPENCV_Sandbox: /usr/lib/aarch64-linux-gnu/libopencv_stitching.so.3.4.5
-OPENCV_Sandbox: /usr/lib/aarch64-linux-gnu/libopencv_hfs.so.3.4.5
-OPENCV_Sandbox: /usr/lib/aarch64-linux-gnu/libopencv_freetype.so.3.4.5
-OPENCV_Sandbox: /usr/lib/aarch64-linux-gnu/libopencv_img_hash.so.3.4.5
-OPENCV_Sandbox: /usr/lib/aarch64-linux-gnu/libopencv_xphoto.so.3.4.5
-OPENCV_Sandbox: /usr/lib/aarch64-linux-gnu/libopencv_optflow.so.3.4.5
-OPENCV_Sandbox: /usr/lib/aarch64-linux-gnu/libopencv_xfeatures2d.so.3.4.5
-OPENCV_Sandbox: /usr/lib/aarch64-linux-gnu/libopencv_rgbd.so.3.4.5
-OPENCV_Sandbox: /usr/lib/aarch64-linux-gnu/libopencv_bgsegm.so.3.4.5
-OPENCV_Sandbox: /usr/lib/aarch64-linux-gnu/libopencv_ccalib.so.3.4.5
-OPENCV_Sandbox: /usr/lib/aarch64-linux-gnu/libopencv_saliency.so.3.4.5
-OPENCV_Sandbox: /usr/lib/aarch64-linux-gnu/libopencv_line_descriptor.so.3.4.5
-OPENCV_Sandbox: /usr/lib/aarch64-linux-gnu/libopencv_stereo.so.3.4.5
-OPENCV_Sandbox: /usr/lib/aarch64-linux-gnu/libopencv_surface_matching.so.3.4.5
-OPENCV_Sandbox: /usr/lib/aarch64-linux-gnu/libopencv_fuzzy.so.3.4.5
-OPENCV_Sandbox: /usr/lib/aarch64-linux-gnu/libopencv_dpm.so.3.4.5
-OPENCV_Sandbox: /usr/lib/aarch64-linux-gnu/libopencv_face.so.3.4.5
-OPENCV_Sandbox: /usr/lib/aarch64-linux-gnu/libopencv_aruco.so.3.4.5
-OPENCV_Sandbox: /usr/lib/aarch64-linux-gnu/libopencv_ximgproc.so.3.4.5
-OPENCV_Sandbox: /usr/lib/aarch64-linux-gnu/libopencv_structured_light.so.3.4.5
-OPENCV_Sandbox: /usr/lib/aarch64-linux-gnu/libopencv_dnn_objdetect.so.3.4.5
-OPENCV_Sandbox: /usr/lib/aarch64-linux-gnu/libopencv_reg.so.3.4.5
-OPENCV_Sandbox: /usr/lib/aarch64-linux-gnu/libopencv_tracking.so.3.4.5
-OPENCV_Sandbox: /usr/lib/aarch64-linux-gnu/libopencv_xobjdetect.so.3.4.5
-OPENCV_Sandbox: /usr/lib/aarch64-linux-gnu/libopencv_bioinspired.so.3.4.5
-OPENCV_Sandbox: /usr/lib/aarch64-linux-gnu/libopencv_phase_unwrapping.so.3.4.5
-OPENCV_Sandbox: /usr/lib/aarch64-linux-gnu/libopencv_cudacodec.so.3.4.5
-OPENCV_Sandbox: /usr/lib/aarch64-linux-gnu/libopencv_cudaoptflow.so.3.4.5
-OPENCV_Sandbox: /usr/lib/aarch64-linux-gnu/libopencv_cudalegacy.so.3.4.5
-OPENCV_Sandbox: /usr/lib/aarch64-linux-gnu/libopencv_cudafeatures2d.so.3.4.5
-OPENCV_Sandbox: /usr/lib/aarch64-linux-gnu/libopencv_cudawarping.so.3.4.5
-OPENCV_Sandbox: /usr/lib/aarch64-linux-gnu/libopencv_shape.so.3.4.5
-OPENCV_Sandbox: /usr/lib/aarch64-linux-gnu/libopencv_photo.so.3.4.5
-OPENCV_Sandbox: /usr/lib/aarch64-linux-gnu/libopencv_cudaimgproc.so.3.4.5
-OPENCV_Sandbox: /usr/lib/aarch64-linux-gnu/libopencv_cudafilters.so.3.4.5
-OPENCV_Sandbox: /usr/lib/aarch64-linux-gnu/libopencv_cudaarithm.so.3.4.5
-OPENCV_Sandbox: /usr/lib/aarch64-linux-gnu/libopencv_video.so.3.4.5
-OPENCV_Sandbox: /usr/lib/aarch64-linux-gnu/libopencv_plot.so.3.4.5
-OPENCV_Sandbox: /usr/lib/aarch64-linux-gnu/libopencv_datasets.so.3.4.5
-OPENCV_Sandbox: /usr/lib/aarch64-linux-gnu/libopencv_text.so.3.4.5
-OPENCV_Sandbox: /usr/lib/aarch64-linux-gnu/libopencv_ml.so.3.4.5
-OPENCV_Sandbox: /usr/lib/aarch64-linux-gnu/libopencv_dnn.so.3.4.5
-OPENCV_Sandbox: /usr/lib/aarch64-linux-gnu/libopencv_objdetect.so.3.4.5
-OPENCV_Sandbox: /usr/lib/aarch64-linux-gnu/libopencv_calib3d.so.3.4.5
-OPENCV_Sandbox: /usr/lib/aarch64-linux-gnu/libopencv_features2d.so.3.4.5
-OPENCV_Sandbox: /usr/lib/aarch64-linux-gnu/libopencv_flann.so.3.4.5
-OPENCV_Sandbox: /usr/lib/aarch64-linux-gnu/libopencv_highgui.so.3.4.5
-OPENCV_Sandbox: /usr/lib/aarch64-linux-gnu/libopencv_videoio.so.3.4.5
-OPENCV_Sandbox: /usr/lib/aarch64-linux-gnu/libopencv_imgcodecs.so.3.4.5
-OPENCV_Sandbox: /usr/lib/aarch64-linux-gnu/libopencv_imgproc.so.3.4.5
-OPENCV_Sandbox: /usr/lib/aarch64-linux-gnu/libopencv_core.so.3.4.5
-OPENCV_Sandbox: /usr/lib/aarch64-linux-gnu/libopencv_cudev.so.3.4.5
+OPENCV_Sandbox: /usr/local/lib/libopencv_cudabgsegm.so.3.3.1
+OPENCV_Sandbox: /usr/local/lib/libopencv_cudaobjdetect.so.3.3.1
+OPENCV_Sandbox: /usr/local/lib/libopencv_cudastereo.so.3.3.1
+OPENCV_Sandbox: /usr/local/lib/libopencv_stitching.so.3.3.1
+OPENCV_Sandbox: /usr/local/lib/libopencv_superres.so.3.3.1
+OPENCV_Sandbox: /usr/local/lib/libopencv_videostab.so.3.3.1
+OPENCV_Sandbox: /usr/local/lib/libopencv_aruco.so.3.3.1
+OPENCV_Sandbox: /usr/local/lib/libopencv_bgsegm.so.3.3.1
+OPENCV_Sandbox: /usr/local/lib/libopencv_bioinspired.so.3.3.1
+OPENCV_Sandbox: /usr/local/lib/libopencv_ccalib.so.3.3.1
+OPENCV_Sandbox: /usr/local/lib/libopencv_dpm.so.3.3.1
+OPENCV_Sandbox: /usr/local/lib/libopencv_face.so.3.3.1
+OPENCV_Sandbox: /usr/local/lib/libopencv_freetype.so.3.3.1
+OPENCV_Sandbox: /usr/local/lib/libopencv_fuzzy.so.3.3.1
+OPENCV_Sandbox: /usr/local/lib/libopencv_img_hash.so.3.3.1
+OPENCV_Sandbox: /usr/local/lib/libopencv_line_descriptor.so.3.3.1
+OPENCV_Sandbox: /usr/local/lib/libopencv_optflow.so.3.3.1
+OPENCV_Sandbox: /usr/local/lib/libopencv_reg.so.3.3.1
+OPENCV_Sandbox: /usr/local/lib/libopencv_rgbd.so.3.3.1
+OPENCV_Sandbox: /usr/local/lib/libopencv_saliency.so.3.3.1
+OPENCV_Sandbox: /usr/local/lib/libopencv_stereo.so.3.3.1
+OPENCV_Sandbox: /usr/local/lib/libopencv_structured_light.so.3.3.1
+OPENCV_Sandbox: /usr/local/lib/libopencv_surface_matching.so.3.3.1
+OPENCV_Sandbox: /usr/local/lib/libopencv_tracking.so.3.3.1
+OPENCV_Sandbox: /usr/local/lib/libopencv_xfeatures2d.so.3.3.1
+OPENCV_Sandbox: /usr/local/lib/libopencv_ximgproc.so.3.3.1
+OPENCV_Sandbox: /usr/local/lib/libopencv_xobjdetect.so.3.3.1
+OPENCV_Sandbox: /usr/local/lib/libopencv_xphoto.so.3.3.1
+OPENCV_Sandbox: /usr/local/lib/libopencv_cudafeatures2d.so.3.3.1
+OPENCV_Sandbox: /usr/local/lib/libopencv_shape.so.3.3.1
+OPENCV_Sandbox: /usr/local/lib/libopencv_cudacodec.so.3.3.1
+OPENCV_Sandbox: /usr/local/lib/libopencv_cudaoptflow.so.3.3.1
+OPENCV_Sandbox: /usr/local/lib/libopencv_cudalegacy.so.3.3.1
+OPENCV_Sandbox: /usr/local/lib/libopencv_cudawarping.so.3.3.1
+OPENCV_Sandbox: /usr/local/lib/libopencv_photo.so.3.3.1
+OPENCV_Sandbox: /usr/local/lib/libopencv_cudaimgproc.so.3.3.1
+OPENCV_Sandbox: /usr/local/lib/libopencv_cudafilters.so.3.3.1
+OPENCV_Sandbox: /usr/local/lib/libopencv_cudaarithm.so.3.3.1
+OPENCV_Sandbox: /usr/local/lib/libopencv_calib3d.so.3.3.1
+OPENCV_Sandbox: /usr/local/lib/libopencv_phase_unwrapping.so.3.3.1
+OPENCV_Sandbox: /usr/local/lib/libopencv_video.so.3.3.1
+OPENCV_Sandbox: /usr/local/lib/libopencv_datasets.so.3.3.1
+OPENCV_Sandbox: /usr/local/lib/libopencv_plot.so.3.3.1
+OPENCV_Sandbox: /usr/local/lib/libopencv_text.so.3.3.1
+OPENCV_Sandbox: /usr/local/lib/libopencv_dnn.so.3.3.1
+OPENCV_Sandbox: /usr/local/lib/libopencv_features2d.so.3.3.1
+OPENCV_Sandbox: /usr/local/lib/libopencv_flann.so.3.3.1
+OPENCV_Sandbox: /usr/local/lib/libopencv_highgui.so.3.3.1
+OPENCV_Sandbox: /usr/local/lib/libopencv_ml.so.3.3.1
+OPENCV_Sandbox: /usr/local/lib/libopencv_videoio.so.3.3.1
+OPENCV_Sandbox: /usr/local/lib/libopencv_imgcodecs.so.3.3.1
+OPENCV_Sandbox: /usr/local/lib/libopencv_objdetect.so.3.3.1
+OPENCV_Sandbox: /usr/local/lib/libopencv_imgproc.so.3.3.1
+OPENCV_Sandbox: /usr/local/lib/libopencv_core.so.3.3.1
+OPENCV_Sandbox: /usr/local/lib/libopencv_cudev.so.3.3.1
 OPENCV_Sandbox: CMakeFiles/OPENCV_Sandbox.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/nvidia/Documents/USUPACR/OPENCV_Sandbox/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX executable OPENCV_Sandbox"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/steven/Documents/Programming/USUPACR/OPENCV_Sandbox/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX executable OPENCV_Sandbox"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/OPENCV_Sandbox.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -165,6 +163,6 @@ CMakeFiles/OPENCV_Sandbox.dir/clean:
 .PHONY : CMakeFiles/OPENCV_Sandbox.dir/clean
 
 CMakeFiles/OPENCV_Sandbox.dir/depend:
-	cd /home/nvidia/Documents/USUPACR/OPENCV_Sandbox/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/nvidia/Documents/USUPACR/OPENCV_Sandbox /home/nvidia/Documents/USUPACR/OPENCV_Sandbox /home/nvidia/Documents/USUPACR/OPENCV_Sandbox/build /home/nvidia/Documents/USUPACR/OPENCV_Sandbox/build /home/nvidia/Documents/USUPACR/OPENCV_Sandbox/build/CMakeFiles/OPENCV_Sandbox.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/steven/Documents/Programming/USUPACR/OPENCV_Sandbox/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/steven/Documents/Programming/USUPACR/OPENCV_Sandbox /home/steven/Documents/Programming/USUPACR/OPENCV_Sandbox /home/steven/Documents/Programming/USUPACR/OPENCV_Sandbox/build /home/steven/Documents/Programming/USUPACR/OPENCV_Sandbox/build /home/steven/Documents/Programming/USUPACR/OPENCV_Sandbox/build/CMakeFiles/OPENCV_Sandbox.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/OPENCV_Sandbox.dir/depend
 

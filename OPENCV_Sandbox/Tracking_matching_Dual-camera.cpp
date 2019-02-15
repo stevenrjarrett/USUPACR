@@ -64,7 +64,7 @@ int main(int argc, char **argv)
     // vector <string> trackerTypes(types, std::end(types));
 
     // Create a tracker
-    string trackerType = trackerTypes[6];
+    string trackerType = trackerTypes[4];
 
     Ptr<Tracker> tracker;
 
@@ -86,15 +86,15 @@ int main(int argc, char **argv)
             tracker = TrackerMedianFlow::create();
         if (trackerType == "GOTURN")
             tracker = TrackerGOTURN::create();
-        if (trackerType == "MOSSE")
-            tracker = TrackerMOSSE::create();
-        if (trackerType == "CSRT")
-            tracker = TrackerCSRT::create();
+//        if (trackerType == "MOSSE")
+//            tracker = TrackerMOSSE::create();
+//        if (trackerType == "CSRT")
+//            tracker = TrackerCSRT::create();
     }
     #endif
     // Read video
-    VideoCapture video(1);
-    VideoCapture video2(2);
+    VideoCapture video(0);
+    VideoCapture video2(1);
 
     // Exit if video is not opened
     if(!video.isOpened())
@@ -105,8 +105,32 @@ int main(int argc, char **argv)
 
     // Read first lframe
     Mat lframe, rframe, templ;
+//    video.set(CV_CAP_PROP_FOURCC,CV_FOURCC('M','J','P','G'));
+//    video.set(cv::CAP_PROP_FRAME_WIDTH, 640);
+//    video.set(cv::CAP_PROP_FRAME_HEIGHT, 480);
+//    video.set(cv::CAP_PROP_FPS, 30);
     bool ok = video.read(lframe);
-//    bool ok2 = video2.read(rframe);
+    video.set(CV_CAP_PROP_FOURCC,CV_FOURCC('M','J','P','G'));
+    video.set(cv::CAP_PROP_FRAME_WIDTH, 640);
+    video.set(cv::CAP_PROP_FRAME_HEIGHT, 480);
+    video.set(cv::CAP_PROP_FPS, 30);
+    cv::imshow("Tracking", lframe);
+//    std::cin.get();
+    std::cout << "read 1st" << std::endl;
+    cv::waitKey();
+//    usleep(1000000);
+//    video2.set(CV_CAP_PROP_FOURCC,CV_FOURCC('M','J','P','G'));
+//    video2.set(cv::CAP_PROP_FRAME_WIDTH, 640);
+//    video2.set(cv::CAP_PROP_FRAME_HEIGHT, 480);
+//    video2.set(cv::CAP_PROP_FPS, 30);
+    bool ok2 = video2.read(rframe);
+    video2.set(CV_CAP_PROP_FOURCC,CV_FOURCC('M','J','P','G'));
+    video2.set(cv::CAP_PROP_FRAME_WIDTH, 640);
+    video2.set(cv::CAP_PROP_FRAME_HEIGHT, 480);
+    video2.set(cv::CAP_PROP_FPS, 30);
+    cv::imshow("Matching", rframe);
+    std::cout << "Read 2nd" << std::endl;
+    cv::waitKey();
 
     // Define initial bounding box
     Rect2d lbbox(3*lframe.cols/8, lframe.rows/4, lframe.cols/4, lframe.rows/2);
@@ -134,7 +158,18 @@ int main(int argc, char **argv)
     double al = 0.0,
            ar = 0.0;
     coordinate person;
-    while(video.read(lframe) && video2.read(rframe))
+    bool readVideo1 = video.read(lframe);
+    video.set(CV_CAP_PROP_FOURCC,CV_FOURCC('M','J','P','G'));
+    video.set(cv::CAP_PROP_FRAME_WIDTH, 640);
+    video.set(cv::CAP_PROP_FRAME_HEIGHT, 480);
+    video.set(cv::CAP_PROP_FPS, 30);
+    bool readVideo2 = video2.read(rframe);
+    video2.set(CV_CAP_PROP_FOURCC,CV_FOURCC('M','J','P','G'));
+    video2.set(cv::CAP_PROP_FRAME_WIDTH, 640);
+    video2.set(cv::CAP_PROP_FRAME_HEIGHT, 480);
+    video2.set(cv::CAP_PROP_FPS, 30);
+    std::cout << "Got to loop" << std::endl;
+    while(readVideo1 && readVideo2)
     {
         // Start timer
         double timer = (double)getTickCount();
@@ -224,6 +259,16 @@ int main(int argc, char **argv)
         {
             break;
         }
+        bool readVideo1 = video.read(lframe);
+        video.set(CV_CAP_PROP_FOURCC,CV_FOURCC('M','J','P','G'));
+        video.set(cv::CAP_PROP_FRAME_WIDTH, 640);
+        video.set(cv::CAP_PROP_FRAME_HEIGHT, 480);
+        video.set(cv::CAP_PROP_FPS, 30);
+        bool readVideo2 = video2.read(rframe);
+        video2.set(CV_CAP_PROP_FOURCC,CV_FOURCC('M','J','P','G'));
+        video2.set(cv::CAP_PROP_FRAME_WIDTH, 640);
+        video2.set(cv::CAP_PROP_FRAME_HEIGHT, 480);
+        video2.set(cv::CAP_PROP_FPS, 30);
 
     }
 }

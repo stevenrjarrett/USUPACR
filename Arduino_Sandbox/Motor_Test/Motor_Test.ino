@@ -19,7 +19,7 @@ void loop()
   
   // Input value from console
   int in_val = 0;
-  if (Serial.available()) {
+  while (Serial.available()) {
     int in_val = Serial.parseInt();
     int in_servoVal = map(in_val, 0, 1023, 1000, 2000);
     int in_pwmVal  = map(in_val, 0, 1023, 0, 255);

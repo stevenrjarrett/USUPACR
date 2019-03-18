@@ -1,0 +1,4 @@
+Notes for thresholding the distance values:
+- otsu thresholding: http://www.labbookpages.co.uk/software/imgProc/otsuThreshold.html
+- applying the threshold in opencv: http://answers.opencv.org/question/42204/converting-image-from-grayscale-to-binary/
+- Idea: use the expected distance of the person and set an upper and lower bound.

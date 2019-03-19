@@ -161,7 +161,7 @@ int main( int argc, char** argv )
 	/*
 	 * create font
 	 */
-	cudaFont* font = cudaFont::Create();
+//	cudaFont* font = cudaFont::Create();
 
 
 	/*
@@ -196,21 +196,22 @@ int main( int argc, char** argv )
 
         ///  TODO: FROM HERE
 
+		// convert from YUV to RGBA
+
         uchar* camData = new uchar[rgbimg.total()*4];
         Mat continuousRGBA(rgbimg.size(), CV_8UC4, camData);
         cv::cvtColor(rgbimg, continuousRGBA, CV_BGR2RGBA, 4);
-        img.LoadFromPixels(rgbimg.cols, rgbimg.rows, camData);
 
-		// convert from YUV to RGBA
-		void* imgRGBA = NULL;
-
-		if( !camera->ConvertRGBA(imgCUDA, &imgRGBA) )
-			printf("detectnet-camera:  failed to convert from NV12 to RGBA\n");
+//		void* imgRGBA = NULL;
+//
+//		if( !camera->ConvertRGBA(imgCUDA, &imgRGBA) )
+//			printf("detectnet-camera:  failed to convert from NV12 to RGBA\n");
 
 		// classify image with detectNet
 		int numBoundingBoxes = maxBoxes;
 
-		if( net->Detect((float*)imgRGBA, camera->GetWidth(), camera->GetHeight(), bbCPU, &numBoundingBoxes, confCPU))
+//		if( net->Detect((float*)imgRGBA, camera->GetWidth(), camera->GetHeight(), bbCPU, &numBoundingBoxes, confCPU))
+		if( net->Detect((float*)camData, rgbimg.cols, rgbimg.rows , bbCPU, &numBoundingBoxes, confCPU))
 		{
 			printf("%i bounding boxes detected\n", numBoundingBoxes);
 
@@ -227,7 +228,7 @@ int main( int argc, char** argv )
 
 				if( nc != lastClass || n == (numBoundingBoxes - 1) )
 				{
-					if( !net->DrawBoxes((float*)imgRGBA, (float*)imgRGBA, camera->GetWidth(), camera->GetHeight(),
+					if( !net->DrawBoxes((float*)camData, (float*)camData, rgbimg.cols, rgbimg.rows,
 						                        bbCUDA + (lastStart * 4), (n - lastStart) + 1, lastClass) )
 						printf("detectnet-console:  failed to draw boxes\n");
 
@@ -247,43 +248,52 @@ int main( int argc, char** argv )
 								    str, 10, 10, make_float4(255.0f, 255.0f, 255.0f, 255.0f));
 			}*/
 
-			if( display != NULL )
-			{
-				char str[256];
-				sprintf(str, "TensorRT %i.%i.%i | %s | %04.1f FPS", NV_TENSORRT_MAJOR, NV_TENSORRT_MINOR, NV_TENSORRT_PATCH, precisionTypeToStr(net->GetPrecision()), display->GetFPS());
-				display->SetTitle(str);
-			}
+//			if( display != NULL )
+//			{
+//				char str[256];
+//				sprintf(str, "TensorRT %i.%i.%i | %s | %04.1f FPS", NV_TENSORRT_MAJOR, NV_TENSORRT_MINOR, NV_TENSORRT_PATCH, precisionTypeToStr(net->GetPrecision()), display->GetFPS());
+//				display->SetTitle(str);
+//			}
+			char c = cv::waitKey(5);
+			if(c==27) // ESC is pressed
+                break;
 		}
 
 
 		// update display
-		if( display != NULL )
-		{
-			display->UserEvents();
-			display->BeginRender();
-
-			if( texture != NULL )
-			{
-				// rescale image pixel intensities for display
-				CUDA(cudaNormalizeRGBA((float4*)imgRGBA, make_float2(0.0f, 255.0f),
-								   (float4*)imgRGBA, make_float2(0.0f, 1.0f),
-		 						   camera->GetWidth(), camera->GetHeight()));
-
-				// map from CUDA to openGL using GL interop
-				void* tex_map = texture->MapCUDA();
-
-				if( tex_map != NULL )
-				{
-					cudaMemcpy(tex_map, imgRGBA, texture->GetSize(), cudaMemcpyDeviceToDevice);
-					texture->Unmap();
-				}
-
-				// draw the texture
-				texture->Render(100,100);
-			}
-
-			display->EndRender();
-		}
+        cv::Mat img;
+        img.LoadFromPixels(rgbimg.cols, rgbimg.rows, camData);
+        char str[256];
+        sprintf(str, "TensorRT %i.%i.%i | %s | %04.1f FPS", NV_TENSORRT_MAJOR, NV_TENSORRT_MINOR, NV_TENSORRT_PATCH, precisionTypeToStr(net->GetPrecision()), display->GetFPS());
+		cv::imshow(str, img);
+//		if( display != NULL )
+//		{
+//			display->UserEvents();
+//			display->BeginRender();
+//
+//			if( texture != NULL )
+//			{
+//				// rescale image pixel intensities for display
+//				CUDA(cudaNormalizeRGBA((float4*)imgRGBA, make_float2(0.0f, 255.0f),
+//								   (float4*)imgRGBA, make_float2(0.0f, 1.0f),
+//		 						   camera->GetWidth(), camera->GetHeight()));
+//
+//				// map from CUDA to openGL using GL interop
+//				void* tex_map = texture->MapCUDA();
+//
+//				if( tex_map != NULL )
+//				{
+//					cudaMemcpy(tex_map, imgRGBA, texture->GetSize(), cudaMemcpyDeviceToDevice);
+//					texture->Unmap();
+//				}
+//
+//				// draw the texture
+//				texture->Render(100,100);
+//			}
+//
+//			display->EndRender();
+//		}
+        delete[] camData;
 	}
 
 	printf("\ndetectnet-camera:  un-initializing video device\n");
@@ -292,18 +302,18 @@ int main( int argc, char** argv )
 	/*
 	 * shutdown the camera device
 	 */
-	if( camera != NULL )
-	{
-		delete camera;
-		camera = NULL;
-	}
+//	if( camera != NULL )
+//	{
+//		delete camera;
+//		camera = NULL;
+//	}
 
-	if( display != NULL )
-	{
-		delete display;
-		display = NULL;
-	}
-	delete uchar* camData;
+//	if( display != NULL )
+//	{
+//		delete display;
+//		display = NULL;
+//	}
+//	delete uchar* camData;
 
 	printf("detectnet-camera:  video device has been un-initialized.\n");
 	printf("detectnet-camera:  this concludes the test of the video device.\n");

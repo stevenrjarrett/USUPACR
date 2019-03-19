@@ -111,44 +111,44 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named detectnet-camera
+# Target rules for targets named detectnet-camera-opencv
 
 # Build rule for target.
-detectnet-camera: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 detectnet-camera
-.PHONY : detectnet-camera
+detectnet-camera-opencv: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 detectnet-camera-opencv
+.PHONY : detectnet-camera-opencv
 
 # fast build rule for target.
-detectnet-camera/fast:
-	$(MAKE) -f CMakeFiles/detectnet-camera.dir/build.make CMakeFiles/detectnet-camera.dir/build
-.PHONY : detectnet-camera/fast
+detectnet-camera-opencv/fast:
+	$(MAKE) -f CMakeFiles/detectnet-camera-opencv.dir/build.make CMakeFiles/detectnet-camera-opencv.dir/build
+.PHONY : detectnet-camera-opencv/fast
 
-detectnet-camera.o: detectnet-camera.cpp.o
+detectnet-camera-opencv.o: detectnet-camera-opencv.cpp.o
 
-.PHONY : detectnet-camera.o
+.PHONY : detectnet-camera-opencv.o
 
 # target to build an object file
-detectnet-camera.cpp.o:
-	$(MAKE) -f CMakeFiles/detectnet-camera.dir/build.make CMakeFiles/detectnet-camera.dir/detectnet-camera.cpp.o
-.PHONY : detectnet-camera.cpp.o
+detectnet-camera-opencv.cpp.o:
+	$(MAKE) -f CMakeFiles/detectnet-camera-opencv.dir/build.make CMakeFiles/detectnet-camera-opencv.dir/detectnet-camera-opencv.cpp.o
+.PHONY : detectnet-camera-opencv.cpp.o
 
-detectnet-camera.i: detectnet-camera.cpp.i
+detectnet-camera-opencv.i: detectnet-camera-opencv.cpp.i
 
-.PHONY : detectnet-camera.i
+.PHONY : detectnet-camera-opencv.i
 
 # target to preprocess a source file
-detectnet-camera.cpp.i:
-	$(MAKE) -f CMakeFiles/detectnet-camera.dir/build.make CMakeFiles/detectnet-camera.dir/detectnet-camera.cpp.i
-.PHONY : detectnet-camera.cpp.i
+detectnet-camera-opencv.cpp.i:
+	$(MAKE) -f CMakeFiles/detectnet-camera-opencv.dir/build.make CMakeFiles/detectnet-camera-opencv.dir/detectnet-camera-opencv.cpp.i
+.PHONY : detectnet-camera-opencv.cpp.i
 
-detectnet-camera.s: detectnet-camera.cpp.s
+detectnet-camera-opencv.s: detectnet-camera-opencv.cpp.s
 
-.PHONY : detectnet-camera.s
+.PHONY : detectnet-camera-opencv.s
 
 # target to generate assembly for a file
-detectnet-camera.cpp.s:
-	$(MAKE) -f CMakeFiles/detectnet-camera.dir/build.make CMakeFiles/detectnet-camera.dir/detectnet-camera.cpp.s
-.PHONY : detectnet-camera.cpp.s
+detectnet-camera-opencv.cpp.s:
+	$(MAKE) -f CMakeFiles/detectnet-camera-opencv.dir/build.make CMakeFiles/detectnet-camera-opencv.dir/detectnet-camera-opencv.cpp.s
+.PHONY : detectnet-camera-opencv.cpp.s
 
 # Help Target
 help:
@@ -158,10 +158,10 @@ help:
 	@echo "... depend"
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
-	@echo "... detectnet-camera"
-	@echo "... detectnet-camera.o"
-	@echo "... detectnet-camera.i"
-	@echo "... detectnet-camera.s"
+	@echo "... detectnet-camera-opencv"
+	@echo "... detectnet-camera-opencv.o"
+	@echo "... detectnet-camera-opencv.i"
+	@echo "... detectnet-camera-opencv.s"
 .PHONY : help
 
 

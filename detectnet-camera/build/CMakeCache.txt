@@ -118,7 +118,7 @@ CMAKE_OBJCOPY:FILEPATH=/usr/bin/objcopy
 CMAKE_OBJDUMP:FILEPATH=/usr/bin/objdump
 
 //Value Computed by CMake
-CMAKE_PROJECT_NAME:STATIC=detectnet-camera
+CMAKE_PROJECT_NAME:STATIC=detectnet-camera-opencv
 
 //Path to a program.
 CMAKE_RANLIB:FILEPATH=/usr/bin/ranlib
@@ -289,6 +289,9 @@ EXECUTABLE_OUTPUT_PATH:PATH=
 
 //Single output directory for building all libraries.
 LIBRARY_OUTPUT_PATH:PATH=
+
+//The directory containing a CMake configuration file for OpenCV.
+OpenCV_DIR:PATH=/usr/share/OpenCV
 
 //Value Computed by CMake
 Project_BINARY_DIR:STATIC=/home/nvidia/Documents/USUPACR/detectnet-camera/build
@@ -906,6 +909,12 @@ QT_WORLDTIMECLOCKPLUGIN_PLUGIN_DEBUG:FILEPATH=QT_WORLDTIMECLOCKPLUGIN_PLUGIN_DEB
 QT_WORLDTIMECLOCKPLUGIN_PLUGIN_RELEASE:FILEPATH=QT_WORLDTIMECLOCKPLUGIN_PLUGIN_RELEASE-NOTFOUND
 
 //Value Computed by CMake
+detectnet-camera-opencv_BINARY_DIR:STATIC=/home/nvidia/Documents/USUPACR/detectnet-camera/build
+
+//Value Computed by CMake
+detectnet-camera-opencv_SOURCE_DIR:STATIC=/home/nvidia/Documents/USUPACR/detectnet-camera
+
+//Value Computed by CMake
 detectnet-camera_BINARY_DIR:STATIC=/home/nvidia/Documents/USUPACR/detectnet-camera/build
 
 //Value Computed by CMake
@@ -1139,6 +1148,8 @@ CUDA_parse_cubin:INTERNAL=/usr/share/cmake-3.5/Modules/FindCUDA/parse_cubin.cmak
 CUDA_run_nvcc:INTERNAL=/usr/share/cmake-3.5/Modules/FindCUDA/run_nvcc.cmake
 //Details about finding CUDA
 FIND_PACKAGE_MESSAGE_DETAILS_CUDA:INTERNAL=[/usr/local/cuda-9.0][/usr/local/cuda-9.0/bin/nvcc][/usr/local/cuda-9.0/include][/usr/local/cuda-9.0/lib64/libcudart.so][v9.0()]
+//Details about finding OpenCV
+FIND_PACKAGE_MESSAGE_DETAILS_OpenCV:INTERNAL=[/usr][v3.3.1()]
 //Details about finding Qt4
 FIND_PACKAGE_MESSAGE_DETAILS_Qt4:INTERNAL=[/usr/bin/qmake][/usr/lib/aarch64-linux-gnu/qt4/bin/moc][/usr/lib/aarch64-linux-gnu/qt4/bin/rcc][/usr/lib/aarch64-linux-gnu/qt4/bin/uic][/usr/include/qt4][/usr/lib/aarch64-linux-gnu][/usr/lib/aarch64-linux-gnu/libQtCore.so][v4.8.7()]
 //Details about finding Threads

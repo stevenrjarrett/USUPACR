@@ -15,6 +15,10 @@ set(CMAKE_MAKEFILE_DEPENDS
   "/usr/local/share/jetson-inference/cmake/jetson-inferenceConfig.cmake"
   "/usr/local/share/jetson-utils/cmake/jetson-utilsConfig-noconfig.cmake"
   "/usr/local/share/jetson-utils/cmake/jetson-utilsConfig.cmake"
+  "/usr/share/OpenCV/OpenCVConfig-version.cmake"
+  "/usr/share/OpenCV/OpenCVConfig.cmake"
+  "/usr/share/OpenCV/OpenCVModules-release.cmake"
+  "/usr/share/OpenCV/OpenCVModules.cmake"
   "/usr/share/cmake-3.5/Modules/CMakeCInformation.cmake"
   "/usr/share/cmake-3.5/Modules/CMakeCXXInformation.cmake"
   "/usr/share/cmake-3.5/Modules/CMakeCommonLanguageInclude.cmake"
@@ -60,5 +64,5 @@ set(CMAKE_MAKEFILE_PRODUCTS
 
 # Dependency information for all targets:
 set(CMAKE_DEPEND_INFO_FILES
-  "CMakeFiles/detectnet-camera.dir/DependInfo.cmake"
+  "CMakeFiles/detectnet-camera-opencv.dir/DependInfo.cmake"
   )

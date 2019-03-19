@@ -1,0 +1,26 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/nvidia/Documents/USUPACR/detectnet-camera/detectnet-camera-opencv.cpp
+opencv2/opencv.hpp
+-
+stdio.h
+-
+signal.h
+-
+unistd.h
+-
+jetson-utils/cudaMappedMemory.h
+-
+jetson-utils/cudaNormalize.h
+-
+jetson-utils/cudaFont.h
+-
+jetson-inference/detectNet.h
+-
+

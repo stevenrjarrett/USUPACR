@@ -76,11 +76,13 @@ int main( int argc, char** argv )
     cv::VideoCapture rgbcam(DEFAULT_CAMERA);
     cv::Mat rgbimg;
     rgbcam >> rgbimg;
+    cv::imshow("Original", rgbimg);
+    cv::waitKey();
 
-    uchar* camData = new uchar[rgbimg.total()*4];
-    Mat continuousRGBA(rgbimg.size(), CV_8UC4, camData);
-    cv::cvtColor(rgbimg, continuousRGBA, CV_BGR2RGBA, 4);
-    img.LoadFromPixels(rgbimg.cols, rgbimg.rows, camData);
+//    uchar* camData = new uchar[rgbimg.total()*4];
+//    cv::Mat continuousRGBA(rgbimg.size(), CV_8UC4, camData);
+//    cv::cvtColor(rgbimg, continuousRGBA, CV_BGR2RGBA, 4);
+//    img.LoadFromPixels(rgbimg.cols, rgbimg.rows, camData);
 
     if(!rgbcam.isOpened())
     {
@@ -89,8 +91,8 @@ int main( int argc, char** argv )
     }
 
 	printf("\ndetectnet-camera:  successfully initialized video device\n");
-	printf("    width:  %u\n", rgbimg.cols);
-	printf("   height:  %u\n", rgbimg.rows);
+//	printf("    width:  %u\n", rgbimg.cols);
+//	printf("   height:  %u\n", rgbimg.rows);
 //	printf("    depth:  %u (bpp)\n\n", camera->GetPixelDepth());
 
 //	gstCamera* camera = gstCamera::Create(DEFAULT_CAMERA);
@@ -156,7 +158,7 @@ int main( int argc, char** argv )
 //	}
 
     // Create opencv window:
-    cv::imshow("Capture: ", rgbimg);
+//    cv::imshow("Original", rgbimg);
 
 	/*
 	 * create font
@@ -193,13 +195,13 @@ int main( int argc, char** argv )
         rgbcam >> rgbimg;
 		if( rgbimg.empty() )
 			printf("\ndetectnet-camera:  failed to capture frame\n");
-
-        ///  TODO: FROM HERE
+        cv::imshow("Original", rgbimg);
+        cv::waitKey();
 
 		// convert from YUV to RGBA
 
         uchar* camData = new uchar[rgbimg.total()*4];
-        Mat continuousRGBA(rgbimg.size(), CV_8UC4, camData);
+        cv::Mat continuousRGBA(rgbimg.size(), CV_8UC4, camData);
         cv::cvtColor(rgbimg, continuousRGBA, CV_BGR2RGBA, 4);
 
 //		void* imgRGBA = NULL;
@@ -261,11 +263,11 @@ int main( int argc, char** argv )
 
 
 		// update display
-        cv::Mat img;
-        img.LoadFromPixels(rgbimg.cols, rgbimg.rows, camData);
+//        cv::Mat img;
+//        img.LoadFromPixels(rgbimg.cols, rgbimg.rows, camData);
         char str[256];
-        sprintf(str, "TensorRT %i.%i.%i | %s | %04.1f FPS", NV_TENSORRT_MAJOR, NV_TENSORRT_MINOR, NV_TENSORRT_PATCH, precisionTypeToStr(net->GetPrecision()), display->GetFPS());
-		cv::imshow(str, img);
+        sprintf(str, "TensorRT %i.%i.%i | %s | %04.1f FPS", NV_TENSORRT_MAJOR, NV_TENSORRT_MINOR, NV_TENSORRT_PATCH, precisionTypeToStr(net->GetPrecision()), 0.0);
+		cv::imshow(str, continuousRGBA);
 //		if( display != NULL )
 //		{
 //			display->UserEvents();

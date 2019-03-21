@@ -200,9 +200,13 @@ int main( int argc, char** argv )
 
 		// convert from YUV to RGBA
 
-        uchar* camData = new uchar[rgbimg.total()*4];
+        unsigned long numElem = rgbimg.total()*4;
+        uchar* camData = new uchar[numElem];
+        float* camDataflt = new float[numElem];
         cv::Mat continuousRGBA(rgbimg.size(), CV_8UC4, camData);
         cv::cvtColor(rgbimg, continuousRGBA, CV_BGR2RGBA, 4);
+        for(int i=0; i<numElem; i++)
+            camDataflt[i] = (float)camData[i];
 
 //		void* imgRGBA = NULL;
 //
@@ -213,7 +217,7 @@ int main( int argc, char** argv )
 		int numBoundingBoxes = maxBoxes;
 
 //		if( net->Detect((float*)imgRGBA, camera->GetWidth(), camera->GetHeight(), bbCPU, &numBoundingBoxes, confCPU))
-		if( net->Detect((float*)camData, rgbimg.cols, rgbimg.rows , bbCPU, &numBoundingBoxes, confCPU))
+		if( net->Detect(camDataflt, rgbimg.cols, rgbimg.rows , bbCPU, &numBoundingBoxes, confCPU))
 		{
 			printf("%i bounding boxes detected\n", numBoundingBoxes);
 
@@ -230,7 +234,7 @@ int main( int argc, char** argv )
 
 				if( nc != lastClass || n == (numBoundingBoxes - 1) )
 				{
-					if( !net->DrawBoxes((float*)camData, (float*)camData, rgbimg.cols, rgbimg.rows,
+					if( !net->DrawBoxes(camDataflt, camDataflt, rgbimg.cols, rgbimg.rows,
 						                        bbCUDA + (lastStart * 4), (n - lastStart) + 1, lastClass) )
 						printf("detectnet-console:  failed to draw boxes\n");
 

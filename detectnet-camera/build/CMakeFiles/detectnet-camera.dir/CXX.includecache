@@ -6,31 +6,7 @@
 
 #IncludeRegexTransform: 
 
-/home/nvidia/Documents/USUPACR/detectnet-camera/detectnet-camera-opencv.cpp
-jetson-utils/gstCamera.h
--
-jetson-utils/glDisplay.h
--
-jetson-utils/glTexture.h
--
-stdio.h
--
-signal.h
--
-unistd.h
--
-jetson-utils/cudaMappedMemory.h
--
-jetson-utils/cudaNormalize.h
--
-jetson-utils/cudaFont.h
--
-jetson-inference/detectNet.h
--
-
 /home/nvidia/Documents/USUPACR/detectnet-camera/detectnet-camera.cpp
-detectnet-camera-opencv.cpp
-/home/nvidia/Documents/USUPACR/detectnet-camera/detectnet-camera-opencv.cpp
 jetson-utils/gstCamera.h
 -
 jetson-utils/glDisplay.h

@@ -27,6 +27,8 @@
 #include <jetson-utils/glDisplay.h>
 #include <jetson-utils/glTexture.h>
 
+#include <GL/glut.h>
+
 #include <stdio.h>
 #include <signal.h>
 #include <unistd.h>
@@ -217,7 +219,7 @@ int main( int argc, char** argv )
 				}
 			}
 
-			/*if( font != NULL )
+			if( font != NULL )
 			{
 				char str[256];
 				sprintf(str, "%05.2f%% %s", confidence * 100.0f, net->GetClassDesc(img_class));
@@ -256,6 +258,8 @@ int main( int argc, char** argv )
 					cudaMemcpy(tex_map, imgRGBA, texture->GetSize(), cudaMemcpyDeviceToDevice);
 					texture->Unmap();
 				}
+
+                // Display text
 
 				// draw the texture
 				texture->Render(100,100);

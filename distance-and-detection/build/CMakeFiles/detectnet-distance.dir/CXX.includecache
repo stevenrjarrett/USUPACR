@@ -13,6 +13,8 @@ jetson-utils/glDisplay.h
 -
 jetson-utils/glTexture.h
 -
+GL/glut.h
+-
 stdio.h
 -
 signal.h

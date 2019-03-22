@@ -217,16 +217,18 @@ int main( int argc, char** argv )
 
 					CUDA(cudaDeviceSynchronize());
 				}
+
+				// render text for each box
+                if( font != NULL )
+                {
+                    char str[256];
+                    sprintf(str, "%05.2f%%", confCPU[n*2] * 100.0f);//, net->GetClassDesc(img_class));
+
+                    font->RenderOverlay((float4*)imgRGBA, (float4*)imgRGBA, camera->GetWidth(), camera->GetHeight(),
+                                        str, bb[0], bb[1], make_float4(255.0f, 255.0f, 255.0f, 255.0f));
+                }//*/
 			}
 
-			if( font != NULL )
-			{
-				char str[256];
-				sprintf(str, "%05.2f%%", confidence * 100.0f);//, net->GetClassDesc(img_class));
-
-				font->RenderOverlay((float4*)imgRGBA, (float4*)imgRGBA, camera->GetWidth(), camera->GetHeight(),
-								    str, 10, 10, make_float4(255.0f, 255.0f, 255.0f, 255.0f));
-			}//*/
 
 			if( display != NULL )
 			{

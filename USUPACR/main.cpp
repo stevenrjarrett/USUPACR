@@ -95,7 +95,7 @@ int main()
         motorArduino << motors.left << std::endl;
         motorArduino << motors.right << std::endl;
 //            controller.printALL();
-        std::cout << "Values sent: " << motors.left  << '\t' << motors.right << std::endl;
+//        std::cout << "Values sent: " << motors.left  << '\t' << motors.right << std::endl;
 
         //wait for a little bit
         usleep(EXECUTIVE_WAIT_TIME);

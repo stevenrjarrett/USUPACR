@@ -16,7 +16,7 @@ class cameraDetection
         double Getframerate() { return framerate; }
         void Setframerate(double val) { framerate = val; }
         void Setdelay_time(unsigned int val) { delay_time = val; }
-        void sig_handler(int signo);
+//        void sig_handler(int signo);
 //        std::vector<coordinate> Getlocations() { return locations; }
 
     protected:

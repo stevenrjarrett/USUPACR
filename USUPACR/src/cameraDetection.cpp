@@ -54,7 +54,7 @@ void cameraDetection::stop()
     runningThread.join();
 }
 
-void cameraDetection::sig_handler(int signo)
+void sig_handler(int signo)
 {
 	if( signo == SIGINT )
 	{
@@ -93,15 +93,15 @@ void cameraDetection::run()
 
 //int main( int argc, char** argv )
 //{
-    int argc = 1;
-    char** argv[1][256] = {"detectnet-camera"};
-
-	printf("detectnet-camera\n  args (%i):  ", argc);
-
-	for( int i=0; i < argc; i++ )
-		printf("%i [%s]  ", i, argv[i]);
-
-	printf("\n\n");
+//    int argc = 1;
+//    char** argv[1][256] = {"detectnet-camera"};
+//
+//	printf("detectnet-camera\n  args (%i):  ", argc);
+//
+//	for( int i=0; i < argc; i++ )
+//		printf("%i [%s]  ", i, argv[i]);
+//
+//	printf("\n\n");
 
 
 	/*
@@ -143,7 +143,7 @@ void cameraDetection::run()
 	/*
 	 * create detectNet
 	 */
-	detectNet* net = detectNet::Create(argc, argv);
+	detectNet* net = detectNet::Create();
 
 	if( !net )
 	{

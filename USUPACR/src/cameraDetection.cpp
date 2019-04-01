@@ -22,10 +22,11 @@
 
 cameraDetection::cameraDetection(int _cameraNumber=3, double _framerate=30)
 {
-    cameraNumber = _defaultCamera;
+    cameraNumber = _cameraNumber;
     framerate = _framerate;
     delay_time = 1000000.0 * (1/_framerate);
     isRunning = true;
+    signal_recieved = false;
     runningThread = std::thread(&cameraDetection::run, this);
 }
 
@@ -46,14 +47,12 @@ void cameraDetection::start()
         std::cout << "Attempted to start camera, but it's already running.\n";
 }
 
-void XBoxOne::stop()
+void cameraDetection::stop()
 {
     isRunning = false;
     std::cout << "Stopping camera" << std::endl;
     runningThread.join();
 }
-
-bool cameraDetection::signal_recieved = false;
 
 void cameraDetection::sig_handler(int signo)
 {
@@ -94,10 +93,10 @@ void cameraDetection::run()
 
 //int main( int argc, char** argv )
 //{
-	printf("detectnet-camera\n  args (%i):  ", argc);
-
     int argc = 1
     char** argv[1][256] = {"detectnet-camera"};
+
+	printf("detectnet-camera\n  args (%i):  ", argc);
 
 	for( int i=0; i < argc; i++ )
 		printf("%i [%s]  ", i, argv[i]);

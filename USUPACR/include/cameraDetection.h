@@ -6,7 +6,7 @@
 class cameraDetection
 {
     public:
-        cameraDetection(int _cameraNumber=3, double _framerate=30);
+        cameraDetection(int _cameraNumber, double _framerate);
         ~cameraDetection();
 
         void start();
@@ -16,10 +16,11 @@ class cameraDetection
         double Getframerate() { return framerate; }
         void Setframerate(double val) { framerate = val; }
         void Setdelay_time(unsigned int val) { delay_time = val; }
-        std::vector<coordinate> Getlocations() { return locations; }
+        void cameraDetection::sig_handler(int signo);
+//        std::vector<coordinate> Getlocations() { return locations; }
 
     protected:
-        std::vector<coordinate> locations;
+//        std::vector<coordinate> locations;
 
     private:
         double framerate;
@@ -27,6 +28,7 @@ class cameraDetection
         int cameraNumber;
         std::thread runningThread;
         bool isRunning;
+        bool signal_recieved;
 };
 
 #endif // CAMERADETECTION_H

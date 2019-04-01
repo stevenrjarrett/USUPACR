@@ -3,6 +3,8 @@
 #include <unistd.h>
 #include "include/XBoxOne.h"
 #include "src/XBoxOne.cpp"
+#include "include/cameraDetection.h"
+#include "src/cameraDetection.cpp"
 #include <fstream>
 
 /////////////////////////////////////////////////////////////////////////////////////////

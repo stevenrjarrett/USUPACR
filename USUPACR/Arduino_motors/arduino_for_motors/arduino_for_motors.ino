@@ -4,17 +4,23 @@
 #define DELAYTIME 200
 #define LMOTOR 5
 #define RMOTOR 6
+#define LMOTOR_REVERSE 7
+#define RMOTOR_REVERSE 8
+
 
 int lMotor = 0;
 int rMotor = 0;
 unsigned long lastTime = 0;
+
+int sign(int val) { return val==0 ? 1 : val / abs(val);}
 
 void setup()
 {
   Serial.begin(9600);
   analogWrite(LMOTOR, 0);
   analogWrite(RMOTOR, 0);
-  
+  digitalWrite(LMOTOR_REVERSE,false);
+  digitalWrite(RMOTOR_REVERSE,false);
 }
 
 
@@ -23,10 +29,34 @@ void loop()
   
   // Input value from console
   int in_val = 0;
-  while (Serial.available()>1)
+//  while (Serial.available()>2)
+//  {
+//    lMotor = Serial.parseInt();
+//    rMotor = Serial.parseInt();
+//  }
+  while(Serial.available() > 1)
   {
-    lMotor = Serial.parseInt();
-    rMotor = Serial.parseInt();
+    // get motor input
+    int lMotor_raw = Serial.parseInt();
+    int rMotor_raw = Serial.parseInt();
+    bool waitReverse = false;
+    if(sign(lMotor_raw) == -sign(lMotor) || sign(rMotor_raw) == -sign(rMotor))
+      waitReverse = true;
+    if(abs(lMotor_raw) > 15)
+      lMotor = map(abs(lMotor_raw), 0, 255, 50, 200);
+    else
+      lMotor = 0;
+    if(abs(rMotor_raw) > 15)
+      rMotor = map(abs(rMotor_raw), 0, 255, 50, 200);
+    else
+      rMotor = 0;
+    if(lMotor_raw<0) lMotor = -lMotor;
+    if(rMotor_raw<0) rMotor = -rMotor;
+    
+    digitalWrite(LMOTOR_REVERSE,lMotor<0);
+    digitalWrite(RMOTOR_REVERSE,rMotor<0);
+    if(waitReverse)
+      delay(50);
     analogWrite(LMOTOR, abs(lMotor));
     analogWrite(RMOTOR, abs(rMotor));
     lastTime = millis();
@@ -35,7 +65,7 @@ void loop()
 //    Serial.parseInt();
 
   // Safety: If I haven't heard anything from Serial for a while, 
-  if(lastTime - millis() > 5000)
+  if(lastTime - millis() > 500)
   {
     analogWrite(LMOTOR, 0);
     analogWrite(RMOTOR, 0);
@@ -57,3 +87,4 @@ void loop()
   delay(DELAYTIME);
   */
 }
+

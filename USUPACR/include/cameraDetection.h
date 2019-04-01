@@ -28,7 +28,6 @@ class cameraDetection
         int cameraNumber;
         std::thread runningThread;
         bool isRunning;
-        bool signal_recieved;
 };
 
 #endif // CAMERADETECTION_H

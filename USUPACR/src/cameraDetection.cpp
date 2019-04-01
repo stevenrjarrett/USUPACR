@@ -26,7 +26,7 @@ cameraDetection::cameraDetection(int _cameraNumber=3, double _framerate=30)
     framerate = _framerate;
     delay_time = 1000000.0 * (1/_framerate);
     isRunning = true;
-    signal_recieved = false;
+//    signal_recieved = false;
     runningThread = std::thread(&cameraDetection::run, this);
 }
 
@@ -53,6 +53,8 @@ void cameraDetection::stop()
     std::cout << "Stopping camera" << std::endl;
     runningThread.join();
 }
+
+bool signal_recieved = false;
 
 void sig_handler(int signo)
 {
@@ -131,7 +133,7 @@ void cameraDetection::run()
 	if( !camera )
 	{
 		printf("\ndetectnet-camera:  failed to initialize video device\n");
-		return 0;
+		return;
 	}
 
 	printf("\ndetectnet-camera:  successfully initialized video device\n");
@@ -148,7 +150,7 @@ void cameraDetection::run()
 	if( !net )
 	{
 		printf("detectnet-camera:   failed to initialize imageNet\n");
-		return 0;
+		return;
 	}
 
 
@@ -167,7 +169,7 @@ void cameraDetection::run()
 	    !cudaAllocMapped((void**)&confCPU, (void**)&confCUDA, maxBoxes * classes * sizeof(float)) )
 	{
 		printf("detectnet-console:  failed to alloc output memory\n");
-		return 0;
+		return;
 	}
 
 
@@ -201,7 +203,7 @@ void cameraDetection::run()
 	if( !camera->Open() )
 	{
 		printf("\ndetectnet-camera:  failed to open camera for streaming\n");
-		return 0;
+		return;
 	}
 
 	printf("\ndetectnet-camera:  camera open for streaming\n");
@@ -326,7 +328,7 @@ void cameraDetection::run()
 
 	printf("detectnet-camera:  video device has been un-initialized.\n");
 	printf("detectnet-camera:  this concludes the test of the video device.\n");
-	return 0;
+	return;
 //}
 
 

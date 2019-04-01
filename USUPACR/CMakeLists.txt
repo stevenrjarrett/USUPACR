@@ -5,12 +5,32 @@ set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
+file(GLOB USUPACR_Sources main.cpp ./src/*.cpp)
+file(GLOB USUPACR_Includes *.h ./include/*.h )
+
 find_package(OpenCV REQUIRED)
 find_package (Threads REQUIRED)
 
-include_directories(${OpenCV_INCLUDE_DIRS})
+# import jetson-inference and jetson-utils packages.
+# note that if you didn't do "sudo make install"
+# while building jetson-inference, this will error.
+find_package(jetson-utils)
+find_package(jetson-inference)
 
-add_executable(USUPACR main.cpp)
+# CUDA and Qt4 are required
+find_package(CUDA)
+find_package(Qt4)
 
-target_link_libraries(USUPACR ${OpenCV_LIBS})
-target_link_libraries (USUPACR ${CMAKE_THREAD_LIBS_INIT})
+# setup Qt4 for build
+include(${QT_USE_FILE})
+add_definitions(${QT_DEFINITIONS})
+
+# link detectnet-camera to jetson-inference library
+include_directories(/usr/include/gstreamer-1.0 /usr/lib/aarch64-linux-gnu/gstreamer-1.0/include /usr/include/glib-2.0 /usr/include/libxml2 /usr/lib/aarch64-linux-gnu/glib-2.0/include/ ${OpenCV_INCLUDE_DIRS})
+
+# compile the detectnet-camera program
+cuda_add_executable(USUPACR ${USUPACR_sources})
+# add_executable(USUPACR main.cpp)
+
+target_link_libraries(USUPACR ${OpenCV_LIBS} ${CMAKE_THREAD_LIBS_INIT})
+# target_link_libraries (USUPACR )

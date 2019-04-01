@@ -1,4 +1,4 @@
-#include "cameraDetection.h"
+#include "../include/cameraDetection.h"
 
 
 //headers for detection net

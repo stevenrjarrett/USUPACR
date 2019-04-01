@@ -59,6 +59,7 @@ int main()
 //            }
         // IMU
         // Cameras/autonomous function
+        cameraDetection cam(3);
         // Communication with Arduino
         std::ofstream motorArduino("/dev/ttyACM0");
 
@@ -98,6 +99,7 @@ int main()
         usleep(EXECUTIVE_WAIT_TIME);
     }
     controller.stop();
+    cam.stop();
     return 0;
 }
 

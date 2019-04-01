@@ -93,7 +93,7 @@ void cameraDetection::run()
 
 //int main( int argc, char** argv )
 //{
-    int argc = 1
+    int argc = 1;
     char** argv[1][256] = {"detectnet-camera"};
 
 	printf("detectnet-camera\n  args (%i):  ", argc);

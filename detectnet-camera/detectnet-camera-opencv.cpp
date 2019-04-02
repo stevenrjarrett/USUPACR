@@ -81,7 +81,7 @@ int main( int argc, char** argv )
     float* camDataflt;
     cudaMallocManaged(&camDataflt, sizeof(float)*numElem);
     cv::Mat rgbaImg(camera_rows, camera_cols, CV_8UC4, camData);
-    cv::Mat fltImg(rgbaimg.size(), CV_32FC4, camDataflt);
+    cv::Mat fltImg(camera_rows, camera_cols, CV_32FC4, camDataflt);
 
     rgbcam >> rgbaImg;
     cv::imshow("Original", rgbaImg);
@@ -202,15 +202,15 @@ int main( int argc, char** argv )
 //		if( !camera->Capture(&imgCPU, &imgCUDA, 1000) )
 //			printf("\ndetectnet-camera:  failed to capture frame\n");
 
-        rgbcam >> rgbimg;
-		if( rgbimg.empty() )
+        rgbcam >> rgbaImg;
+		if( rgbaImg.empty() )
 			printf("\ndetectnet-camera:  failed to capture frame\n");
-        cv::imshow("Original", rgbimg);
+        cv::imshow("Original", rgbaImg);
 //        cv::waitKey();
 
 		// convert from YUV to RGBA and move to graphics memory
 
-//        cv::cvtColor(rgbimg, rgbaImg, CV_BGR2RGBA, 4);
+//        cv::cvtColor(rgbaImg, rgbaImg, CV_BGR2RGBA, 4);
         for(int i=0; i<numElem; i+=4)
         {
             camDataflt[i]   = (float)camData[i];
@@ -229,7 +229,7 @@ int main( int argc, char** argv )
 		int numBoundingBoxes = maxBoxes;
 
 //		if( net->Detect((float*)imgRGBA, camera->GetWidth(), camera->GetHeight(), bbCPU, &numBoundingBoxes, confCPU))
-		if( net->Detect(camDataflt, rgbimg.cols, rgbimg.rows , bbCPU, &numBoundingBoxes, confCPU))
+		if( net->Detect(camDataflt, rgbaImg.cols, rgbaImg.rows , bbCPU, &numBoundingBoxes, confCPU))
 		{
 			printf("%i bounding boxes detected\n", numBoundingBoxes);
 
@@ -246,7 +246,7 @@ int main( int argc, char** argv )
 
 				if( nc != lastClass || n == (numBoundingBoxes - 1) )
 				{
-					if( !net->DrawBoxes(camDataflt, camDataflt, rgbimg.cols, rgbimg.rows,
+					if( !net->DrawBoxes(camDataflt, camDataflt, rgbaImg.cols, rgbaImg.rows,
 						                        bbCUDA + (lastStart * 4), (n - lastStart) + 1, lastClass) )
 						printf("detectnet-console:  failed to draw boxes\n");
 
@@ -280,7 +280,7 @@ int main( int argc, char** argv )
 
 		// update display
 //        cv::Mat img;
-//        img.LoadFromPixels(rgbimg.cols, rgbimg.rows, camData);
+//        img.LoadFromPixels(rgbaImg.cols, rgbaImg.rows, camData);
         char str[256];
         sprintf(str, "TensorRT %i.%i.%i | %s | %04.1f FPS", NV_TENSORRT_MAJOR, NV_TENSORRT_MINOR, NV_TENSORRT_PATCH, precisionTypeToStr(net->GetPrecision()), 0.0);
 		cv::imshow(str, fltImg);

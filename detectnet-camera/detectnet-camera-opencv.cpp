@@ -85,6 +85,9 @@ int main( int argc, char** argv )
 
     rgbcam >> rgbaImg;
     cv::imshow("Original", rgbaImg);
+        char str[256];
+        sprintf(str, "TensorRT %i.%i.%i | %s | %04.1f FPS", NV_TENSORRT_MAJOR, NV_TENSORRT_MINOR, NV_TENSORRT_PATCH, precisionTypeToStr(net->GetPrecision()), 0.0);
+    cv::imshow(str, fltImg);
     cv::waitKey();
 
 //    uchar* camData = new uchar[rgbimg.total()*4];
@@ -101,6 +104,8 @@ int main( int argc, char** argv )
 	printf("\ndetectnet-camera:  successfully initialized video device\n");
     std::cout << "Image height: " << rgbcam.get(cv::CAP_PROP_FRAME_HEIGHT) << '\n';
     std::cout << "Image width:  " << rgbcam.get(cv::CAP_PROP_FRAME_WIDTH) << std::endl;
+    std::cout << "Image height: " << rgbaImg.rows << '\n';
+    std::cout << "Image width:  " << rgbaImg.cols << std::endl;
 //	printf("    width:  %u\n", rgbimg.cols);
 //	printf("   height:  %u\n", rgbimg.rows);
 //	printf("    depth:  %u (bpp)\n\n", camera->GetPixelDepth());

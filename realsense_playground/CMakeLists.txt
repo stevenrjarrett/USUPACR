@@ -13,4 +13,4 @@ set(CMAKE_CXX_STANDARD_REQUIRED TRUE)
 
 add_executable(rs-play rs-measure.cpp ./example.hpp)
 
-target_link_libraries(rs-play Threads::Threads $(realsense2_LIBRARY))
+target_link_libraries(rs-play Threads::Threads ${realsense2_LIBRARY})

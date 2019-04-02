@@ -7,7 +7,7 @@ set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=gnu++11")
 # declare detectnet-camera project
 project(detectnet-camera)
 
-file(GLOB detectnetCameraSources detectnet-camera.cpp)
+file(GLOB detectnetCameraSources detectnet-camera-opencv.cpp)
 file(GLOB detectnetCameraIncludes *.h )
 
 # import jetson-inference and jetson-utils packages.

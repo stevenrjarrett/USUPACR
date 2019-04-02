@@ -77,10 +77,6 @@ int main( int argc, char** argv )
     int camera_rows = rgbcam.get(cv::CAP_PROP_FRAME_HEIGHT);
     int camera_cols = rgbcam.get(cv::CAP_PROP_FRAME_WIDTH);
     unsigned long numElem = camera_rows * camera_cols;
-    cv::Mat rgbImg;
-    rgbcam >> rgbImg;
-    cv::imshow("Original", rgbImg);
-
     uchar* camData = new uchar[numElem];
     float* camDataflt;
     cudaMallocManaged(&camDataflt, sizeof(float)*numElem);
@@ -88,10 +84,8 @@ int main( int argc, char** argv )
     cv::Mat fltImg(camera_rows, camera_cols, CV_32FC4, camDataflt);
 
     rgbcam >> rgbaImg;
-//        char str[256];
-//        sprintf(str, "TensorRT %i.%i.%i | %s | %04.1f FPS", NV_TENSORRT_MAJOR, NV_TENSORRT_MINOR, NV_TENSORRT_PATCH, precisionTypeToStr(net->GetPrecision()), 0.0);
-//    cv::imshow(str, fltImg);
-    cv::waitKey();
+    cv::imshow("Original", rgbaImg);
+//    cv::waitKey();
 
 //    uchar* camData = new uchar[rgbimg.total()*4];
 //    cv::Mat rgbaImg(rgbimg.size(), CV_8UC4, camData);
@@ -107,8 +101,6 @@ int main( int argc, char** argv )
 	printf("\ndetectnet-camera:  successfully initialized video device\n");
     std::cout << "Image height: " << rgbcam.get(cv::CAP_PROP_FRAME_HEIGHT) << '\n';
     std::cout << "Image width:  " << rgbcam.get(cv::CAP_PROP_FRAME_WIDTH) << std::endl;
-    std::cout << "Image height: " << rgbaImg.rows << '\n';
-    std::cout << "Image width:  " << rgbaImg.cols << std::endl;
 //	printf("    width:  %u\n", rgbimg.cols);
 //	printf("   height:  %u\n", rgbimg.rows);
 //	printf("    depth:  %u (bpp)\n\n", camera->GetPixelDepth());
@@ -210,20 +202,15 @@ int main( int argc, char** argv )
 //		if( !camera->Capture(&imgCPU, &imgCUDA, 1000) )
 //			printf("\ndetectnet-camera:  failed to capture frame\n");
 
-        rgbcam >> rgbImg;
-		if( rgbImg.empty() )
+        rgbcam >> rgbaImg;
+		if( rgbaImg.empty() )
 			printf("\ndetectnet-camera:  failed to capture frame\n");
-        cv::imshow("Original", rgbImg);
+        cv::imshow("Original", rgbaImg);
 //        cv::waitKey();
 
 		// convert from YUV to RGBA and move to graphics memory
 
-//        unsigned long numElem = rgbimg.total()*4;
-//        uchar* camData = new uchar[numElem];
-//        float* camDataflt;
-//        cudaMallocManaged(&camDataflt, sizeof(float)*numElem);
-//        cv::Mat continuousRGBA(rgbimg.size(), CV_8UC4, camData);
-        cv::cvtColor(rgbImg, rgbaImg, CV_BGR2RGBA, 4);
+//        cv::cvtColor(rgbaImg, rgbaImg, CV_BGR2RGBA, 4);
         for(int i=0; i<numElem; i+=4)
         {
             camDataflt[i]   = (float)camData[i];
@@ -231,7 +218,7 @@ int main( int argc, char** argv )
             camDataflt[i+2] = (float)camData[i+2];
             camDataflt[i+3] = (float)camData[i+3];
         }
-//        cv::Mat fltImg(rgbimg.size(), CV_32FC4, camDataflt);
+
 
 //		void* imgRGBA = NULL;
 //
@@ -324,7 +311,7 @@ int main( int argc, char** argv )
 //
 //			display->EndRender();
 //		}
-        cudaFree(camDataflt);
+//        cudaFree(camDataflt);
 	}
 
 	printf("\ndetectnet-camera:  un-initializing video device\n");
@@ -345,6 +332,7 @@ int main( int argc, char** argv )
 //		display = NULL;
 //	}
 //	delete uchar* camData;
+    cudaFree(camDataflt);
 
 	printf("detectnet-camera:  video device has been un-initialized.\n");
 	printf("detectnet-camera:  this concludes the test of the video device.\n");

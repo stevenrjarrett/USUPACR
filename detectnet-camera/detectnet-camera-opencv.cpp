@@ -74,8 +74,8 @@ int main( int argc, char** argv )
 	 */
 
     cv::VideoCapture rgbcam(DEFAULT_CAMERA);
-    rgbcam.set(CAP_PROP_FRAME_WIDTH, 1280);
-    rgbcam.set(CAP_PROP_FRAME_HEIGHT, 720);
+    rgbcam.set(cv::CAP_PROP_FRAME_WIDTH, 1280);
+    rgbcam.set(cv::CAP_PROP_FRAME_HEIGHT, 720);
     cv::Mat rgbimg;
     rgbcam >> rgbimg;
     cv::imshow("Original", rgbimg);

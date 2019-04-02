@@ -85,9 +85,9 @@ int main( int argc, char** argv )
 
     rgbcam >> rgbaImg;
     cv::imshow("Original", rgbaImg);
-        char str[256];
-        sprintf(str, "TensorRT %i.%i.%i | %s | %04.1f FPS", NV_TENSORRT_MAJOR, NV_TENSORRT_MINOR, NV_TENSORRT_PATCH, precisionTypeToStr(net->GetPrecision()), 0.0);
-    cv::imshow(str, fltImg);
+//        char str[256];
+//        sprintf(str, "TensorRT %i.%i.%i | %s | %04.1f FPS", NV_TENSORRT_MAJOR, NV_TENSORRT_MINOR, NV_TENSORRT_PATCH, precisionTypeToStr(net->GetPrecision()), 0.0);
+//    cv::imshow(str, fltImg);
     cv::waitKey();
 
 //    uchar* camData = new uchar[rgbimg.total()*4];

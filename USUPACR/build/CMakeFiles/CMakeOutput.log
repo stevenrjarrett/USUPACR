@@ -584,3 +584,31 @@ Linking C executable cmTC_49132
 make[1]: Leaving directory '/home/nvidia/Documents/USUPACR/USUPACR/build/CMakeFiles/CMakeTmp'
 
 
+Determining if the Q_WS_X11 exist passed with the following output:
+Change Dir: /home/nvidia/Documents/USUPACR/USUPACR/build/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/make" "cmTC_2a085/fast"
+/usr/bin/make -f CMakeFiles/cmTC_2a085.dir/build.make CMakeFiles/cmTC_2a085.dir/build
+make[1]: Entering directory '/home/nvidia/Documents/USUPACR/USUPACR/build/CMakeFiles/CMakeTmp'
+Building CXX object CMakeFiles/cmTC_2a085.dir/CheckSymbolExists.cxx.o
+/usr/bin/c++    -I/usr/include/qt4   -o CMakeFiles/cmTC_2a085.dir/CheckSymbolExists.cxx.o -c /home/nvidia/Documents/USUPACR/USUPACR/build/CMakeFiles/CMakeTmp/CheckSymbolExists.cxx
+Linking CXX executable cmTC_2a085
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_2a085.dir/link.txt --verbose=1
+/usr/bin/c++        CMakeFiles/cmTC_2a085.dir/CheckSymbolExists.cxx.o  -o cmTC_2a085 -rdynamic 
+make[1]: Leaving directory '/home/nvidia/Documents/USUPACR/USUPACR/build/CMakeFiles/CMakeTmp'
+
+File /home/nvidia/Documents/USUPACR/USUPACR/build/CMakeFiles/CMakeTmp/CheckSymbolExists.cxx:
+/* */
+#include <QtCore/qglobal.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef Q_WS_X11
+  return ((int*)(&Q_WS_X11))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+

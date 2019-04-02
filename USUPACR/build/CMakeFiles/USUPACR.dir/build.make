@@ -90,23 +90,14 @@ USUPACR_EXTERNAL_OBJECTS =
 
 USUPACR: CMakeFiles/USUPACR.dir/main.cpp.o
 USUPACR: CMakeFiles/USUPACR.dir/build.make
-USUPACR: /usr/lib/libopencv_dnn.so.3.3.1
-USUPACR: /usr/lib/libopencv_ml.so.3.3.1
-USUPACR: /usr/lib/libopencv_objdetect.so.3.3.1
-USUPACR: /usr/lib/libopencv_shape.so.3.3.1
-USUPACR: /usr/lib/libopencv_stitching.so.3.3.1
-USUPACR: /usr/lib/libopencv_superres.so.3.3.1
-USUPACR: /usr/lib/libopencv_videostab.so.3.3.1
-USUPACR: /usr/lib/libopencv_calib3d.so.3.3.1
-USUPACR: /usr/lib/libopencv_features2d.so.3.3.1
-USUPACR: /usr/lib/libopencv_flann.so.3.3.1
-USUPACR: /usr/lib/libopencv_highgui.so.3.3.1
-USUPACR: /usr/lib/libopencv_photo.so.3.3.1
-USUPACR: /usr/lib/libopencv_video.so.3.3.1
-USUPACR: /usr/lib/libopencv_videoio.so.3.3.1
-USUPACR: /usr/lib/libopencv_imgcodecs.so.3.3.1
-USUPACR: /usr/lib/libopencv_imgproc.so.3.3.1
-USUPACR: /usr/lib/libopencv_core.so.3.3.1
+USUPACR: /usr/local/cuda-9.0/lib64/libcudart_static.a
+USUPACR: /usr/lib/aarch64-linux-gnu/librt.so
+USUPACR: /usr/local/lib/libjetson-inference.so
+USUPACR: /usr/local/lib/libjetson-utils.so
+USUPACR: /usr/local/cuda-9.0/lib64/libcudart_static.a
+USUPACR: /usr/lib/aarch64-linux-gnu/librt.so
+USUPACR: /usr/lib/aarch64-linux-gnu/libQtGui.so
+USUPACR: /usr/lib/aarch64-linux-gnu/libQtCore.so
 USUPACR: CMakeFiles/USUPACR.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/nvidia/Documents/USUPACR/USUPACR/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX executable USUPACR"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/USUPACR.dir/link.txt --verbose=$(VERBOSE)

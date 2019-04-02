@@ -109,8 +109,8 @@ pthread.h
 /home/nvidia/Documents/USUPACR/USUPACR/libenjoy/src/libenjoy_linux.c
 
 /home/nvidia/Documents/USUPACR/USUPACR/src/cameraDetection.cpp
-cameraDetection.h
-/home/nvidia/Documents/USUPACR/USUPACR/src/cameraDetection.h
+../include/cameraDetection.h
+/home/nvidia/Documents/USUPACR/USUPACR/include/cameraDetection.h
 jetson-utils/gstCamera.h
 -
 jetson-utils/glDisplay.h

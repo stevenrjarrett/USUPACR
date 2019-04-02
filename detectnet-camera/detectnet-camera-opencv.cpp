@@ -74,6 +74,8 @@ int main( int argc, char** argv )
 	 */
 
     cv::VideoCapture rgbcam(DEFAULT_CAMERA);
+    std::cout << "Image height: " << rgbcam.get(CAP_PROP_FRAME_HEIGHT) << '\n';
+    std::cout << "Image width:  " << rgbcam.get(CAP_PROP_FRAME_WIDTH) << std::endl;
     cv::Mat rgbimg;
     rgbcam >> rgbimg;
     cv::imshow("Original", rgbimg);
@@ -201,18 +203,20 @@ int main( int argc, char** argv )
 		// convert from YUV to RGBA and move to graphics memory
 
         unsigned long numElem = rgbimg.total()*4;
-//        uchar* camData = new uchar[numElem];
+        uchar* camData = new uchar[numElem];
         float* camDataflt;
         cudaMallocManaged(&camDataflt, sizeof(float)*numElem);
-        cv::Mat continuousRGBA(rgbimg.size(), CV_64FC4, camDataflt);
+        cv::Mat continuousRGBA(rgbimg.size(), CV_8UC4, camData);
         cv::cvtColor(rgbimg, continuousRGBA, CV_BGR2RGBA, 4);
-//        for(int i=0; i<numElem; i+=4)
-//        {
-//            camDataflt[i]   = (float)camData[i];
-//            camDataflt[i+1] = (float)camData[i+1];
-//            camDataflt[i+2] = (float)camData[i+2];
-//            camDataflt[i+3] = (float)camData[i+3];
-//        }
+        for(int i=0; i<numElem; i+=4)
+        {
+            camDataflt[i]   = (float)camData[i];
+            camDataflt[i+1] = (float)camData[i+1];
+            camDataflt[i+2] = (float)camData[i+2];
+            camDataflt[i+3] = (float)camData[i+3];
+        }
+        cv::Mat fltImg(rgbimg.size(), CV_32FC4, camDataflt);
+
 
 //		void* imgRGBA = NULL;
 //

@@ -79,6 +79,12 @@ int main( int argc, char** argv )
     cv::imshow("Original", rgbimg);
 //    cv::waitKey();
 
+        unsigned long numElem = rgbimg.total()*4;
+        uchar* camData = new uchar[numElem];
+        float* camDataflt;
+        cudaMallocManaged(&camDataflt, sizeof(float)*numElem);
+        cv::Mat continuousRGBA(rgbimg.size(), CV_8UC4, camData);
+
 //    uchar* camData = new uchar[rgbimg.total()*4];
 //    cv::Mat continuousRGBA(rgbimg.size(), CV_8UC4, camData);
 //    cv::cvtColor(rgbimg, continuousRGBA, CV_BGR2RGBA, 4);
@@ -202,11 +208,6 @@ int main( int argc, char** argv )
 
 		// convert from YUV to RGBA and move to graphics memory
 
-        unsigned long numElem = rgbimg.total()*4;
-        uchar* camData = new uchar[numElem];
-        float* camDataflt;
-        cudaMallocManaged(&camDataflt, sizeof(float)*numElem);
-        cv::Mat continuousRGBA(rgbimg.size(), CV_8UC4, camData);
         cv::cvtColor(rgbimg, continuousRGBA, CV_BGR2RGBA, 4);
         for(int i=0; i<numElem; i+=4)
         {
@@ -309,9 +310,9 @@ int main( int argc, char** argv )
 //
 //			display->EndRender();
 //		}
-        cudaFree(camDataflt);
 	}
 
+    cudaFree(camDataflt);
 	printf("\ndetectnet-camera:  un-initializing video device\n");
 
 

@@ -281,7 +281,7 @@ int main( int argc, char** argv )
 //        img.LoadFromPixels(rgbimg.cols, rgbimg.rows, camData);
         char str[256];
         sprintf(str, "TensorRT %i.%i.%i | %s | %04.1f FPS", NV_TENSORRT_MAJOR, NV_TENSORRT_MINOR, NV_TENSORRT_PATCH, precisionTypeToStr(net->GetPrecision()), 0.0);
-		cv::imshow(str, continuousRGBA);
+		cv::imshow(str, fltImg);
 //		if( display != NULL )
 //		{
 //			display->UserEvents();

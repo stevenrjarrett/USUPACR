@@ -77,8 +77,8 @@ int main( int argc, char** argv )
     int camera_rows = rgbcam.get(cv::CAP_PROP_FRAME_HEIGHT);
     int camera_cols = rgbcam.get(cv::CAP_PROP_FRAME_WIDTH);
     unsigned long numElem = camera_rows * camera_cols;
-    cv::Mat rgbimg;
-    rgbcam >> rgbimg;
+    cv::Mat rgbImg;
+    rgbcam >> rgbImg;
     cv::imshow("Original", rgbImg);
 
     uchar* camData = new uchar[numElem];
@@ -223,7 +223,7 @@ int main( int argc, char** argv )
 //        float* camDataflt;
 //        cudaMallocManaged(&camDataflt, sizeof(float)*numElem);
 //        cv::Mat continuousRGBA(rgbimg.size(), CV_8UC4, camData);
-        cv::cvtColor(rgbimg, continuousRGBA, CV_BGR2RGBA, 4);
+        cv::cvtColor(rgbImg, rgbaImg, CV_BGR2RGBA, 4);
         for(int i=0; i<numElem; i+=4)
         {
             camDataflt[i]   = (float)camData[i];

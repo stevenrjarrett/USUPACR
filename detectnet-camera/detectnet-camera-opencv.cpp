@@ -74,16 +74,19 @@ int main( int argc, char** argv )
 	 */
 
     cv::VideoCapture rgbcam(DEFAULT_CAMERA);
+    rgbcam.set(CAP_PROP_FRAME_WIDTH, 1280);
+    rgbcam.set(CAP_PROP_FRAME_HEIGHT, 720);
     cv::Mat rgbimg;
     rgbcam >> rgbimg;
     cv::imshow("Original", rgbimg);
 //    cv::waitKey();
 
-        unsigned long numElem = rgbimg.total()*4;
-        uchar* camData = new uchar[numElem];
-        float* camDataflt;
-        cudaMallocManaged(&camDataflt, sizeof(float)*numElem);
-        cv::Mat continuousRGBA(rgbimg.size(), CV_8UC4, camData);
+    // Allocate memory
+    unsigned long numElem = rgbimg.total()*4;
+    uchar* camData = new uchar[numElem];
+    float* camDataflt;
+    cudaMallocManaged(&camDataflt, sizeof(float)*numElem);
+    cv::Mat continuousRGBA(rgbimg.size(), CV_8UC4, camData);
 
 //    uchar* camData = new uchar[rgbimg.total()*4];
 //    cv::Mat continuousRGBA(rgbimg.size(), CV_8UC4, camData);

@@ -77,6 +77,10 @@ int main( int argc, char** argv )
     int camera_rows = rgbcam.get(cv::CAP_PROP_FRAME_HEIGHT);
     int camera_cols = rgbcam.get(cv::CAP_PROP_FRAME_WIDTH);
     unsigned long numElem = camera_rows * camera_cols;
+    cv::Mat rgbimg;
+    rgbcam >> rgbimg;
+    cv::imshow("Original", rgbImg);
+
     uchar* camData = new uchar[numElem];
     float* camDataflt;
     cudaMallocManaged(&camDataflt, sizeof(float)*numElem);
@@ -84,7 +88,6 @@ int main( int argc, char** argv )
     cv::Mat fltImg(camera_rows, camera_cols, CV_32FC4, camDataflt);
 
     rgbcam >> rgbaImg;
-    cv::imshow("Original", rgbaImg);
 //        char str[256];
 //        sprintf(str, "TensorRT %i.%i.%i | %s | %04.1f FPS", NV_TENSORRT_MAJOR, NV_TENSORRT_MINOR, NV_TENSORRT_PATCH, precisionTypeToStr(net->GetPrecision()), 0.0);
 //    cv::imshow(str, fltImg);
@@ -207,15 +210,20 @@ int main( int argc, char** argv )
 //		if( !camera->Capture(&imgCPU, &imgCUDA, 1000) )
 //			printf("\ndetectnet-camera:  failed to capture frame\n");
 
-        rgbcam >> rgbaImg;
-		if( rgbaImg.empty() )
+        rgbcam >> rgbImg;
+		if( rgbImg.empty() )
 			printf("\ndetectnet-camera:  failed to capture frame\n");
-        cv::imshow("Original", rgbaImg);
-        cv::waitKey();
+        cv::imshow("Original", rgbImg);
+//        cv::waitKey();
 
 		// convert from YUV to RGBA and move to graphics memory
 
-//        cv::cvtColor(rgbaImg, rgbaImg, CV_BGR2RGBA, 4);
+//        unsigned long numElem = rgbimg.total()*4;
+//        uchar* camData = new uchar[numElem];
+//        float* camDataflt;
+//        cudaMallocManaged(&camDataflt, sizeof(float)*numElem);
+//        cv::Mat continuousRGBA(rgbimg.size(), CV_8UC4, camData);
+        cv::cvtColor(rgbimg, continuousRGBA, CV_BGR2RGBA, 4);
         for(int i=0; i<numElem; i+=4)
         {
             camDataflt[i]   = (float)camData[i];
@@ -223,7 +231,7 @@ int main( int argc, char** argv )
             camDataflt[i+2] = (float)camData[i+2];
             camDataflt[i+3] = (float)camData[i+3];
         }
-
+//        cv::Mat fltImg(rgbimg.size(), CV_32FC4, camDataflt);
 
 //		void* imgRGBA = NULL;
 //

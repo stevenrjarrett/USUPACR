@@ -211,7 +211,7 @@ int main( int argc, char** argv )
 		if( rgbaImg.empty() )
 			printf("\ndetectnet-camera:  failed to capture frame\n");
         cv::imshow("Original", rgbaImg);
-//        cv::waitKey();
+        cv::waitKey();
 
 		// convert from YUV to RGBA and move to graphics memory
 

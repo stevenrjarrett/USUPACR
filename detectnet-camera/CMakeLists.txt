@@ -1,8 +1,9 @@
 # require CMake 2.8 or greater
 cmake_minimum_required(VERSION 2.8)
 
-# Use C++11
-set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=gnu++11")
+# Use C++14
+set(CMAKE_CXX_STANDARD 14)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 # declare detectnet-camera project
 project(detectnet-camera)
@@ -20,6 +21,9 @@ find_package(jetson-inference)
 find_package(CUDA)
 find_package(Qt4)
 
+# opencv required
+find_package(OpenCV REQUIRED)
+
 # Find gstreamer
 # find_package(gstreamer-1.0)
 
@@ -32,7 +36,6 @@ cuda_add_executable(detectnet-camera ${detectnetCameraSources})
 # cuda_add_executable(detectnet-camera detectnet-camera.cpp)
 
 # link detectnet-camera to jetson-inference library
-include_directories(/usr/include/gstreamer-1.0 /usr/lib/aarch64-linux-gnu/gstreamer-1.0/include /usr/include/glib-2.0 /usr/include/libxml2 /usr/lib/aarch64-linux-gnu/glib-2.0/include/)
-# target_include_directories(detectnet-camera PRIVATE ${GST_INCLUDE_DIRS})
-message(GST_INCLUDE_DIRS=${GST_INCLUDE_DIRS})
-target_link_libraries(detectnet-camera jetson-inference ${GST_LIBRARIES})
+include_directories(/usr/include/gstreamer-1.0 /usr/lib/aarch64-linux-gnu/gstreamer-1.0/include /usr/include/glib-2.0 /usr/include/libxml2 /usr/lib/aarch64-linux-gnu/glib-2.0/include/ ${OpenCV_INCLUDE_DIRS})
+
+target_link_libraries(detectnet-camera jetson-inference ${GST_LIBRARIES} ${OpenCV_LIBS})

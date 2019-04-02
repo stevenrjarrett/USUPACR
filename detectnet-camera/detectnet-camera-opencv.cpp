@@ -85,7 +85,7 @@ int main( int argc, char** argv )
 
     rgbcam >> rgbaImg;
     cv::imshow("Original", rgbaImg);
-//    cv::waitKey();
+    cv::waitKey();
 
 //    uchar* camData = new uchar[rgbimg.total()*4];
 //    cv::Mat rgbaImg(rgbimg.size(), CV_8UC4, camData);

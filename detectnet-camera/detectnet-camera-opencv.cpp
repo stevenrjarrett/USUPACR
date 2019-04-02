@@ -74,8 +74,6 @@ int main( int argc, char** argv )
 	 */
 
     cv::VideoCapture rgbcam(DEFAULT_CAMERA);
-    std::cout << "Image height: " << rgbcam.get(CAP_PROP_FRAME_HEIGHT) << '\n';
-    std::cout << "Image width:  " << rgbcam.get(CAP_PROP_FRAME_WIDTH) << std::endl;
     cv::Mat rgbimg;
     rgbcam >> rgbimg;
     cv::imshow("Original", rgbimg);
@@ -93,6 +91,8 @@ int main( int argc, char** argv )
     }
 
 	printf("\ndetectnet-camera:  successfully initialized video device\n");
+    std::cout << "Image height: " << rgbcam.get(cv::CAP_PROP_FRAME_HEIGHT) << '\n';
+    std::cout << "Image width:  " << rgbcam.get(cv::CAP_PROP_FRAME_WIDTH) << std::endl;
 //	printf("    width:  %u\n", rgbimg.cols);
 //	printf("   height:  %u\n", rgbimg.rows);
 //	printf("    depth:  %u (bpp)\n\n", camera->GetPixelDepth());

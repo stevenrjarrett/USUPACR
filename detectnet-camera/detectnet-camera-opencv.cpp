@@ -74,14 +74,20 @@ int main( int argc, char** argv )
 	 */
 
     cv::VideoCapture rgbcam(DEFAULT_CAMERA);
-    cv::Mat rgbimg;
-    rgbcam >> rgbimg;
-    cv::imshow("Original", rgbimg);
+    unsigned long numElem = rgbcam.get(cv::CAP_PROP_FRAME_HEIGHT) * rgbcam.get(cv::CAP_PROP_FRAME_WIDTH);
+    uchar* camData = new uchar[numElem];
+    float* camDataflt;
+    cudaMallocManaged(&camDataflt, sizeof(float)*numElem);
+    cv::Mat rgbaImg(rgbimg.size(), CV_8UC4, camData);
+//    cv::Mat fltImg(rgbimg.size(), CV_32FC4, camDataflt);
+
+    rgbcam >> rgbaImg;
+    cv::imshow("Original", rgbaImg);
 //    cv::waitKey();
 
 //    uchar* camData = new uchar[rgbimg.total()*4];
-//    cv::Mat continuousRGBA(rgbimg.size(), CV_8UC4, camData);
-//    cv::cvtColor(rgbimg, continuousRGBA, CV_BGR2RGBA, 4);
+//    cv::Mat rgbaImg(rgbimg.size(), CV_8UC4, camData);
+//    cv::cvtColor(rgbimg, rgbaImg, CV_BGR2RGBA, 4);
 //    img.LoadFromPixels(rgbimg.cols, rgbimg.rows, camData);
 
     if(!rgbcam.isOpened())
@@ -202,12 +208,7 @@ int main( int argc, char** argv )
 
 		// convert from YUV to RGBA and move to graphics memory
 
-        unsigned long numElem = rgbimg.total()*4;
-        uchar* camData = new uchar[numElem];
-        float* camDataflt;
-        cudaMallocManaged(&camDataflt, sizeof(float)*numElem);
-        cv::Mat continuousRGBA(rgbimg.size(), CV_8UC4, camData);
-        cv::cvtColor(rgbimg, continuousRGBA, CV_BGR2RGBA, 4);
+//        cv::cvtColor(rgbimg, rgbaImg, CV_BGR2RGBA, 4);
         for(int i=0; i<numElem; i+=4)
         {
             camDataflt[i]   = (float)camData[i];
@@ -215,7 +216,6 @@ int main( int argc, char** argv )
             camDataflt[i+2] = (float)camData[i+2];
             camDataflt[i+3] = (float)camData[i+3];
         }
-        cv::Mat fltImg(rgbimg.size(), CV_64FC4, camDataflt);
 
 
 //		void* imgRGBA = NULL;

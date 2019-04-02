@@ -77,7 +77,7 @@ int main( int argc, char** argv )
     cv::Mat rgbimg;
     rgbcam >> rgbimg;
     cv::imshow("Original", rgbimg);
-    cv::waitKey();
+//    cv::waitKey();
 
 //    uchar* camData = new uchar[rgbimg.total()*4];
 //    cv::Mat continuousRGBA(rgbimg.size(), CV_8UC4, camData);
@@ -196,7 +196,7 @@ int main( int argc, char** argv )
 		if( rgbimg.empty() )
 			printf("\ndetectnet-camera:  failed to capture frame\n");
         cv::imshow("Original", rgbimg);
-        cv::waitKey();
+//        cv::waitKey();
 
 		// convert from YUV to RGBA
 

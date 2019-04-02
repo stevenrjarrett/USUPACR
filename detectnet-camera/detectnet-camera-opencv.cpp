@@ -215,7 +215,7 @@ int main( int argc, char** argv )
             camDataflt[i+2] = (float)camData[i+2];
             camDataflt[i+3] = (float)camData[i+3];
         }
-        cv::Mat fltImg(rgbimg.size(), CV_32FC4, camDataflt);
+        cv::Mat fltImg(rgbimg.size(), CV_64FC4, camDataflt);
 
 
 //		void* imgRGBA = NULL;

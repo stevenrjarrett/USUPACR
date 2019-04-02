@@ -203,7 +203,7 @@ int main( int argc, char** argv )
         unsigned long numElem = rgbimg.total()*4;
         uchar* camData = new uchar[numElem];
         float* camDataflt;
-        cudaMallocManaged(&camDataflt, sizeof(float)*numElem)
+        cudaMallocManaged(&camDataflt, sizeof(float)*numElem);
         cv::Mat continuousRGBA(rgbimg.size(), CV_8UC4, camData);
         cv::cvtColor(rgbimg, continuousRGBA, CV_BGR2RGBA, 4);
         for(int i=0; i<numElem; i++)

@@ -305,7 +305,7 @@ int main( int argc, char** argv )
 //
 //			display->EndRender();
 //		}
-        cudaFree(camData);
+        cudaFree(camDataflt);
 	}
 
 	printf("\ndetectnet-camera:  un-initializing video device\n");

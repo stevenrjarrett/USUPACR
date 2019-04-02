@@ -74,22 +74,14 @@ int main( int argc, char** argv )
 	 */
 
     cv::VideoCapture rgbcam(DEFAULT_CAMERA);
-    int camera_rows = rgbcam.get(cv::CAP_PROP_FRAME_HEIGHT);
-    int camera_cols = rgbcam.get(cv::CAP_PROP_FRAME_WIDTH);
-    unsigned long numElem = camera_rows * camera_cols;
-    uchar* camData = new uchar[numElem];
-    float* camDataflt;
-    cudaMallocManaged(&camDataflt, sizeof(float)*numElem);
-    cv::Mat rgbaImg(camera_rows, camera_cols, CV_8UC4, camData);
-    cv::Mat fltImg(camera_rows, camera_cols, CV_32FC4, camDataflt);
-
-    rgbcam >> rgbaImg;
-    cv::imshow("Original", rgbaImg);
+    cv::Mat rgbimg;
+    rgbcam >> rgbimg;
+    cv::imshow("Original", rgbimg);
 //    cv::waitKey();
 
 //    uchar* camData = new uchar[rgbimg.total()*4];
-//    cv::Mat rgbaImg(rgbimg.size(), CV_8UC4, camData);
-//    cv::cvtColor(rgbimg, rgbaImg, CV_BGR2RGBA, 4);
+//    cv::Mat continuousRGBA(rgbimg.size(), CV_8UC4, camData);
+//    cv::cvtColor(rgbimg, continuousRGBA, CV_BGR2RGBA, 4);
 //    img.LoadFromPixels(rgbimg.cols, rgbimg.rows, camData);
 
     if(!rgbcam.isOpened())
@@ -202,15 +194,20 @@ int main( int argc, char** argv )
 //		if( !camera->Capture(&imgCPU, &imgCUDA, 1000) )
 //			printf("\ndetectnet-camera:  failed to capture frame\n");
 
-        rgbcam >> rgbaImg;
-		if( rgbaImg.empty() )
+        rgbcam >> rgbimg;
+		if( rgbimg.empty() )
 			printf("\ndetectnet-camera:  failed to capture frame\n");
-        cv::imshow("Original", rgbaImg);
+        cv::imshow("Original", rgbimg);
 //        cv::waitKey();
 
 		// convert from YUV to RGBA and move to graphics memory
 
-//        cv::cvtColor(rgbaImg, rgbaImg, CV_BGR2RGBA, 4);
+        unsigned long numElem = rgbimg.total()*4;
+        uchar* camData = new uchar[numElem];
+        float* camDataflt;
+        cudaMallocManaged(&camDataflt, sizeof(float)*numElem);
+        cv::Mat continuousRGBA(rgbimg.size(), CV_8UC4, camData);
+        cv::cvtColor(rgbimg, continuousRGBA, CV_BGR2RGBA, 4);
         for(int i=0; i<numElem; i+=4)
         {
             camDataflt[i]   = (float)camData[i];
@@ -218,6 +215,7 @@ int main( int argc, char** argv )
             camDataflt[i+2] = (float)camData[i+2];
             camDataflt[i+3] = (float)camData[i+3];
         }
+        cv::Mat fltImg(rgbimg.size(), CV_32FC4, camDataflt);
 
 
 //		void* imgRGBA = NULL;
@@ -229,7 +227,7 @@ int main( int argc, char** argv )
 		int numBoundingBoxes = maxBoxes;
 
 //		if( net->Detect((float*)imgRGBA, camera->GetWidth(), camera->GetHeight(), bbCPU, &numBoundingBoxes, confCPU))
-		if( net->Detect(camDataflt, rgbaImg.cols, rgbaImg.rows , bbCPU, &numBoundingBoxes, confCPU))
+		if( net->Detect(camDataflt, rgbimg.cols, rgbimg.rows , bbCPU, &numBoundingBoxes, confCPU))
 		{
 			printf("%i bounding boxes detected\n", numBoundingBoxes);
 
@@ -246,7 +244,7 @@ int main( int argc, char** argv )
 
 				if( nc != lastClass || n == (numBoundingBoxes - 1) )
 				{
-					if( !net->DrawBoxes(camDataflt, camDataflt, rgbaImg.cols, rgbaImg.rows,
+					if( !net->DrawBoxes(camDataflt, camDataflt, rgbimg.cols, rgbimg.rows,
 						                        bbCUDA + (lastStart * 4), (n - lastStart) + 1, lastClass) )
 						printf("detectnet-console:  failed to draw boxes\n");
 
@@ -280,7 +278,7 @@ int main( int argc, char** argv )
 
 		// update display
 //        cv::Mat img;
-//        img.LoadFromPixels(rgbaImg.cols, rgbaImg.rows, camData);
+//        img.LoadFromPixels(rgbimg.cols, rgbimg.rows, camData);
         char str[256];
         sprintf(str, "TensorRT %i.%i.%i | %s | %04.1f FPS", NV_TENSORRT_MAJOR, NV_TENSORRT_MINOR, NV_TENSORRT_PATCH, precisionTypeToStr(net->GetPrecision()), 0.0);
 		cv::imshow(str, fltImg);
@@ -311,7 +309,7 @@ int main( int argc, char** argv )
 //
 //			display->EndRender();
 //		}
-//        cudaFree(camDataflt);
+        cudaFree(camDataflt);
 	}
 
 	printf("\ndetectnet-camera:  un-initializing video device\n");
@@ -332,7 +330,6 @@ int main( int argc, char** argv )
 //		display = NULL;
 //	}
 //	delete uchar* camData;
-    cudaFree(camDataflt);
 
 	printf("detectnet-camera:  video device has been un-initialized.\n");
 	printf("detectnet-camera:  this concludes the test of the video device.\n");

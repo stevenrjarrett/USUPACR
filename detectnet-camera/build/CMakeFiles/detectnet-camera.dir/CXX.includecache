@@ -6,12 +6,8 @@
 
 #IncludeRegexTransform: 
 
-/home/nvidia/Documents/USUPACR/detectnet-camera/detectnet-camera.cpp
-jetson-utils/gstCamera.h
--
-jetson-utils/glDisplay.h
--
-jetson-utils/glTexture.h
+/home/nvidia/Documents/USUPACR/detectnet-camera/detectnet-camera-opencv.cpp
+opencv2/opencv.hpp
 -
 stdio.h
 -

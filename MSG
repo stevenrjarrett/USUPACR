@@ -1,0 +1,19 @@
+Working on detection
+# Please enter the commit message for your changes. Lines starting
+# with '#' will be ignored, and an empty message aborts the commit.
+# On branch master
+# Your branch is up-to-date with 'origin/master'.
+#
+# Changes to be committed:
+#	modified:   USUPACR/build/CMakeCache.txt
+#	modified:   USUPACR/build/CMakeFiles/CMakeError.log
+#	modified:   USUPACR/build/CMakeFiles/CMakeOutput.log
+#	modified:   USUPACR/build/CMakeFiles/Makefile.cmake
+#	modified:   USUPACR/build/CMakeFiles/USUPACR.dir/CXX.includecache
+#	modified:   USUPACR/build/CMakeFiles/USUPACR.dir/DependInfo.cmake
+#	modified:   USUPACR/build/CMakeFiles/USUPACR.dir/build.make
+#	modified:   USUPACR/build/CMakeFiles/USUPACR.dir/flags.make
+#	modified:   USUPACR/build/CMakeFiles/USUPACR.dir/link.txt
+#	new file:   USUPACR/build/CMakeFiles/USUPACR.dir/main.cpp.o
+#	modified:   USUPACR/build/USUPACR
+#

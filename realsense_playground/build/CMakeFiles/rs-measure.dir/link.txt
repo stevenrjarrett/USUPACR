@@ -1,0 +1,1 @@
+/usr/bin/c++    -std=c++11   CMakeFiles/rs-measure.dir/rs-measure.cpp.o  -o rs-measure -rdynamic -lrealsense2 -lm -pthread 

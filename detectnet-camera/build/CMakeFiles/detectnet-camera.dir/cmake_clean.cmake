@@ -1,5 +1,5 @@
 file(REMOVE_RECURSE
-  "CMakeFiles/detectnet-camera.dir/detectnet-camera.cpp.o"
+  "CMakeFiles/detectnet-camera.dir/detectnet-camera-opencv.cpp.o"
   "detectnet-camera.pdb"
   "detectnet-camera"
 )

@@ -123,32 +123,32 @@ detectnet-camera/fast:
 	$(MAKE) -f CMakeFiles/detectnet-camera.dir/build.make CMakeFiles/detectnet-camera.dir/build
 .PHONY : detectnet-camera/fast
 
-detectnet-camera.o: detectnet-camera.cpp.o
+detectnet-camera-opencv.o: detectnet-camera-opencv.cpp.o
 
-.PHONY : detectnet-camera.o
+.PHONY : detectnet-camera-opencv.o
 
 # target to build an object file
-detectnet-camera.cpp.o:
-	$(MAKE) -f CMakeFiles/detectnet-camera.dir/build.make CMakeFiles/detectnet-camera.dir/detectnet-camera.cpp.o
-.PHONY : detectnet-camera.cpp.o
+detectnet-camera-opencv.cpp.o:
+	$(MAKE) -f CMakeFiles/detectnet-camera.dir/build.make CMakeFiles/detectnet-camera.dir/detectnet-camera-opencv.cpp.o
+.PHONY : detectnet-camera-opencv.cpp.o
 
-detectnet-camera.i: detectnet-camera.cpp.i
+detectnet-camera-opencv.i: detectnet-camera-opencv.cpp.i
 
-.PHONY : detectnet-camera.i
+.PHONY : detectnet-camera-opencv.i
 
 # target to preprocess a source file
-detectnet-camera.cpp.i:
-	$(MAKE) -f CMakeFiles/detectnet-camera.dir/build.make CMakeFiles/detectnet-camera.dir/detectnet-camera.cpp.i
-.PHONY : detectnet-camera.cpp.i
+detectnet-camera-opencv.cpp.i:
+	$(MAKE) -f CMakeFiles/detectnet-camera.dir/build.make CMakeFiles/detectnet-camera.dir/detectnet-camera-opencv.cpp.i
+.PHONY : detectnet-camera-opencv.cpp.i
 
-detectnet-camera.s: detectnet-camera.cpp.s
+detectnet-camera-opencv.s: detectnet-camera-opencv.cpp.s
 
-.PHONY : detectnet-camera.s
+.PHONY : detectnet-camera-opencv.s
 
 # target to generate assembly for a file
-detectnet-camera.cpp.s:
-	$(MAKE) -f CMakeFiles/detectnet-camera.dir/build.make CMakeFiles/detectnet-camera.dir/detectnet-camera.cpp.s
-.PHONY : detectnet-camera.cpp.s
+detectnet-camera-opencv.cpp.s:
+	$(MAKE) -f CMakeFiles/detectnet-camera.dir/build.make CMakeFiles/detectnet-camera.dir/detectnet-camera-opencv.cpp.s
+.PHONY : detectnet-camera-opencv.cpp.s
 
 # Help Target
 help:
@@ -159,9 +159,9 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... detectnet-camera"
-	@echo "... detectnet-camera.o"
-	@echo "... detectnet-camera.i"
-	@echo "... detectnet-camera.s"
+	@echo "... detectnet-camera-opencv.o"
+	@echo "... detectnet-camera-opencv.i"
+	@echo "... detectnet-camera-opencv.s"
 .PHONY : help
 
 

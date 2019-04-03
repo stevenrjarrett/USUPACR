@@ -1,0 +1,1 @@
+/usr/bin/c++      CMakeFiles/rs-play.dir/rs-measure.cpp.o  -o rs-play -rdynamic /usr/local/lib/librealsense2.so.2.10.4 -pthread -Wl,-rpath,/usr/local/lib 

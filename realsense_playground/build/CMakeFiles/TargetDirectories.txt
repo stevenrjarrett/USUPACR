@@ -1,0 +1,3 @@
+/home/nvidia/Documents/USUPACR/realsense_playground/build/CMakeFiles/edit_cache.dir
+/home/nvidia/Documents/USUPACR/realsense_playground/build/CMakeFiles/rebuild_cache.dir
+/home/nvidia/Documents/USUPACR/realsense_playground/build/CMakeFiles/rs-play.dir

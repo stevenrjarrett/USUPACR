@@ -4,7 +4,7 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "/home/nvidia/Documents/USUPACR/detectnet-camera/detectnet-camera.cpp" "/home/nvidia/Documents/USUPACR/detectnet-camera/build/CMakeFiles/detectnet-camera.dir/detectnet-camera.cpp.o"
+  "/home/nvidia/Documents/USUPACR/detectnet-camera/detectnet-camera-opencv.cpp" "/home/nvidia/Documents/USUPACR/detectnet-camera/build/CMakeFiles/detectnet-camera.dir/detectnet-camera-opencv.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 
@@ -26,6 +26,7 @@ set(CMAKE_CXX_TARGET_INCLUDE_PATH
   "/usr/include/glib-2.0"
   "/usr/include/libxml2"
   "/usr/lib/aarch64-linux-gnu/glib-2.0/include"
+  "/usr/include/opencv"
   "/usr/share/qt4/mkspecs/default"
   )
 

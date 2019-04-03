@@ -57,47 +57,64 @@ include CMakeFiles/detectnet-camera.dir/progress.make
 # Include the compile flags for this target's objects.
 include CMakeFiles/detectnet-camera.dir/flags.make
 
-CMakeFiles/detectnet-camera.dir/detectnet-camera.cpp.o: CMakeFiles/detectnet-camera.dir/flags.make
-CMakeFiles/detectnet-camera.dir/detectnet-camera.cpp.o: ../detectnet-camera.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nvidia/Documents/USUPACR/detectnet-camera/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/detectnet-camera.dir/detectnet-camera.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/detectnet-camera.dir/detectnet-camera.cpp.o -c /home/nvidia/Documents/USUPACR/detectnet-camera/detectnet-camera.cpp
+CMakeFiles/detectnet-camera.dir/detectnet-camera-opencv.cpp.o: CMakeFiles/detectnet-camera.dir/flags.make
+CMakeFiles/detectnet-camera.dir/detectnet-camera-opencv.cpp.o: ../detectnet-camera-opencv.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nvidia/Documents/USUPACR/detectnet-camera/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/detectnet-camera.dir/detectnet-camera-opencv.cpp.o"
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/detectnet-camera.dir/detectnet-camera-opencv.cpp.o -c /home/nvidia/Documents/USUPACR/detectnet-camera/detectnet-camera-opencv.cpp
 
-CMakeFiles/detectnet-camera.dir/detectnet-camera.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/detectnet-camera.dir/detectnet-camera.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/nvidia/Documents/USUPACR/detectnet-camera/detectnet-camera.cpp > CMakeFiles/detectnet-camera.dir/detectnet-camera.cpp.i
+CMakeFiles/detectnet-camera.dir/detectnet-camera-opencv.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/detectnet-camera.dir/detectnet-camera-opencv.cpp.i"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/nvidia/Documents/USUPACR/detectnet-camera/detectnet-camera-opencv.cpp > CMakeFiles/detectnet-camera.dir/detectnet-camera-opencv.cpp.i
 
-CMakeFiles/detectnet-camera.dir/detectnet-camera.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/detectnet-camera.dir/detectnet-camera.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/nvidia/Documents/USUPACR/detectnet-camera/detectnet-camera.cpp -o CMakeFiles/detectnet-camera.dir/detectnet-camera.cpp.s
+CMakeFiles/detectnet-camera.dir/detectnet-camera-opencv.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/detectnet-camera.dir/detectnet-camera-opencv.cpp.s"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/nvidia/Documents/USUPACR/detectnet-camera/detectnet-camera-opencv.cpp -o CMakeFiles/detectnet-camera.dir/detectnet-camera-opencv.cpp.s
 
-CMakeFiles/detectnet-camera.dir/detectnet-camera.cpp.o.requires:
+CMakeFiles/detectnet-camera.dir/detectnet-camera-opencv.cpp.o.requires:
 
-.PHONY : CMakeFiles/detectnet-camera.dir/detectnet-camera.cpp.o.requires
+.PHONY : CMakeFiles/detectnet-camera.dir/detectnet-camera-opencv.cpp.o.requires
 
-CMakeFiles/detectnet-camera.dir/detectnet-camera.cpp.o.provides: CMakeFiles/detectnet-camera.dir/detectnet-camera.cpp.o.requires
-	$(MAKE) -f CMakeFiles/detectnet-camera.dir/build.make CMakeFiles/detectnet-camera.dir/detectnet-camera.cpp.o.provides.build
-.PHONY : CMakeFiles/detectnet-camera.dir/detectnet-camera.cpp.o.provides
+CMakeFiles/detectnet-camera.dir/detectnet-camera-opencv.cpp.o.provides: CMakeFiles/detectnet-camera.dir/detectnet-camera-opencv.cpp.o.requires
+	$(MAKE) -f CMakeFiles/detectnet-camera.dir/build.make CMakeFiles/detectnet-camera.dir/detectnet-camera-opencv.cpp.o.provides.build
+.PHONY : CMakeFiles/detectnet-camera.dir/detectnet-camera-opencv.cpp.o.provides
 
-CMakeFiles/detectnet-camera.dir/detectnet-camera.cpp.o.provides.build: CMakeFiles/detectnet-camera.dir/detectnet-camera.cpp.o
+CMakeFiles/detectnet-camera.dir/detectnet-camera-opencv.cpp.o.provides.build: CMakeFiles/detectnet-camera.dir/detectnet-camera-opencv.cpp.o
 
 
 # Object files for target detectnet-camera
 detectnet__camera_OBJECTS = \
-"CMakeFiles/detectnet-camera.dir/detectnet-camera.cpp.o"
+"CMakeFiles/detectnet-camera.dir/detectnet-camera-opencv.cpp.o"
 
 # External object files for target detectnet-camera
 detectnet__camera_EXTERNAL_OBJECTS =
 
-detectnet-camera: CMakeFiles/detectnet-camera.dir/detectnet-camera.cpp.o
+detectnet-camera: CMakeFiles/detectnet-camera.dir/detectnet-camera-opencv.cpp.o
 detectnet-camera: CMakeFiles/detectnet-camera.dir/build.make
 detectnet-camera: /usr/local/cuda-9.0/lib64/libcudart_static.a
 detectnet-camera: /usr/lib/aarch64-linux-gnu/librt.so
 detectnet-camera: /usr/local/lib/libjetson-inference.so
+detectnet-camera: /usr/lib/libopencv_dnn.so.3.3.1
+detectnet-camera: /usr/lib/libopencv_ml.so.3.3.1
+detectnet-camera: /usr/lib/libopencv_objdetect.so.3.3.1
+detectnet-camera: /usr/lib/libopencv_shape.so.3.3.1
+detectnet-camera: /usr/lib/libopencv_stitching.so.3.3.1
+detectnet-camera: /usr/lib/libopencv_superres.so.3.3.1
+detectnet-camera: /usr/lib/libopencv_videostab.so.3.3.1
 detectnet-camera: /usr/local/lib/libjetson-utils.so
 detectnet-camera: /usr/local/cuda-9.0/lib64/libcudart_static.a
 detectnet-camera: /usr/lib/aarch64-linux-gnu/librt.so
 detectnet-camera: /usr/lib/aarch64-linux-gnu/libQtGui.so
 detectnet-camera: /usr/lib/aarch64-linux-gnu/libQtCore.so
+detectnet-camera: /usr/lib/libopencv_calib3d.so.3.3.1
+detectnet-camera: /usr/lib/libopencv_features2d.so.3.3.1
+detectnet-camera: /usr/lib/libopencv_flann.so.3.3.1
+detectnet-camera: /usr/lib/libopencv_highgui.so.3.3.1
+detectnet-camera: /usr/lib/libopencv_photo.so.3.3.1
+detectnet-camera: /usr/lib/libopencv_video.so.3.3.1
+detectnet-camera: /usr/lib/libopencv_videoio.so.3.3.1
+detectnet-camera: /usr/lib/libopencv_imgcodecs.so.3.3.1
+detectnet-camera: /usr/lib/libopencv_imgproc.so.3.3.1
+detectnet-camera: /usr/lib/libopencv_core.so.3.3.1
 detectnet-camera: CMakeFiles/detectnet-camera.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/nvidia/Documents/USUPACR/detectnet-camera/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX executable detectnet-camera"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/detectnet-camera.dir/link.txt --verbose=$(VERBOSE)
@@ -107,7 +124,7 @@ CMakeFiles/detectnet-camera.dir/build: detectnet-camera
 
 .PHONY : CMakeFiles/detectnet-camera.dir/build
 
-CMakeFiles/detectnet-camera.dir/requires: CMakeFiles/detectnet-camera.dir/detectnet-camera.cpp.o.requires
+CMakeFiles/detectnet-camera.dir/requires: CMakeFiles/detectnet-camera.dir/detectnet-camera-opencv.cpp.o.requires
 
 .PHONY : CMakeFiles/detectnet-camera.dir/requires
 

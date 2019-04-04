@@ -78,7 +78,7 @@ int main(int argc, char * argv[]) try
         float* colorData_flt;
         cudaMallocManaged(&colorData_flt, sizeof(float)*color_numElements*4);
         char*  colorData;
-        cudaMallocManaged(&colorData, 2 * sizeof(char)*color_numElements*4);
+        cudaMallocManaged(&colorData, 10 * sizeof(char)*color_numElements*4);
         /*
          * create detectNet
          */

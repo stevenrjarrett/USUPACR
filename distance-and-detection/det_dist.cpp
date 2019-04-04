@@ -77,6 +77,8 @@ int main(int argc, char * argv[]) try
 
         float* colorData_flt;
         cudaMallocManaged(&colorData_flt, sizeof(float)*color_numElements*4);
+        char*  colorData;
+        cudaMallocManaged(&colorData, 2 * sizeof(char)*color_numElements*4);
         /*
          * create detectNet
          */
@@ -128,7 +130,7 @@ int main(int argc, char * argv[]) try
 
         // get data pointers
         char* depthData = (char*)depth.get_data();
-        char* colorData = (char*)color.get_data();
+        colorData = (char*)color.get_data();
 
         // create opencv Mat's
         cv::Mat depthMat(cv::Size(depth_width, depth_height), CV_16UC1, (void*)depth.get_data(), cv::Mat::AUTO_STEP);
@@ -144,6 +146,7 @@ int main(int argc, char * argv[]) try
         const int h2 = color.as<rs2::video_frame>().get_height();
 
         // Create OpenCV matrix of size (w,h) from the colorized depth data
+        std::cout << "Loaded frames" << std::endl;
 
 
 

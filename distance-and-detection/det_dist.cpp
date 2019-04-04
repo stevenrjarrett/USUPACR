@@ -262,11 +262,11 @@ int main(int argc, char * argv[]) try
 //						                        bbCUDA + (lastStart * 4), (n - lastStart) + 1, lastClass) )
 //						printf("detectnet-console:  failed to draw boxes\n");
 
-                    cv::rectangle(colorMat, cv::Rect2d(bb[0],bb[1], bb[2]-bb[0], bb[3]-bb[1]), cv::Scalar( 255, 0, 0 ), 2, 1 );
+                    cv::rectangle(rgbaMat, cv::Rect2d(bb[0],bb[1], bb[2]-bb[0], bb[3]-bb[1]), cv::Scalar( 255, 0, 0 ), 2, 1 );
 
                     std::string prnt = "Confidence: ";
                     prnt += std::to_string(confCPU[n*2]);
-                    cv::putText(colorMat, prnt, cv::Point(bb[0],bb[1]), cv::FONT_HERSHEY_SIMPLEX, 0.75, cv::Scalar(50,170,50),2);
+                    cv::putText(rgbaMat, prnt, cv::Point(bb[0],bb[1]), cv::FONT_HERSHEY_SIMPLEX, 0.75, cv::Scalar(50,170,50),2);
 
 					lastClass = nc;
 					lastStart = n;

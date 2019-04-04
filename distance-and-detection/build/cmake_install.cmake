@@ -1,4 +1,4 @@
-# Install script for directory: /home/nvidia/Documents/USUPACR/distance-and-detection
+# Install script for directory: /home/nvidia/Documents/USUPACR/realsense_playground
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -40,5 +40,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/home/nvidia/Documents/USUPACR/distance-and-detection/build/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "/home/nvidia/Documents/USUPACR/realsense_playground/build/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

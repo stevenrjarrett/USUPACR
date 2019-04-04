@@ -48,10 +48,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/nvidia/Documents/USUPACR/distance-and-detection
+CMAKE_SOURCE_DIR = /home/nvidia/Documents/USUPACR/realsense_playground
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/nvidia/Documents/USUPACR/distance-and-detection/build
+CMAKE_BINARY_DIR = /home/nvidia/Documents/USUPACR/realsense_playground/build
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -80,9 +80,9 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/nvidia/Documents/USUPACR/distance-and-detection/build/CMakeFiles /home/nvidia/Documents/USUPACR/distance-and-detection/build/CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/nvidia/Documents/USUPACR/realsense_playground/build/CMakeFiles /home/nvidia/Documents/USUPACR/realsense_playground/build/CMakeFiles/progress.marks
 	$(MAKE) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/nvidia/Documents/USUPACR/distance-and-detection/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/nvidia/Documents/USUPACR/realsense_playground/build/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -111,44 +111,44 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named detectnet-distance
+# Target rules for targets named rs-playground
 
 # Build rule for target.
-detectnet-distance: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 detectnet-distance
-.PHONY : detectnet-distance
+rs-playground: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 rs-playground
+.PHONY : rs-playground
 
 # fast build rule for target.
-detectnet-distance/fast:
-	$(MAKE) -f CMakeFiles/detectnet-distance.dir/build.make CMakeFiles/detectnet-distance.dir/build
-.PHONY : detectnet-distance/fast
+rs-playground/fast:
+	$(MAKE) -f CMakeFiles/rs-playground.dir/build.make CMakeFiles/rs-playground.dir/build
+.PHONY : rs-playground/fast
 
-detectnet-distance.o: detectnet-distance.cpp.o
+rs-playground.o: rs-playground.cpp.o
 
-.PHONY : detectnet-distance.o
+.PHONY : rs-playground.o
 
 # target to build an object file
-detectnet-distance.cpp.o:
-	$(MAKE) -f CMakeFiles/detectnet-distance.dir/build.make CMakeFiles/detectnet-distance.dir/detectnet-distance.cpp.o
-.PHONY : detectnet-distance.cpp.o
+rs-playground.cpp.o:
+	$(MAKE) -f CMakeFiles/rs-playground.dir/build.make CMakeFiles/rs-playground.dir/rs-playground.cpp.o
+.PHONY : rs-playground.cpp.o
 
-detectnet-distance.i: detectnet-distance.cpp.i
+rs-playground.i: rs-playground.cpp.i
 
-.PHONY : detectnet-distance.i
+.PHONY : rs-playground.i
 
 # target to preprocess a source file
-detectnet-distance.cpp.i:
-	$(MAKE) -f CMakeFiles/detectnet-distance.dir/build.make CMakeFiles/detectnet-distance.dir/detectnet-distance.cpp.i
-.PHONY : detectnet-distance.cpp.i
+rs-playground.cpp.i:
+	$(MAKE) -f CMakeFiles/rs-playground.dir/build.make CMakeFiles/rs-playground.dir/rs-playground.cpp.i
+.PHONY : rs-playground.cpp.i
 
-detectnet-distance.s: detectnet-distance.cpp.s
+rs-playground.s: rs-playground.cpp.s
 
-.PHONY : detectnet-distance.s
+.PHONY : rs-playground.s
 
 # target to generate assembly for a file
-detectnet-distance.cpp.s:
-	$(MAKE) -f CMakeFiles/detectnet-distance.dir/build.make CMakeFiles/detectnet-distance.dir/detectnet-distance.cpp.s
-.PHONY : detectnet-distance.cpp.s
+rs-playground.cpp.s:
+	$(MAKE) -f CMakeFiles/rs-playground.dir/build.make CMakeFiles/rs-playground.dir/rs-playground.cpp.s
+.PHONY : rs-playground.cpp.s
 
 # Help Target
 help:
@@ -158,10 +158,10 @@ help:
 	@echo "... depend"
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
-	@echo "... detectnet-distance"
-	@echo "... detectnet-distance.o"
-	@echo "... detectnet-distance.i"
-	@echo "... detectnet-distance.s"
+	@echo "... rs-playground"
+	@echo "... rs-playground.o"
+	@echo "... rs-playground.i"
+	@echo "... rs-playground.s"
 .PHONY : help
 
 

@@ -25,12 +25,15 @@ int main(int argc, char * argv[]) try
     pipe.start(cfg);
 
     using namespace cv;
-    const auto window_name = "Display Image";
+    const auto window_name = "Depth Image";
+    const auto window_name2 = "Color Image";
     namedWindow(window_name, WINDOW_AUTOSIZE);
 
     while (waitKey(1) < 0 && getWindowProperty(window_name, WND_PROP_AUTOSIZE) >= 0)
     {
         rs2::frameset data = pipe.wait_for_frames(); // Wait for next set of frames from the camera
+
+        //Depth
         rs2::frame depth = data.get_depth_frame();
 
         // Query frame size (width and height)
@@ -38,10 +41,23 @@ int main(int argc, char * argv[]) try
         const int h = depth.as<rs2::video_frame>().get_height();
 
         // Create OpenCV matrix of size (w,h) from the colorized depth data
+
         Mat image(Size(w, h), CV_16UC1, (void*)depth.get_data(), Mat::AUTO_STEP);
+
+        //Color
+        rs2::frame color = data.get_color_frame();
+
+        // Query frame size (width and height)
+        const int w2 = color.get_width();
+        const int h2 = color.get_height();
+
+        // Create OpenCV matrix of size (w,h) from the colorized depth data
+
+        Mat image2(Size(w2, h2), CV_8UC3, (void*)color.get_data(), Mat::AUTO_STEP);
 
         // Update the window with new data
         imshow(window_name, image);
+        imshow(window_name2, image2)
     }
 
     return EXIT_SUCCESS;

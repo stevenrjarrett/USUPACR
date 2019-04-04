@@ -11,11 +11,11 @@ find_package(OpenCV REQUIRED)
 find_package(jetson-utils)
 find_package(jetson-inference)
 find_package(CUDA)
-# find_package(Qt4)
+find_package(Qt4)
 
 # setup Qt4 for build
-# include(${QT_USE_FILE})
-# add_definitions(${QT_DEFINITIONS})
+include(${QT_USE_FILE})
+add_definitions(${QT_DEFINITIONS})
 
 set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_CXX_STANDARD_REQUIRED TRUE)

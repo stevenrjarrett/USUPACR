@@ -38,7 +38,7 @@ int main(int argc, char * argv[]) try
         const int h = depth.as<rs2::video_frame>().get_height();
 
         // Create OpenCV matrix of size (w,h) from the colorized depth data
-        Mat image(Size(w, h), CV_8UC1, (void*)depth.get_data(), Mat::AUTO_STEP);
+        Mat image(Size(w, h), CV_16UC1, (void*)depth.get_data(), Mat::AUTO_STEP);
 
         // Update the window with new data
         imshow(window_name, image);

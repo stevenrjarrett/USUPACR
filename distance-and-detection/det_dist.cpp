@@ -75,10 +75,19 @@ int main(int argc, char * argv[]) try
     ///////////////////////////////////////////////////////////////////
     //Set up detectNet
 
-        float* colorData_flt;
-        cudaMallocManaged(&colorData_flt, sizeof(float)*color_numElements*4);
-        char*  colorData;
-        cudaMallocManaged(&colorData, 10 * sizeof(char)*color_numElements*4);
+        float* colorData_flt_CPU,
+               colorData_flt_CUDA;
+//        cudaMallocManaged(&colorData_flt, sizeof(float)*color_numElements*4);
+//        char*  colorDataCPU,
+//               colorDataCUDA;
+//        cudaMallocManaged(&colorData, 10 * sizeof(char)*color_numElements*4);
+
+        if( !cudaAllocMapped((void**)&colorData_flt_CPU, (void**)&colorData_flt_CUDA, color_numElements * sizeof(float4)) )
+        {
+            printf("detecnet:  failed to alloc image memory\n");
+            return 0;
+        }
+
         /*
          * create detectNet
          */
@@ -130,7 +139,7 @@ int main(int argc, char * argv[]) try
 
         // get data pointers
         char* depthData = (char*)depth.get_data();
-        colorData = (char*)color.get_data();
+        char* colorData = (char*)color.get_data();
 
         // create opencv Mat's
         cv::Mat depthMat(cv::Size(depth_width, depth_height), CV_16UC1, (void*)depth.get_data(), cv::Mat::AUTO_STEP);
@@ -209,10 +218,10 @@ int main(int argc, char * argv[]) try
         {
             int rgb_ind = i*3;
             int rgba_ind = i*4;
-            colorData_flt[rgba_ind]   = (float)colorData[rgb_ind];
-            colorData_flt[rgba_ind+1] = (float)colorData[rgb_ind+1];
-            colorData_flt[rgba_ind+2] = (float)colorData[rgb_ind+2];
-            colorData_flt[rgba_ind+3] = 255.0;
+            colorData_flt_CPU[rgba_ind]   = (float)colorData[rgb_ind];
+            colorData_flt_CPU[rgba_ind+1] = (float)colorData[rgb_ind+1];
+            colorData_flt_CPU[rgba_ind+2] = (float)colorData[rgb_ind+2];
+            colorData_flt_CPU[rgba_ind+3] = 255.0;
         }
         std::cout << "Copied image successfully" << std::endl;
 //        cv::Mat fltImg(rgbimg.size(), CV_32FC4, colorData_flt);
@@ -227,7 +236,7 @@ int main(int argc, char * argv[]) try
 		int numBoundingBoxes = maxBoxes;
 
 //		if( net->Detect((float*)imgRGBA, camera->GetWidth(), camera->GetHeight(), bbCPU, &numBoundingBoxes, confCPU))
-		if( net->Detect(colorData_flt, rgba_width, rgba_height , bbCPU, &numBoundingBoxes, confCPU))
+		if( net->Detect(colorData_flt_CUDA, rgba_width, rgba_height , bbCPU, &numBoundingBoxes, confCPU))
 		{
 			printf("%i bounding boxes detected\n", numBoundingBoxes);
 
@@ -328,7 +337,8 @@ int main(int argc, char * argv[]) try
         imshow(color_window_name, colorMat);
     }
 
-    cudaFree(colorData_flt);
+    cudaFree(colorData_flt_CPU);
+    cudaFree(colorData_flt_CUDA);
     return EXIT_SUCCESS;
 }
 catch (const rs2::error & e)

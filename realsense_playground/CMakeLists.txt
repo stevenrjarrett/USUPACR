@@ -7,10 +7,14 @@ project(rs-play)
 
 find_package(Threads REQUIRED)
 find_package(realsense2 REQUIRED)
+find_package(OpenCV REQUIRED)
 
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED TRUE)
 
+include_directories(${realsense2_INCLUDE_DIRS} ${OpenCV_INCLUDE_DIRS})
+
 add_executable(rs-play rs-measure.cpp ./example.hpp)
 
-target_link_libraries(rs-play Threads::Threads ${realsense2_LIBRARY})
+target_link_libraries(rs-play Threads::Threads ${realsense2_LIBRARY} ${OpenCV_LIBS})
+

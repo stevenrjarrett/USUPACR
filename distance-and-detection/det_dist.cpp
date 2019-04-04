@@ -211,6 +211,7 @@ int main(int argc, char * argv[]) try
             colorData_flt[rgba_ind+2] = (float)colorData[rgb_ind+2];
             colorData_flt[rgba_ind+3] = 255.0;
         }
+        std::cout << "Copied image successfully" << std::endl;
 //        cv::Mat fltImg(rgbimg.size(), CV_32FC4, colorData_flt);
 
 

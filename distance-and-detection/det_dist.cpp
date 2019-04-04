@@ -146,9 +146,9 @@ int main(int argc, char * argv[]) try
         // create opencv Mat's
         cv::Mat depthMat(cv::Size(depth_width, depth_height), CV_16UC1, depthData, cv::Mat::AUTO_STEP);
 
-        cv::Mat color_image_raw(cv::Size(color_width, color_height), CV_8UC3, colorData, cv::Mat::AUTO_STEP);
-        cv::Mat colorMat;
-        cv::cvtColor(color_image_raw, colorMat, cv::COLOR_RGB2BGR);
+//        cv::Mat color_image_raw(cv::Size(color_width, color_height), CV_8UC3, colorData, cv::Mat::AUTO_STEP);
+//        cv::Mat colorMat;
+//        cv::cvtColor(color_image_raw, colorMat, cv::COLOR_RGB2BGR);
 
         //Color
 
@@ -255,15 +255,15 @@ int main(int argc, char * argv[]) try
 
 				if( nc != lastClass || n == (numBoundingBoxes - 1) )
 				{
-//					if( !net->DrawBoxes(colorData_flt, colorData_flt, rgba_width, rgba_height,
-//						                        bbCUDA + (lastStart * 4), (n - lastStart) + 1, lastClass) )
-//						printf("detectnet-console:  failed to draw boxes\n");
+					if( !net->DrawBoxes(colorData_flt, colorData_flt, rgba_width, rgba_height,
+						                        bbCUDA + (lastStart * 4), (n - lastStart) + 1, lastClass) )
+						printf("detectnet-console:  failed to draw boxes\n");
 
-                    cv::rectangle(colorMat, cv::Rect2d(bb[0],bb[1], bb[2]-bb[0], bb[3]-bb[1]), cv::Scalar( 255, 0, 0 ), 2, 1 );
-
-                    std::string prnt = "Confidence: ";
-                    prnt += std::to_string(confCPU[n*2]);
-                    cv::putText(colorMat, prnt, cv::Point(bb[0],bb[1]), cv::FONT_HERSHEY_SIMPLEX, 0.75, cv::Scalar(50,170,50),2);
+//                    cv::rectangle(colorMat, cv::Rect2d(bb[0],bb[1], bb[2]-bb[0], bb[3]-bb[1]), cv::Scalar( 255, 0, 0 ), 2, 1 );
+//
+//                    std::string prnt = "Confidence: ";
+//                    prnt += std::to_string(confCPU[n*2]);
+//                    cv::putText(colorMat, prnt, cv::Point(bb[0],bb[1]), cv::FONT_HERSHEY_SIMPLEX, 0.75, cv::Scalar(50,170,50),2);
 
 					lastClass = nc;
 					lastStart = n;
@@ -334,7 +334,9 @@ int main(int argc, char * argv[]) try
 
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////
-
+        cv::Mat color_image_raw(cv::Size(color_width, color_height), CV_8UC4, colorData_flt_CPU, cv::Mat::AUTO_STEP);
+        cv::Mat colorMat;
+        cv::cvtColor(color_image_raw, colorMat, cv::COLOR_RGBA2BGR);
 
         // Update the window with new data
         imshow(depth_window_name, depthMat);

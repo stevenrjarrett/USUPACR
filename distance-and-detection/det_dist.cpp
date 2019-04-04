@@ -225,7 +225,7 @@ int main(int argc, char * argv[]) try
             colorData_flt_CPU[rgba_ind+0] = (float)colorData[rgb_ind+0] / 255.0;
             colorData_flt_CPU[rgba_ind+1] = (float)colorData[rgb_ind+1] / 255.0;
             colorData_flt_CPU[rgba_ind+2] = (float)colorData[rgb_ind+2] / 255.0;
-            colorData_flt_CPU[rgba_ind+3] = 255.0;
+            colorData_flt_CPU[rgba_ind+3] = 1.0;
         }
         cv::Mat rgbaMat(cv::Size(color_width, color_height), CV_32FC4, colorData_flt_CPU, cv::Mat::AUTO_STEP);
 //        std::cout << "Copied image successfully" << std::endl;

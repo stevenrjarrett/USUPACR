@@ -66,8 +66,8 @@ int main(int argc, char * argv[]) try
 
         const auto depth_window_name = "Depth Video Feed";
         const auto color_window_name = "Color Video Feed";
-        cv::namedWindow(depth_window_name, WINDOW_AUTOSIZE);
-        cv::namedWindow(color_window_name, WINDOW_AUTOSIZE);
+        cv::namedWindow(depth_window_name, cv::WINDOW_AUTOSIZE);
+        cv::namedWindow(color_window_name, cv::WINDOW_AUTOSIZE);
 
 
 
@@ -75,7 +75,7 @@ int main(int argc, char * argv[]) try
     ///////////////////////////////////////////////////////////////////
     //Set up detectNet
 
-        float* colorDataflt;
+        float* colorData_flt;
         cudaMallocManaged(&colorData_flt, sizeof(float)*color_numElements);
         /*
          * create detectNet
@@ -116,9 +116,9 @@ int main(int argc, char * argv[]) try
 	//////////////////////////////////////////////////////////////////////////
 	// main loop
 
-    while (waitKey(1) < 0 && cv::getWindowProperty(depth_window_name, WND_PROP_AUTOSIZE) >= 0
-                          && cv::getWindowProperty(depth_window_name, WND_PROP_AUTOSIZE) >= 0
-                          && !exit_signal_recieved)
+    while (cv::waitKey(1) < 0 && cv::getWindowProperty(depth_window_name, cv::WND_PROP_AUTOSIZE) >= 0
+                              && cv::getWindowProperty(depth_window_name, cv::WND_PROP_AUTOSIZE) >= 0
+                              && !exit_signal_recieved)
     {
         rs2::frameset data = pipe.wait_for_frames(); // Wait for next set of frames from the camera
 
@@ -127,13 +127,13 @@ int main(int argc, char * argv[]) try
         rs2::frame color = data.get_color_frame();
 
         // get data pointers
-        char* depthData = depth.getData();
-        char* colorData = color.getData();
+        char* depthData = depth.get_data();
+        char* colorData = color.get_data();
 
         // create opencv Mat's
-        cv::Mat depthMat(cv::Size(w, h), cv::CV_16UC1, (void*)depth.get_data(), cv::Mat::AUTO_STEP);
+        cv::Mat depthMat(cv::Size(depth_width, depth_height), cv::CV_16UC1, (void*)depth.get_data(), cv::Mat::AUTO_STEP);
 
-        cv::Mat color_image_raw(cv::Size(640, 480), cv::CV_8UC3, (void*)color.get_data(), cv::Mat::AUTO_STEP);
+        cv::Mat color_image_raw(cv::Size(color_width, color_height), cv::CV_8UC3, (void*)color.get_data(), cv::Mat::AUTO_STEP);
         cv::Mat colorMat;
         cv::cvtColor(color_image_raw, colorMat, cv::COLOR_RGB2BGR);
 
@@ -204,8 +204,8 @@ int main(int argc, char * argv[]) try
         int rgba_height = color_height;
         for(int i=0; i<color_numElements; i++)
         {
-            rgb_ind = i*3;
-            rgba_ind = i*4;
+            int rgb_ind = i*3;
+            int rgba_ind = i*4;
             colorData_flt[rgba_ind]   = (float)colorData[rgb_ind];
             colorData_flt[rgba_ind+1] = (float)colorData[rgb_ind+1];
             colorData_flt[rgba_ind+2] = (float)colorData[rgb_ind+2];
@@ -244,9 +244,9 @@ int main(int argc, char * argv[]) try
 //						                        bbCUDA + (lastStart * 4), (n - lastStart) + 1, lastClass) )
 //						printf("detectnet-console:  failed to draw boxes\n");
 
-                    cv::rectangle(colorMat, cv::rect2D(bb[0],bb[1], bb[2]-bb[0], bb[3]-bb[1]), cv::Scalar( 255, 0, 0 ), 2, 1 );
+                    cv::rectangle(colorMat, cv::Rect2D(bb[0],bb[1], bb[2]-bb[0], bb[3]-bb[1]), cv::Scalar( 255, 0, 0 ), 2, 1 );
 
-                    cv::putText(colorMat, "Confidence: ", Point(bb[0],bb[1]), FONT_HERSHEY_SIMPLEX, 0.75, Scalar(50,170,50),2);
+                    cv::putText(colorMat, "Confidence: ", cv::Point(bb[0],bb[1]), cv::FONT_HERSHEY_SIMPLEX, 0.75, cv::Scalar(50,170,50),2);
 
 					lastClass = nc;
 					lastStart = n;

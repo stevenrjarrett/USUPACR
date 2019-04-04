@@ -9,10 +9,20 @@ int main(int argc, char * argv[]) try
     // Declare depth colorizer for pretty visualization of depth data
     rs2::colorizer color_map;
 
+
+    //Create a configuration for configuring the pipeline with a non default profile
+    rs2::config cfg;
+    //Add desired streams to configuration
+    cfg.enable_stream(RS2_STREAM_COLOR, 640, 480, RS2_FORMAT_BGR8, 30);
+    cfg.enable_stream(RS2_STREAM_INFRARED, 1280, 720, RS2_FORMAT_Y8, 30);
+    cfg.enable_stream(RS2_STREAM_DEPTH, 1280, 720, RS2_FORMAT_Z16, 30);
+
+
+
     // Declare RealSense pipeline, encapsulating the actual device and sensors
     rs2::pipeline pipe;
     // Start streaming with default recommended configuration
-    pipe.start();
+    pipe.start(cfg);
 
     using namespace cv;
     const auto window_name = "Display Image";
@@ -28,7 +38,7 @@ int main(int argc, char * argv[]) try
         const int h = depth.as<rs2::video_frame>().get_height();
 
         // Create OpenCV matrix of size (w,h) from the colorized depth data
-        Mat image(Size(w, h), CV_8UC3, (void*)depth.get_data(), Mat::AUTO_STEP);
+        Mat image(Size(w, h), CV_8UC1, (void*)depth.get_data(), Mat::AUTO_STEP);
 
         // Update the window with new data
         imshow(window_name, image);

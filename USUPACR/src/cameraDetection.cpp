@@ -17,6 +17,11 @@
 
 #include <jetson-inference/detectNet.h>
 
+double IR_Hor_Field_of_View = 91.2*pi/180;
+double IR_Ver_Field_of_View = 65.5*pi/180;
+double COL_Hor_Field_of_View = 69.4*pi/180;
+double COL_Ver_Field_of_View = 42.5*pi/180;
+
 
 
 

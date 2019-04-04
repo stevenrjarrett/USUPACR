@@ -148,7 +148,7 @@ int main(int argc, char * argv[]) try
 
         cv::Mat color_image_raw(cv::Size(color_width, color_height), CV_8UC3, colorData, cv::Mat::AUTO_STEP);
         cv::Mat colorMat;
-        cv::Mat rgbaMat(cv::Size(color_width, color_height), CV_8UC4, colorData_flt_CPU, cv::Mat::AUTO_STEP);
+        cv::Mat rgbaMat(cv::Size(color_width, color_height), CV_32FC4, colorData_flt_CPU, cv::Mat::AUTO_STEP);
         cv::cvtColor(color_image_raw, colorMat, cv::COLOR_RGB2BGR);
         cv::cvtColor(color_image_raw, rgbaMat, cv::COLOR_RGB2RGBA);
 
@@ -216,8 +216,8 @@ int main(int argc, char * argv[]) try
 		// convert from RGB to RGBA and move to graphics memory
 
 //        cv::cvtColor(rgbimg, continuousRGBA, CV_BGR2RGBA, 4);
-//        int rgba_width  = color_width;
-//        int rgba_height = color_height;
+        int rgba_width  = color_width;
+        int rgba_height = color_height;
 //        for(int i=0; i<color_numElements; i++)
 //        {
 //            int rgb_ind = i*3;
@@ -336,9 +336,9 @@ int main(int argc, char * argv[]) try
 
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////
-        cv::Mat color_image_raw(cv::Size(color_width, color_height), CV_8UC4, colorData_flt_CPU, cv::Mat::AUTO_STEP);
-        cv::Mat colorMat;
-        cv::cvtColor(color_image_raw, colorMat, cv::COLOR_RGBA2BGR);
+//        cv::Mat color_image_raw(cv::Size(color_width, color_height), CV_8UC4, colorData_flt_CPU, cv::Mat::AUTO_STEP);
+//        cv::Mat colorMat;
+//        cv::cvtColor(color_image_raw, colorMat, cv::COLOR_RGBA2BGR);
 
         // Update the window with new data
         imshow(depth_window_name, depthMat);

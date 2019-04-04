@@ -336,7 +336,7 @@ int main(int argc, char * argv[]) try
 
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////
-        cv::Mat rgbaMat(cv::Size(color_width, color_height), CV_64FC4, colorData_flt_CPU, cv::Mat::AUTO_STEP);
+        cv::Mat rgbaMat(cv::Size(color_width, color_height), CV_32FC4, colorData_flt_CPU, cv::Mat::AUTO_STEP);
 //        cv::Mat color_image_raw(cv::Size(color_width, color_height), CV_8UC4, colorData_flt_CPU, cv::Mat::AUTO_STEP);
 //        cv::Mat colorMat;
 //        cv::cvtColor(color_image_raw, colorMat, cv::COLOR_RGBA2BGR);

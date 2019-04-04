@@ -48,8 +48,8 @@ int main(int argc, char * argv[]) try
         rs2::frame color = data.get_color_frame();
 
         // Query frame size (width and height)
-        const int w2 = color.get_width();
-        const int h2 = color.get_height();
+        const int w2 = color.as<rs2::video_frame>().get_width();
+        const int h2 = color.as<rs2::video_frame>().get_height();
 
         // Create OpenCV matrix of size (w,h) from the colorized depth data
 
@@ -57,7 +57,7 @@ int main(int argc, char * argv[]) try
 
         // Update the window with new data
         imshow(window_name, image);
-        imshow(window_name2, image2)
+        imshow(window_name2, image2);
     }
 
     return EXIT_SUCCESS;

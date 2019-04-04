@@ -144,9 +144,9 @@ int main(int argc, char * argv[]) try
         char* colorData = (char*)color.get_data();
 
         // create opencv Mat's
-        cv::Mat depthMat(cv::Size(depth_width, depth_height), CV_16UC1, (void*)depth.get_data(), cv::Mat::AUTO_STEP);
+        cv::Mat depthMat(cv::Size(depth_width, depth_height), CV_16UC1, depthData, cv::Mat::AUTO_STEP);
 
-        cv::Mat color_image_raw(cv::Size(color_width, color_height), CV_8UC3, (void*)color.get_data(), cv::Mat::AUTO_STEP);
+        cv::Mat color_image_raw(cv::Size(color_width, color_height), CV_8UC3, colorData, cv::Mat::AUTO_STEP);
         cv::Mat colorMat;
         cv::cvtColor(color_image_raw, colorMat, cv::COLOR_RGB2BGR);
 

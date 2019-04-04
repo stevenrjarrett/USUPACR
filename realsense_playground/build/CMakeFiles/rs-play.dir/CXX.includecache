@@ -9,8 +9,6 @@
 /home/nvidia/Documents/USUPACR/realsense_playground/rs-measure.cpp
 librealsense2/rs.hpp
 -
-librealsense2/hpp/rs_internal.hpp
--
 iostream
 -
 
@@ -27,18 +25,6 @@ rs_sensor.h
 /usr/local/include/librealsense2/h/rs_frame.h
 rs_types.h
 /usr/local/include/librealsense2/h/rs_types.h
-
-/usr/local/include/librealsense2/h/rs_internal.h
-rs_types.h
-/usr/local/include/librealsense2/h/rs_types.h
-rs_context.h
-/usr/local/include/librealsense2/h/rs_context.h
-rs_sensor.h
-/usr/local/include/librealsense2/h/rs_sensor.h
-rs_frame.h
-/usr/local/include/librealsense2/h/rs_frame.h
-rs_option.h
-/usr/local/include/librealsense2/h/rs_option.h
 
 /usr/local/include/librealsense2/h/rs_option.h
 rs_types.h
@@ -85,16 +71,6 @@ array
 /usr/local/include/librealsense2/hpp/rs_frame.hpp
 rs_types.hpp
 /usr/local/include/librealsense2/hpp/rs_types.hpp
-
-/usr/local/include/librealsense2/hpp/rs_internal.hpp
-rs_types.hpp
-/usr/local/include/librealsense2/hpp/rs_types.hpp
-rs_device.hpp
-/usr/local/include/librealsense2/hpp/rs_device.hpp
-rs_context.hpp
-/usr/local/include/librealsense2/hpp/rs_context.hpp
-../h/rs_internal.h
-/usr/local/include/librealsense2/h/rs_internal.h
 
 /usr/local/include/librealsense2/hpp/rs_pipeline.hpp
 rs_types.hpp

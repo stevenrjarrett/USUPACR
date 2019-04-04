@@ -13,7 +13,7 @@ int main(int argc, char * argv[]) try
     //Create a configuration for configuring the pipeline with a non default profile
     rs2::config cfg;
     //Add desired streams to configuration
-    cfg.enable_stream(RS2_STREAM_COLOR, 640, 480, RS2_FORMAT_RGBA8, 30);
+    cfg.enable_stream(RS2_STREAM_COLOR, 640, 480, RS2_FORMAT_RGB8, 30);
 //    cfg.enable_stream(RS2_STREAM_INFRARED, 1280, 720, RS2_FORMAT_Y8, 30);
 //    cfg.enable_stream(RS2_STREAM_DEPTH, 1280, 720, RS2_FORMAT_Z16, 30);
 
@@ -54,9 +54,9 @@ int main(int argc, char * argv[]) try
 
         // Create OpenCV matrix of size (w,h) from the colorized depth data
 
-        Mat color_image_raw(Size(640, 480), CV_8UC4, (void*)color.get_data(), Mat::AUTO_STEP);
+        Mat color_image_raw(Size(640, 480), CV_8UC3, (void*)color.get_data(), Mat::AUTO_STEP);
         Mat image2;
-        cvtColor(color_image_raw, image2, COLOR_RGBA2BGR);
+        cvtColor(color_image_raw, image2, COLOR_RGB2BGR);
 
         // Update the window with new data
 //        imshow(window_name, image);

@@ -75,8 +75,8 @@ int main(int argc, char * argv[]) try
     ///////////////////////////////////////////////////////////////////
     //Set up detectNet
 
-        float* colorData_flt_CPU,
-               colorData_flt_CUDA;
+        float *colorData_flt_CPU,
+              *colorData_flt_CUDA;
 //        cudaMallocManaged(&colorData_flt, sizeof(float)*color_numElements*4);
 //        char*  colorDataCPU,
 //               colorDataCUDA;

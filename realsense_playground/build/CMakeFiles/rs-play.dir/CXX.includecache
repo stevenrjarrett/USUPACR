@@ -9,7 +9,7 @@
 /home/nvidia/Documents/USUPACR/realsense_playground/rs-measure.cpp
 librealsense2/rs.hpp
 -
-iostream
+opencv2/opencv.hpp
 -
 
 /usr/local/include/librealsense2/h/rs_context.h

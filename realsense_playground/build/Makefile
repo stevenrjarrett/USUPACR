@@ -111,44 +111,17 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named rs-play
+# Target rules for targets named rs-playground
 
 # Build rule for target.
-rs-play: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 rs-play
-.PHONY : rs-play
+rs-playground: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 rs-playground
+.PHONY : rs-playground
 
 # fast build rule for target.
-rs-play/fast:
-	$(MAKE) -f CMakeFiles/rs-play.dir/build.make CMakeFiles/rs-play.dir/build
-.PHONY : rs-play/fast
-
-rs-measure.o: rs-measure.cpp.o
-
-.PHONY : rs-measure.o
-
-# target to build an object file
-rs-measure.cpp.o:
-	$(MAKE) -f CMakeFiles/rs-play.dir/build.make CMakeFiles/rs-play.dir/rs-measure.cpp.o
-.PHONY : rs-measure.cpp.o
-
-rs-measure.i: rs-measure.cpp.i
-
-.PHONY : rs-measure.i
-
-# target to preprocess a source file
-rs-measure.cpp.i:
-	$(MAKE) -f CMakeFiles/rs-play.dir/build.make CMakeFiles/rs-play.dir/rs-measure.cpp.i
-.PHONY : rs-measure.cpp.i
-
-rs-measure.s: rs-measure.cpp.s
-
-.PHONY : rs-measure.s
-
-# target to generate assembly for a file
-rs-measure.cpp.s:
-	$(MAKE) -f CMakeFiles/rs-play.dir/build.make CMakeFiles/rs-play.dir/rs-measure.cpp.s
-.PHONY : rs-measure.cpp.s
+rs-playground/fast:
+	$(MAKE) -f CMakeFiles/rs-playground.dir/build.make CMakeFiles/rs-playground.dir/build
+.PHONY : rs-playground/fast
 
 # Help Target
 help:
@@ -158,10 +131,7 @@ help:
 	@echo "... depend"
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
-	@echo "... rs-play"
-	@echo "... rs-measure.o"
-	@echo "... rs-measure.i"
-	@echo "... rs-measure.s"
+	@echo "... rs-playground"
 .PHONY : help
 
 

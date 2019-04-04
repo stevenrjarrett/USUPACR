@@ -6,5 +6,5 @@ CXX_FLAGS =   -pthread -std=gnu++11
 
 CXX_DEFINES = 
 
-CXX_INCLUDES = -isystem /usr/local/include 
+CXX_INCLUDES = -isystem /usr/include/opencv -isystem /usr/local/include 
 

@@ -15,6 +15,10 @@ set(CMAKE_MAKEFILE_DEPENDS
   "/usr/local/lib/cmake/realsense2/realsense2ConfigVersion.cmake"
   "/usr/local/lib/cmake/realsense2/realsense2Targets-noconfig.cmake"
   "/usr/local/lib/cmake/realsense2/realsense2Targets.cmake"
+  "/usr/share/OpenCV/OpenCVConfig-version.cmake"
+  "/usr/share/OpenCV/OpenCVConfig.cmake"
+  "/usr/share/OpenCV/OpenCVModules-release.cmake"
+  "/usr/share/OpenCV/OpenCVModules.cmake"
   "/usr/share/cmake-3.5/Modules/CMakeCInformation.cmake"
   "/usr/share/cmake-3.5/Modules/CMakeCXXInformation.cmake"
   "/usr/share/cmake-3.5/Modules/CMakeCommonLanguageInclude.cmake"
@@ -52,5 +56,5 @@ set(CMAKE_MAKEFILE_PRODUCTS
 
 # Dependency information for all targets:
 set(CMAKE_DEPEND_INFO_FILES
-  "CMakeFiles/rs-play.dir/DependInfo.cmake"
+  "CMakeFiles/rs-playground.dir/DependInfo.cmake"
   )

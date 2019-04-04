@@ -127,13 +127,13 @@ int main(int argc, char * argv[]) try
         rs2::frame color = data.get_color_frame();
 
         // get data pointers
-        char* depthData = depth.get_data();
-        char* colorData = color.get_data();
+        char* depthData = (char*)depth.get_data();
+        char* colorData = (char*)color.get_data();
 
         // create opencv Mat's
-        cv::Mat depthMat(cv::Size(depth_width, depth_height), cv::CV_16UC1, (void*)depth.get_data(), cv::Mat::AUTO_STEP);
+        cv::Mat depthMat(cv::Size(depth_width, depth_height), CV_16UC1, (void*)depth.get_data(), cv::Mat::AUTO_STEP);
 
-        cv::Mat color_image_raw(cv::Size(color_width, color_height), cv::CV_8UC3, (void*)color.get_data(), cv::Mat::AUTO_STEP);
+        cv::Mat color_image_raw(cv::Size(color_width, color_height), CV_8UC3, (void*)color.get_data(), cv::Mat::AUTO_STEP);
         cv::Mat colorMat;
         cv::cvtColor(color_image_raw, colorMat, cv::COLOR_RGB2BGR);
 
@@ -244,7 +244,7 @@ int main(int argc, char * argv[]) try
 //						                        bbCUDA + (lastStart * 4), (n - lastStart) + 1, lastClass) )
 //						printf("detectnet-console:  failed to draw boxes\n");
 
-                    cv::rectangle(colorMat, cv::Rect2D(bb[0],bb[1], bb[2]-bb[0], bb[3]-bb[1]), cv::Scalar( 255, 0, 0 ), 2, 1 );
+                    cv::rectangle(colorMat, cv::Rect2d(bb[0],bb[1], bb[2]-bb[0], bb[3]-bb[1]), cv::Scalar( 255, 0, 0 ), 2, 1 );
 
                     cv::putText(colorMat, "Confidence: ", cv::Point(bb[0],bb[1]), cv::FONT_HERSHEY_SIMPLEX, 0.75, cv::Scalar(50,170,50),2);
 

@@ -48,10 +48,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/nvidia/Documents/USUPACR/realsense_playground
+CMAKE_SOURCE_DIR = /home/nvidia/Documents/USUPACR/distance-and-detection
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/nvidia/Documents/USUPACR/realsense_playground/build
+CMAKE_BINARY_DIR = /home/nvidia/Documents/USUPACR/distance-and-detection/build
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -80,9 +80,9 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/nvidia/Documents/USUPACR/realsense_playground/build/CMakeFiles /home/nvidia/Documents/USUPACR/realsense_playground/build/CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/nvidia/Documents/USUPACR/distance-and-detection/build/CMakeFiles /home/nvidia/Documents/USUPACR/distance-and-detection/build/CMakeFiles/progress.marks
 	$(MAKE) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/nvidia/Documents/USUPACR/realsense_playground/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/nvidia/Documents/USUPACR/distance-and-detection/build/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -111,44 +111,44 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named rs-playground
+# Target rules for targets named det_dist
 
 # Build rule for target.
-rs-playground: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 rs-playground
-.PHONY : rs-playground
+det_dist: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 det_dist
+.PHONY : det_dist
 
 # fast build rule for target.
-rs-playground/fast:
-	$(MAKE) -f CMakeFiles/rs-playground.dir/build.make CMakeFiles/rs-playground.dir/build
-.PHONY : rs-playground/fast
+det_dist/fast:
+	$(MAKE) -f CMakeFiles/det_dist.dir/build.make CMakeFiles/det_dist.dir/build
+.PHONY : det_dist/fast
 
-rs-playground.o: rs-playground.cpp.o
+det_dist.o: det_dist.cpp.o
 
-.PHONY : rs-playground.o
+.PHONY : det_dist.o
 
 # target to build an object file
-rs-playground.cpp.o:
-	$(MAKE) -f CMakeFiles/rs-playground.dir/build.make CMakeFiles/rs-playground.dir/rs-playground.cpp.o
-.PHONY : rs-playground.cpp.o
+det_dist.cpp.o:
+	$(MAKE) -f CMakeFiles/det_dist.dir/build.make CMakeFiles/det_dist.dir/det_dist.cpp.o
+.PHONY : det_dist.cpp.o
 
-rs-playground.i: rs-playground.cpp.i
+det_dist.i: det_dist.cpp.i
 
-.PHONY : rs-playground.i
+.PHONY : det_dist.i
 
 # target to preprocess a source file
-rs-playground.cpp.i:
-	$(MAKE) -f CMakeFiles/rs-playground.dir/build.make CMakeFiles/rs-playground.dir/rs-playground.cpp.i
-.PHONY : rs-playground.cpp.i
+det_dist.cpp.i:
+	$(MAKE) -f CMakeFiles/det_dist.dir/build.make CMakeFiles/det_dist.dir/det_dist.cpp.i
+.PHONY : det_dist.cpp.i
 
-rs-playground.s: rs-playground.cpp.s
+det_dist.s: det_dist.cpp.s
 
-.PHONY : rs-playground.s
+.PHONY : det_dist.s
 
 # target to generate assembly for a file
-rs-playground.cpp.s:
-	$(MAKE) -f CMakeFiles/rs-playground.dir/build.make CMakeFiles/rs-playground.dir/rs-playground.cpp.s
-.PHONY : rs-playground.cpp.s
+det_dist.cpp.s:
+	$(MAKE) -f CMakeFiles/det_dist.dir/build.make CMakeFiles/det_dist.dir/det_dist.cpp.s
+.PHONY : det_dist.cpp.s
 
 # Help Target
 help:
@@ -158,10 +158,10 @@ help:
 	@echo "... depend"
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
-	@echo "... rs-playground"
-	@echo "... rs-playground.o"
-	@echo "... rs-playground.i"
-	@echo "... rs-playground.s"
+	@echo "... det_dist"
+	@echo "... det_dist.o"
+	@echo "... det_dist.i"
+	@echo "... det_dist.s"
 .PHONY : help
 
 

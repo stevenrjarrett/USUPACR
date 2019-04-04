@@ -155,7 +155,7 @@ int main(int argc, char * argv[]) try
         const int h2 = color.as<rs2::video_frame>().get_height();
 
         // Create OpenCV matrix of size (w,h) from the colorized depth data
-        std::cout << "Loaded frames" << std::endl;
+//        std::cout << "Loaded frames" << std::endl;
 
 
 
@@ -223,7 +223,7 @@ int main(int argc, char * argv[]) try
             colorData_flt_CPU[rgba_ind+2] = (float)colorData[rgb_ind+2];
             colorData_flt_CPU[rgba_ind+3] = 255.0;
         }
-        std::cout << "Copied image successfully" << std::endl;
+//        std::cout << "Copied image successfully" << std::endl;
 //        cv::Mat fltImg(rgbimg.size(), CV_32FC4, colorData_flt);
 
 
@@ -259,7 +259,9 @@ int main(int argc, char * argv[]) try
 
                     cv::rectangle(colorMat, cv::Rect2d(bb[0],bb[1], bb[2]-bb[0], bb[3]-bb[1]), cv::Scalar( 255, 0, 0 ), 2, 1 );
 
-                    cv::putText(colorMat, "Confidence: ", cv::Point(bb[0],bb[1]), cv::FONT_HERSHEY_SIMPLEX, 0.75, cv::Scalar(50,170,50),2);
+                    std::string prnt = "Confidence: ";
+                    prnt += std::string(confCPU[n*2]);
+                    cv::putText(colorMat, prnt, cv::Point(bb[0],bb[1]), cv::FONT_HERSHEY_SIMPLEX, 0.75, cv::Scalar(50,170,50),2);
 
 					lastClass = nc;
 					lastStart = n;

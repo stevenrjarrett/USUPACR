@@ -38,8 +38,8 @@ int main(int argc, char * argv[]) try
         rs2::colorizer color_map;
 
         // Set up resolution and other variables
-        int color_width = 640;
-        int color_height = 480;
+        int color_width = 1280;
+        int color_height = 720;
         int depth_width = 1280;
         int depth_height = 720;
 

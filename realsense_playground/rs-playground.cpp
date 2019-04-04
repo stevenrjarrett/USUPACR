@@ -53,7 +53,7 @@ int main(int argc, char * argv[]) try
 
         // Create OpenCV matrix of size (w,h) from the colorized depth data
 
-        Mat image2(Size(w2, h2), CV_8UC3, (void*)color.get_data(), Mat::AUTO_STEP);
+        Mat image2(Size(640, 480), CV_8UC3, (void*)color.get_data(), Mat::AUTO_STEP);
 
         // Update the window with new data
         imshow(window_name, image);

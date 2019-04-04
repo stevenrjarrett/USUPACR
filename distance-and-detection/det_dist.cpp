@@ -5,9 +5,9 @@
 #include <opencv2/opencv.hpp>   // Include OpenCV API
 
 
-//#include <stdio.h>
+#include <stdio.h>
 #include <signal.h>
-//#include <unistd.h>
+#include <unistd.h>
 
 #include <jetson-utils/cudaMappedMemory.h>
 #include <jetson-utils/cudaNormalize.h>
@@ -15,7 +15,7 @@
 
 #include <jetson-inference/detectNet.h>
 
-bool signal_recieved = false;
+bool exit_signal_recieved = false;
 
 void sig_handler(int signo)
 {

@@ -3,11 +3,13 @@
 
 #include <librealsense2/rs.hpp> // Include RealSense Cross Platform API
 #include <opencv2/opencv.hpp>   // Include OpenCV API
+#include <string>
 
 
 #include <stdio.h>
 #include <signal.h>
 #include <unistd.h>
+#include <cstdlib>
 
 #include <jetson-utils/cudaMappedMemory.h>
 #include <jetson-utils/cudaNormalize.h>
@@ -260,7 +262,7 @@ int main(int argc, char * argv[]) try
                     cv::rectangle(colorMat, cv::Rect2d(bb[0],bb[1], bb[2]-bb[0], bb[3]-bb[1]), cv::Scalar( 255, 0, 0 ), 2, 1 );
 
                     std::string prnt = "Confidence: ";
-                    prnt += std::string(confCPU[n*2]);
+                    prnt += std::to_string(confCPU[n*2]);
                     cv::putText(colorMat, prnt, cv::Point(bb[0],bb[1]), cv::FONT_HERSHEY_SIMPLEX, 0.75, cv::Scalar(50,170,50),2);
 
 					lastClass = nc;

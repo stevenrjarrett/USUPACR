@@ -195,7 +195,7 @@ int main( int argc, char** argv )
         printf("Attempting write\n");
         unsigned long ptr = (unsigned long)imgRGBA;
 //        float val = *((float*)imgRGBA);
-        printf("ptr = %f\tval = \n", ptr);
+        printf("ptr = %d\tval = \n", ptr);
 //        printf( "1st pixel: %f\n", ((float*)imgRGBA)[0] );
 //        FILE *outFile = fopen("outFile.txt", "a");
 ////        float *fltPtr = (float*)imgRGBA;

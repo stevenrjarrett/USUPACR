@@ -200,11 +200,13 @@ int main( int argc, char** argv )
         for(int i=0; i<imgWidth; i++)
             outFile << (std::string)"\"R " + std::to_string(i) + (std::string)"\",\"G\",\"B\",\"A\",";
         outFile << "\n";
+        std::cout << "Starting copy" << std::endl;
         for(int i=0; i<numPixels; i++)
         {
             if(i%imgWidth == 0)
                 outFile << "\n";
             int index = i*4;
+            std::cout << "i     = " << i << " index = " << index << std::endl;
             outFile << fltPtr[index+0] << ","
                     << fltPtr[index+1] << ","
                     << fltPtr[index+2] << ","

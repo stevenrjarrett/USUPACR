@@ -10,12 +10,15 @@
 #include <signal.h>
 #include <unistd.h>
 #include <cstdlib>
+#include <cmath>
 
 #include <jetson-utils/cudaMappedMemory.h>
 #include <jetson-utils/cudaNormalize.h>
 #include <jetson-utils/cudaFont.h>
 
 #include <jetson-inference/detectNet.h>
+
+// Signal handler, makes it so that we don't interrupt tensor-flow at a bad time?
 
 bool exit_signal_recieved = false;
 
@@ -28,6 +31,58 @@ void sig_handler(int signo)
 	}
 }
 
+// point handlers for color and depth bounding boxes
+double IR_Hor_Field_of_View = 91.2*pi/180;
+double IR_Ver_Field_of_View = 65.5*pi/180;
+int    IR_cols = 1280;
+int    IR_rows = 720;
+double COL_Hor_Field_of_View = 69.4*pi/180;
+double COL_Ver_Field_of_View = 42.5*pi/180;
+int    COL_cols = 1280;
+int    COL_rows = 720;
+
+double x_color_to_depth_conversion_factor = IR_cols/COL_cols * tan(COL_Hor_Field_of_View)/tan(IR_Hor_Field_of_View);
+double y_color_to_depth_conversion_factor = IR_rows/COL_rows * tan(COL_Ver_Field_of_View)/tan(IR_Ver_Field_of_View);
+
+struct bb_color
+{
+    int x1=0;
+    int y1=0;
+    int x2=0;
+    int y2=0;
+    int width=0;
+    int height=0;
+
+    bb_color(int _x1, int _y1, int _x2, int _y2)
+      : x1(_x1),
+        y1(_y1),
+        x2(_x2),
+        y2(_y2),
+        width(_x2-_x1),
+        height(_y2-_y1)
+    {
+        correctVals();
+    }
+
+    void correctVals()
+    {
+        if(width<0)
+        {
+            std::swap(x1, x2);
+            width *= -1;
+        }
+        if(height<0)
+        {
+            std::swap(y1, y2);
+            height *= -1;
+        }
+    }
+
+    void setFromDepth(bb_depth bbd)
+    {
+
+    }
+};
 
 
 int main(int argc, char * argv[]) try
@@ -38,10 +93,10 @@ int main(int argc, char * argv[]) try
         rs2::colorizer color_map;
 
         // Set up resolution and other variables
-        int color_width = 1280;
-        int color_height = 720;
-        int depth_width = 1280;
-        int depth_height = 720;
+        int color_width = COL_cols;
+        int color_height = COL_rows;
+        int depth_width = IR_cols;
+        int depth_height = IR_rows;
 
         int color_numElements = color_height * color_width;
         int depth_numElements = depth_height * depth_width;

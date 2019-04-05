@@ -148,9 +148,9 @@ int main(int argc, char * argv[]) try
 
         cv::Mat color_image_raw(cv::Size(color_width, color_height), CV_8UC3, colorData, cv::Mat::AUTO_STEP);
         cv::Mat colorMat;
-//        cv::Mat rgbaMat(cv::Size(color_width, color_height), CV_64FC4, colorData_flt_CPU, cv::Mat::AUTO_STEP);
+        cv::Mat rgbaMat(cv::Size(color_width, color_height), CV_64FC4, colorData_flt_CPU, cv::Mat::AUTO_STEP);
         cv::cvtColor(color_image_raw, colorMat, cv::COLOR_RGB2BGR);
-//        cv::cvtColor(color_image_raw, rgbaMat, cv::COLOR_RGB2RGBA);
+        cv::cvtColor(color_image_raw, rgbaMat, cv::COLOR_RGB2RGBA);
 
         //Color
 
@@ -218,16 +218,39 @@ int main(int argc, char * argv[]) try
 //        cv::cvtColor(rgbimg, continuousRGBA, CV_BGR2RGBA, 4);
         int rgba_width  = color_width;
         int rgba_height = color_height;
+//        for(int i=0; i<color_numElements; i++)
+//        {
+//            int rgb_ind = i*3;
+//            int rgba_ind = i*4;
+//            colorData_flt_CPU[rgba_ind+0] = (float)colorData[rgb_ind+0] / 255.0;
+//            colorData_flt_CPU[rgba_ind+1] = (float)colorData[rgb_ind+1] / 255.0;
+//            colorData_flt_CPU[rgba_ind+2] = (float)colorData[rgb_ind+2] / 255.0;
+//            colorData_flt_CPU[rgba_ind+3] = 255.0;
+//        }
+//        cv::Mat rgbaMat(cv::Size(color_width, color_height), CV_32FC4, colorData_flt_CPU, cv::Mat::AUTO_STEP);
+
+        std::fstream outFile("outputImage.csv", std::fstream::out | std::fstream::trunc);
+//        int imgWidth  = camera->GetWidth();
+//        int imgHeight = camera->GetHeight();
+//        int numPixels = imgWidth*imgHeight;
+        float *fltPtr = (float*)colorData_flt_CPU;
+        for(int i=0; i<rgba_width; i++)
+            outFile << (std::string)"\"R " + std::to_string(i) + (std::string)"\",\"G\",\"B\",\"A\",";
+        outFile << "\n";
+//        std::cout << "Starting copy" << std::endl;
         for(int i=0; i<color_numElements; i++)
         {
-            int rgb_ind = i*3;
-            int rgba_ind = i*4;
-            colorData_flt_CPU[rgba_ind+0] = (float)colorData[rgb_ind+0] / 255.0;
-            colorData_flt_CPU[rgba_ind+1] = (float)colorData[rgb_ind+1] / 255.0;
-            colorData_flt_CPU[rgba_ind+2] = (float)colorData[rgb_ind+2] / 255.0;
-            colorData_flt_CPU[rgba_ind+3] = 255.0;
+            if(i%rgba_width == 0)
+                outFile << "\n";
+            int index = i*4;
+//            std::cout << "i     = " << i << " index = " << index << std::endl;
+            outFile << fltPtr[index+0] << ","
+                    << fltPtr[index+1] << ","
+                    << fltPtr[index+2] << ","
+                    << fltPtr[index+3] << ",";
+//            std::cout << "i     = " << i << " index = " << index << std::endl;
         }
-        cv::Mat rgbaMat(cv::Size(color_width, color_height), CV_32FC4, colorData_flt_CPU, cv::Mat::AUTO_STEP);
+        outFile.close();
 //        std::cout << "Copied image successfully" << std::endl;
 //        cv::Mat fltImg(rgbimg.size(), CV_32FC4, colorData_flt);
 
@@ -345,6 +368,7 @@ int main(int argc, char * argv[]) try
         // Update the window with new data
         imshow(depth_window_name, depthMat);
         imshow(color_window_name, colorMat);
+        usleep(500000);
     }
 
     cudaFree(colorData_flt_CPU);

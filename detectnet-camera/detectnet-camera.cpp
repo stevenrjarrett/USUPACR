@@ -189,14 +189,14 @@ int main( int argc, char** argv )
 		// convert from YUV to RGBA
 		void* imgRGBA = NULL;
 
-		if( !camera->ConvertRGBA(imgCUDA, &imgRGBA) )
+		if( !camera->ConvertRGBA(imgCUDA, &imgRGBA, true) )
 			printf("detectnet-camera:  failed to convert from NV12 to RGBA\n");
 
         printf("Attempting write\n");
         unsigned long ptr = (unsigned long)imgRGBA;
-//        float val = *((float*)imgRGBA);
-        printf("ptr = %d\tval = \n", ptr);
-//        printf( "1st pixel: %f\n", ((float*)imgRGBA)[0] );
+        float val = *((float*)imgRGBA);
+//        printf("ptr = %d\tval = \n", ptr);
+        printf( "1st pixel: %f\n", ((float*)imgRGBA)[0] );
 //        FILE *outFile = fopen("outFile.txt", "a");
 ////        float *fltPtr = (float*)imgRGBA;
 //        fprintf(outFile, "1st pixel: %f\n", ((float*)imgRGBA)[0] );

@@ -209,6 +209,7 @@ int main( int argc, char** argv )
                     << fltPtr[index+1] << ","
                     << fltPtr[index+2] << ","
                     << fltPtr[index+3] << ",";
+            std::cout << "i     = " << i << " index = " << index << std::endl;
         }
         outFile.close();
 

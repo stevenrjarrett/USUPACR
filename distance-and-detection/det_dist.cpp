@@ -229,28 +229,28 @@ int main(int argc, char * argv[]) try
         }
 //        cv::Mat rgbaMat(cv::Size(color_width, color_height), CV_32FC4, colorData_flt_CPU, cv::Mat::AUTO_STEP);
 
-//        std::fstream outFile("outputImage.csv", std::fstream::out | std::fstream::trunc);
-////        int imgWidth  = camera->GetWidth();
-////        int imgHeight = camera->GetHeight();
-////        int numPixels = imgWidth*imgHeight;
-////        float *fltPtr = (float*)colorData_flt_CPU;
-//        for(int i=0; i<rgba_width; i++)
-//            outFile << (std::string)"\"R " + std::to_string(i) + (std::string)"\",\"G\",\"B\",\"A\",";
-//        outFile << "\n";
-////        std::cout << "Starting copy" << std::endl;
-//        for(int i=0; i<color_numElements; i++)
-//        {
-//            if(i%rgba_width == 0)
-//                outFile << "\n";
-//            int index = i*4;
-////            std::cout << "i     = " << i << " index = " << index << std::endl;
-//            outFile << colorData_flt_CPU[index+0] << ","
-//                    << colorData_flt_CPU[index+1] << ","
-//                    << colorData_flt_CPU[index+2] << ","
-//                    << colorData_flt_CPU[index+3] << ",";
-////            std::cout << "i     = " << i << " index = " << index << std::endl;
-//        }
-//        outFile.close();
+        std::fstream outFile("outputImage.csv", std::fstream::out | std::fstream::trunc);
+//        int imgWidth  = camera->GetWidth();
+//        int imgHeight = camera->GetHeight();
+//        int numPixels = imgWidth*imgHeight;
+//        float *fltPtr = (float*)colorData_flt_CPU;
+        for(int i=0; i<rgba_width; i++)
+            outFile << (std::string)"\"R " + std::to_string(i) + (std::string)"\",\"G\",\"B\",\"A\",";
+        outFile << "\n";
+//        std::cout << "Starting copy" << std::endl;
+        for(int i=0; i<color_numElements; i++)
+        {
+            if(i%rgba_width == 0)
+                outFile << "\n";
+            int index = i*4;
+//            std::cout << "i     = " << i << " index = " << index << std::endl;
+            outFile << colorData_flt_CPU[index+0] << ","
+                    << colorData_flt_CPU[index+1] << ","
+                    << colorData_flt_CPU[index+2] << ","
+                    << colorData_flt_CPU[index+3] << ",";
+//            std::cout << "i     = " << i << " index = " << index << std::endl;
+        }
+        outFile.close();
 //        std::cout << "Copied image successfully" << std::endl;
 //        cv::Mat fltImg(rgbimg.size(), CV_32FC4, colorData_flt);
 
@@ -368,7 +368,7 @@ int main(int argc, char * argv[]) try
         // Update the window with new data
         imshow(depth_window_name, depthMat);
         imshow(color_window_name, colorMat);
-//        usleep(500000);
+        usleep(500000);
     }
 
     cudaFree(colorData_flt_CPU);

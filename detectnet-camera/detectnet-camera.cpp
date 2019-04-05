@@ -192,7 +192,7 @@ int main( int argc, char** argv )
 		if( !camera->ConvertRGBA(imgCUDA, &imgRGBA, true) )
 			printf("detectnet-camera:  failed to convert from NV12 to RGBA\n");
 
-        printf("Attempting write\n");
+//        printf("Attempting write\n");
 //        unsigned long ptr = (unsigned long)imgRGBA;
 //        float val = *((float*)imgRGBA);
 ////        printf("ptr = %d\tval = \n", ptr);
@@ -210,18 +210,18 @@ int main( int argc, char** argv )
         for(int i=0; i<imgWidth; i++)
             outFile << (std::string)"\"R " + std::to_string(i) + (std::string)"\",\"G\",\"B\",\"A\",";
         outFile << "\n";
-        std::cout << "Starting copy" << std::endl;
+//        std::cout << "Starting copy" << std::endl;
         for(int i=0; i<numPixels; i++)
         {
             if(i%imgWidth == 0)
                 outFile << "\n";
             int index = i*4;
-            std::cout << "i     = " << i << " index = " << index << std::endl;
+//            std::cout << "i     = " << i << " index = " << index << std::endl;
             outFile << fltPtr[index+0] << ","
                     << fltPtr[index+1] << ","
                     << fltPtr[index+2] << ","
                     << fltPtr[index+3] << ",";
-            std::cout << "i     = " << i << " index = " << index << std::endl;
+//            std::cout << "i     = " << i << " index = " << index << std::endl;
         }
         outFile.close();
 

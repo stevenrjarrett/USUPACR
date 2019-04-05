@@ -148,9 +148,9 @@ int main(int argc, char * argv[]) try
 
         cv::Mat color_image_raw(cv::Size(color_width, color_height), CV_8UC3, colorData, cv::Mat::AUTO_STEP);
         cv::Mat colorMat;
-        cv::Mat rgbaMat(cv::Size(color_width, color_height), CV_64FC4, colorData_flt_CPU, cv::Mat::AUTO_STEP);
+//        cv::Mat rgbaMat(cv::Size(color_width, color_height), CV_64FC4, colorData_flt_CPU, cv::Mat::AUTO_STEP);
         cv::cvtColor(color_image_raw, colorMat, cv::COLOR_RGB2BGR);
-        cv::cvtColor(color_image_raw, rgbaMat, cv::COLOR_RGB2RGBA);
+//        cv::cvtColor(color_image_raw, rgbaMat, cv::COLOR_RGB2RGBA);
 
         //Color
 
@@ -218,15 +218,15 @@ int main(int argc, char * argv[]) try
 //        cv::cvtColor(rgbimg, continuousRGBA, CV_BGR2RGBA, 4);
         int rgba_width  = color_width;
         int rgba_height = color_height;
-//        for(int i=0; i<color_numElements; i++)
-//        {
-//            int rgb_ind = i*3;
-//            int rgba_ind = i*4;
-//            colorData_flt_CPU[rgba_ind+0] = (float)colorData[rgb_ind+0] / 255.0;
-//            colorData_flt_CPU[rgba_ind+1] = (float)colorData[rgb_ind+1] / 255.0;
-//            colorData_flt_CPU[rgba_ind+2] = (float)colorData[rgb_ind+2] / 255.0;
-//            colorData_flt_CPU[rgba_ind+3] = 255.0;
-//        }
+        for(int i=0; i<color_numElements; i++)
+        {
+            int rgb_ind = i*3;
+            int rgba_ind = i*4;
+            colorData_flt_CPU[rgba_ind+0] = (float)colorData[rgb_ind+0] / 255.0;
+            colorData_flt_CPU[rgba_ind+1] = (float)colorData[rgb_ind+1] / 255.0;
+            colorData_flt_CPU[rgba_ind+2] = (float)colorData[rgb_ind+2] / 255.0;
+            colorData_flt_CPU[rgba_ind+3] = 255.0;
+        }
 //        cv::Mat rgbaMat(cv::Size(color_width, color_height), CV_32FC4, colorData_flt_CPU, cv::Mat::AUTO_STEP);
 
         std::fstream outFile("outputImage.csv", std::fstream::out | std::fstream::trunc);

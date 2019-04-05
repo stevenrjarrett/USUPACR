@@ -37,6 +37,12 @@
 
 #include <jetson-inference/detectNet.h>
 
+#include <iostream>
+#include <fstream>
+#include <cstdlib>
+#include <string>
+#include <unistd.h>
+
 
 #define DEFAULT_CAMERA 3	// -1 for onboard camera, or change to index of /dev/video V4L2 camera (>=0)
 
@@ -186,6 +192,26 @@ int main( int argc, char** argv )
 		if( !camera->ConvertRGBA(imgCUDA, &imgRGBA) )
 			printf("detectnet-camera:  failed to convert from NV12 to RGBA\n");
 
+        std::fstream outFile("outputImage.csv", std::fstream::out | std::fstream::trunc);
+        int imgWidth  = camera->GetWidth();
+        int imgHeight = camera->GetHeight();
+        int numPixels = imgWidth*imgHeight;
+        float *fltPtr = (float*)imgRGBA;
+        for(int i=0; i<imgWidth; i++)
+            outFile << (std::string)"\"R " + std::to_string(i) + (std::string)"\",\"G\",\"B\",\"A\",";
+        outFile << "\n";
+        for(int i=0; i<numPixels; i++)
+        {
+            if(i%imgWidth == 0)
+                outFile << "\n";
+            int index = i*4;
+            outFile << fltPtr[index+0] << ","
+                    << fltPtr[index+1] << ","
+                    << fltPtr[index+2] << ","
+                    << fltPtr[index+3] << ",";
+        }
+        outFile.close();
+
 		// classify image with detectNet
 		int numBoundingBoxes = maxBoxes;
 
@@ -263,6 +289,7 @@ int main( int argc, char** argv )
 
 			display->EndRender();
 		}
+		usleep(500000);
 	}
 
 	printf("\ndetectnet-camera:  un-initializing video device\n");

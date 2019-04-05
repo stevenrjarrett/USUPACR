@@ -192,7 +192,7 @@ int main( int argc, char** argv )
 		if( !camera->ConvertRGBA(imgCUDA, &imgRGBA) )
 			printf("detectnet-camera:  failed to convert from NV12 to RGBA\n");
 
-        FILE *outFile = fopen("outFile.txt", "a")
+        FILE *outFile = fopen("outFile.txt", "a");
 //        float *fltPtr = (float*)imgRGBA;
         fprintf(outFile, "1st pixel: %f\n", *imgRGBA);
         fclose(outFile);

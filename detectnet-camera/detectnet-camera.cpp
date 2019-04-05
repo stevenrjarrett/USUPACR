@@ -192,10 +192,12 @@ int main( int argc, char** argv )
 		if( !camera->ConvertRGBA(imgCUDA, &imgRGBA) )
 			printf("detectnet-camera:  failed to convert from NV12 to RGBA\n");
 
-        FILE *outFile = fopen("outFile.txt", "a");
-//        float *fltPtr = (float*)imgRGBA;
-        fprintf(outFile, "1st pixel: %f\n", ((float*)imgRGBA)[0] );
-        fclose(outFile);
+        printf("Attempting write\n");
+        printf( "1st pixel: %f\n", ((float*)imgRGBA)[0] );
+//        FILE *outFile = fopen("outFile.txt", "a");
+////        float *fltPtr = (float*)imgRGBA;
+//        fprintf(outFile, "1st pixel: %f\n", ((float*)imgRGBA)[0] );
+//        fclose(outFile);
 
 //        std::fstream outFile("outputImage.csv", std::fstream::out | std::fstream::trunc);
 //        int imgWidth  = camera->GetWidth();

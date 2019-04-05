@@ -194,7 +194,7 @@ int main( int argc, char** argv )
 
         FILE *outFile = fopen("outFile.txt", "a");
 //        float *fltPtr = (float*)imgRGBA;
-        fprintf(outFile, "1st pixel: %f\n", *imgRGBA);
+        fprintf(outFile, "1st pixel: %f\n", ((float*)imgRGBA)[0] );
         fclose(outFile);
 
 //        std::fstream outFile("outputImage.csv", std::fstream::out | std::fstream::trunc);

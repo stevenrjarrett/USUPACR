@@ -193,7 +193,10 @@ int main( int argc, char** argv )
 			printf("detectnet-camera:  failed to convert from NV12 to RGBA\n");
 
         printf("Attempting write\n");
-        printf( "1st pixel: %f\n", ((float*)imgRGBA)[0] );
+        int ptr = (int)imgRGBA;
+        float val = ((float*)imgRGBA)
+        printf("ptr = %f\tval = %f", ptr, val);
+//        printf( "1st pixel: %f\n", ((float*)imgRGBA)[0] );
 //        FILE *outFile = fopen("outFile.txt", "a");
 ////        float *fltPtr = (float*)imgRGBA;
 //        fprintf(outFile, "1st pixel: %f\n", ((float*)imgRGBA)[0] );

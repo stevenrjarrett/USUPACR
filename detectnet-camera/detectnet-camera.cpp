@@ -201,29 +201,29 @@ int main( int argc, char** argv )
 ////        float *fltPtr = (float*)imgRGBA;
 //        fprintf(outFile, "1st pixel: %f\n", ((float*)imgRGBA)[0] );
 //        fclose(outFile);
-
-        std::fstream outFile("outputImage.csv", std::fstream::out | std::fstream::trunc);
-        int imgWidth  = camera->GetWidth();
-        int imgHeight = camera->GetHeight();
-        int numPixels = imgWidth*imgHeight;
-        float *fltPtr = (float*)imgRGBA;
-        for(int i=0; i<imgWidth; i++)
-            outFile << (std::string)"\"R " + std::to_string(i) + (std::string)"\",\"G\",\"B\",\"A\",";
-        outFile << "\n";
-//        std::cout << "Starting copy" << std::endl;
-        for(int i=0; i<numPixels; i++)
-        {
-            if(i%imgWidth == 0)
-                outFile << "\n";
-            int index = i*4;
-//            std::cout << "i     = " << i << " index = " << index << std::endl;
-            outFile << fltPtr[index+0] << ","
-                    << fltPtr[index+1] << ","
-                    << fltPtr[index+2] << ","
-                    << fltPtr[index+3] << ",";
-//            std::cout << "i     = " << i << " index = " << index << std::endl;
-        }
-        outFile.close();
+//
+//        std::fstream outFile("outputImage.csv", std::fstream::out | std::fstream::trunc);
+//        int imgWidth  = camera->GetWidth();
+//        int imgHeight = camera->GetHeight();
+//        int numPixels = imgWidth*imgHeight;
+//        float *fltPtr = (float*)imgRGBA;
+//        for(int i=0; i<imgWidth; i++)
+//            outFile << (std::string)"\"R " + std::to_string(i) + (std::string)"\",\"G\",\"B\",\"A\",";
+//        outFile << "\n";
+////        std::cout << "Starting copy" << std::endl;
+//        for(int i=0; i<numPixels; i++)
+//        {
+//            if(i%imgWidth == 0)
+//                outFile << "\n";
+//            int index = i*4;
+////            std::cout << "i     = " << i << " index = " << index << std::endl;
+//            outFile << fltPtr[index+0] << ","
+//                    << fltPtr[index+1] << ","
+//                    << fltPtr[index+2] << ","
+//                    << fltPtr[index+3] << ",";
+////            std::cout << "i     = " << i << " index = " << index << std::endl;
+//        }
+//        outFile.close();
 
 		// classify image with detectNet
 		int numBoundingBoxes = maxBoxes;
@@ -302,7 +302,7 @@ int main( int argc, char** argv )
 
 			display->EndRender();
 		}
-		usleep(500000);
+//		usleep(500000);
 	}
 
 	printf("\ndetectnet-camera:  un-initializing video device\n");

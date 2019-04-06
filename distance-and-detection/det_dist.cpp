@@ -118,8 +118,6 @@ cv::Rect2d cvt_bb(cv::Rect2d bb, int cvt_type)
 
 int main(int argc, char * argv[]) try
 {
-    std::cout << "x factor: " << x_color_to_depth_conversion_factor << std::endl;
-    std::cout << "y factor: " << y_color_to_depth_conversion_factor << std::endl;
     // Set up camera streams and realsense
 
         // Declare depth colorizer for pretty visualization of depth data
@@ -362,12 +360,12 @@ int main(int argc, char * argv[]) try
 
 				printf("detected obj %i  class #%u (%s)  confidence=%f\n", n, nc, net->GetClassDesc(nc), confCPU[n*2]);
 				printf("bounding box %i  (%f, %f)  (%f, %f)  w=%f  h=%f\n", n, bb[0], bb[1], bb[2], bb[3], bb[2] - bb[0], bb[3] - bb[1]);
-                    cv::Rect2d crect(bb[0],bb[1], bb[2]-bb[0], bb[3]-bb[1]);
-                    cv::Rect2d drect = cvt_bb(crect, CVT_COLOR_TO_DEPTH);
+                cv::Rect2d crect(bb[0],bb[1], bb[2]-bb[0], bb[3]-bb[1]);
+                cv::Rect2d drect = cvt_bb(crect, CVT_COLOR_TO_DEPTH);
 
-                    printf("bw box       %i  (%f, %f)  w=%f  h=%f\n", n, drect.x, drect.y, drect.width, drect.height);
-                    cv::rectangle(colorMat, crect, cv::Scalar( 255, 0, 0 ), 2, 1 );
-                    cv::rectangle(depthMat, drect, cv::Scalar( 1, 1, 1 ), 2, 1 );
+                printf("bw box       %i  (%f, %f)  w=%f  h=%f\n", n, drect.x, drect.y, drect.width, drect.height);
+                cv::rectangle(colorMat, crect, cv::Scalar( 255, 0, 0 ), 2, 1 );
+                cv::rectangle(depthMat, drect, cv::Scalar( 1, 1, 1 ), 2, 1 );
 
 				if( nc != lastClass || n == (numBoundingBoxes - 1) )
 				{

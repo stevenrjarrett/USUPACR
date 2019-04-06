@@ -363,7 +363,7 @@ int main(int argc, char * argv[]) try
                     cv::Rect2d crect(bb[0],bb[1], bb[2]-bb[0], bb[3]-bb[1]);
                     cv::Rect2d drect = cvt_bb(crect, 2);
 
-                    printf("bw box       %i  (%d, %d)  w=%d  h=%d\n", n, drect.x, drect.y, drect.width, drect.height);
+                    printf("bw box       %i  (%f, %f)  w=%f  h=%f\n", n, drect.x, drect.y, drect.width, drect.height);
                     cv::rectangle(colorMat, crect, cv::Scalar( 255, 0, 0 ), 2, 1 );
                     cv::rectangle(depthMat, drect, cv::Scalar( 255, 255, 255 ), 2, 1 );
 

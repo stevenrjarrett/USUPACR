@@ -118,6 +118,8 @@ cv::Rect2d cvt_bb(cv::Rect2d bb, int cvt_type)
 
 int main(int argc, char * argv[]) try
 {
+    std::cout << "x factor: " << x_color_to_depth_conversion_factor << std::endl;
+    std::cout << "y factor: " << y_color_to_depth_conversion_factor << std::endl;
     // Set up camera streams and realsense
 
         // Declare depth colorizer for pretty visualization of depth data
@@ -452,7 +454,9 @@ int main(int argc, char * argv[]) try
 //        cv::cvtColor(rgbaMat, colorMat, cv::COLOR_RGBA2BGR);
 
         // Update the window with new data
-//        cv::rectangle(depthMat, cv::Rect2d(5, 5, 50, 50), cv::Scalar(0,255,255), 2, 1 );
+        cv::rectangle(depthMat, cv::Rect2d(5, 5, 50, 50), cv::Scalar(255,255,255), 2, 1 );
+        cv::rectangle(depthMat, cv::Rect2d(60, 5, 50, 50), cv::Scalar(0,0,0), 2, 1 );
+        cv::rectangle(depthMat, cv::Rect2d(115, 5, 50, 50), cv::Scalar(1000,1000,1000), 2, 1 );
         imshow(depth_window_name, depthMat);
         imshow(color_window_name, colorMat);
 //        usleep(500000);

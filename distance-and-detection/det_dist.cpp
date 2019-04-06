@@ -369,7 +369,7 @@ int main(int argc, char * argv[]) try
                     cv::Rect2d crect(bb[0],bb[1], bb[2]-bb[0], bb[3]-bb[1]);
                     cv::Rect2d drect = cvt_bb(crect, CVT_COLOR_TO_DEPTH);
                     cv::rectangle(colorMat, crect, cv::Scalar( 255, 0, 0 ), 2, 1 );
-                    cv::rectangle(depthMat, drect, 0                    , 2, 1 );
+                    cv::rectangle(depthMat, drect, cv::Scalar( 0  , 0, 0 ), 2, 1 );
 
                     std::string prnt = "Confidence: ";
                     prnt += std::to_string(confCPU[n*2]);
@@ -450,7 +450,7 @@ int main(int argc, char * argv[]) try
 //        cv::cvtColor(rgbaMat, colorMat, cv::COLOR_RGBA2BGR);
 
         // Update the window with new data
-        cv::rectangle(depthMat, cv::Rect2d(5, 5, 50, 50), cv::Scalar(255,255,255), 2, 1 );
+//        cv::rectangle(depthMat, cv::Rect2d(5, 5, 50, 50), cv::Scalar(0,255,255), 2, 1 );
         imshow(depth_window_name, depthMat);
         imshow(color_window_name, colorMat);
 //        usleep(500000);

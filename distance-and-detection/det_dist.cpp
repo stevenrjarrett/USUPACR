@@ -361,7 +361,7 @@ int main(int argc, char * argv[]) try
 				printf("detected obj %i  class #%u (%s)  confidence=%f\n", n, nc, net->GetClassDesc(nc), confCPU[n*2]);
 				printf("bounding box %i  (%f, %f)  (%f, %f)  w=%f  h=%f\n", n, bb[0], bb[1], bb[2], bb[3], bb[2] - bb[0], bb[3] - bb[1]);
                     cv::Rect2d crect(bb[0],bb[1], bb[2]-bb[0], bb[3]-bb[1]);
-                    cv::Rect2d drect = cvt_bb(crect, 2);
+                    cv::Rect2d drect = cvt_bb(crect, CVT_COLOR_TO_DEPTH);
 
                     printf("bw box       %i  (%f, %f)  w=%f  h=%f\n", n, drect.x, drect.y, drect.width, drect.height);
                     cv::rectangle(colorMat, crect, cv::Scalar( 255, 0, 0 ), 2, 1 );

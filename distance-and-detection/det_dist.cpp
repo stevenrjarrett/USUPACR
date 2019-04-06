@@ -45,8 +45,8 @@ double COL_width  = 1280;
 double COL_height = 720;
 int COL_numPixels = COL_height * COL_width;
 
-double x_color_to_depth_conversion_factor = IR_width /COL_width  * tan(COL_Hor_Field_of_View)/tan(IR_Hor_Field_of_View);
-double y_color_to_depth_conversion_factor = IR_height/COL_height * tan(COL_Ver_Field_of_View)/tan(IR_Ver_Field_of_View);
+double x_color_to_depth_conversion_factor = IR_width /COL_width  * tan(COL_Hor_Field_of_View/2)/tan(IR_Hor_Field_of_View/2);
+double y_color_to_depth_conversion_factor = IR_height/COL_height * tan(COL_Ver_Field_of_View/2)/tan(IR_Ver_Field_of_View/2);
 
 #define CVT_COLOR_TO_DEPTH 0
 #define CVT_DEPTH_TO_COLOR 1
@@ -454,9 +454,9 @@ int main(int argc, char * argv[]) try
 //        cv::cvtColor(rgbaMat, colorMat, cv::COLOR_RGBA2BGR);
 
         // Update the window with new data
-        cv::rectangle(depthMat, cv::Rect2d(5, 5, 50, 50), cv::Scalar(255,255,255), 2, 1 );
-        cv::rectangle(depthMat, cv::Rect2d(60, 5, 50, 50), cv::Scalar(0,0,0), 2, 1 );
-        cv::rectangle(depthMat, cv::Rect2d(115, 5, 50, 50), cv::Scalar(1000,1000,1000), 2, 1 );
+        cv::rectangle(depthMat, cv::Rect2d(5, 5, 50, 50), cv::Scalar(.9,.9,.9), 2, 1 );
+        cv::rectangle(depthMat, cv::Rect2d(60, 5, 50, 50), cv::Scalar(0.5,0.5,0.5), 2, 1 );
+        cv::rectangle(depthMat, cv::Rect2d(115, 5, 50, 50), cv::Scalar(0,0,0), 2, 1 );
         imshow(depth_window_name, depthMat);
         imshow(color_window_name, colorMat);
 //        usleep(500000);

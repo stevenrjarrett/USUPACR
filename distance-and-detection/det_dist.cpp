@@ -32,17 +32,21 @@ void sig_handler(int signo)
 }
 
 // point handlers for color and depth bounding boxes
-double IR_Hor_Field_of_View = 91.2*pi/180;
-double IR_Ver_Field_of_View = 65.5*pi/180;
+int max_fps = 30;
+
+double IR_Hor_Field_of_View = 91.2*M_PI/180;
+double IR_Ver_Field_of_View = 65.5*M_PI/180;
 int    IR_width  = 1280;
 int    IR_height = 720;
-double COL_Hor_Field_of_View = 69.4*pi/180;
-double COL_Ver_Field_of_View = 42.5*pi/180;
+int IR_numPixels = IR_height * IR_width;
+double COL_Hor_Field_of_View = 69.4*M_PI/180;
+double COL_Ver_Field_of_View = 42.5*M_PI/180;
 int    COL_width  = 1280;
 int    COL_height = 720;
+int COL_numPixels = COL_height * COL_width;
 
-double x_color_to_depth_conversion_factor = IR_cols/COL_cols * tan(COL_Hor_Field_of_View)/tan(IR_Hor_Field_of_View);
-double y_color_to_depth_conversion_factor = IR_rows/COL_rows * tan(COL_Ver_Field_of_View)/tan(IR_Ver_Field_of_View);
+double x_color_to_depth_conversion_factor = IR_width /COL_width  * tan(COL_Hor_Field_of_View)/tan(IR_Hor_Field_of_View);
+double y_color_to_depth_conversion_factor = IR_height/COL_height * tan(COL_Ver_Field_of_View)/tan(IR_Ver_Field_of_View);
 
 #define CVT_COLOR_TO_DEPTH 0
 #define CVT_DEPTH_TO_COLOR 1
@@ -68,7 +72,7 @@ cv::Rect2d cvt_bb(cv::Rect2d bb, int cvt_type)
             height = static_cast<int>((int)bb.height / y_color_to_depth_conversion_factor);
             break;
     }
-    return cv::Rect2d(x, y, width, height)
+    return cv::Rect2d(x, y, width, height);
 }
 
 //struct bb_color
@@ -120,24 +124,20 @@ int main(int argc, char * argv[]) try
         rs2::colorizer color_map;
 
         // Set up resolution and other variables
-        int color_width = COL_cols;
-        int color_height = COL_rows;
-        int depth_width = IR_cols;
-        int depth_height = IR_rows;
+//        int COL_width = COL_width;
+//        int color_height = COL_height;
+//        int depth_width = IR_width;
+//        int IR_height = IR_height;
 
-        int color_numElements = color_height * color_width;
-        int depth_numElements = depth_height * depth_width;
-
-        int max_fps = 30;
 
 
 
         //Create a configuration for configuring the pipeline with a non default profile
         rs2::config cfg;
         //Add desired streams to configuration
-        cfg.enable_stream(RS2_STREAM_COLOR   , color_width, color_height, RS2_FORMAT_RGB8, max_fps);
-        cfg.enable_stream(RS2_STREAM_INFRARED, depth_width, depth_height, RS2_FORMAT_Y8  , max_fps);
-        cfg.enable_stream(RS2_STREAM_DEPTH   , depth_width, depth_height, RS2_FORMAT_Z16 , max_fps);
+        cfg.enable_stream(RS2_STREAM_COLOR   , COL_width, COL_height, RS2_FORMAT_RGB8, max_fps);
+        cfg.enable_stream(RS2_STREAM_INFRARED, IR_width, IR_height, RS2_FORMAT_Y8  , max_fps);
+        cfg.enable_stream(RS2_STREAM_DEPTH   , IR_width, IR_height, RS2_FORMAT_Z16 , max_fps);
 
         // enable signal catcher
         if( signal(SIGINT, sig_handler) == SIG_ERR )
@@ -161,12 +161,12 @@ int main(int argc, char * argv[]) try
 
         float *colorData_flt_CPU,
               *colorData_flt_CUDA;
-//        cudaMallocManaged(&colorData_flt, sizeof(float)*color_numElements*4);
+//        cudaMallocManaged(&colorData_flt, sizeof(float)*COL_numPixels*4);
 //        char*  colorDataCPU,
 //               colorDataCUDA;
-//        cudaMallocManaged(&colorData, 10 * sizeof(char)*color_numElements*4);
+//        cudaMallocManaged(&colorData, 10 * sizeof(char)*COL_numPixels*4);
 
-        if( !cudaAllocMapped((void**)&colorData_flt_CPU, (void**)&colorData_flt_CUDA, color_numElements * sizeof(float4)) )
+        if( !cudaAllocMapped((void**)&colorData_flt_CPU, (void**)&colorData_flt_CUDA, COL_numPixels * sizeof(float4)) )
         {
             printf("detecnet:  failed to alloc image memory\n");
             return 0;
@@ -226,11 +226,11 @@ int main(int argc, char * argv[]) try
         char* colorData = (char*)color.get_data();
 
         // create opencv Mat's
-        cv::Mat depthMat(cv::Size(depth_width, depth_height), CV_16UC1, depthData, cv::Mat::AUTO_STEP);
+        cv::Mat depthMat(cv::Size(IR_width, IR_height), CV_16UC1, depthData, cv::Mat::AUTO_STEP);
 
-        cv::Mat color_image_raw(cv::Size(color_width, color_height), CV_8UC3, colorData, cv::Mat::AUTO_STEP);
+        cv::Mat color_image_raw(cv::Size(COL_width, COL_height), CV_8UC3, colorData, cv::Mat::AUTO_STEP);
         cv::Mat colorMat;
-//        cv::Mat rgbaMat(cv::Size(color_width, color_height), CV_64FC4, colorData_flt_CPU, cv::Mat::AUTO_STEP);
+//        cv::Mat rgbaMat(cv::Size(COL_width, COL_height), CV_64FC4, colorData_flt_CPU, cv::Mat::AUTO_STEP);
         cv::cvtColor(color_image_raw, colorMat, cv::COLOR_RGB2BGR);
 //        cv::cvtColor(color_image_raw, rgbaMat, cv::COLOR_RGB2RGBA);
 
@@ -298,9 +298,9 @@ int main(int argc, char * argv[]) try
 		// convert from RGB to RGBA and move to graphics memory
 
 //        cv::cvtColor(rgbimg, continuousRGBA, CV_BGR2RGBA, 4);
-        int rgba_width  = color_width;
-        int rgba_height = color_height;
-        for(int i=0; i<color_numElements; i++)
+        int rgba_width  = COL_width;
+        int rgba_height = COL_height;
+        for(int i=0; i<COL_numPixels; i++)
         {
             int rgb_ind = i*3;
             int rgba_ind = i*4;
@@ -309,7 +309,7 @@ int main(int argc, char * argv[]) try
             colorData_flt_CPU[rgba_ind+2] = (float)colorData[rgb_ind+2];
             colorData_flt_CPU[rgba_ind+3] = 255.0;
         }
-//        cv::Mat rgbaMat(cv::Size(color_width, color_height), CV_32FC4, colorData_flt_CPU, cv::Mat::AUTO_STEP);
+//        cv::Mat rgbaMat(cv::Size(COL_width, COL_height), CV_32FC4, colorData_flt_CPU, cv::Mat::AUTO_STEP);
 
 //        std::fstream outFile("outputImage.csv", std::fstream::out | std::fstream::trunc);
 ////        int imgWidth  = camera->GetWidth();
@@ -320,7 +320,7 @@ int main(int argc, char * argv[]) try
 //            outFile << (std::string)"\"R " + std::to_string(i) + (std::string)"\",\"G\",\"B\",\"A\",";
 //        outFile << "\n";
 ////        std::cout << "Starting copy" << std::endl;
-//        for(int i=0; i<color_numElements; i++)
+//        for(int i=0; i<COL_numPixels; i++)
 //        {
 //            if(i%rgba_width == 0)
 //                outFile << "\n";
@@ -444,7 +444,7 @@ int main(int argc, char * argv[]) try
 
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////
-//        cv::Mat color_image_raw(cv::Size(color_width, color_height), CV_8UC4, colorData_flt_CPU, cv::Mat::AUTO_STEP);
+//        cv::Mat color_image_raw(cv::Size(COL_width, COL_height), CV_8UC4, colorData_flt_CPU, cv::Mat::AUTO_STEP);
 //        cv::Mat colorMat;
 //        cv::cvtColor(color_image_raw, colorMat, cv::COLOR_RGBA2BGR);
 //        cv::cvtColor(rgbaMat, colorMat, cv::COLOR_RGBA2BGR);

@@ -34,55 +34,82 @@ void sig_handler(int signo)
 // point handlers for color and depth bounding boxes
 double IR_Hor_Field_of_View = 91.2*pi/180;
 double IR_Ver_Field_of_View = 65.5*pi/180;
-int    IR_cols = 1280;
-int    IR_rows = 720;
+int    IR_width  = 1280;
+int    IR_height = 720;
 double COL_Hor_Field_of_View = 69.4*pi/180;
 double COL_Ver_Field_of_View = 42.5*pi/180;
-int    COL_cols = 1280;
-int    COL_rows = 720;
+int    COL_width  = 1280;
+int    COL_height = 720;
 
 double x_color_to_depth_conversion_factor = IR_cols/COL_cols * tan(COL_Hor_Field_of_View)/tan(IR_Hor_Field_of_View);
 double y_color_to_depth_conversion_factor = IR_rows/COL_rows * tan(COL_Ver_Field_of_View)/tan(IR_Ver_Field_of_View);
 
-struct bb_color
+#define CVT_COLOR_TO_DEPTH 0
+#define CVT_DEPTH_TO_COLOR 1
+
+cv::Rect2d cvt_bb(cv::Rect2d bb, int cvt_type)
 {
-    int x1=0;
-    int y1=0;
-    int x2=0;
-    int y2=0;
-    int width=0;
-    int height=0;
-
-    bb_color(int _x1, int _y1, int _x2, int _y2)
-      : x1(_x1),
-        y1(_y1),
-        x2(_x2),
-        y2(_y2),
-        width(_x2-_x1),
-        height(_y2-_y1)
+    int x      = (int)bb.x;
+    int y      = (int)bb.y;
+    int width  = (int)bb.width;
+    int height = (int)bb.height;
+    switch(cvt_type)
     {
-        correctVals();
+        case CVT_COLOR_TO_DEPTH:
+            x      = static_cast<int>((((int)bb.x - COL_width /2) * x_color_to_depth_conversion_factor) + IR_width /2);
+            y      = static_cast<int>((((int)bb.y - COL_height/2) * y_color_to_depth_conversion_factor) + IR_height/2);
+            width  = static_cast<int>((int)bb.width  * x_color_to_depth_conversion_factor);
+            height = static_cast<int>((int)bb.height * y_color_to_depth_conversion_factor);
+            break;
+        case CVT_DEPTH_TO_COLOR:
+            x      = static_cast<int>((((int)bb.x - IR_width /2) / x_color_to_depth_conversion_factor) + COL_width /2);
+            y      = static_cast<int>((((int)bb.y - IR_height/2) / y_color_to_depth_conversion_factor) + COL_height/2);
+            width  = static_cast<int>((int)bb.width  / x_color_to_depth_conversion_factor);
+            height = static_cast<int>((int)bb.height / y_color_to_depth_conversion_factor);
+            break;
     }
+    return cv::Rect2d(x, y, width, height)
+}
 
-    void correctVals()
-    {
-        if(width<0)
-        {
-            std::swap(x1, x2);
-            width *= -1;
-        }
-        if(height<0)
-        {
-            std::swap(y1, y2);
-            height *= -1;
-        }
-    }
-
-    void setFromDepth(bb_depth bbd)
-    {
-
-    }
-};
+//struct bb_color
+//{
+//    int x1=0;
+//    int y1=0;
+//    int x2=0;
+//    int y2=0;
+//    int width=0;
+//    int height=0;
+//
+//    bb_color(int _x1, int _y1, int _x2, int _y2)
+//      : x1(_x1),
+//        y1(_y1),
+//        x2(_x2),
+//        y2(_y2),
+//        width(_x2-_x1),
+//        height(_y2-_y1)
+//    {
+//        correctVals();
+//    }
+//
+//    void correctVals()
+//    {
+//        if(width<0)
+//        {
+//            std::swap(x1, x2);
+//            width *= -1;
+//        }
+//        if(height<0)
+//        {
+//            std::swap(y1, y2);
+//            height *= -1;
+//        }
+//    }
+//
+//    void setFromDepth(bb_depth bbd)
+//    {
+//
+//    }
+//};
 
 
 int main(int argc, char * argv[]) try
@@ -339,8 +366,10 @@ int main(int argc, char * argv[]) try
 //					if( !net->DrawBoxes(colorData_flt_CUDA, colorData_flt_CUDA, rgba_width, rgba_height,
 //						                        bbCUDA + (lastStart * 4), (n - lastStart) + 1, lastClass) )
 //						printf("detectnet-console:  failed to draw boxes\n");
-
-                    cv::rectangle(colorMat, cv::Rect2d(bb[0],bb[1], bb[2]-bb[0], bb[3]-bb[1]), cv::Scalar( 255, 0, 0 ), 2, 1 );
+                    cv::Rect2d crect(bb[0],bb[1], bb[2]-bb[0], bb[3]-bb[1]);
+                    cv::Rect2d drect = cvt_bb(crect, CVT_COLOR_TO_DEPTH);
+                    cv::rectangle(colorMat, crect, cv::Scalar( 255, 0, 0 ), 2, 1 );
+                    cv::rectangle(depthMat, drect, 255                    , 2, 1 );
 
                     std::string prnt = "Confidence: ";
                     prnt += std::to_string(confCPU[n*2]);

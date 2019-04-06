@@ -36,13 +36,13 @@ int max_fps = 30;
 
 double IR_Hor_Field_of_View = 91.2*M_PI/180;
 double IR_Ver_Field_of_View = 65.5*M_PI/180;
-int    IR_width  = 1280;
-int    IR_height = 720;
+double IR_width  = 1280;
+double IR_height = 720;
 int IR_numPixels = IR_height * IR_width;
 double COL_Hor_Field_of_View = 69.4*M_PI/180;
 double COL_Ver_Field_of_View = 42.5*M_PI/180;
-int    COL_width  = 1280;
-int    COL_height = 720;
+double COL_width  = 1280;
+double COL_height = 720;
 int COL_numPixels = COL_height * COL_width;
 
 double x_color_to_depth_conversion_factor = IR_width /COL_width  * tan(COL_Hor_Field_of_View)/tan(IR_Hor_Field_of_View);

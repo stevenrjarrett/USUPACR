@@ -82,7 +82,7 @@ void bboxFix( const cv::Mat& img, cv::Rect2d& box)
     }
 }
 
-cv::Point3d getCentroid(const cv::Mat &depthMat, const rs2::depth_frame& dframe, const cv::Rect& drect)
+cv::Point3d getCentroid(const cv::Mat &depthMat, const rs2::depth_frame& dframe, cv::Rect drect)
 {
     // get units information
 //    double units = dframe.get_units();
@@ -96,7 +96,7 @@ cv::Point3d getCentroid(const cv::Mat &depthMat, const rs2::depth_frame& dframe,
                          drect.width  / 3,
                          drect.height / 3);
     bboxFix(depthMat, innerRect);
-    const cv::Mat innerMat = depthMat(drect);
+    const cv::Mat innerMat = depthMat(innerRect);
     cv::Scalar tmpScal = cv::mean(innerMat);
     double z = tmpScal[0] * depth_scale;
 

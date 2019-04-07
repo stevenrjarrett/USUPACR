@@ -155,16 +155,16 @@ int main(int argc, char * argv[]) try
         cfg.enable_stream(RS2_STREAM_COLOR   , COL_width, COL_height, RS2_FORMAT_RGB8, max_fps);
 //        cfg.enable_stream(RS2_STREAM_INFRARED, IR_width, IR_height, RS2_FORMAT_Y8  , max_fps);
         cfg.enable_stream(RS2_STREAM_DEPTH   , IR_width, IR_height, RS2_FORMAT_Z16 , max_fps);
-        cfg.rs435_depth_emitter_enabled = 1;
+//        cfg.rs435_depth_emitter_enabled = 1;
 
         // enable signal catcher
         if( signal(SIGINT, sig_handler) == SIG_ERR )
             printf("\ncan't catch SIGINT\n");
 
         // Declare RealSense pipeline, encapsulating the actual device and sensors
-        rs2::pipeline_profile rs2::pipeline pipe;
+        rs2::pipeline pipe;
         // Start streaming with default recommended configuration
-        pipe.start(cfg);
+        rs2::pipeline_profile pipe.start(cfg);
 
         // enable emitterrs2::pipeline pipe;
         rs2::device selected_device = selection.get_device();

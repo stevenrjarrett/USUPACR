@@ -39,6 +39,8 @@ double IR_Ver_Field_of_View = 65.5*M_PI/180;
 double IR_width  = 1280;
 double IR_height = 720;
 int IR_numPixels = IR_height * IR_width;
+double depth_scale;
+
 double COL_Hor_Field_of_View = 69.4*M_PI/180;
 double COL_Ver_Field_of_View = 42.5*M_PI/180;
 double COL_width  = 1280;
@@ -65,7 +67,7 @@ cv::Point3d getCentroid(const cv::Mat &depthMat, const rs2::depth_frame& dframe,
     // get center coordinates in the frame
     double frame_x_index = drect.x + drect.width/2;
     double frame_y_index = drect.y + drect.height/2;
-    double z = dframe.get_distance(frame_x_index, frame_y_index);
+    double z = depthMat.at(cv::Point(frame_x_index, frame_y_index)) * depth_scale;
 
     // calculate x angle
     double frame_x = frame_x_index - (depthMat.cols/2);
@@ -166,7 +168,7 @@ int main(int argc, char * argv[]) try
         // Start streaming with default recommended configuration
         rs2::pipeline_profile selection = pipe.start(cfg);
 
-        // enable emitterrs2::pipeline pipe;
+        // enable emitter
         rs2::device selected_device = selection.get_device();
         auto depth_sensor = selected_device.first<rs2::depth_sensor>();
 
@@ -183,6 +185,9 @@ int main(int argc, char * argv[]) try
 //            depth_sensor.set_option(RS2_OPTION_LASER_POWER, 0.f); // Disable laser
         }
 
+        // Get depth scale
+        auto sensor = selection.get_device().first<rs2::depth_sensor>();
+        depth_scale =  sensor.get_depth_scale();
 
         const auto depth_window_name = "Depth Video Feed";
         const auto color_window_name = "Color Video Feed";

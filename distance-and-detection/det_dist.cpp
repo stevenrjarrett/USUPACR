@@ -349,8 +349,8 @@ int main(int argc, char * argv[]) try
 				}
 
 				// Get 3d centroid of person
-				cv::Point3d position = getCentroid(depthMat, depth, drect);
-                cv::putText(colorMat, std::to_string(position.z), cv::Point(bb[0],bb[1]-50), cv::FONT_HERSHEY_SIMPLEX, 0.75, cv::Scalar(50,170,50),2);
+//				cv::Point3d position = getCentroid(depthMat, depth, drect);
+//                cv::putText(colorMat, std::to_string(position.z), cv::Point(bb[0],bb[1]-50), cv::FONT_HERSHEY_SIMPLEX, 0.75, cv::Scalar(50,170,50),2);
 
 
 				// Add it to the global list

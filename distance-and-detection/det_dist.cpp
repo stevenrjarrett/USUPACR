@@ -67,7 +67,14 @@ cv::Point3d getCentroid(const cv::Mat &depthMat, const rs2::depth_frame& dframe,
     // get center coordinates in the frame
     double frame_x_index = drect.x + drect.width/2;
     double frame_y_index = drect.y + drect.height/2;
-    double z = depthMat.at(cv::Point((int)frame_x_index, (int)frame_y_index)) * depth_scale;
+
+    // Get z distance
+//    cv::Rect2d innerRect(drect.x + drect.width  / 3,
+//                         drect.y + drect.height / 3,
+//                         drect.width  / 3,
+//                         drect.height / 3);
+//    cv::Mat innerMat = dFrame(drect)
+    double z = depthMat.at((int)frame_x_index, (int)frame_y_index) * depth_scale;
 
     // calculate x angle
     double frame_x = frame_x_index - (depthMat.cols/2);

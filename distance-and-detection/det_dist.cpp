@@ -264,7 +264,7 @@ int main(int argc, char * argv[]) try
 //        usleep(500000);
 
         // create opencv Mat's
-        cv::Mat depthMat(cv::Size(IR_width, IR_height), CV_16UC1, depthData, cv::Mat::AUTO_STEP);
+        cv::Mat depthMat(cv::Size(IR_width, IR_height), CV_16UC1, depth.get_data(), cv::Mat::AUTO_STEP);
 
         cv::Mat color_image_raw(cv::Size(COL_width, COL_height), CV_8UC3, colorData, cv::Mat::AUTO_STEP);
         cv::Mat colorMat;

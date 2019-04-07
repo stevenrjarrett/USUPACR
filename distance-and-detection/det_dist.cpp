@@ -250,8 +250,8 @@ int main(int argc, char * argv[]) try
         rs2::frame color = data.get_color_frame();
 
         // get data pointers
-        char* depthData = (char*)depth.get_data();
-        char* colorData = (char*)color.get_data();
+        unsigned short *depthData = (unsigned short *)depth.get_data();
+        char           *colorData = (char*)color.get_data();
 
 //        std::fstream outFile("depthImage.csv", std::fstream::out | std::fstream::trunc);
 ////        int imgWidth  = camera->GetWidth();
@@ -341,7 +341,7 @@ int main(int argc, char * argv[]) try
 
 //                printf("bw box       %i  (%f, %f)  w=%f  h=%f\n", n, drect.x, drect.y, drect.width, drect.height);
                 cv::rectangle(colorMat, crect, cv::Scalar( 255, 0, 0 ), 2, 1 );
-                cv::rectangle(depthMat, drect, cv::Scalar( 255, 255, 255 ), 2, 1 );
+                cv::rectangle(depthMat, drect, cv::Scalar( 65535, 65535, 65535 ), 2, 1 );
 
                 std::string prnt = "Confidence: ";
                 prnt += std::to_string(confCPU[n*2]);
@@ -407,7 +407,7 @@ int main(int argc, char * argv[]) try
 
         cv::Mat dpth;
 //        depthMat.convertTo(dpth, CV_32F, 1.0 / 255, 0);
-        cv::normalize(depthMat, dpth, 0, 255, cv::NORM_MINMAX);
+//        cv::normalize(depthMat, dpth, 0, 255, cv::NORM_MINMAX);
 
         imshow(depth_window_name, dpth);
         imshow(color_window_name, colorMat);

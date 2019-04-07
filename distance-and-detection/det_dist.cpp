@@ -153,8 +153,9 @@ int main(int argc, char * argv[]) try
         rs2::config cfg;
         //Add desired streams to configuration
         cfg.enable_stream(RS2_STREAM_COLOR   , COL_width, COL_height, RS2_FORMAT_RGB8, max_fps);
-        cfg.enable_stream(RS2_STREAM_INFRARED, IR_width, IR_height, RS2_FORMAT_Y8  , max_fps);
+//        cfg.enable_stream(RS2_STREAM_INFRARED, IR_width, IR_height, RS2_FORMAT_Y8  , max_fps);
         cfg.enable_stream(RS2_STREAM_DEPTH   , IR_width, IR_height, RS2_FORMAT_Z16 , max_fps);
+        cfg.rs435_depth_emitter_enabled = 1;
 
         // enable signal catcher
         if( signal(SIGINT, sig_handler) == SIG_ERR )
@@ -330,11 +331,11 @@ int main(int argc, char * argv[]) try
 
 //                printf("bw box       %i  (%f, %f)  w=%f  h=%f\n", n, drect.x, drect.y, drect.width, drect.height);
                 cv::rectangle(colorMat, crect, COL_TEXT_COLOR, 2, 1 );
-                cv::rectangle(depthMat, drect, cv::Scalar( 65535, 65535, 65535 ), 2, 1 );
+                cv::rectangle(depthMat, drect, cv::Scalar( 65535/2, 65535/2, 65535/2 ), 2, 1 );
 
                 std::string prnt = "Confidence: ";
                 prnt += std::to_string(confCPU[n*2]);
-                cv::putText(colorMat, prnt, cv::Point(bb[0],bb[1]+10), cv::FONT_HERSHEY_SIMPLEX, 0.75, COL_TEXT_COLOR ,2);
+                cv::putText(colorMat, prnt, cv::Point(bb[0],bb[1]+20), cv::FONT_HERSHEY_SIMPLEX, 0.75, COL_TEXT_COLOR ,2);
 
 				if( nc != lastClass || n == (numBoundingBoxes - 1) )
 				{
@@ -352,7 +353,7 @@ int main(int argc, char * argv[]) try
 
 				// Get 3d centroid of person
 				cv::Point3d position = getCentroid(depthMat, depth, drect);
-                cv::putText(colorMat, std::string("Distance: ") + std::to_string(position.z), cv::Point(bb[0],bb[1]+30), cv::FONT_HERSHEY_SIMPLEX, 0.75, COL_TEXT_COLOR,2);
+                cv::putText(colorMat, std::string("Distance: ") + std::to_string(position.z), cv::Point(bb[0],bb[1]+40), cv::FONT_HERSHEY_SIMPLEX, 0.75, COL_TEXT_COLOR,2);
 
 
 				// Add it to the global list

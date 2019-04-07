@@ -236,7 +236,7 @@ int main(int argc, char * argv[]) try
 //        std::cout << "Starting copy" << std::endl;
         for(int i=0; i<COL_numPixels; i++)
         {
-            if(i%IR_width == 0)
+            if(i%((int)IR_width) == 0)
                 outFile << "\n";
             int index = i;
 //            std::cout << "i     = " << i << " index = " << index << std::endl;

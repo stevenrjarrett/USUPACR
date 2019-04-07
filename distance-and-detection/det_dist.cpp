@@ -73,7 +73,7 @@ cv::Point3d getCentroid(const cv::Mat &depthMat, const rs2::depth_frame& dframe,
                          drect.y + drect.height / 3,
                          drect.width  / 3,
                          drect.height / 3);
-    const cv::Mat innerMat = dFrame(drect)
+    const cv::Mat innerMat = dframe(drect);
     cv::Scalar tmpScal = cv::mean(innerMat);
     double z = tmpScal[0] * depth_scale;
 

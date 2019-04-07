@@ -164,7 +164,7 @@ int main(int argc, char * argv[]) try
         // Declare RealSense pipeline, encapsulating the actual device and sensors
         rs2::pipeline pipe;
         // Start streaming with default recommended configuration
-        rs2::pipeline_profile pipe.start(cfg);
+        rs2::pipeline_profile selection = pipe.start(cfg);
 
         // enable emitterrs2::pipeline pipe;
         rs2::device selected_device = selection.get_device();

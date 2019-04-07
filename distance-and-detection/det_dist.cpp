@@ -20,34 +20,6 @@
 
 // Signal handler, makes it so that we don't interrupt tensor-flow at a bad time?
 
-double distance3d(cv::point3d pt1, cv::point3d pt2)
-{
-    return sqrt(pow(pt1.x-pt2.x,2) + pow(pt1.y-pt2.y,2) + pow(pt1.z-pt2.z,2))
-}
-
-cv::Point3d getCentroid(const cv::Mat &depthMat, rs2::depth_frame& dframe, const cv::Rect& drect)
-{
-    // get units information
-    double units = dframe.get_units();
-    // get center coordinates in the frame
-    double frame_x_index = drect.x + drect.width/2;
-    double frame_y_index = drect.y + drect.height/2;
-    double z = dframe.get_distance(frame_x_index, frame_y_index);
-
-    // calculate x angle
-    double frame_x = frame_x_index - (depthMat.cols/2);
-    double xangle = atan(frame_x/((double)depthMat.cols/2)*tan(IR_Hor_Field_of_View/2));//x/((double)lframe.cols/2) * 30.0;
-    // calculate y angle
-    double frame_y = frame_y_index - (depthMat.rows/2);
-    double yangle = atan(frame_y/((double)depthMat.rows/2)*tan(IR_Ver_Field_of_View/2));//x/((double)lframe.cols/2) * 30.0;
-
-    double x = dist * tan(xangle);
-    double y = dist * tan(yangle);
-
-
-    return cv::Point3d(x, y, z);
-}
-
 bool exit_signal_recieved = false;
 
 void sig_handler(int signo)
@@ -79,6 +51,36 @@ double y_color_to_depth_conversion_factor = IR_height/COL_height * tan(COL_Ver_F
 #define CVT_COLOR_TO_DEPTH 0
 #define CVT_DEPTH_TO_COLOR 1
 
+double distance3d(cv::Point3d pt1, cv::Point3d pt2)
+{
+    return sqrt(pow(pt1.x-pt2.x,2) + pow(pt1.y-pt2.y,2) + pow(pt1.z-pt2.z,2));
+}
+
+cv::Point3d getCentroid(const cv::Mat &depthMat, const rs2::depth_frame& dframe, const cv::Rect& drect)
+{
+    // get units information
+//    double units = dframe.get_units();
+    // get center coordinates in the frame
+    double frame_x_index = drect.x + drect.width/2;
+    double frame_y_index = drect.y + drect.height/2;
+    double z = dframe.get_distance(frame_x_index, frame_y_index);
+
+    // calculate x angle
+    double frame_x = frame_x_index - (depthMat.cols/2);
+    double xangle = atan(frame_x/((double)depthMat.cols/2)*tan(IR_Hor_Field_of_View/2));//x/((double)lframe.cols/2) * 30.0;
+    // calculate y angle
+    double frame_y = frame_y_index - (depthMat.rows/2);
+    double yangle = atan(frame_y/((double)depthMat.rows/2)*tan(IR_Ver_Field_of_View/2));//x/((double)lframe.cols/2) * 30.0;
+
+    double x = z * tan(xangle);
+    double y = z * tan(yangle);
+
+
+    return cv::Point3d(x, y, z);
+}
+
+
+
 cv::Rect2d cvt_bb(cv::Rect2d bb, int cvt_type)
 {
     int x      = (int)bb.x;
@@ -103,45 +105,30 @@ cv::Rect2d cvt_bb(cv::Rect2d bb, int cvt_type)
     return cv::Rect2d(x, y, width, height);
 }
 
-//struct bb_color
-//{
-//    int x1=0;
-//    int y1=0;
-//    int x2=0;
-//    int y2=0;
-//    int width=0;
-//    int height=0;
-//
-//    bb_color(int _x1, int _y1, int _x2, int _y2)
-//      : x1(_x1),
-//        y1(_y1),
-//        x2(_x2),
-//        y2(_y2),
-//        width(_x2-_x1),
-//        height(_y2-_y1)
-//    {
-//        correctVals();
-//    }
-//
-//    void correctVals()
-//    {
-//        if(width<0)
-//        {
-//            std::swap(x1, x2);
-//            width *= -1;
-//        }
-//        if(height<0)
-//        {
-//            std::swap(y1, y2);
-//            height *= -1;
-//        }
-//    }
-//
-//    void setFromDepth(bb_depth bbd)
-//    {
-//
-//    }
-//};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////       Main       /////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
 int main(int argc, char * argv[]) try

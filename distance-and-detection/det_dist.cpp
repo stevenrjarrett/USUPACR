@@ -162,9 +162,27 @@ int main(int argc, char * argv[]) try
             printf("\ncan't catch SIGINT\n");
 
         // Declare RealSense pipeline, encapsulating the actual device and sensors
-        rs2::pipeline pipe;
+        rs2::pipeline_profile rs2::pipeline pipe;
         // Start streaming with default recommended configuration
         pipe.start(cfg);
+
+        // enable emitterrs2::pipeline pipe;
+        rs2::device selected_device = selection.get_device();
+        auto depth_sensor = selected_device.first<rs2::depth_sensor>();
+
+        if (depth_sensor.supports(RS2_OPTION_EMITTER_ENABLED))
+        {
+            depth_sensor.set_option(RS2_OPTION_EMITTER_ENABLED, 1.f); // Enable emitter
+//            depth_sensor.set_option(RS2_OPTION_EMITTER_ENABLED, 0.f); // Disable emitter
+        }
+        if (depth_sensor.supports(RS2_OPTION_LASER_POWER))
+        {
+            // Query min and max values:
+            auto range = depth_sensor.get_option_range(RS2_OPTION_LASER_POWER);
+            depth_sensor.set_option(RS2_OPTION_LASER_POWER, range.max); // Set max power
+//            depth_sensor.set_option(RS2_OPTION_LASER_POWER, 0.f); // Disable laser
+        }
+
 
         const auto depth_window_name = "Depth Video Feed";
         const auto color_window_name = "Color Video Feed";

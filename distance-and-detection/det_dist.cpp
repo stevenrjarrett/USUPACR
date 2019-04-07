@@ -51,6 +51,8 @@ double y_color_to_depth_conversion_factor = IR_height/COL_height * tan(COL_Ver_F
 #define CVT_COLOR_TO_DEPTH 0
 #define CVT_DEPTH_TO_COLOR 1
 
+#define COL_TEXT_COLOR cv::Scalar(0, 0, 0)
+
 double distance3d(cv::Point3d pt1, cv::Point3d pt2)
 {
     return sqrt(pow(pt1.x-pt2.x,2) + pow(pt1.y-pt2.y,2) + pow(pt1.z-pt2.z,2));
@@ -309,7 +311,7 @@ int main(int argc, char * argv[]) try
 //		if( net->Detect((float*)imgRGBA, camera->GetWidth(), camera->GetHeight(), bbCPU, &numBoundingBoxes, confCPU))
 		if( net->Detect(colorData_flt_CUDA, rgba_width, rgba_height , bbCPU, &numBoundingBoxes, confCPU))
 		{
-			printf("%i bounding boxes detected\n", numBoundingBoxes);
+//			printf("%i bounding boxes detected\n", numBoundingBoxes);
 
 			int lastClass = 0;
 			int lastStart = 0;
@@ -327,12 +329,12 @@ int main(int argc, char * argv[]) try
                 cv::Rect2d drect = cvt_bb(crect, CVT_COLOR_TO_DEPTH);
 
 //                printf("bw box       %i  (%f, %f)  w=%f  h=%f\n", n, drect.x, drect.y, drect.width, drect.height);
-                cv::rectangle(colorMat, crect, cv::Scalar( 255, 0, 0 ), 2, 1 );
+                cv::rectangle(colorMat, crect, COL_TEXT_COLOR, 2, 1 );
                 cv::rectangle(depthMat, drect, cv::Scalar( 65535, 65535, 65535 ), 2, 1 );
 
                 std::string prnt = "Confidence: ";
                 prnt += std::to_string(confCPU[n*2]);
-                cv::putText(colorMat, prnt, cv::Point(bb[0],bb[1]-10), cv::FONT_HERSHEY_SIMPLEX, 0.75, cv::Scalar(50,170,50),2);
+                cv::putText(colorMat, prnt, cv::Point(bb[0],bb[1]+10), cv::FONT_HERSHEY_SIMPLEX, 0.75, COL_TEXT_COLOR ,2);
 
 				if( nc != lastClass || n == (numBoundingBoxes - 1) )
 				{
@@ -350,7 +352,7 @@ int main(int argc, char * argv[]) try
 
 				// Get 3d centroid of person
 				cv::Point3d position = getCentroid(depthMat, depth, drect);
-                cv::putText(colorMat, std::to_string(position.z), cv::Point(bb[0],bb[1]-50), cv::FONT_HERSHEY_SIMPLEX, 0.75, cv::Scalar(50,170,50),2);
+                cv::putText(colorMat, std::string("Distance: ") + std::to_string(position.z), cv::Point(bb[0],bb[1]+30), cv::FONT_HERSHEY_SIMPLEX, 0.75, COL_TEXT_COLOR,2);
 
 
 				// Add it to the global list

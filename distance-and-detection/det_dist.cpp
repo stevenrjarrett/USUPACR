@@ -225,6 +225,29 @@ int main(int argc, char * argv[]) try
         char* depthData = (char*)depth.get_data();
         char* colorData = (char*)color.get_data();
 
+        std::fstream outFile("depthImage.csv", std::fstream::out | std::fstream::trunc);
+//        int imgWidth  = camera->GetWidth();
+//        int imgHeight = camera->GetHeight();
+//        int numPixels = imgWidth*imgHeight;
+//        float *fltPtr = (float*)colorData_flt_CPU;
+        for(int i=0; i<IR_width; i++)
+            outFile << (std::string)"\"" + std::to_string(i) + (std::string)"\",";
+        outFile << "\n";
+//        std::cout << "Starting copy" << std::endl;
+        for(int i=0; i<COL_numPixels; i++)
+        {
+            if(i%IR_width == 0)
+                outFile << "\n";
+            int index = i;
+//            std::cout << "i     = " << i << " index = " << index << std::endl;
+            outFile << depthData[index+0] << ",";
+//            std::cout << "i     = " << i << " index = " << index << std::endl;
+        }
+        outFile.close();
+        std::cout << "Copied image successfully" << std::endl;
+//        cv::Mat fltImg(rgbimg.size(), CV_32FC4, colorData_flt);
+        usleep(500000);
+
         // create opencv Mat's
         cv::Mat depthMat(cv::Size(IR_width, IR_height), CV_16UC1, depthData, cv::Mat::AUTO_STEP);
 
@@ -309,38 +332,6 @@ int main(int argc, char * argv[]) try
             colorData_flt_CPU[rgba_ind+2] = (float)colorData[rgb_ind+2];
             colorData_flt_CPU[rgba_ind+3] = 255.0;
         }
-//        cv::Mat rgbaMat(cv::Size(COL_width, COL_height), CV_32FC4, colorData_flt_CPU, cv::Mat::AUTO_STEP);
-
-//        std::fstream outFile("outputImage.csv", std::fstream::out | std::fstream::trunc);
-////        int imgWidth  = camera->GetWidth();
-////        int imgHeight = camera->GetHeight();
-////        int numPixels = imgWidth*imgHeight;
-////        float *fltPtr = (float*)colorData_flt_CPU;
-//        for(int i=0; i<rgba_width; i++)
-//            outFile << (std::string)"\"R " + std::to_string(i) + (std::string)"\",\"G\",\"B\",\"A\",";
-//        outFile << "\n";
-////        std::cout << "Starting copy" << std::endl;
-//        for(int i=0; i<COL_numPixels; i++)
-//        {
-//            if(i%rgba_width == 0)
-//                outFile << "\n";
-//            int index = i*4;
-////            std::cout << "i     = " << i << " index = " << index << std::endl;
-//            outFile << colorData_flt_CPU[index+0] << ","
-//                    << colorData_flt_CPU[index+1] << ","
-//                    << colorData_flt_CPU[index+2] << ","
-//                    << colorData_flt_CPU[index+3] << ",";
-////            std::cout << "i     = " << i << " index = " << index << std::endl;
-//        }
-//        outFile.close();
-//        std::cout << "Copied image successfully" << std::endl;
-//        cv::Mat fltImg(rgbimg.size(), CV_32FC4, colorData_flt);
-
-
-//		void* imgRGBA = NULL;
-//
-//		if( !camera->ConvertRGBA(imgCUDA, &imgRGBA) )
-//			printf("detectnet-camera:  failed to convert from NV12 to RGBA\n");
 
 		// classify image with detectNet
 		int numBoundingBoxes = maxBoxes;
@@ -358,24 +349,28 @@ int main(int argc, char * argv[]) try
 				const int nc = confCPU[n*2+1];
 				float* bb = bbCPU + (n * 4);
 
-				printf("detected obj %i  class #%u (%s)  confidence=%f\n", n, nc, net->GetClassDesc(nc), confCPU[n*2]);
-				printf("bounding box %i  (%f, %f)  (%f, %f)  w=%f  h=%f\n", n, bb[0], bb[1], bb[2], bb[3], bb[2] - bb[0], bb[3] - bb[1]);
+                // Collect the bounding box and create the bounding box for the depth camera
+
+//				printf("detected obj %i  class #%u (%s)  confidence=%f\n", n, nc, net->GetClassDesc(nc), confCPU[n*2]);
+//				printf("bounding box %i  (%f, %f)  (%f, %f)  w=%f  h=%f\n", n, bb[0], bb[1], bb[2], bb[3], bb[2] - bb[0], bb[3] - bb[1]);
                 cv::Rect2d crect(bb[0],bb[1], bb[2]-bb[0], bb[3]-bb[1]);
                 cv::Rect2d drect = cvt_bb(crect, CVT_COLOR_TO_DEPTH);
 
-                printf("bw box       %i  (%f, %f)  w=%f  h=%f\n", n, drect.x, drect.y, drect.width, drect.height);
+//                printf("bw box       %i  (%f, %f)  w=%f  h=%f\n", n, drect.x, drect.y, drect.width, drect.height);
                 cv::rectangle(colorMat, crect, cv::Scalar( 255, 0, 0 ), 2, 1 );
                 cv::rectangle(depthMat, drect, cv::Scalar( 1, 1, 1 ), 2, 1 );
 
+                std::string prnt = "Confidence: ";
+                prnt += std::to_string(confCPU[n*2]);
+                cv::putText(colorMat, prnt, cv::Point(bb[0],bb[1]-10), cv::FONT_HERSHEY_SIMPLEX, 0.75, cv::Scalar(50,170,50),2);
+
 				if( nc != lastClass || n == (numBoundingBoxes - 1) )
 				{
+                    // draw boxes in the RGBA image
 //					if( !net->DrawBoxes(colorData_flt_CUDA, colorData_flt_CUDA, rgba_width, rgba_height,
 //						                        bbCUDA + (lastStart * 4), (n - lastStart) + 1, lastClass) )
 //						printf("detectnet-console:  failed to draw boxes\n");
 
-                    std::string prnt = "Confidence: ";
-                    prnt += std::to_string(confCPU[n*2]);
-                    cv::putText(colorMat, prnt, cv::Point(bb[0],bb[1]), cv::FONT_HERSHEY_SIMPLEX, 0.75, cv::Scalar(50,170,50),2);
 
 					lastClass = nc;
 					lastStart = n;
@@ -406,43 +401,6 @@ int main(int argc, char * argv[]) try
 
 
 		// update display
-//        cv::Mat img;
-//        img.LoadFromPixels(rgbimg.cols, rgbimg.rows, camData);
-//        char str[256];
-//        sprintf(str, "TensorRT %i.%i.%i | %s | %04.1f FPS", NV_TENSORRT_MAJOR, NV_TENSORRT_MINOR, NV_TENSORRT_PATCH, precisionTypeToStr(net->GetPrecision()), 0.0);
-//		cv::imshow(str, fltImg);
-//		if( display != NULL )
-//		{
-//			display->UserEvents();
-//			display->BeginRender();
-//
-//			if( texture != NULL )
-//			{
-//				// rescale image pixel intensities for display
-//				CUDA(cudaNormalizeRGBA((float4*)imgRGBA, make_float2(0.0f, 255.0f),
-//								   (float4*)imgRGBA, make_float2(0.0f, 1.0f),
-//		 						   camera->GetWidth(), camera->GetHeight()));
-//
-//				// map from CUDA to openGL using GL interop
-//				void* tex_map = texture->MapCUDA();
-//
-//				if( tex_map != NULL )
-//				{
-//					cudaMemcpy(tex_map, imgRGBA, texture->GetSize(), cudaMemcpyDeviceToDevice);
-//					texture->Unmap();
-//				}
-//
-//				// draw the texture
-//				texture->Render(100,100);
-//			}
-//
-//			display->EndRender();
-//		}
-//	}
-
-
-
-
 
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////

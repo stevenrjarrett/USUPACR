@@ -237,7 +237,7 @@ int main(int argc, char * argv[]) try
         rs2::frame color = data.get_color_frame();
 
         // get data pointers
-        char           *depthData = (char*)depth.get_data();
+        unsigned short *depthData = (unsigned short *)depth.get_data();
         char           *colorData = (char*)color.get_data();
 
 //        std::fstream outFile("depthImage.csv", std::fstream::out | std::fstream::trunc);
@@ -328,7 +328,7 @@ int main(int argc, char * argv[]) try
 
 //                printf("bw box       %i  (%f, %f)  w=%f  h=%f\n", n, drect.x, drect.y, drect.width, drect.height);
                 cv::rectangle(colorMat, crect, cv::Scalar( 255, 0, 0 ), 2, 1 );
-                cv::rectangle(depthMat, drect, cv::Scalar( 255, 255, 255 ), 2, 1 );
+                cv::rectangle(depthMat, drect, cv::Scalar( 65535, 65535, 65535 ), 2, 1 );
 
                 std::string prnt = "Confidence: ";
                 prnt += std::to_string(confCPU[n*2]);
@@ -349,8 +349,8 @@ int main(int argc, char * argv[]) try
 				}
 
 				// Get 3d centroid of person
-//				cv::Point3d position = getCentroid(depthMat, depth, drect);
-//                cv::putText(colorMat, std::to_string(position.z), cv::Point(bb[0],bb[1]-50), cv::FONT_HERSHEY_SIMPLEX, 0.75, cv::Scalar(50,170,50),2);
+				cv::Point3d position = getCentroid(depthMat, depth, drect);
+                cv::putText(colorMat, std::to_string(position.z), cv::Point(bb[0],bb[1]-50), cv::FONT_HERSHEY_SIMPLEX, 0.75, cv::Scalar(50,170,50),2);
 
 
 				// Add it to the global list
@@ -392,11 +392,11 @@ int main(int argc, char * argv[]) try
 //        cv::rectangle(depthMat, cv::Rect2d(115, 5, 50, 50), cv::Scalar(0,0,0), 2, 1 );
 
 
-        cv::Mat dpth;
+//        cv::Mat dpth;
 //        depthMat.convertTo(dpth, CV_32F, 1.0 / 255, 0);
 //        cv::normalize(depthMat, dpth, 0, 255, cv::NORM_MINMAX);
 
-        imshow(depth_window_name, dpth);
+        imshow(depth_window_name, depthMat);
         imshow(color_window_name, colorMat);
 //        usleep(500000);
     }

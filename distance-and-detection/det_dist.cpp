@@ -60,6 +60,28 @@ double distance3d(cv::Point3d pt1, cv::Point3d pt2)
     return sqrt(pow(pt1.x-pt2.x,2) + pow(pt1.y-pt2.y,2) + pow(pt1.z-pt2.z,2));
 }
 
+void bboxFix( const cv::Mat& img, cv::Rect2d& box)
+{
+    if(box.x < 0)
+    {
+        box.width += box.x;
+        box.x = 0;
+    }
+    if(box.y < 0)
+    {
+        box.height += box.y;
+        box.y = 0;
+    }
+    if(box.x+box.width >= img.cols)
+    {
+        box.width = img.cols-1-box.x;
+    }
+    if(box.y+box.height >= img.rows)
+    {
+        box.height = img.rows-1-box.y;
+    }
+}
+
 cv::Point3d getCentroid(const cv::Mat &depthMat, const rs2::depth_frame& dframe, const cv::Rect& drect)
 {
     // get units information
@@ -73,6 +95,7 @@ cv::Point3d getCentroid(const cv::Mat &depthMat, const rs2::depth_frame& dframe,
                          drect.y + drect.height / 3,
                          drect.width  / 3,
                          drect.height / 3);
+    bboxFix(depthMat, innerRect);
     const cv::Mat innerMat = depthMat(drect);
     cv::Scalar tmpScal = cv::mean(innerMat);
     double z = tmpScal[0] * depth_scale;

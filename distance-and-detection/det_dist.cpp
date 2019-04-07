@@ -54,6 +54,7 @@ double y_color_to_depth_conversion_factor = IR_height/COL_height * tan(COL_Ver_F
 #define CVT_DEPTH_TO_COLOR 1
 
 #define COL_TEXT_COLOR cv::Scalar(0, 0, 0)
+#define IR_TEXT_COLOR cv::Scalar( 65535/2, 65535/2, 65535/2 )
 
 double distance3d(cv::Point3d pt1, cv::Point3d pt2)
 {
@@ -82,7 +83,7 @@ void bboxFix( const cv::Mat& img, cv::Rect2d& box)
     }
 }
 
-cv::Point3d getCentroid(const cv::Mat &depthMat, const rs2::depth_frame& dframe, cv::Rect drect)
+cv::Point3d getCentroid(cv::Mat &depthMat, const rs2::depth_frame& dframe, cv::Rect drect)
 {
     // get units information
 //    double units = dframe.get_units();
@@ -96,6 +97,7 @@ cv::Point3d getCentroid(const cv::Mat &depthMat, const rs2::depth_frame& dframe,
                          drect.width  / 3,
                          drect.height / 3);
     bboxFix(depthMat, innerRect);
+    cv::rectangle(depthMat, innerRect, IR_TEXT_COLOR, 2, 1 );
     const cv::Mat innerMat = depthMat(innerRect);
     cv::Scalar tmpScal = cv::mean(innerMat);
     double z = tmpScal[0] * depth_scale;
@@ -387,7 +389,7 @@ int main(int argc, char * argv[]) try
 
 //                printf("bw box       %i  (%f, %f)  w=%f  h=%f\n", n, drect.x, drect.y, drect.width, drect.height);
                 cv::rectangle(colorMat, crect, COL_TEXT_COLOR, 2, 1 );
-                cv::rectangle(depthMat, drect, cv::Scalar( 65535/2, 65535/2, 65535/2 ), 2, 1 );
+                cv::rectangle(depthMat, drect, IR_TEXT_COLOR, 2, 1 );
 
                 std::string prnt = "Confidence: ";
                 prnt += std::to_string(confCPU[n*2]);

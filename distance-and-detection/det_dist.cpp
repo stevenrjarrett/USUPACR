@@ -237,7 +237,7 @@ int main(int argc, char * argv[]) try
         rs2::frame color = data.get_color_frame();
 
         // get data pointers
-        unsigned short *depthData = (unsigned short *)depth.get_data();
+        char           *depthData = (char*)depth.get_data();
         char           *colorData = (char*)color.get_data();
 
 //        std::fstream outFile("depthImage.csv", std::fstream::out | std::fstream::trunc);
@@ -264,7 +264,7 @@ int main(int argc, char * argv[]) try
 //        usleep(500000);
 
         // create opencv Mat's
-        cv::Mat depthMat(cv::Size(IR_width, IR_height), CV_16UC1, depth.get_data(), cv::Mat::AUTO_STEP);
+        cv::Mat depthMat(cv::Size(IR_width, IR_height), CV_16UC1, depthData, cv::Mat::AUTO_STEP);
 
         cv::Mat color_image_raw(cv::Size(COL_width, COL_height), CV_8UC3, colorData, cv::Mat::AUTO_STEP);
         cv::Mat colorMat;

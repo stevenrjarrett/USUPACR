@@ -20,6 +20,34 @@
 
 // Signal handler, makes it so that we don't interrupt tensor-flow at a bad time?
 
+double distance3d(cv::point3d pt1, cv::point3d pt2)
+{
+    return sqrt(pow(pt1.x-pt2.x,2) + pow(pt1.y-pt2.y,2) + pow(pt1.z-pt2.z,2))
+}
+
+cv::Point3d getCentroid(const cv::Mat &depthMat, rs2::depth_frame& dframe, const cv::Rect& drect)
+{
+    // get units information
+    double units = dframe.get_units();
+    // get center coordinates in the frame
+    double frame_x_index = drect.x + drect.width/2;
+    double frame_y_index = drect.y + drect.height/2;
+    double z = dframe.get_distance(frame_x_index, frame_y_index);
+
+    // calculate x angle
+    double frame_x = frame_x_index - (depthMat.cols/2);
+    double xangle = atan(frame_x/((double)depthMat.cols/2)*tan(IR_Hor_Field_of_View/2));//x/((double)lframe.cols/2) * 30.0;
+    // calculate y angle
+    double frame_y = frame_y_index - (depthMat.rows/2);
+    double yangle = atan(frame_y/((double)depthMat.rows/2)*tan(IR_Ver_Field_of_View/2));//x/((double)lframe.cols/2) * 30.0;
+
+    double x = dist * tan(xangle);
+    double y = dist * tan(yangle);
+
+
+    return cv::Point3d(x, y, z);
+}
+
 bool exit_signal_recieved = false;
 
 void sig_handler(int signo)
@@ -225,28 +253,28 @@ int main(int argc, char * argv[]) try
         char* depthData = (char*)depth.get_data();
         char* colorData = (char*)color.get_data();
 
-        std::fstream outFile("depthImage.csv", std::fstream::out | std::fstream::trunc);
-//        int imgWidth  = camera->GetWidth();
-//        int imgHeight = camera->GetHeight();
-//        int numPixels = imgWidth*imgHeight;
-//        float *fltPtr = (float*)colorData_flt_CPU;
-        for(int i=0; i<IR_width; i++)
-            outFile << (std::string)"\"" + std::to_string(i) + (std::string)"\",";
-        outFile << "\n";
-//        std::cout << "Starting copy" << std::endl;
-        for(int i=0; i<COL_numPixels; i++)
-        {
-            if(i%((int)IR_width) == 0)
-                outFile << "\n";
-            int index = i;
-//            std::cout << "i     = " << i << " index = " << index << std::endl;
-            outFile << (int)(depthData[index+0]) << ",";
-//            std::cout << "i     = " << i << " index = " << index << std::endl;
-        }
-        outFile.close();
-        std::cout << "Copied image successfully" << std::endl;
-//        cv::Mat fltImg(rgbimg.size(), CV_32FC4, colorData_flt);
-        usleep(500000);
+//        std::fstream outFile("depthImage.csv", std::fstream::out | std::fstream::trunc);
+////        int imgWidth  = camera->GetWidth();
+////        int imgHeight = camera->GetHeight();
+////        int numPixels = imgWidth*imgHeight;
+////        float *fltPtr = (float*)colorData_flt_CPU;
+//        for(int i=0; i<IR_width; i++)
+//            outFile << (std::string)"\"" + std::to_string(i) + (std::string)"\",";
+//        outFile << "\n";
+////        std::cout << "Starting copy" << std::endl;
+//        for(int i=0; i<COL_numPixels; i++)
+//        {
+//            if(i%((int)IR_width) == 0)
+//                outFile << "\n";
+//            int index = i;
+////            std::cout << "i     = " << i << " index = " << index << std::endl;
+//            outFile << (int)(depthData[index+0]) << ",";
+////            std::cout << "i     = " << i << " index = " << index << std::endl;
+//        }
+//        outFile.close();
+//        std::cout << "Copied image successfully" << std::endl;
+////        cv::Mat fltImg(rgbimg.size(), CV_32FC4, colorData_flt);
+//        usleep(500000);
 
         // create opencv Mat's
         cv::Mat depthMat(cv::Size(IR_width, IR_height), CV_16UC1, depthData, cv::Mat::AUTO_STEP);
@@ -274,51 +302,6 @@ int main(int argc, char * argv[]) try
 ////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-
-
-//
-//	/*
-//	 * create the camera device
-//	 */
-//    cv::Mat rgbimg;
-//    rgbcam >> rgbimg;
-//    cv::imshow("Original", rgbimg);
-////    cv::waitKey();
-//
-//    // Allocate memory
-//    unsigned long numElem = rgbimg.total()*4;
-//    uchar* camData = new uchar[numElem];
-//    cv::Mat continuousRGBA(rgbimg.size(), CV_8UC4, camData);
-//
-//
-//    if(!rgbcam.isOpened())
-//    {
-//		printf("\ndetectnet-camera:  failed to initialize video device\n");
-//		return 0;
-//    }
-//
-//	printf("\ndetectnet-camera:  successfully initialized video device\n");
-//    std::cout << "Image height: " << rgbcam.get(cv::CAP_PROP_FRAME_HEIGHT) << '\n';
-//    std::cout << "Image width:  " << rgbcam.get(cv::CAP_PROP_FRAME_WIDTH) << std::endl;
-
-
-
-//	while( !exit_signal_recieved )
-//	{
-//		void* imgCPU  = NULL;
-//		void* imgCUDA = NULL;
-
-		// get the latest frame
-//		if( !camera->Capture(&imgCPU, &imgCUDA, 1000) )
-//			printf("\ndetectnet-camera:  failed to capture frame\n");
-
-//        rgbcam >> rgbimg;
-//		if( rgbimg.empty() )
-//			printf("\ndetectnet-camera:  failed to capture frame\n");
-//        cv::imshow("Original", rgbimg);
-//        cv::waitKey();
-
-		// convert from RGB to RGBA and move to graphics memory
 
 //        cv::cvtColor(rgbimg, continuousRGBA, CV_BGR2RGBA, 4);
         int rgba_width  = COL_width;
@@ -358,7 +341,7 @@ int main(int argc, char * argv[]) try
 
 //                printf("bw box       %i  (%f, %f)  w=%f  h=%f\n", n, drect.x, drect.y, drect.width, drect.height);
                 cv::rectangle(colorMat, crect, cv::Scalar( 255, 0, 0 ), 2, 1 );
-                cv::rectangle(depthMat, drect, cv::Scalar( 1, 1, 1 ), 2, 1 );
+                cv::rectangle(depthMat, drect, cv::Scalar( 255, 255, 255 ), 2, 1 );
 
                 std::string prnt = "Confidence: ";
                 prnt += std::to_string(confCPU[n*2]);
@@ -377,6 +360,13 @@ int main(int argc, char * argv[]) try
 
 					CUDA(cudaDeviceSynchronize());
 				}
+
+				// Get 3d centroid of person
+				cv::Point3d position = getCentroid(depthMat, depth, drect);
+                cv::putText(colorMat, std::to_string(position.z), cv::Point(bb[0],bb[1]-50), cv::FONT_HERSHEY_SIMPLEX, 0.75, cv::Scalar(50,170,50),2);
+
+
+				// Add it to the global list
 			}
 
 			/*if( font != NULL )
@@ -410,10 +400,16 @@ int main(int argc, char * argv[]) try
 //        cv::cvtColor(rgbaMat, colorMat, cv::COLOR_RGBA2BGR);
 
         // Update the window with new data
-        cv::rectangle(depthMat, cv::Rect2d(5, 5, 50, 50), cv::Scalar(.9,.9,.9), 2, 1 );
-        cv::rectangle(depthMat, cv::Rect2d(60, 5, 50, 50), cv::Scalar(0.5,0.5,0.5), 2, 1 );
-        cv::rectangle(depthMat, cv::Rect2d(115, 5, 50, 50), cv::Scalar(0,0,0), 2, 1 );
-        imshow(depth_window_name, depthMat);
+//        cv::rectangle(depthMat, cv::Rect2d(5, 5, 50, 50), cv::Scalar(.9,.9,.9), 2, 1 );
+//        cv::rectangle(depthMat, cv::Rect2d(60, 5, 50, 50), cv::Scalar(0.5,0.5,0.5), 2, 1 );
+//        cv::rectangle(depthMat, cv::Rect2d(115, 5, 50, 50), cv::Scalar(0,0,0), 2, 1 );
+
+
+        cv::Mat dpth;
+//        depthMat.convertTo(dpth, CV_32F, 1.0 / 255, 0);
+        cv::normalize(depthMat, dpth, 0, 255, cv::NORM_MINMAX);
+
+        imshow(depth_window_name, dpth);
         imshow(color_window_name, colorMat);
 //        usleep(500000);
     }

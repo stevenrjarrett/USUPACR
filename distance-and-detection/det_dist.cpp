@@ -240,7 +240,7 @@ int main(int argc, char * argv[]) try
                 outFile << "\n";
             int index = i;
 //            std::cout << "i     = " << i << " index = " << index << std::endl;
-            outFile << depthData[index+0] << ",";
+            outFile << (int)(depthData[index+0]) << ",";
 //            std::cout << "i     = " << i << " index = " << index << std::endl;
         }
         outFile.close();

@@ -328,7 +328,7 @@ int main(int argc, char * argv[]) try
 
 //                printf("bw box       %i  (%f, %f)  w=%f  h=%f\n", n, drect.x, drect.y, drect.width, drect.height);
                 cv::rectangle(colorMat, crect, cv::Scalar( 255, 0, 0 ), 2, 1 );
-                cv::rectangle(depthMat, drect, cv::Scalar( 65535, 65535, 65535 ), 2, 1 );
+                cv::rectangle(depthMat, drect, cv::Scalar( 255, 255, 255 ), 2, 1 );
 
                 std::string prnt = "Confidence: ";
                 prnt += std::to_string(confCPU[n*2]);

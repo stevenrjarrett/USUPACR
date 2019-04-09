@@ -43,16 +43,28 @@ bool Manual_Only = false;
 motorValues ConvertToArcade ( int x1 , int y1 );
 
 void sendSerial(int val);
+bool stop_signal_recieved = false;
 
 //# include "XBoxOne.hpp"
 
 
+void sig_handler(int signo)
+{
+	if( signo == SIGINT )
+	{
+		std::cout << "received SIGINT" << std::endl;
+		stop_signal_recieved = true;
+	}
+}
 
 
 
 
 
 
+/////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////  Main  ////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////
 
 int main()
 {
@@ -74,6 +86,9 @@ int main()
         // Communication with Arduino
         std::ofstream motorArduino("/dev/ttyACM0");
 
+        // enable signal catcher
+        if( signal(SIGINT, sig_handler) == SIG_ERR )
+            printf("\ncan't catch SIGINT\n");
 
     // For now, we're only doing manual control.
     Manual_Only = true;
@@ -83,7 +98,7 @@ int main()
 
 
     /// Executive decision making function
-    while(true)
+    while(!stop_signal_recieved)
     {
 //        std::cout << "Beginning of executive loop" << std::endl;
 
@@ -123,6 +138,9 @@ int main()
 
 
 
+/////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////// Functions //////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////
 
 
 motorValues ConvertToArcade ( int x1 , int y1 ) // Converts joystick input to holonomic drive output in the array MTarget[]

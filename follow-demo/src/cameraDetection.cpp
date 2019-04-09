@@ -1,13 +1,5 @@
 #include "cameraDetection.h"
 
-void sig_handler(int signo)
-{
-	if( signo == SIGINT )
-	{
-		std::cout << "received SIGINT" << std::endl;
-		isRunning = false;
-	}
-}
 
 cameraDetection::cameraDetection()
 {
@@ -51,7 +43,6 @@ void cameraDetection::resetCamera()
     // Update pertinant variablesint max_fps = 30;
 
     DEPTH_numPixels = DEPTH_height * DEPTH_width;
-    depth_scale =  sensor.get_depth_scale();
     COL_numPixels = COL_height * COL_width;
 
     x_color_to_depth_conversion_factor = DEPTH_width /COL_width  * tan(COL_Hor_Field_of_View/2)/tan(DEPTH_Hor_Field_of_View/2);
@@ -193,10 +184,6 @@ void cameraDetection::run() try
         cfg.enable_stream(RS2_STREAM_DEPTH   , DEPTH_width, DEPTH_height, RS2_FORMAT_Z16 , max_fps);
 //        cfg.rs435_depth_emitter_enabled = 1;
 
-        // enable signal catcher
-        if( signal(SIGINT, sig_handler) == SIG_ERR )
-            printf("\ncan't catch SIGINT\n");
-
         // Declare RealSense pipeline, encapsulating the actual device and sensors
         rs2::pipeline pipe;
         // Start streaming with default recommended configuration
@@ -240,7 +227,7 @@ void cameraDetection::run() try
         if( !cudaAllocMapped((void**)&colorData_flt_CPU, (void**)&colorData_flt_CUDA, COL_numPixels * sizeof(float4)) )
         {
             std::cout << "detectnet:  failed to alloc image memory\n";
-            return 0;
+            return;
         }
 
         /*
@@ -251,7 +238,7 @@ void cameraDetection::run() try
         if( !net )
         {
             std::cout << "detectnet-camera:   failed to initialize imageNet\n";
-            return 0;
+            return;
         }
 
 
@@ -270,7 +257,7 @@ void cameraDetection::run() try
             !cudaAllocMapped((void**)&confCPU, (void**)&confCUDA, maxBoxes * classes * sizeof(float)) )
         {
             std::cout << "detectnet:  failed to alloc output memory\n";
-            return 0;
+            return;
         }
 
         /*
@@ -441,10 +428,10 @@ void cameraDetection::run() try
             depthMat.convertTo(dpth, CV_8UC1, 2.0 / 255, 0);
     //        cv::normalize(depthMat, dpth, 0, 255, cv::NORM_MINMAX);
 
-            imshow(depth_window_name, dpth);
+            imshow(depthWindowName, dpth);
         }
         if(show_color)
-            imshow(color_window_name, colorMat);
+            imshow(colorWindowName, colorMat);
 //        usleep(500000);
     }
 
@@ -459,10 +446,10 @@ void cameraDetection::run() try
 catch (const rs2::error & e)
 {
     std::cerr << "RealSense error calling " << e.get_failed_function() << "(" << e.get_failed_args() << "):\n    " << e.what() << std::endl;
-    return EXIT_FAILURE;
+    return;
 }
 catch (const std::exception& e)
 {
     std::cerr << e.what() << std::endl;
-    return EXIT_FAILURE;
+    return;
 }

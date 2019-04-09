@@ -1,14 +1,14 @@
-#include "../include/XBoxOne.h"
+#include "XBoxOne.h"
 #include <stdio.h>
 #include <unistd.h>
 #include <thread>
 #include <iostream>
 #include <pthread.h>
-#include "../libenjoy/src/libenjoy.h"
-#include "../libenjoy/src/libenjoy_linux.h"
-
-#include "../libenjoy/src/libenjoy.c"
-#include "../libenjoy/src/libenjoy_linux.c"
+//#include "../libenjoy/src/libenjoy.h"
+//#include "../libenjoy/src/libenjoy_linux.h"
+//
+//#include "../libenjoy/src/libenjoy.c"
+//#include "../libenjoy/src/libenjoy_linux.c"
 
 // This tels msvc to link agains winmm.lib. Pretty nasty though.
 //#pragma comment(lib, "winmm.lib")
@@ -194,6 +194,7 @@ void XBoxOne::setAxis(int id, int val)
         }
         break;
     }
+
 }
 
 void XBoxOne::setBtn(int id, int val)

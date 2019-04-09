@@ -81,8 +81,6 @@ int main()
         // IMU
         // Cameras/autonomous function
         cameraDetection cam;
-        cam.showDepth();
-        cam.start();
         // Communication with Arduino
         std::ofstream motorArduino("/dev/ttyACM0");
 

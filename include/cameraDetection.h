@@ -5,6 +5,7 @@
 #include <librealsense2/rs.hpp> // Include RealSense Cross Platform API
 #include <opencv2/opencv.hpp>   // Include OpenCV API
 #include <string>
+#include "stopwatch.h"
 
 
 //#include <stdio.h>
@@ -107,7 +108,6 @@ class cameraDetection
         /// Output
         std::vector<personFrame> getPeople()
         {
-            wasUpdated = false;
             return lastPeople;
         }
         cv::Mat depthMat;

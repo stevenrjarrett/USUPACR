@@ -3,6 +3,8 @@
 
 CMakeFiles/pacr-follow.dir/pacr-follow.cpp.o: .././include/XBoxOne.h
 CMakeFiles/pacr-follow.dir/pacr-follow.cpp.o: .././include/cameraDetection.h
+CMakeFiles/pacr-follow.dir/pacr-follow.cpp.o: .././include/libenjoy.h
+CMakeFiles/pacr-follow.dir/pacr-follow.cpp.o: .././include/libenjoy_linux.h
 CMakeFiles/pacr-follow.dir/pacr-follow.cpp.o: ../pacr-follow.cpp
 CMakeFiles/pacr-follow.dir/pacr-follow.cpp.o: /usr/local/cuda-9.0/include/builtin_types.h
 CMakeFiles/pacr-follow.dir/pacr-follow.cpp.o: /usr/local/cuda-9.0/include/channel_descriptor.h
@@ -87,7 +89,9 @@ CMakeFiles/pacr-follow.dir/pacr-follow.cpp.o: /usr/local/include/librealsense2/h
 CMakeFiles/pacr-follow.dir/pacr-follow.cpp.o: /usr/local/include/librealsense2/rs.h
 CMakeFiles/pacr-follow.dir/pacr-follow.cpp.o: /usr/local/include/librealsense2/rs.hpp
 
-CMakeFiles/pacr-follow.dir/src/XBoxOne.cpp.o: ../include/XBoxOne.h
+CMakeFiles/pacr-follow.dir/src/XBoxOne.cpp.o: .././include/XBoxOne.h
+CMakeFiles/pacr-follow.dir/src/XBoxOne.cpp.o: .././include/libenjoy.h
+CMakeFiles/pacr-follow.dir/src/XBoxOne.cpp.o: .././include/libenjoy_linux.h
 CMakeFiles/pacr-follow.dir/src/XBoxOne.cpp.o: ../src/XBoxOne.cpp
 
 CMakeFiles/pacr-follow.dir/src/cameraDetection.cpp.o: .././include/cameraDetection.h

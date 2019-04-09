@@ -9,10 +9,10 @@
 .././include/XBoxOne.h
 thread
 -
-../libenjoy/src/libenjoy.h
-.././libenjoy/src/libenjoy.h
-../libenjoy/src/libenjoy_linux.h
-.././libenjoy/src/libenjoy_linux.h
+libenjoy.h
+.././include/libenjoy.h
+libenjoy_linux.h
+.././include/libenjoy_linux.h
 
 .././include/cameraDetection.h
 librealsense2/rs.hpp
@@ -44,13 +44,15 @@ jetson-utils/cudaFont.h
 jetson-inference/detectNet.h
 -
 
-/home/nvidia/Documents/USUPACR/follow-demo/include/XBoxOne.h
-thread
+.././include/libenjoy.h
+stdint.h
 -
-../libenjoy/src/libenjoy.h
-/home/nvidia/Documents/USUPACR/follow-demo/libenjoy/src/libenjoy.h
-../libenjoy/src/libenjoy_linux.h
-/home/nvidia/Documents/USUPACR/follow-demo/libenjoy/src/libenjoy_linux.h
+
+.././include/libenjoy_linux.h
+linux/joystick.h
+-
+stdint.h
+-
 
 /home/nvidia/Documents/USUPACR/follow-demo/pacr-follow.cpp
 iostream
@@ -65,8 +67,8 @@ XBoxOne.h
 /home/nvidia/Documents/USUPACR/follow-demo/XBoxOne.h
 
 /home/nvidia/Documents/USUPACR/follow-demo/src/XBoxOne.cpp
-../include/XBoxOne.h
-/home/nvidia/Documents/USUPACR/follow-demo/include/XBoxOne.h
+XBoxOne.h
+/home/nvidia/Documents/USUPACR/follow-demo/src/XBoxOne.h
 stdio.h
 -
 unistd.h
@@ -77,14 +79,6 @@ iostream
 -
 pthread.h
 -
-../libenjoy/src/libenjoy.h
-/home/nvidia/Documents/USUPACR/follow-demo/libenjoy/src/libenjoy.h
-../libenjoy/src/libenjoy_linux.h
-/home/nvidia/Documents/USUPACR/follow-demo/libenjoy/src/libenjoy_linux.h
-../libenjoy/src/libenjoy.c
-/home/nvidia/Documents/USUPACR/follow-demo/libenjoy/src/libenjoy.c
-../libenjoy/src/libenjoy_linux.c
-/home/nvidia/Documents/USUPACR/follow-demo/libenjoy/src/libenjoy_linux.c
 
 /home/nvidia/Documents/USUPACR/follow-demo/src/cameraDetection.cpp
 cameraDetection.h

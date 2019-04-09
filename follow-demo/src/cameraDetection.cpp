@@ -27,8 +27,8 @@ cameraDetection::cameraDetection()
     isRunning = false;
     show_color = true;
     show_depth = false;
-    runningThread = std::thread();
-    runningThread.join();
+//    runningThread = std::thread();
+//    runningThread.join();
 
 }
 

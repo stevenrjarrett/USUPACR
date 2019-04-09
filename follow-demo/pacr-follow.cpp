@@ -100,7 +100,7 @@ int main()
     {
 //        std::cout << "Beginning of executive loop" << std::endl;
 
-        if(!EStop && controller.isConnected())
+        if(!EStop && controller.isConnected() && controller.isActive())
         {
             //read inputs
             motors = ConvertToArcade(controller.L_x()*255, -controller.L_y()*255);

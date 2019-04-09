@@ -430,9 +430,9 @@ void cameraDetection::run() try
 
 
 				// Add it to the global list
-				lastPeople.push_back(personFrame(position, crect, confidence))
+				lastPeople.push_back(personFrame(position, crect, confidence));
 			}
-            wasUpdated = true;
+            lastTime = watch.abs_time_LongLong();
 		}
 
 

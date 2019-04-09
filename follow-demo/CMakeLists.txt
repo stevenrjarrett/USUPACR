@@ -23,7 +23,7 @@ add_definitions(${QT_DEFINITIONS})
 set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_CXX_STANDARD_REQUIRED TRUE)
 
-include_directories(${realsense2_INCLUDE_DIRS} ${OpenCV_INCLUDE_DIRS} ./include)
+include_directories(${realsense2_INCLUDE_DIRS} ${OpenCV_INCLUDE_DIRS} ../include)
 # include_directories(/usr/include/gstreamer-1.0 /usr/lib/aarch64-linux-gnu/gstreamer-1.0/include /usr/include/glib-2.0 /usr/include/libxml2 /usr/lib/aarch64-linux-gnu/glib-2.0/include/)
 
 # cuda_add_executable(USUPACR ${USUPACR_Sources})

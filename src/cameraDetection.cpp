@@ -32,6 +32,7 @@ cameraDetection::cameraDetection()
 
 cameraDetection::~cameraDetection()
 {
+    stop();
     //dtor
 }
 
@@ -362,7 +363,6 @@ void cameraDetection::run() try
 		// classify image with detectNet
 		int numBoundingBoxes = maxBoxes;
 
-//		if( net->Detect((float*)imgRGBA, camera->GetWidth(), camera->GetHeight(), bbCPU, &numBoundingBoxes, confCPU))
 		if( net->Detect(colorData_flt_CUDA, rgba_width, rgba_height , bbCPU, &numBoundingBoxes, confCPU))
 		{
 //			printf("%i bounding boxes detected\n", numBoundingBoxes);
@@ -370,11 +370,14 @@ void cameraDetection::run() try
 			int lastClass = 0;
 			int lastStart = 0;
 
+			// Clear the last vector of people and re-fill.
+			lastPeople.clear();
+
 			for( int n=0; n < numBoundingBoxes; n++ )
 			{
 				const int nc = confCPU[n*2+1];
 				float* bb = bbCPU + (n * 4);
-
+                float confidence = confCPU[n*2];
                 // Collect the bounding box and create the bounding box for the depth camera
 
 //				printf("detected obj %i  class #%u (%s)  confidence=%f\n", n, nc, net->GetClassDesc(nc), confCPU[n*2]);
@@ -391,7 +394,7 @@ void cameraDetection::run() try
                 if(show_color)
                 {
                     std::string prnt = "Confidence: ";
-                    prnt += std::to_string(confCPU[n*2]);
+                    prnt += std::to_string(confidence);
                     cv::putText(colorMat, prnt, cv::Point(bb[0],bb[1]+20), cv::FONT_HERSHEY_SIMPLEX, 0.75, COL_TEXT_COLOR ,2);
                 }
 
@@ -420,8 +423,9 @@ void cameraDetection::run() try
 
 
 				// Add it to the global list
+				lastPeople.push_back(personFrame(position, crect, confidence))
 			}
-
+            wasUpdated = true;
 		}
 
 

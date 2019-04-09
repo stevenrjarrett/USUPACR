@@ -29,6 +29,27 @@
 #define COL_TEXT_COLOR cv::Scalar(0, 0, 0)
 #define DEPTH_TEXT_COLOR cv::Scalar( 65535/2, 65535/2, 65535/2 )
 
+struct personFrame
+{
+    cv::Point3d centroid;
+    cv::Rect2d bb;
+    float confidence;
+//    cv::Mat frame;  // color frame
+//    cv::Mat dFrame; // depth frame
+    personFrame(cv::Point3d _centroid, cv::Rect2d _bb, float _confidence)
+    : bb(_bb),
+      confidence(_confidence),
+      centroid(_centroid)
+    {}
+
+    personFrame& operator=(const personFrame& rhs)
+    {
+        bb = rhs.bb;
+        confidence = rhs.confidence;
+        centroid = rhs.centroid;
+        return *this;
+    }
+};
 
 
 class cameraDetection
@@ -82,7 +103,12 @@ class cameraDetection
         double Gety_color_to_depth_conversion_factor() { return y_color_to_depth_conversion_factor; }
 //        void Sety_color_to_depth_conversion_factor(double val) { y_color_to_depth_conversion_factor = val; }
 
-
+        /// Output
+        std::vector<personFrame> getPeople()
+        {
+            wasUpdated = false;
+            return lastPeople;
+        }
     protected:
 
     private:
@@ -116,6 +142,10 @@ class cameraDetection
         ///
         std::thread runningThread;
         void run();
+
+        /// Output
+        std::vector<personFrame> lastPeople;
+        bool wasUpdated;
 };
 
 #endif // CAMERADETECTION_H

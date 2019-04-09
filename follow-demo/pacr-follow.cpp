@@ -96,12 +96,20 @@ int main()
 
 
     /// Executive decision making function
+    bool wasRunning = false;
+
     while(!stop_signal_recieved)
     {
 //        std::cout << "Beginning of executive loop" << std::endl;
 
         if(!EStop && controller.isConnected() && controller.isActive())
         {
+            // reset 1st stop signal
+            if(!wasRunning)
+            {
+                std::cout << "Running" << std::endl;
+                wasRunning = true;
+            }
             //read inputs
             motors = ConvertToArcade(controller.L_x()*255, -controller.L_y()*255);
             //decide what to do and set variables
@@ -112,20 +120,28 @@ int main()
         {
             motors.left = 0;
             motors.right = 0;
-            if(!controller.isActive())
-                std::cout << "Controller inactive" << std::endl;
+            if(wasRunning)
+            {
+                wasRunning = false;
+                if(EStop)
+                    std::cout << "E-stop engaged" << std::endl;
+                if(!controller.isConnected())
+                    std::cout << "Controller disconnected, stopping motors" << std::endl;
+                if(!controller.isActive())
+                    std::cout << "Controller inactive, stopping motors" << std::endl;
+            }
         }
 
         motorArduino << motors.left << std::endl;
         motorArduino << motors.right << std::endl;
 //            controller.printALL();
-        std::cout << "Values sent: " << motors.left  << '\t' << motors.right << std::endl;
+//        std::cout << "Values sent: " << motors.left  << '\t' << motors.right << std::endl;
 
         //wait for a little bit
         usleep(EXECUTIVE_WAIT_TIME);
     }
-    cam.stop();
-    controller.stop();
+//    cam.stop();
+//    controller.stop();
     return 0;
 }
 

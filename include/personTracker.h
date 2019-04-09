@@ -5,7 +5,8 @@
 #include "stopwatch.h"
 #include <opencv2/opencv.hpp>   // Include OpenCV API
 #include <thread>
-#include <
+#include <string>
+#include <vector>
 
 
 double distance3d(cv::Point3d pt1, cv::Point3d pt2) { return sqrt(pow(pt1.x-pt2.x,2) + pow(pt1.y-pt2.y,2) + pow(pt1.z-pt2.z,2)); }
@@ -27,7 +28,7 @@ struct trackedPerson
         int    bestInd = -1;
         for(unsigned int i=0; i<personList.size(); i++)
         {
-            dist = distance_xz(last, personList[i]);
+            dist = distance_xz(last.centroid, personList[i].centroid);
             if(dist < tolerance && dist < bestDist)
             {
                 bestDist = dist;
@@ -64,7 +65,7 @@ class personTracker
         /// Getters and Setters
         bool isRunning() { return running; }
         void setTolerance(double tol);
-        double getTolerance(){if(people.size() > 0) return people[0].tolerance; else return 1.0;}
+        double getTolerance(){ return tolerance;}
         cv::Point3d getCentroid(){ return centroid; }
 
     protected:
@@ -86,7 +87,7 @@ class personTracker
         std::thread runningThread;
 
         /// people database
-        std::vector<personFrame> people;
+        std::vector<trackedPerson> people;
         personFrame default_person;
         double tolerance;
         cv::Point3d centroid;

@@ -1,6 +1,6 @@
 #include "personTracker.h"
 
-personTracker(cv::Point3d defaultLocation, double _tolerance = 1.0)//, double _initial_tolerance = 1.0)
+personTracker::personTracker(cv::Point3d defaultLocation, double _tolerance = 1.0)//, double _initial_tolerance = 1.0)
 {
     show_color = false;
     show_depth = false;
@@ -33,7 +33,7 @@ void personTracker::run()
     while(running)
     {
         // wait for input
-        while(camera.lastUpdated() == lastTime)
+        while(camera.getLastTime() == lastTime)
             usleep(1000);
         lastTime = camera.getLastTime();
 
@@ -62,7 +62,7 @@ void personTracker::run()
     camera.stop();
 }
 
-void setTolerance(double tol)
+void personTracker::setTolerance(double tol)
 {
     tolerance = tol;
     for(unsigned int i=0; i<people.size(); i++)

@@ -2,8 +2,8 @@
 #define XBOXONE_H
 
 #include <thread>
-#include "../libenjoy/src/libenjoy.h"
-#include "../libenjoy/src/libenjoy_linux.h"
+#include "libenjoy.h"
+#include "libenjoy_linux.h"
 
 #define XJOY_MAX 32768
 

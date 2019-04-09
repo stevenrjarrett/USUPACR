@@ -37,7 +37,7 @@ struct personFrame
     float confidence;
 //    cv::Mat frame;  // color frame
 //    cv::Mat dFrame; // depth frame
-    personFrame(cv::Point3d _centroid, cv::Rect2d _bb, float _confidence)
+    personFrame(cv::Point3d _centroid = cv::Point3d(), cv::Rect2d _bb = cv::Rect2d(), float _confidence = 1.0)
     : bb(_bb),
       confidence(_confidence),
       centroid(_centroid)

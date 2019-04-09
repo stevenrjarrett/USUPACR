@@ -88,7 +88,7 @@ class personTracker
 
         /// people database
         std::vector<trackedPerson> people;
-        personFrame default_person;
+        trackedPerson default_person;
         double tolerance;
         cv::Point3d centroid;
 };

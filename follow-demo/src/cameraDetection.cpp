@@ -1,5 +1,6 @@
 #include "cameraDetection.h"
 
+void emptyFunc(){}
 
 cameraDetection::cameraDetection()
 {
@@ -26,6 +27,7 @@ cameraDetection::cameraDetection()
     isRunning = false;
     show_color = true;
     show_depth = false;
+    runningThread = std::Thread();
 
 }
 

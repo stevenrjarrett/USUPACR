@@ -74,7 +74,7 @@ void XBoxOne::run()
     info = libenjoy_get_info_list(ctx);
 
     //Wait until you have a connection
-    while(info->count == 0)
+    while(info->count == 0 && isRunning)
     {
         std::cout << "Waiting for connection:" << std::endl;
         usleep(1000000);

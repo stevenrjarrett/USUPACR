@@ -2,9 +2,10 @@
 
 personTracker::personTracker(cv::Point3d defaultLocation, double _tolerance)//, double _initial_tolerance = 1.0)
 {
-    show_color = false;
+    show_color = true;
     show_depth = false;
     lastTime = camera.getLastTime();
+    init_wait_time = 3.0;
     default_person = trackedPerson(personFrame(defaultLocation, cv::Rect2d(), 1.0), _tolerance);
 //    tolerance = _tolerance;
 
@@ -29,6 +30,10 @@ void personTracker::run()
     // initialize
     camera.start();
     people.push_back(default_person);
+
+    // wait a few seconds for the person to get in position
+    usleep(init_wait_time*1000000);
+
     while(running)
     {
         // wait for input
@@ -49,6 +54,7 @@ void personTracker::run()
 
         if(show_color)
         {
+            cv::rectangle(camera.colorMat, people[0].last.bb, COL_TEXT_COLOR, 5);
             cv::imshow(colorWindowName, camera.colorMat);
         }
         if(show_depth)

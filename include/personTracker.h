@@ -17,7 +17,7 @@ struct trackedPerson
     personFrame last;
     double tolerance = 1.0;
 
-    trackedPerson(personFrame _last=personFrame(), double _tolerance = 1.0)
+    trackedPerson(personFrame _last=personFrame(cv::Point3d(0, 0, 5)), double _tolerance = 1.0)
       : last(_last),
         tolerance(_tolerance)
     {
@@ -57,7 +57,7 @@ struct trackedPerson
 class personTracker
 {
     public:
-        personTracker(cv::Point3d defaultLocation, double _tolerance = 1.0);
+        personTracker(cv::Point3d defaultLocation, double _tolerance = 0.5);
         ~personTracker();
 
         /// User control functions
@@ -65,6 +65,7 @@ class personTracker
         void stop();
         void show(){ camera.show(); }
         void hide(){ camera.hide(); }
+        double init_wait_time; // in seconds
 
         /// Utilities
 

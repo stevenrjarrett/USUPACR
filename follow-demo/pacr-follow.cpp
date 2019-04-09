@@ -33,6 +33,7 @@ double lSpeed = 0;
 double rSpeed = 0;
 bool EStop = false;
 bool Manual_Only = false;
+bool autonomous_mode = false;
 
 
 /////////////////////////////////////////////////////////////////////////////////////////
@@ -95,14 +96,15 @@ int main()
 
 
 
+
     /// Executive decision making function
     bool wasRunning = false;
 
     while(!stop_signal_recieved)
     {
 //        std::cout << "Beginning of executive loop" << std::endl;
-
-        if(!EStop && controller.isConnected() && controller.isActive())
+        if(controller.wp_)
+        if(!EStop)
         {
             // reset 1st stop signal
             if(!wasRunning)
@@ -110,11 +112,20 @@ int main()
                 std::cout << "Running" << std::endl;
                 wasRunning = true;
             }
-            //read inputs
-            motors = ConvertToArcade(controller.L_x()*255, -controller.L_y()*255);
-            //decide what to do and set variables
-            if(controller.lBumper())
-                break;
+            if(autonomous_mode)
+            {
+
+            }
+            else
+            {
+                if(controller.isConnected())
+                    if()
+                    //read inputs
+                    //decide what to do and set variables
+                    motors = ConvertToArcade(controller.L_x()*255, -controller.L_y()*255);
+                    if(controller.lBumper())
+                        break;
+            }
         }
         else
         {

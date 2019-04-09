@@ -42,6 +42,11 @@ struct personFrame
       confidence(_confidence),
       centroid(_centroid)
     {}
+    personFrame(personFrame person)
+    : bb(person.bb),
+      confidence(person.confidence),
+      centroid(person.centroid)
+    {}
 
     personFrame& operator=(const personFrame& rhs)
     {

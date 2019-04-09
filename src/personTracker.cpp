@@ -5,8 +5,7 @@ personTracker::personTracker(cv::Point3d defaultLocation, double _tolerance)//, 
     show_color = false;
     show_depth = false;
     lastTime = camera.getLastTime();
-    default_person = trackedPerson(defaultLocation, cv::Rect2d(), 1.0);
-    default_person.tolerance = _tolerance;
+    default_person = trackedPerson(personFrame(defaultLocation, cv::Rect2d(), 1.0), _tolerance);
 //    tolerance = _tolerance;
 
     running = false;

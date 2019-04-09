@@ -4,6 +4,7 @@
 #include <thread>
 #include "libenjoy.h"
 #include "libenjoy_linux.h"
+#include "stopwatch.h"
 
 #define XJOY_MAX 32768
 
@@ -17,7 +18,11 @@ public:
         // control functions
         void start();
         void stop();
+
+        // Class information accessors
         bool isConnected();
+        bool isRunning(){ return running; }
+        bool isActive(){ return active; }
 
         // Print / debug functions
         void printALL();
@@ -44,14 +49,25 @@ public:
 protected:
 
 private:
+    /// Activity Checker
+    bool active;
+    std::thread activityThread;
+    stopwatch activityStopwatch;
+    void activityChecker();
+
+    /// Run function and utilities
+    bool running,
+         connected;
     void run();
     void setBtn(int id, int val);
     void setAxis(int id, int val);
-    bool isRunning,
-         connected;
     std::thread pollingThread;
+
+    /// libenjoy
     libenjoy_context *ctx; // initialize the library
     libenjoy_joy_info_list *info;
+
+    /// Button Values
     bool btnUP,
          btnDOWN,
          btnLEFT,

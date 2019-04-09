@@ -12,10 +12,11 @@
 
 // This tels msvc to link agains winmm.lib. Pretty nasty though.
 //#pragma comment(lib, "winmm.lib")
+#define ACTIVITY_TIMEOUT 2.0 // seconds
 
 XBoxOne::XBoxOne()
 {
-    isRunning = true;
+    running = true;
     ctx = libenjoy_init(); // initialize the library
     connected = false;
     pollingThread = std::thread(&XBoxOne::run, this);
@@ -23,16 +24,32 @@ XBoxOne::XBoxOne()
 
 XBoxOne::~XBoxOne()
 {
+    stop();
     // Frees memory allocated by that joystick list. Do not forget it!
     libenjoy_free_info_list(info);//#include
 }
 
+void XBoxOne::activityChecker()
+{
+    active = false;
+    while(running)
+    {
+        if(activityStopwatch.seconds() < ACTIVITY_TIMEOUT)
+            active = true;
+        else
+            active = false;
+        usleep(10000);
+    }
+    active = false;
+}
+
 void XBoxOne::start()
 {
-    if(!isRunning && pollingThread.joinable())
+    if(!running && pollingThread.joinable())
     {
-        isRunning = true;
+        running = true;
         pollingThread = std::thread(&XBoxOne::run, this);
+        activityThread = std::thread(&XBoxOne::activityChecker, this);
     }
     else
         std::cout << "Attempted to start xbox controller, but it's already running.\n";
@@ -40,9 +57,10 @@ void XBoxOne::start()
 
 void XBoxOne::stop()
 {
-    isRunning = false;
+    running = false;
     std::cout << "Stopping controller" << std::endl;
     pollingThread.join();
+    activityThread.join();
     std::cout << "Controller stopped" << std::endl;
 }
 
@@ -75,7 +93,7 @@ void XBoxOne::run()
     info = libenjoy_get_info_list(ctx);
 
     //Wait until you have a connection
-    while(info->count == 0 && isRunning)
+    while(info->count == 0 && running)
     {
         std::cout << "Waiting for connection:" << std::endl;
         usleep(1000000);
@@ -95,8 +113,8 @@ void XBoxOne::run()
 
         printf("Opened Joystick!\n");
         printf("Axes: %d btns: %d\n", libenjoy_get_axes_num(joy),libenjoy_get_buttons_num(joy));
-//        std::cout << "Am I running: " << isRunning << std::endl;
-        while(isRunning)
+//        std::cout << "Am I running: " << running << std::endl;
+        while(running)
         {
             // Value data are not stored in library. if you want to use
             // them, you have to store them
@@ -142,6 +160,7 @@ void XBoxOne::run()
 
 void XBoxOne::setAxis(int id, int val)
 {
+    activityStopwatch.reset();
     switch(id)
     {
     case 0:
@@ -200,6 +219,7 @@ void XBoxOne::setAxis(int id, int val)
 
 void XBoxOne::setBtn(int id, int val)
 {
+    activityStopwatch.reset();
     switch(id)
     {
     case 0: // A

@@ -1,233 +1,146 @@
-# rs-measure Sample
+# libenjoy
+[![Build Status](https://travis-ci.org/Tasssadar/libenjoy.png?branch=master)](https://travis-ci.org/Tasssadar/libenjoy)
 
-## Overview
+Lighweight (I mean simple) joystick library for Linux and Windows. It is desinged
+for use in [Lorris](https://github.com/Tasssadar/Lorris), so it is
+the easiest to use with Qt - just  `include(libenjoy.pri)` in your .pro file.
+It can be however used with any C/C++ app, just `#include "libenjoy.h"` and make
+sure that `libenjoy.c` and `libenjoy_linux.c`/`libenjoy_win32.c` are compiled.
 
-This tutorial shows simple method for measuring real-world distances using depth data. 
-> **Note:** Measuring dimensions of real-world objects is one of the obvious applications of a depth camera. This sample is not indented to be a proper measurement tool, but rather to showcase critical concepts.
-> With better algorithms measurement results can be improved considerably.
+Oh, yeah, and on Windows, you have to link with winmm.lib!
 
-In this tutorial you will learn how to:
+####Highlights
+* Small. All files combined (both Linux and Windows) have about 1000 lines.
+* Almost no additional dependencies.
+  * On Linux, it is nothing other than GCC and kernel 2.2+
+  * winmm.lib on Windows - nothing special
+* Remembers joysticks. Joystick ID is unique, and libenjoy can automatically
+  reconnect re-plugged joysticks. This works flawlessly on Linux, Windows
+  on the other hand does not like it very much. Be sure to re-plug joysticks
+  to the same USB port when using multiple joysticks at once.
+* __Thread-safety note__: all functions (for one context) should be called
+  from the same thread. The only exception is `libenjoy_poll`, which is made
+  thread safe, so that you can make another thread to poll joystick events.
 
-* Spatially align color stream to depth (as opposed to depth-to-color alignment in [rs-align](../align))
-* Leverage post-processing to handle missing or noisy depth data
-* Convert between 2D pixels and points in 3D space
-* Taking advantage of multiple cores to parallelize data flow
-* Overlaying color on top of depth using OpenGL
+###WARNING!
+The fact that **libenjoy** can handle re-plugged joystick means it
+**cannot handle two or more exactly same joysticks at once**. It will pick
+the one which was plugged-in first and ignore the other ones. This is because
+without libusb, I can't get really unique device id, so there is no way for me
+to identify more than one joystick of same type. But the situation "I just
+wanna to fix the joystick's cable without restarting the app" is more frequent
+than "Hey, let's buy twelve exactly same joysticks!", at least for me - that is
+why I went on with this solution.
 
+### Usage:
+```C
+#include <stdio.h>
+#ifdef __linux
+  #include <unistd.h>
+#else
+  #include <windows.h>
+#endif
 
-## Expected Output
-![expected output](https://raw.githubusercontent.com/wiki/dorodnic/librealsense/expected.png)
+#include "libenjoy.h"
 
-This demo lets the user measure distance between two points in the physical world.
+// This tels msvc to link agains winmm.lib. Pretty nasty though.
+#pragma comment(lib, "winmm.lib")
 
-## Code Overview 
-
-### Depth Processing Pipeline
-
-We start this example by defining all the processing blocks we are going to use:
-
-```cpp
-// Colorizer is used to visualize depth data
-rs2::colorizer color_map;
-// Use black to white color map
-color_map.set_option(RS2_OPTION_COLOR_SCHEME, 2.f);
-// Decimation filter reduces the amount of data (while preserving best samples)
-rs2::decimation_filter dec;
-// If the demo is too slow, make sure you run in Release (-DCMAKE_BUILD_TYPE=Release)
-// but you can also increase the following parameter to decimate depth more (reducing quality)
-dec.set_option(RS2_OPTION_FILTER_MAGNITUDE, 2);
-// Define transformations from and to Disparity domain
-rs2::disparity_transform depth2disparity;
-rs2::disparity_transform disparity2depth(false);
-// Define spatial filter (edge-preserving)
-rs2::spatial_filter spat;
-// Enable hole-filling
-// Hole filling is an aggressive heuristic and it gets the depth wrong many times
-// However, this demo is not built to handle holes 
-// (the shortest-path will always prefer to "cut" through the holes since they have zero 3D distance)
-spat.set_option(RS2_OPTION_HOLES_FILL, 5); // 5 = fill all the zero pixels
-// Define temporal filter
-rs2::temporal_filter temp;
-// Spatially align all streams to depth viewport
-// We do this because:
-//   a. Usually depth has wider FOV, and we only really need depth for this demo
-//   b. We don't want to introduce new holes
-rs2::align align_to(RS2_STREAM_DEPTH);
-```
-Next, we configure camera pipeline for depth + color streaming:
-```cpp
-// Declare RealSense pipeline, encapsulating the actual device and sensors
-rs2::pipeline pipe;
-
-rs2::config cfg;
-cfg.enable_stream(RS2_STREAM_DEPTH); // Enable default depth
-// For the color stream, set format to RGBA
-// To allow blending of the color frame on top of the depth frame
-cfg.enable_stream(RS2_STREAM_COLOR, RS2_FORMAT_RGBA8);
-auto profile = pipe.start(cfg);
-```
-
-Our goal is to generate depth without any holes, since these are going to pose an immediate problem to our algorithm.
-The best way to reduce the number of missing pixels is by letting the hardware do it.
-The D400 cameras have a **High Density** preset we can take advantage of.
-```cpp
-auto sensor = profile.get_device().first<rs2::depth_sensor>();
-    
-// Set the device to High Accuracy preset
-auto sensor = profile.get_device().first<rs2::depth_sensor>();
-sensor.set_option(RS2_OPTION_VISUAL_PRESET, RS2_RS400_VISUAL_PRESET_HIGH_ACCURACY);
-```
-
-Given a frame-set, we are going to apply all the processing blocks in order. 
-First we apply the `align` processing block to align color frame to depth viewport:
-```cpp
-// First make the frames spatially aligned
-data = align_to.process(data);
-```
-
-Next, we invoke the depth post-processing flow:
-```cpp
-rs2::frame depth = data.get_depth_frame();
-// Decimation will reduce the resultion of the depth image,
-// closing small holes and speeding-up the algorithm
-depth = dec.process(depth); 
-// To make sure far-away objects are filtered proportionally
-// we try to switch to disparity domain
-depth = depth2disparity.process(depth);
-// Apply spatial filtering
-depth = spat.process(depth);
-// Apply temporal filtering
-depth = temp.process(depth);
-// If we are in disparity domain, switch back to depth
-depth = disparity2depth.process(depth);
-// Send the post-processed depth for path-finding
-pathfinding_queue.enqueue(depth);
-```
-> All **stereo-based** 3D cameras have the property of noise being proportional to distance squared.
-> To counteract this we transform the frame into **disparity-domain** making the noise more uniform across distance.
-> This will do nothing on our **structured-light** cameras (since they don't have this property).
-
-We also apply the standard color map:
-```cpp
-// Apply color map for visualization of depth
-auto colorized = color_map(depth);
-```
-
-### Converting between pixels and points in 3D
-
-To convert pixels in the depth image into 3D points we are calling `rs2_deproject_pixel_to_point` C function (declared in `rsutil.h`).
-This function needs depths intrinsics, 2D pixel and distance in meters. Here is how we fetch depth intrinsics:
-```cpp
-auto stream = profile.get_stream(RS2_STREAM_DEPTH).as<rs2::video_stream_profile>();
-auto intrinsics = stream.get_intrinsics(); // Calibration data
-```
-
-Distance in meters can be acquired using `get_distance` function of `depth_frame` class. 
-
-> Calling `get_distance` excessively can result in bad performance, since the compiler can't optimize across module boundaries, so it could be beneficial to read the `DEPTH_UNITS` option directly from the `depth_sensor` and use it to convert raw depth pixels to meters.
-
-Putting everything together results in rather verbose `dist_3d` function:
-```cpp
-float dist_3d(const rs2_intrinsics& intr, const rs2::depth_frame& frame, pixel u, pixel v)
+int main()
 {
-    float upixel[2]; // From pixel
-    float upoint[3]; // From point (in 3D)
+    libenjoy_context *ctx = libenjoy_init(); // initialize the library
+    libenjoy_joy_info_list *info;
 
-    float vpixel[2]; // To pixel
-    float vpoint[3]; // To point (in 3D)
+    // Updates internal list of joysticks. If you want auto-reconnect
+    // after re-plugging the joystick, you should call this every 1s or so
+    libenjoy_enumerate(ctx);
 
-    // Copy pixels into the arrays (to match rsutil signatures)
-    upixel[0] = u.first;
-    upixel[1] = u.second;
-    vpixel[0] = v.first;
-    vpixel[1] = v.second;
+    // get list with available joysticks. structs are
+    // typedef struct libenjoy_joy_info_list {
+    //     uint32_t count;
+    //     libenjoy_joy_info **list;
+    // } libenjoy_joy_info_list;
+    //
+    // typedef struct libenjoy_joy_info {
+    //     char *name;
+    //     uint32_t id;
+    //     char opened;
+    // } libenjoy_joy_info;
+    //
+    // id is not linear (eg. you should not use vector or array), 
+    // and if you disconnect joystick and then plug it in again,
+    // it should have the same ID
+    info = libenjoy_get_info_list(ctx);
 
-    // Query the frame for distance
-    // Note: this can be optimized
-    // It is not recommended to issue an API call for each pixel
-    // (since the compiler can't inline these)
-    // However, in this example it is not one of the bottlenecks
-    auto udist = frame.get_distance(upixel[0], upixel[1]);
-    auto vdist = frame.get_distance(vpixel[0], vpixel[1]);
-
-    // Deproject from pixel to point in 3D
-    rs2_deproject_pixel_to_point(upoint, &intr, upixel, udist);
-    rs2_deproject_pixel_to_point(vpoint, &intr, vpixel, vdist);
-
-    // Calculate euclidean distance between the two points
-    return sqrt(pow(upoint[0] - vpoint[0], 2) +
-                pow(upoint[1] - vpoint[1], 2) +
-                pow(upoint[2] - vpoint[2], 2));
-}
-```
-
-### Running Processing on a Background Thread
-
-Post-processing calculations in this example can be relatively slow. To not block the main (UI) thread, we are going to have a dedicated thread for post-processing. 
-
-#### Video-Processing Thread
-
-This thread will consume full frame-sets from the camera, and will produce frame-sets containing color and colorized depth frames (for rendering on the main thread):
-```cpp
-while (alive)
-{
-    // Fetch frames from the pipeline and send them for processing
-    rs2::frameset fs;
-    if (pipe.poll_for_frames(&fs)) 
+    if(info->count != 0) // just get the first joystick
     {
-        // Apply post processing
-        // ...
-        
-        // Send resulting frames for visualization in the main thread
-        postprocessed_frames.enqueue(data);
+        libenjoy_joystick *joy;
+        printf("Opening joystick %s...", info->list[0]->name);
+        joy = libenjoy_open_joystick(ctx, info->list[0]->id);
+        if(joy)
+        {
+            int counter = 0;
+            libenjoy_event ev;
+
+            printf("Success!\n");
+            printf("Axes: %d btns: %d\n", libenjoy_get_axes_num(joy),libenjoy_get_buttons_num(joy));
+
+            while(1)
+            {
+                // Value data are not stored in library. if you want to use
+                // them, you have to store them
+
+                // That's right, only polling available
+                while(libenjoy_poll(ctx, &ev))
+                {
+                    switch(ev.type)
+                    {
+                    case LIBENJOY_EV_AXIS:
+                        printf("%u: axis %d val %d\n", ev.joy_id, ev.part_id, ev.data);
+                        break;
+                    case LIBENJOY_EV_BUTTON:
+                        printf("%u: button %d val %d\n", ev.joy_id, ev.part_id, ev.data);
+                        break;
+                    case LIBENJOY_EV_CONNECTED:
+                        printf("%u: status changed: %d\n", ev.joy_id, ev.data);
+                        break;
+                    }
+                }
+#ifdef __linux
+                usleep(50000);
+#else
+                Sleep(50);
+#endif
+                counter += 50;
+                if(counter >= 1000)
+                {
+                    libenjoy_enumerate(ctx);
+                    counter = 0;
+                }
+            }
+
+            // Joystick is really closed in libenjoy_poll or libenjoy_close,
+            // because closing it while libenjoy_poll is in process in another thread
+            // could cause crash. Be sure to call libenjoy_poll(ctx, NULL); (yes,
+            // you can use NULL as event) if you will not poll nor libenjoy_close
+            // anytime soon.
+            libenjoy_close_joystick(joy);
+        }
+        else
+            printf("Failed!\n");
     }
+    else
+        printf("No joystick available\n");
+
+    // Frees memory allocated by that joystick list. Do not forget it!
+    libenjoy_free_info_list(info);
+
+    // deallocates all memory used by lib. Do not forget this!
+    // libenjoy_poll must not be called during or after this call
+    libenjoy_close(ctx); 
+    return 0;
 }
 ```
 
-#### Main Thread
-
-The main thread is the only one allowed to render to the screen.
-
-It polls from the `postprocessed_frames` queue and just displays the results:
-
-```cpp
-while(app) // Application still alive?
-{
-	postprocessed_frames.poll_for_frame(&current_frameset);
-
-	if (current_frameset)
-	{
-		auto depth = current_frameset.get_depth_frame();
-		auto color = current_frameset.get_color_frame();
-
-		glEnable(GL_BLEND);
-		// Use the Alpha channel for blending
-		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-
-		// First render the colorized depth image
-		depth_image.render(depth, { 0, 0, app.width(), app.height() });
-		// Next, set global alpha for the color image to 90%
-		// (to make it slightly translucent)
-		glColor4f(1.f, 1.f, 1.f, 0.9f);
-		// Render the color frame (since we have selected RGBA format
-		// pixels out of FOV will appear transparent)
-		color_image.render(color, { 0, 0, app.width(), app.height() });
-
-		// Render the simple pythagorean distance
-		render_simple_distance(depth, app_state, app, intrinsics);
-
-		// Render the ruler
-		app_state.ruler_start.render(app);
-		app_state.ruler_end.render(app);
-			
-		glDisable(GL_BLEND);
-	}
-}
-```
-We use `glBlendFunc` to overlay aligned-color on top of depth using colors alpha channel (the stream must be of format `RGBA` for this to work).
-
-----------------------------------
-
-This example demonstrates a short yet complex processing flow. Each thread has somewhat different rate and they all need to synchronize but not block one another. 
-This is achieved using thread-safe `frame_queue`s as synchronization primitives and `rs2::frame` reference counting for object lifetime management across threads.
-
+### License
+LGPLv2.1, see COPYING. Most of libenjoy_win32.c is from libSDL - thanks!

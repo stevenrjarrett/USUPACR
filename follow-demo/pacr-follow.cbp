@@ -35,12 +35,23 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
+		<Unit filename="../include/XBoxOne.h" />
+		<Unit filename="../include/cameraDetection.h" />
+		<Unit filename="../include/libenjoy.h" />
+		<Unit filename="../include/libenjoy_linux.h" />
+		<Unit filename="../include/libenjoy_p.h" />
+		<Unit filename="../include/stopwatch.h" />
+		<Unit filename="../src/XBoxOne.cpp" />
+		<Unit filename="../src/cameraDetection.cpp" />
+		<Unit filename="../src/libenjoy.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../src/libenjoy_linux.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../src/stopwatch.cpp" />
 		<Unit filename="CMakeLists.txt" />
-		<Unit filename="include/XBoxOne.h" />
-		<Unit filename="include/cameraDetection.h" />
 		<Unit filename="pacr-follow.cpp" />
-		<Unit filename="src/XBoxOne.cpp" />
-		<Unit filename="src/cameraDetection.cpp" />
 		<Extensions>
 			<code_completion />
 			<envvars />

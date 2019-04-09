@@ -5,8 +5,8 @@ cmake_minimum_required(VERSION 3.1.0)
 
 project(pacr-follow)
 
-file(GLOB pacr-follow_SOURCES pacr-follow.cpp ./src/*.cpp)
-# file(GLOB pacr-follow_INCLUDES ./include/*.h )
+file(GLOB pacr-follow_SOURCES pacr-follow.cpp ./src/*.cpp ./src/*.c)
+# file(GLOB pacr-follow_INCLUDES ./include/*.hpp ./include/*.h )
 
 find_package(Threads REQUIRED)
 find_package(realsense2 REQUIRED)

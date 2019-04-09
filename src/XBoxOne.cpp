@@ -20,6 +20,7 @@ XBoxOne::XBoxOne()
     ctx = libenjoy_init(); // initialize the library
     connected = false;
     pollingThread = std::thread(&XBoxOne::run, this);
+    activityThread = std::thread(&XBoxOne::activityChecker, this);
 }
 
 XBoxOne::~XBoxOne()

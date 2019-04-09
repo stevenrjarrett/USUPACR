@@ -112,6 +112,8 @@ int main()
         {
             motors.left = 0;
             motors.right = 0;
+            if(!controller.isActive())
+                std::cout << "Controller inactive" << std::endl;
         }
 
         motorArduino << motors.left << std::endl;

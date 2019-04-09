@@ -17,7 +17,7 @@ struct trackedPerson
     personFrame last;
     double tolerance = 1.0;
 
-    trackedPerson(personFrame _last=personFrame(), _tolerance = 1.0)
+    trackedPerson(personFrame _last=personFrame(), double _tolerance = 1.0)
       : last(_last),
         tolerance(_tolerance)
     {

@@ -122,8 +122,8 @@ int main()
         //wait for a little bit
         usleep(EXECUTIVE_WAIT_TIME);
     }
-    controller.stop();
     cam.stop();
+    controller.stop();
     return 0;
 }
 

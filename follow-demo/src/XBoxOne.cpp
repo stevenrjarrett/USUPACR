@@ -43,6 +43,7 @@ void XBoxOne::stop()
     isRunning = false;
     std::cout << "Stopping controller" << std::endl;
     pollingThread.join();
+    std::cout << "Controller stopped" << std::endl;
 }
 
 bool XBoxOne::isConnected()
@@ -126,13 +127,14 @@ void XBoxOne::run()
                 libenjoy_enumerate(ctx);
                 counter = 0;
             }
-            // Joystick is really closed in libenjoy_poll or libenjoy_close,
-            // because closing it while libenjoy_poll is in process in another thread
-            // could cause crash. Be sure to call libenjoy_poll(ctx, NULL); (yes,
-            // you can use NULL as event) if you will not poll nor libenjoy_close
-            // anytime soon.
-            libenjoy_close_joystick(joy);
         }
+
+        // Joystick is really closed in libenjoy_poll or libenjoy_close,
+        // because closing it while libenjoy_poll is in process in another thread
+        // could cause crash. Be sure to call libenjoy_poll(ctx, NULL); (yes,
+        // you can use NULL as event) if you will not poll nor libenjoy_close
+        // anytime soon.
+        libenjoy_close_joystick(joy);
     }
     else
         printf("Failed!\n");

@@ -24,10 +24,10 @@ cameraDetection::cameraDetection()
     y_color_to_depth_conversion_factor = DEPTH_height/COL_height * tan(COL_Ver_Field_of_View/2)/tan(DEPTH_Ver_Field_of_View/2);
 
 
-    isRunning = false;
+    isRunning = true;
     show_color = true;
     show_depth = true;
-    start();
+    runningThread = std::thread(&cameraDetection::run, this);
 }
 
 cameraDetection::~cameraDetection()

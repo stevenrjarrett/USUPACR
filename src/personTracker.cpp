@@ -1,6 +1,6 @@
 #include "personTracker.h"
 
-personTracker::personTracker(cv::Point3d defaultLocation, double _tolerance = 1.0)//, double _initial_tolerance = 1.0)
+personTracker::personTracker(cv::Point3d defaultLocation, double _tolerance)//, double _initial_tolerance = 1.0)
 {
     show_color = false;
     show_depth = false;
@@ -46,7 +46,7 @@ void personTracker::run()
             people[i].update(pplData);
         }
 
-        centroid = people[0].centroid;
+        centroid = people[0].last.centroid;
 
         if(show_color)
         {

@@ -7,6 +7,15 @@ cameraDetection::cameraDetection()
     /// Set defaults
     max_fps = 30;
 
+
+    std::string colorWindowName = "Color Video Feed";
+    COL_Hor_Field_of_View = 69.4*M_PI/180;
+    COL_Ver_Field_of_View = 42.5*M_PI/180;
+    COL_width  = 1280;
+    COL_height = 720;
+    COL_numPixels = COL_height * COL_width;
+
+    std::string depthWindowName = "Depth Video Feed";
     DEPTH_Hor_Field_of_View = 91.2*M_PI/180;
     DEPTH_Ver_Field_of_View = 65.5*M_PI/180;
     DEPTH_width  = 1280;
@@ -14,19 +23,14 @@ cameraDetection::cameraDetection()
     DEPTH_numPixels = DEPTH_height * DEPTH_width;
     depth_scale;
 
-    COL_Hor_Field_of_View = 69.4*M_PI/180;
-    COL_Ver_Field_of_View = 42.5*M_PI/180;
-    COL_width  = 1280;
-    COL_height = 720;
-    COL_numPixels = COL_height * COL_width;
-
     x_color_to_depth_conversion_factor = DEPTH_width /COL_width  * tan(COL_Hor_Field_of_View/2)/tan(DEPTH_Hor_Field_of_View/2);
     y_color_to_depth_conversion_factor = DEPTH_height/COL_height * tan(COL_Ver_Field_of_View/2)/tan(DEPTH_Ver_Field_of_View/2);
 
 
-    isRunning = true;
-    show_color = true;
-    show_depth = true;
+    isRunning  = false;
+    show_color = false;
+    show_depth = false;
+    lastTime   = 0;
     runningThread = std::thread(&cameraDetection::run, this);
 }
 
@@ -171,6 +175,9 @@ cv::Point3d cameraDetection::getCentroid(cv::Mat &depthMat, const rs2::depth_fra
 
 void cameraDetection::run() try
 {
+    // don't even try if I shouldn't be running
+    if(!isRunning)
+        return;
     // Set up camera streams and realsense
 
         // Declare depth colorizer for pretty visualization of depth data
@@ -321,10 +328,10 @@ void cameraDetection::run() try
 //        usleep(500000);
 
         // create opencv Mat's
-        cv::Mat depthMat(cv::Size(DEPTH_width, DEPTH_height), CV_16UC1, depthData, cv::Mat::AUTO_STEP);
+        depthMat = cv::Mat(cv::Size(DEPTH_width, DEPTH_height), CV_16UC1, depthData, cv::Mat::AUTO_STEP);
 
         cv::Mat color_image_raw(cv::Size(COL_width, COL_height), CV_8UC3, colorData, cv::Mat::AUTO_STEP);
-        cv::Mat colorMat;
+//        cv::Mat colorMat;
 //        cv::Mat rgbaMat(cv::Size(COL_width, COL_height), CV_64FC4, colorData_flt_CPU, cv::Mat::AUTO_STEP);
         cv::cvtColor(color_image_raw, colorMat, cv::COLOR_RGB2BGR);
 //        cv::cvtColor(color_image_raw, rgbaMat, cv::COLOR_RGB2RGBA);
@@ -436,11 +443,11 @@ void cameraDetection::run() try
 
         if(show_depth)
         {
-            cv::Mat dpth;
-            depthMat.convertTo(dpth, CV_8UC1, 2.0 / 255, 0);
+//            cv::Mat dpth;
+//            depthMat.convertTo(dpth, CV_8UC1, 2.0 / 255, 0);
     //        cv::normalize(depthMat, dpth, 0, 255, cv::NORM_MINMAX);
 
-            imshow(depthWindowName, dpth);
+            imshow(depthWindowName, depthMat);
         }
         if(show_color)
             imshow(colorWindowName, colorMat);

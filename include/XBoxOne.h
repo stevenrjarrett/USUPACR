@@ -53,6 +53,7 @@ private:
     bool active;
     std::thread activityThread;
     stopwatch activityStopwatch;
+    double activity_timeout; // number of seconds the controller is inactive before the class marks it as inactive
     void activityChecker();
 
     /// Run function and utilities

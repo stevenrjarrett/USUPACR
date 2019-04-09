@@ -102,6 +102,7 @@ class cameraDetection
 //        void Setx_color_to_depth_conversion_factor(double val) { x_color_to_depth_conversion_factor = val; }
         double Gety_color_to_depth_conversion_factor() { return y_color_to_depth_conversion_factor; }
 //        void Sety_color_to_depth_conversion_factor(double val) { y_color_to_depth_conversion_factor = val; }
+        long long getLastTime(){ return lastTime; }
 
         /// Output
         std::vector<personFrame> getPeople()
@@ -109,6 +110,8 @@ class cameraDetection
             wasUpdated = false;
             return lastPeople;
         }
+        cv::Mat depthMat;
+        cv::Mat colorMat;
     protected:
 
     private:
@@ -146,6 +149,7 @@ class cameraDetection
         /// Output
         std::vector<personFrame> lastPeople;
         bool wasUpdated;
+        long long lastTime;
 };
 
 #endif // CAMERADETECTION_H

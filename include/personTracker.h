@@ -2,7 +2,14 @@
 #define PERSONTRACKER_H
 
 #include "cameraDetection.h"
+#include "stopwatch.h"
+#include <opencv2/opencv.hpp>   // Include OpenCV API
+#include <thread>
+#include <
 
+
+double distance3d(cv::Point3d pt1, cv::Point3d pt2) { return sqrt(pow(pt1.x-pt2.x,2) + pow(pt1.y-pt2.y,2) + pow(pt1.z-pt2.z,2)); }
+double distance_xz(cv::Point3d pt1, cv::Point3d pt2) { return sqrt(pow(pt1.x-pt2.x,2) + pow(pt1.z-pt2.z,2)); }
 
 struct trackedPerson
 {
@@ -13,14 +20,14 @@ struct trackedPerson
     {
         last = newPerson;
     }
-    void update(const std::vector<personFrame>& personList)
+    int update(const std::vector<personFrame>& personList)
     {
         double bestDist = 1e6;
         double dist     = 0;
         int    bestInd = -1;
         for(unsigned int i=0; i<personList.size(); i++)
         {
-            dist = distance3d(last, personList[i]);
+            dist = distance_xz(last, personList[i]);
             if(dist < tolerance && dist < bestDist)
             {
                 bestDist = dist;
@@ -31,35 +38,58 @@ struct trackedPerson
         {
             update(personList[bestInd]);
         }
+        return bestInd;
     }
 };
+
+
+
+
+
 
 class personTracker
 {
     public:
-        personTracker();
+        personTracker(cv::Point3d defaultLocation, double _tolerance = 1.0);
         ~personTracker();
 
         /// User control functions
         void start();
         void stop();
-        void show(){ show_color = true; }
-        void hide(){ show_color = false; if(isRunning) cv::destroyWindow(colorWindowName);}
+        void show(){ camera.show(); }
+        void hide(){ camera.hide(); }
 
         /// Utilities
-        double distance3d(cv::Point3d pt1, cv::Point3d pt2)
-        {
-            return sqrt(pow(pt1.x-pt2.x,2) + pow(pt1.y-pt2.y,2) + pow(pt1.z-pt2.z,2));
-        }
 
         /// Getters and Setters
         bool isRunning() { return running; }
+        void setTolerance(double tol);
+        double getTolerance(){if(people.size() > 0) return people[0].tolerance; else return 1.0;}
+        cv::Point3d getCentroid(){ return centroid; }
 
     protected:
 
     private:
-        bool running;
+        /// detection
         cameraDetection camera;
+        long long lastTime;
+
+        /// show/hide camera feed
+        std::string colorWindowName = "Color Video Feed";
+        std::string depthWindowName = "Depth Video Feed";
+        bool show_color;
+        bool show_depth;
+
+        /// running functions/variables
+        bool running;
+        void run();
+        std::thread runningThread;
+
+        /// people database
+        std::vector<personFrame> people;
+        personFrame default_person;
+        double tolerance;
+        cv::Point3d centroid;
 };
 
 #endif // PERSONTRACKER_H

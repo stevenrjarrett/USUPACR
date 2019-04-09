@@ -12,13 +12,14 @@
 
 // This tels msvc to link agains winmm.lib. Pretty nasty though.
 //#pragma comment(lib, "winmm.lib")
-#define ACTIVITY_TIMEOUT 1.5 // seconds
+//#define ACTIVITY_TIMEOUT 1.5 // seconds
 
 XBoxOne::XBoxOne()
 {
     running = true;
     ctx = libenjoy_init(); // initialize the library
     connected = false;
+    activity_timeout = 1.5; //seconds
     pollingThread = std::thread(&XBoxOne::run, this);
     activityThread = std::thread(&XBoxOne::activityChecker, this);
 }
@@ -35,7 +36,7 @@ void XBoxOne::activityChecker()
     active = false;
     while(running)
     {
-        if(activityStopwatch.seconds() < ACTIVITY_TIMEOUT)
+        if(activityStopwatch.seconds() < activity_timeout)
             active = true;
         else
             active = false;

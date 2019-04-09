@@ -40,6 +40,7 @@
 		<Unit filename="../include/libenjoy.h" />
 		<Unit filename="../include/libenjoy_linux.h" />
 		<Unit filename="../include/libenjoy_p.h" />
+		<Unit filename="../include/personTracker.h" />
 		<Unit filename="../include/stopwatch.h" />
 		<Unit filename="../src/XBoxOne.cpp" />
 		<Unit filename="../src/cameraDetection.cpp" />
@@ -49,6 +50,7 @@
 		<Unit filename="../src/libenjoy_linux.c">
 			<Option compilerVar="CC" />
 		</Unit>
+		<Unit filename="../src/personTracker.cpp" />
 		<Unit filename="../src/stopwatch.cpp" />
 		<Unit filename="CMakeLists.txt" />
 		<Unit filename="pacr-follow.cpp" />

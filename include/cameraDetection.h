@@ -147,8 +147,9 @@ class cameraDetection
         void run();
 
         /// Output
+        stopwatch watch;
         std::vector<personFrame> lastPeople;
-        bool wasUpdated;
+//        bool wasUpdated;
         long long lastTime;
 };
 

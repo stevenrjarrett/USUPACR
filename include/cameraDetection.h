@@ -42,7 +42,7 @@ struct personFrame
       confidence(_confidence),
       centroid(_centroid)
     {}
-    personFrame(personFrame person)
+    personFrame(const personFrame& person)
     : bb(person.bb),
       confidence(person.confidence),
       centroid(person.centroid)

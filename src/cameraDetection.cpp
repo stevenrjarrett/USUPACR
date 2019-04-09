@@ -70,7 +70,14 @@ void cameraDetection::stop()
 {
     isRunning = false;
     std::cout << "Stopping camera" << std::endl;
-    runningThread.join();
+    try
+    {
+        runningThread.join();
+    }
+    catch (const std::exception& e)
+    {
+        std::cout << "ERROR: Camera stopped twice (error caught)" << std::endl;
+    }
 }
 
 void cameraDetection::bboxFix( const cv::Mat& img, cv::Rect2d& box)

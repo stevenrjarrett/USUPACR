@@ -67,10 +67,9 @@ void XBoxOne::stop()
     }
     catch (const std::exception& e)
     {
-        std::cout << e.what() << std::endl;
-        std::cout << "While stopping xbox threads" << std::endl;
+        std::cout << "ERROR: Controller stopped twice (caught)" << std::endl;
     }
-    std::cout << "Controller stopped" << std::endl;
+//    std::cout << "Controller stopped" << std::endl;
 }
 
 bool XBoxOne::isConnected()

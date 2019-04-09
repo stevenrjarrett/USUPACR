@@ -112,14 +112,14 @@ int main()
         {
             motors.left = 0;
             motors.right = 0;
-            if(!controller.isActive())
-                std::cout << "Controller inactive" << std::endl;
+//            if(!controller.isActive())
+//                std::cout << "Controller inactive" << std::endl;
         }
 
         motorArduino << motors.left << std::endl;
         motorArduino << motors.right << std::endl;
 //            controller.printALL();
-//        std::cout << "Values sent: " << motors.left  << '\t' << motors.right << std::endl;
+        std::cout << "Values sent: " << motors.left  << '\t' << motors.right << std::endl;
 
         //wait for a little bit
         usleep(EXECUTIVE_WAIT_TIME);

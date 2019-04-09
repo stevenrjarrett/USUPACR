@@ -12,7 +12,7 @@
 
 // This tels msvc to link agains winmm.lib. Pretty nasty though.
 //#pragma comment(lib, "winmm.lib")
-#define ACTIVITY_TIMEOUT 2.0 // seconds
+#define ACTIVITY_TIMEOUT 1.5 // seconds
 
 XBoxOne::XBoxOne()
 {

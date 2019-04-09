@@ -436,11 +436,12 @@ void cameraDetection::run() try
 //        usleep(500000);
     }
 
-    cudaFree(colorData_flt_CPU);
+    std::cout << "Camera: Freeing memory" << std::endl;
+//    cudaFree(colorData_flt_CPU);
     cudaFree(colorData_flt_CUDA);
-    cudaFree(bbCPU   );
+//    cudaFree(bbCPU   );
     cudaFree(bbCUDA  );
-    cudaFree(confCPU );
+//    cudaFree(confCPU );
     cudaFree(confCUDA);
 //    return EXIT_SUCCESS;
 }

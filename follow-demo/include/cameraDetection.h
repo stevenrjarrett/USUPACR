@@ -49,7 +49,7 @@ class cameraDetection
 
         /// Utilities
         void bboxFix( const cv::Mat& img, cv::Rect2d& box);
-        cv::Point3d getCentroid(cv::Mat &depthMat, const rs2::depth_frame& dframe, cv::Rect drect)
+        cv::Point3d getCentroid(cv::Mat &depthMat, const rs2::depth_frame& dframe, cv::Rect drect);
         cv::Rect2d cvt_bb(cv::Rect2d bb, int cvt_type);
 
         /// Getters and Setters

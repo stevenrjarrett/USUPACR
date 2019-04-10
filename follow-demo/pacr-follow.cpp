@@ -3,7 +3,7 @@
 #include <unistd.h>
 #include <fstream>
 
-#include "cameraDetection.h"
+#include "personTracker.h"
 #include "XBoxOne.h"
 
 /////////////////////////////////////////////////////////////////////////////////////////
@@ -98,7 +98,7 @@ int main()
 //        cameraDetection cam;
         personTracker tracker(cv::Point3d(0, 0, follow_distance));
         // Communication with Arduino
-        motorArduino.open("/dev/ttyACM0", ios_base::out );
+        motorArduino.open("/dev/ttyACM0", std::ios_base::out );
 
         // enable signal catcher
         if( signal(SIGINT, sig_handler) == SIG_ERR )

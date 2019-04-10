@@ -66,8 +66,8 @@ void sig_handler(int signo)
 
 void sendMotorValues()
 {
-    motorArduino << motors.left * motor_power_limiter << std::endl;
-    motorArduino << motors.right * motor_power_limiter << std::endl;
+    motorArduino << motors.left * motor_speed_limiter << std::endl;
+    motorArduino << motors.right * motor_speed_limiter << std::endl;
 }
 
 
@@ -98,7 +98,7 @@ int main()
 //        cameraDetection cam;
         personTracker tracker(cv::Point3d(0, 0, follow_distance));
         // Communication with Arduino
-        motorArduino = std::ofstream ("/dev/ttyACM0");
+        motorArduino.open("/dev/ttyACM0", ios_base::out );
 
         // enable signal catcher
         if( signal(SIGINT, sig_handler) == SIG_ERR )
@@ -135,7 +135,7 @@ int main()
             // Act based on autonomous / user control
             if(autonomous_mode)
             {
-                if(controller.wp_B() || abs(controller.joyL_x) > 0.1 || abs(controller.joyL_y) > 0.1)
+                if(controller.wp_B() || abs(controller.L_x()) > 0.1 || abs(controller.L_y()) > 0.1)
                 {
                     autonomous_mode = false;
                     motors.left = 0;
@@ -148,7 +148,7 @@ int main()
                 else if(tracker.found())
                 {
                     /// TODO
-                    double turningVal = person.centroid.x *255 / 10; // positive to turn right, negative to turn left.
+                    double turningVal = tracker.centroid.x *255 / 10; // positive to turn right, negative to turn left.
                     double speedVal   = 0; // positive for forward, negative for backward
                     if(tracker.centroid.z >= (follow_distance - distance_tolerance))
                     {

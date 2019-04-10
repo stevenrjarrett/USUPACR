@@ -148,11 +148,11 @@ int main()
                 else if(tracker.found())
                 {
                     /// TODO
-                    double turningVal = tracker.centroid.x *255 / 10; // positive to turn right, negative to turn left.
+                    double turningVal = tracker.getCentroid().x *255 / 10; // positive to turn right, negative to turn left.
                     double speedVal   = 0; // positive for forward, negative for backward
-                    if(tracker.centroid.z >= (follow_distance - distance_tolerance))
+                    if(tracker.getCentroid().z >= (follow_distance - distance_tolerance))
                     {
-                        speedVal = (tracker.centroid.z - follow_distance + distance_tolerance) / (2*distance_tolerance);
+                        speedVal = (tracker.getCentroid().z - follow_distance + distance_tolerance) / (2*distance_tolerance);
                         // speedVal should be in a value between 0 and 1 if the person is at the target following
                         // distance +- the distance tolerance.
                         speedVal *= max_speed;

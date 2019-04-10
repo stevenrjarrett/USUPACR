@@ -22,7 +22,7 @@ personTracker::~personTracker()
     stop();
 }
 
-void XBoxOne::activityChecker()
+void personTracker::activityChecker()
 {
     active = false;
     while(running)

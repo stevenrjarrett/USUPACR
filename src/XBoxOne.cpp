@@ -16,10 +16,28 @@
 
 XBoxOne::XBoxOne()
 {
+    // initialize variables
+    wp_btnUP = false;
+    wp_btnDOWN = false;
+    wp_btnLEFT = false;
+    wp_btnRIGHT = false;
+    wp_btnA = false;
+    wp_btnB = false;
+    wp_btnX = false;
+    wp_btnY = false;
+    wp_btnLBumper = false;
+    wp_btnRBumper = false;
+    wp_btn6 = false;
+    wp_btn7 = false;
+    wp_joyLTrigger = false;
+    wp_joyRTrigger = false;
+
     running = true;
     ctx = libenjoy_init(); // initialize the library
     connected = false;
     activity_timeout = 1.5; //seconds
+
+    //start threads
     pollingThread = std::thread(&XBoxOne::run, this);
     activityThread = std::thread(&XBoxOne::activityChecker, this);
 }
@@ -47,6 +65,20 @@ void XBoxOne::activityChecker()
 
 void XBoxOne::start()
 {
+    wp_btnUP = false;
+    wp_btnDOWN = false;
+    wp_btnLEFT = false;
+    wp_btnRIGHT = false;
+    wp_btnA = false;
+    wp_btnB = false;
+    wp_btnX = false;
+    wp_btnY = false;
+    wp_btnLBumper = false;
+    wp_btnRBumper = false;
+    wp_btn6 = false;
+    wp_btn7 = false;
+    wp_joyLTrigger = false;
+    wp_joyRTrigger = false;
     if(!running && pollingThread.joinable())
     {
         running = true;
@@ -180,6 +212,8 @@ void XBoxOne::setAxis(int id, int val)
         break;
     case 2:
         joyLTrigger = val;
+        if(val > 0)
+            wp_joyLTrigger = true;
         break;
     case 3:
         joyR_x = val;
@@ -188,16 +222,20 @@ void XBoxOne::setAxis(int id, int val)
         joyR_y = val;
     case 5:
         joyRTrigger = val;
+        if(val > 0)
+            wp_joyRTrigger = true;
     case 6:
         if(val<0) // left arrow
         {
             btnLEFT  = true;
             btnRIGHT = false;
+            wp_btnLEFT = true;
         }
         else if(val>0) // right arrow
         {
             btnLEFT  = false;
             btnRIGHT = true;
+            wp_btnRIGHT = true;
         }
         else // val==0 // no arrow pressed
         {
@@ -210,11 +248,13 @@ void XBoxOne::setAxis(int id, int val)
         {
             btnDOWN = false;
             btnUP   = true;
+            wp_btnUP = true;
         }
         else if(val>0) // down arrow
         {
             btnDOWN = true;
             btnUP   = false;
+            wp_btnDOWN = true;
         }
         else // val==0 // no arrow pressed
         {
@@ -233,27 +273,43 @@ void XBoxOne::setBtn(int id, int val)
     {
     case 0: // A
         btnA = val;
+        if(val != 0)
+            wp_btnA = true;
         break;
     case 1: // B
         btnB = val;
+        if(val != 0)
+            wp_btnB = true;
         break;
     case 2: // X
         btnX = val;
+        if(val != 0)
+            wp_btnX = true;
         break;
     case 3: // Y
         btnY = val;
+        if(val != 0)
+            wp_btnY = true;
         break;
     case 4: // left bumper
         btnLBumper = val;
+        if(val != 0)
+            wp_btnLBumper = true;
         break;
     case 5: // right bumper
         btnRBumper = val;
+        if(val != 0)
+            wp_btnRBumper = true;
         break;
     case 6:
         btn6 = val;
+        if(val != 0)
+            wp_btn6 = true;
         break;
     case 7:
         btn7 = val;
+        if(val != 0)
+            wp_btn7 = true;
         break;
 //    default:
 //        break;

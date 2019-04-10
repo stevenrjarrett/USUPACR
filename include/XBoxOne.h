@@ -27,6 +27,9 @@ public:
         // Print / debug functions
         void printALL();
 
+        // Setters
+        void setTimeout(double _time){if(_time>0) activity_timeout = _time;}
+
         // Button value accessors
         bool UP(){return btnUP;}
         bool DOWN(){return btnDOWN;}
@@ -46,6 +49,19 @@ public:
         double rTrigger(){return (double)joyRTrigger/XJOY_MAX;}
 
         // "was pressed" button accessors
+        // Button value accessors
+        bool wp_UP(){bool tmp = wp_btnUP; wp_btnUP = false; return tmp;}
+        bool wp_DOWN(){bool tmp = wp_btnDOWN; wp_btnDOWN = false; return tmp;}
+        bool wp_LEFT(){bool tmp = wp_btnLEFT; wp_btnLEFT = false; return tmp;}
+        bool wp_RIGHT(){bool tmp = wp_btnRIGHT; wp_btnRIGHT = false; return tmp;}
+        bool wp_A(){bool tmp = wp_btnA; wp_btnA = false; return tmp;}
+        bool wp_B(){bool tmp = wp_btnB; wp_btnB = false; return tmp;}
+        bool wp_X(){bool tmp = wp_btnX; wp_btnX = false; return tmp;}
+        bool wp_Y(){bool tmp = wp_btnY; wp_btnY = false; return tmp;}
+        bool wp_lBumper(){bool tmp = wp_btnLBumper; wp_btnLBumper = false; return tmp;}
+        bool wp_rBumper(){bool tmp = wp_btnRBumper; wp_btnRBumper = false; return tmp;}
+        double wp_lTrigger(){bool tmp = wp_joyLTrigger; wp_joyLTrigger = false; return tmp;}
+        double wp_rTrigger(){bool tmp = wp_joyRTrigger; wp_joyRTrigger = false; return tmp;}
 protected:
 
 private:
@@ -87,6 +103,22 @@ private:
         joyR_y,
         joyLTrigger,
         joyRTrigger;
+    // button "was-pressed" values
+    bool wp_btnUP,
+         wp_btnDOWN,
+         wp_btnLEFT,
+         wp_btnRIGHT,
+         wp_btnA,
+         wp_btnB,
+         wp_btnX,
+         wp_btnY,
+         wp_btnLBumper,
+         wp_btnRBumper,
+         wp_btn6,
+         wp_btn7,
+         wp_joyLTrigger,
+         wp_joyRTrigger;
+
 };
 
 #endif // XBOXONE_H

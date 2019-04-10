@@ -8,9 +8,12 @@ personTracker::personTracker(cv::Point3d defaultLocation, double _tolerance)//, 
     init_wait_time = 3.0;
     default_person = trackedPerson(personFrame(defaultLocation, cv::Rect2d(), 1.0), _tolerance);
 //    tolerance = _tolerance;
+    active = false;
+    activity_timeout = .2; // number of seconds the controller is inactive before the class marks it as inactive
 
     running = false;
     runningThread = std::thread(&personTracker::run, this);
+    activityThread = std::thread(&personTracker::activityChecker, this);
 }
 
 personTracker::~personTracker()
@@ -19,7 +22,19 @@ personTracker::~personTracker()
     stop();
 }
 
-
+void XBoxOne::activityChecker()
+{
+    active = false;
+    while(running)
+    {
+        if(activityStopwatch.seconds() < activity_timeout)
+            active = true;
+        else
+            active = false;
+        usleep(10000);
+    }
+    active = false;
+}
 
 void personTracker::run()
 {
@@ -45,9 +60,14 @@ void personTracker::run()
         std::vector<personFrame> pplData(camera.getPeople());
 
         // update people
-        for(unsigned int i=0; i<people.size(); i++)
+//        for(unsigned int i=0; i<people.size(); i++)
+//        {
+//            people[i].update(pplData);
+//        }
+        int person_ind = people[0].update(pplData);
+        if(person_ind >= 0)
         {
-            people[i].update(pplData);
+            activityStopwatch.reset();
         }
 
         centroid = people[0].last.centroid;

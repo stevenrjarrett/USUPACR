@@ -74,10 +74,20 @@ class personTracker
         void setTolerance(double tol);
         double getTolerance(){ return tolerance;}
         cv::Point3d getCentroid(){ return centroid; }
+        void setTimeout(double _timeout){ if(_timeout > 0) activity_timeout = _timeout;}
+        bool found(){return active;}
 
     protected:
 
     private:
+        /// Activity Checker
+        bool active;
+        std::thread activityThread;
+        stopwatch activityStopwatch;
+        double activity_timeout; // number of seconds the controller is inactive before the class marks it as inactive
+        void activityChecker();
+
+
         /// detection
         cameraDetection camera;
         long long lastTime;

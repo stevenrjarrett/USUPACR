@@ -171,7 +171,7 @@ cv::Point3d cameraDetection::getCentroid(cv::Mat &depthMat, const rs2::depth_fra
 
 void cameraDetection::run() try
 {
-while(!(self->stop_signal_recieved))
+while(!(this->stop_signal_recieved))
 {
     // don't even try if I shouldn't be running
     while(!isRunning)

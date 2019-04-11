@@ -6,7 +6,7 @@ personTracker::personTracker(cv::Point3d defaultLocation, double _tolerance)//, 
 {
     show_color = true;
     show_depth = false;
-    camera.showBoxes();
+//    camera.showBoxes();
     lastTime = camera.getLastTime();
     init_wait_time = 3.0;
     default_person = trackedPerson(personFrame(defaultLocation, cv::Rect2d(camera.GetCOL_width()/2-30, camera.GetCOL_height()/2-45, 60, 90), 1.0), _tolerance);
@@ -28,7 +28,7 @@ personTracker::~personTracker()
     //dtor
     std::cout << "Stopping tracker:\n";
     stop_signal_recieved = true;
-    stop();
+    running = false;
     std::cout << "\tActivity Thread..." << std::endl;
     if(activityThread.joinable())
         activityThread.join();
@@ -58,9 +58,11 @@ void personTracker::run()
 {
     while(!(this->stop_signal_recieved))
     {
+//    if(this->stop_signal_recieved)
+//        return;
 //    std::cout << "personTracker Thread Started" << std::endl;
     // if I shouldn't be, don't run at all
-    while(!running)
+    while(!running && !(this->stop_signal_recieved))
         usleep(1000);
 
     // initialize
@@ -98,6 +100,7 @@ void personTracker::run()
 
         if(show_color)
         {
+                    cv::putText(camera.colorMat, std::string("z =  ") + std::to_string(people[0].last.centroid.z), cv::Point(people[0].last.bb.x,people[0].last.bb.y+20), cv::FONT_HERSHEY_SIMPLEX, 0.75, COL_TEXT_COLOR,2);
             cv::rectangle(camera.colorMat, people[0].last.bb, COL_TEXT_COLOR, 5);
             cv::imshow(colorWindowName, camera.colorMat);
         }

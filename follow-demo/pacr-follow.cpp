@@ -88,6 +88,7 @@ int main()
     /// Initialize
         // Joystick
         XBoxOne controller;
+        controller.setTimeout(1.5);
 //        controller.start();
 //        int controller = open("/dev/input/event8", 0_RDONLY);
 //        if(controller == 0)
@@ -142,7 +143,7 @@ int main()
             // Act based on autonomous / user control
             if(autonomous_mode)
             {
-                if(controller.wp_B() || abs(controller.L_x()) > 0.1 || abs(controller.L_y()) > 0.1)
+                if(controller.wp_B() || abs(controller.L_x()) > 0.1 || abs(controller.L_y()) > 0.1 || !controller.isActive() || !controller.isConnected())
                 {
                     autonomous_mode = false;
                     motors.left = 0;

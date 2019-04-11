@@ -15,7 +15,7 @@ double distance_xz(cv::Point3d pt1, cv::Point3d pt2);
 struct trackedPerson
 {
     personFrame last;
-    double tolerance = 1.0;
+    double tolerance;
 
     trackedPerson(personFrame _last=personFrame(cv::Point3d(0, 0, 5)), double _tolerance = 1.0)
       : last(_last),
@@ -36,7 +36,7 @@ struct trackedPerson
         double bestDist = 1e6;
         double dist     = 0;
         int    bestInd = -1;
-        std::cout << "Person: " << std::setw(3) << personList.size() << " boxes, ";// << std::endl;
+//        std::cout << "Person: " << std::setw(3) << personList.size() << " boxes, ";// << std::endl;
         for(unsigned int i=0; i<personList.size(); i++)
         {
             dist = distance_xz(last.centroid, personList[i].centroid);
@@ -47,13 +47,13 @@ struct trackedPerson
             }
 //            std::cout << "d=" << std::setw(5) << dist << ", ";
         }
-        std::cout << "BestDist = " << bestDist << ", bestInd = " << bestInd << ", ";
+//        std::cout << "BestDist = " << bestDist << ", bestInd = " << bestInd << ", ";
         if(bestDist < tolerance && bestInd >= 0)
         {
             update(personList[bestInd]);
         }
-        else
-            std::cout << std::endl;
+//        else
+//            std::cout << std::endl;
         return bestInd;
     }
 };
@@ -66,7 +66,7 @@ struct trackedPerson
 class personTracker
 {
     public:
-        personTracker(cv::Point3d defaultLocation, double _tolerance = 0.5);
+        personTracker(cv::Point3d defaultLocation, double _tolerance = 0.8);
         ~personTracker();
 
         /// User control functions

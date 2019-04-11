@@ -125,6 +125,10 @@ void personTracker::start()
 {
     std::cout << "Starting person tracker" << std::endl;
 
+    if(show_color)
+        cv::namedWindow(colorWindowName);
+    if(show_depth)
+        cv::namedWindow(depthWindowName);
     running = true;
 //    if(!runningThread.joinable())
 //    {
@@ -145,6 +149,10 @@ void personTracker::start()
 void personTracker::stop()
 {
     running = false;
+    if(show_color)
+        cv::destroyWindow(colorWindowName);
+    if(show_depth)
+        cv::destroyWindow(depthWindowName);
 //    std::cout << "Stopping tracker" << std::endl;
 //    if(runningThread.joinable())
 //        runningThread.join();

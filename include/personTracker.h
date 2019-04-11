@@ -10,6 +10,7 @@
 
 
 //double distance3d(cv::Point3d pt1, cv::Point3d pt2) { return sqrt(pow(pt1.x-pt2.x,2) + pow(pt1.y-pt2.y,2) + pow(pt1.z-pt2.z,2)); }
+double distance_xz(cv::Point3d pt1, cv::Point3d pt2);
 
 struct trackedPerson
 {
@@ -33,7 +34,7 @@ struct trackedPerson
         int    bestInd = -1;
         for(unsigned int i=0; i<personList.size(); i++)
         {
-            dist = personTracker::distance_xz(last.centroid, personList[i].centroid);
+            dist = distance_xz(last.centroid, personList[i].centroid);
             if(dist < tolerance && dist < bestDist)
             {
                 bestDist = dist;
@@ -67,7 +68,6 @@ class personTracker
         double init_wait_time; // in seconds
 
         /// Utilities
-        double distance_xz(cv::Point3d pt1, cv::Point3d pt2) { return sqrt(pow(pt1.x-pt2.x,2) + pow(pt1.z-pt2.z,2)); }
 
         /// Getters and Setters
         bool isRunning() { return running; }

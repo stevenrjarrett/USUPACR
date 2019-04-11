@@ -1,5 +1,7 @@
 #include "personTracker.h"
 
+double distance_xz(cv::Point3d pt1, cv::Point3d pt2) { return sqrt(pow(pt1.x-pt2.x,2) + pow(pt1.z-pt2.z,2)); }
+
 personTracker::personTracker(cv::Point3d defaultLocation, double _tolerance)//, double _initial_tolerance = 1.0)
 {
     show_color = true;

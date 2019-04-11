@@ -40,6 +40,7 @@ cameraDetection::cameraDetection()
 
 cameraDetection::~cameraDetection()
 {
+    this->stop_signal_recieved = true;
     stop();
     //dtor
 }

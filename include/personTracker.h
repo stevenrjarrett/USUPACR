@@ -32,7 +32,7 @@ struct trackedPerson
         double bestDist = 1e6;
         double dist     = 0;
         int    bestInd = -1;
-        std::cout << "Attempting to update person. Sifting " << personList.size() << " boxes" << std::endl;
+//        std::cout << "Attempting to update person. Sifting " << personList.size() << " boxes" << std::endl;
         for(unsigned int i=0; i<personList.size(); i++)
         {
             dist = distance_xz(last.centroid, personList[i].centroid);
@@ -42,6 +42,7 @@ struct trackedPerson
                 bestInd = i;
             }
         }
+        std::cout << "Tracked person Update: best distance found: " << bestDist << std::endl;
         if(bestInd > 0)
         {
             update(personList[bestInd]);

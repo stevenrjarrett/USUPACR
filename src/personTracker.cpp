@@ -26,12 +26,12 @@ personTracker::personTracker(cv::Point3d defaultLocation, double _tolerance)//, 
 personTracker::~personTracker()
 {
     //dtor
-    stop();
     stop_signal_recieved = true;
-    if(activityThread.joinable())
-        activityThread.join();
-    if(runningThread.joinable())
-        runningThread.join();
+    stop();
+//    if(activityThread.joinable())
+//        activityThread.join();
+//    if(runningThread.joinable())
+//        runningThread.join();
 }
 
 void personTracker::activityChecker()

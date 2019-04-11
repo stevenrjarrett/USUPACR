@@ -42,9 +42,10 @@ cameraDetection::~cameraDetection()
 {
     this->stop_signal_recieved = true;
     stop();
-    std::cout << "Stopping camera" << std::endl;
+    std::cout << "Stopping camera..." << std::endl;
     if(runningThread.joinable())
         runningThread.join();
+    std::cout << "\tDone" << std::endl;
     //dtor
 }
 

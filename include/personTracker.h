@@ -26,13 +26,17 @@ struct trackedPerson
     void update(personFrame newPerson)
     {
         last = newPerson;
+        std::cout << "New centroid: ("
+                  << std::setw(5) << last.centroid.x
+                  << std::setw(5) << last.centroid.y
+                  << std::setw(5) << last.centroid.z << ")" << std::endl;
     }
     int update(const std::vector<personFrame>& personList)
     {
         double bestDist = 1e6;
         double dist     = 0;
         int    bestInd = -1;
-//        std::cout << "Attempting to update person. Sifting " << personList.size() << " boxes" << std::endl;
+        std::cout << "Person: " << std::setw(3) << personList.size() << " boxes: ";// << std::endl;
         for(unsigned int i=0; i<personList.size(); i++)
         {
             dist = distance_xz(last.centroid, personList[i].centroid);
@@ -41,12 +45,15 @@ struct trackedPerson
                 bestDist = dist;
                 bestInd = i;
             }
+            std::cout << "d=" << std::setw(5) << dist << ", ";
         }
-        std::cout << "Tracked person Update: best distance found: " << bestDist << std::endl;
+        std::cout << "Best = " << bestDist << ", ";
         if(bestInd > 0)
         {
             update(personList[bestInd]);
         }
+        else
+            std::cout << std::endl;
         return bestInd;
     }
 };

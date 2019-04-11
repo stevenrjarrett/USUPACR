@@ -36,7 +36,7 @@ struct trackedPerson
         double bestDist = 1e6;
         double dist     = 0;
         int    bestInd = -1;
-        std::cout << "Person: " << std::setw(3) << personList.size() << " boxes: ";// << std::endl;
+        std::cout << "Person: " << std::setw(3) << personList.size() << " boxes, ";// << std::endl;
         for(unsigned int i=0; i<personList.size(); i++)
         {
             dist = distance_xz(last.centroid, personList[i].centroid);
@@ -45,9 +45,9 @@ struct trackedPerson
                 bestDist = dist;
                 bestInd = i;
             }
-            std::cout << "d=" << std::setw(5) << dist << ", ";
+//            std::cout << "d=" << std::setw(5) << dist << ", ";
         }
-        std::cout << "Best = " << bestDist << ", ";
+        std::cout << "BestDist = " << bestDist << ", bestInd = " << bestInd << ", ";
         if(bestDist < tolerance && bestInd > 0)
         {
             update(personList[bestInd]);

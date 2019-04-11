@@ -73,6 +73,8 @@ class cameraDetection
         void hideDepth(){ show_depth = false; if(isRunning) cv::destroyWindow(depthWindowName);}
         void show(){ show_color = true; }
         void hide(){ show_color = false; if(isRunning) cv::destroyWindow(colorWindowName);}
+        void showBoxes(){ show_boxes = true; }
+        void hideBoxes(){ show_boxes = false; }
 
         /// Utilities
         void bboxFix( const cv::Mat& img, cv::Rect2d& box);
@@ -146,6 +148,7 @@ class cameraDetection
         bool isRunning;
         bool show_color;
         bool show_depth;
+        bool show_boxes;
 
         ///
         std::thread runningThread;

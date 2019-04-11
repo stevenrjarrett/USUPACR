@@ -6,9 +6,10 @@ personTracker::personTracker(cv::Point3d defaultLocation, double _tolerance)//, 
 {
     show_color = true;
     show_depth = false;
+    camera.showBoxes();
     lastTime = camera.getLastTime();
     init_wait_time = 3.0;
-    default_person = trackedPerson(personFrame(defaultLocation, cv::Rect2d(), 1.0), _tolerance);
+    default_person = trackedPerson(personFrame(defaultLocation, cv::Rect2d(camera.GetCOL_width()/2-30, camera.GetCOL_height()/2-45, 60, 90), 1.0), _tolerance);
 //    tolerance = _tolerance;
     active = false;
     activity_timeout = .2; // number of seconds the controller is inactive before the class marks it as inactive
@@ -33,12 +34,12 @@ void personTracker::activityChecker()
     active = false;
     while(running)
     {
-        std::cout << "stopwatch loop" << std::endl;
+//        std::cout << "stopwatch loop" << std::endl;
         if(activityStopwatch.seconds() < activity_timeout)
             active = true;
         else
             active = false;
-        usleep(1000000);
+        usleep(10000);
     }
     active = false;
 }
@@ -129,12 +130,8 @@ void personTracker::stop()
 {
     running = false;
     std::cout << "Stopping tracker" << std::endl;
-    try
-    {
+    if(runningThread.joinable())
         runningThread.join();
-    }
-    catch (const std::exception& e)
-    {
-        std::cout << "ERROR: Tracker stopped twice (error caught)" << std::endl;
-    }
+    if(activityThread.joinable())
+        activityThread.join();
 }

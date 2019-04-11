@@ -1,6 +1,6 @@
 #include "cameraDetection.h"
 
-void emptyFunc(){}
+//void emptyFunc(){}
 
 cameraDetection::cameraDetection()
 {
@@ -30,6 +30,7 @@ cameraDetection::cameraDetection()
     isRunning  = false;
     show_color = false;
     show_depth = false;
+    show_boxes = false;
     lastTime   = 0;
     // initialize thread. It will not run continuously unless isRunning is true.
     runningThread = std::thread(&cameraDetection::run, this);
@@ -64,27 +65,19 @@ void cameraDetection::resetCamera()
 
 void cameraDetection::start()
 {
+    if(runningThread.joinable() && !isRunning)
+        stop();
     isRunning = true;
     if(!runningThread.joinable())
-    {
         runningThread = std::thread(&cameraDetection::run, this);
-    }
-    else
-        std::cout << "Attempted to start camera, but it's already running.\n";
 }
 
 void cameraDetection::stop()
 {
     isRunning = false;
-    std::cout << "Stopping camera" << std::endl;
-    try
-    {
+//    std::cout << "Stopping camera" << std::endl;
+    if(runningThread.joinable())
         runningThread.join();
-    }
-    catch (const std::exception& e)
-    {
-        std::cout << "ERROR: Camera stopped twice (error caught)" << std::endl;
-    }
 }
 
 void cameraDetection::bboxFix( const cv::Mat& img, cv::Rect2d& box)
@@ -294,8 +287,14 @@ void cameraDetection::run() try
 	//////////////////////////////////////////////////////////////////////////
 	// main loop
 
-    while (cv::waitKey(1) < 0 && isRunning)
+    while (isRunning)
     {
+        if(cv::waitKey(1) == 27)
+        {
+            isRunning = false;
+            return;
+//            stop_signal_recieved = true;
+        }
         rs2::frameset data = pipe.wait_for_frames(); // Wait for next set of frames from the camera
 
         // get frames
@@ -395,12 +394,12 @@ void cameraDetection::run() try
                 cv::Rect2d drect = cvt_bb(crect, CVT_COLOR_TO_DEPTH);
 
 //                printf("bw box       %i  (%f, %f)  w=%f  h=%f\n", n, drect.x, drect.y, drect.width, drect.height);
-                if(show_color)
+                if(show_boxes)
                     cv::rectangle(colorMat, crect, COL_TEXT_COLOR, 2, 1 );
-                if(show_depth)
+                if(show_boxes)
                     cv::rectangle(depthMat, drect, DEPTH_TEXT_COLOR, 2, 1 );
 
-                if(show_color)
+                if(show_boxes)
                 {
                     std::string prnt = "Confidence: ";
                     prnt += std::to_string(confidence);
@@ -423,7 +422,7 @@ void cameraDetection::run() try
 
 				// Get 3d centroid of person
 				cv::Point3d position = getCentroid(depthMat, depth, drect);
-				if(show_color)
+				if(show_boxes)
                 {
                     cv::putText(colorMat, std::string("x =  ") + std::to_string(position.x), cv::Point(bb[0],bb[1]+40), cv::FONT_HERSHEY_SIMPLEX, 0.75, COL_TEXT_COLOR,2);
                     cv::putText(colorMat, std::string("y =  ") + std::to_string(position.y), cv::Point(bb[0],bb[1]+60), cv::FONT_HERSHEY_SIMPLEX, 0.75, COL_TEXT_COLOR,2);

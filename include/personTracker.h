@@ -77,6 +77,8 @@ class personTracker
         void setTimeout(double _timeout){ if(_timeout > 0) activity_timeout = _timeout;}
         bool found(){return active;}
 
+        /// camera
+        cameraDetection camera;
     protected:
 
     private:
@@ -89,7 +91,6 @@ class personTracker
 
 
         /// detection
-        cameraDetection camera;
         long long lastTime;
 
         /// show/hide camera feed

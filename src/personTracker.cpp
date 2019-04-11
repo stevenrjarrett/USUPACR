@@ -15,6 +15,7 @@ personTracker::personTracker(cv::Point3d defaultLocation, double _tolerance)//, 
     activity_timeout = .2; // number of seconds the controller is inactive before the class marks it as inactive
 
     // initialize threads. They will not run continuously unless running == true.
+    this->stop_signal_recieved = false;
     running = false;
     runningThread = std::thread(&personTracker::run, this);
     activityThread = std::thread(&personTracker::activityChecker, this);
@@ -26,13 +27,18 @@ personTracker::~personTracker()
 {
     //dtor
     stop();
+    stop_signal_recieved = true;
+    if(activityThread.joinable())
+        activityThread.join();
+    if(runningThread.joinable())
+        runningThread.join();
 }
 
 void personTracker::activityChecker()
 {
 //    std::cout << "personTracker thread starting" << std::endl;
     active = false;
-    while(running)
+    while(!(this->stop_signal_recieved))
     {
 //        std::cout << "stopwatch loop" << std::endl;
         if(activityStopwatch.seconds() < activity_timeout)
@@ -46,14 +52,19 @@ void personTracker::activityChecker()
 
 void personTracker::run()
 {
+    while(!(this->stop_signal_recieved))
+    {
 //    std::cout << "personTracker Thread Started" << std::endl;
     // if I shouldn't be, don't run at all
-    if(!running)
-        return;
+    while(!running)
+        usleep(1000);
 
     // initialize
     camera.start();
+
+    people.clear();
     people.push_back(default_person);
+
 
     // wait a few seconds for the person to get in position
     usleep(init_wait_time*1000000);
@@ -92,8 +103,9 @@ void personTracker::run()
         }
 
     }
-    people.clear();
+//    people.clear();
     camera.stop();
+    }
 }
 
 void personTracker::setTolerance(double tol)
@@ -110,28 +122,28 @@ void personTracker::start()
     std::cout << "Starting person tracker" << std::endl;
 
     running = true;
-    if(!runningThread.joinable())
-    {
-        runningThread = std::thread(&personTracker::run, this);
-        std::cout << "Person tracker threads started" << std::endl;
-    }
-    else
-        std::cout << "Attempted to start tracker, but it's already running.\n";
-    if(!activityThread.joinable())
-    {
-        activityThread = std::thread(&personTracker::activityChecker, this);
-        std::cout << "Person tracker activity checker threads started" << std::endl;
-    }
-    else
-        std::cout << "Attempted to start tracker activity watcher, but it's already running.\n";
+//    if(!runningThread.joinable())
+//    {
+//        runningThread = std::thread(&personTracker::run, this);
+//        std::cout << "Person tracker threads started" << std::endl;
+//    }
+//    else
+//        std::cout << "Attempted to start tracker, but it's already running.\n";
+//    if(!activityThread.joinable())
+//    {
+//        activityThread = std::thread(&personTracker::activityChecker, this);
+//        std::cout << "Person tracker activity checker threads started" << std::endl;
+//    }
+//    else
+//        std::cout << "Attempted to start tracker activity watcher, but it's already running.\n";
 }
 
 void personTracker::stop()
 {
     running = false;
-    std::cout << "Stopping tracker" << std::endl;
-    if(runningThread.joinable())
-        runningThread.join();
-    if(activityThread.joinable())
-        activityThread.join();
+//    std::cout << "Stopping tracker" << std::endl;
+//    if(runningThread.joinable())
+//        runningThread.join();
+//    if(activityThread.joinable())
+//        activityThread.join();
 }

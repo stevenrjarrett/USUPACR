@@ -31,6 +31,7 @@ cameraDetection::cameraDetection()
     show_color = false;
     show_depth = false;
     show_boxes = false;
+    this->stop_signal_recieved = false;
     lastTime   = 0;
     // initialize thread. It will not run continuously unless isRunning is true.
     runningThread = std::thread(&cameraDetection::run, this);
@@ -56,8 +57,8 @@ void cameraDetection::resetCamera()
 
     x_color_to_depth_conversion_factor = DEPTH_width /COL_width  * tan(COL_Hor_Field_of_View/2)/tan(DEPTH_Hor_Field_of_View/2);
     y_color_to_depth_conversion_factor = DEPTH_height/COL_height * tan(COL_Ver_Field_of_View/2)/tan(DEPTH_Ver_Field_of_View/2);
-    // Wait for 1 second to allow the computer to take a breath.
-    usleep(1000000);
+    // Wait for 0.1 second to allow the computer to take a breath.
+    usleep(100000);
     // Start the process again
     start();
 
@@ -65,19 +66,19 @@ void cameraDetection::resetCamera()
 
 void cameraDetection::start()
 {
-    if(runningThread.joinable() && !isRunning)
-        stop();
+//    if(runningThread.joinable() && !isRunning)
+//        stop();
     isRunning = true;
-    if(!runningThread.joinable())
-        runningThread = std::thread(&cameraDetection::run, this);
+//    if(!runningThread.joinable())
+//        runningThread = std::thread(&cameraDetection::run, this);
 }
 
 void cameraDetection::stop()
 {
     isRunning = false;
 //    std::cout << "Stopping camera" << std::endl;
-    if(runningThread.joinable())
-        runningThread.join();
+//    if(runningThread.joinable())
+//        runningThread.join();
 }
 
 void cameraDetection::bboxFix( const cv::Mat& img, cv::Rect2d& box)
@@ -170,9 +171,11 @@ cv::Point3d cameraDetection::getCentroid(cv::Mat &depthMat, const rs2::depth_fra
 
 void cameraDetection::run() try
 {
+while(!(self->stop_signal_recieved))
+{
     // don't even try if I shouldn't be running
-    if(!isRunning)
-        return;
+    while(!isRunning)
+        usleep(1000);
     // Set up camera streams and realsense
 
         // Declare depth colorizer for pretty visualization of depth data
@@ -465,6 +468,7 @@ void cameraDetection::run() try
     cudaFree(confCPU );
     cudaFree(confCUDA);
 //    return EXIT_SUCCESS;
+}
 }
 catch (const rs2::error & e)
 {

@@ -104,6 +104,7 @@ class personTracker
         bool running;
         void run();
         std::thread runningThread;
+        bool stop_signal_recieved;
 
         /// people database
         std::vector<trackedPerson> people;

@@ -75,6 +75,7 @@ class cameraDetection
         void hide(){ show_color = false; if(isRunning) cv::destroyWindow(colorWindowName);}
         void showBoxes(){ show_boxes = true; }
         void hideBoxes(){ show_boxes = false; }
+        bool stop_signal_recieved;
 
         /// Utilities
         void bboxFix( const cv::Mat& img, cv::Rect2d& box);

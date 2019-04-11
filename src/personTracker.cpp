@@ -19,8 +19,8 @@ personTracker::personTracker(cv::Point3d defaultLocation, double _tolerance)//, 
     running = false;
     runningThread = std::thread(&personTracker::run, this);
     activityThread = std::thread(&personTracker::activityChecker, this);
-    runningThread.join();
-    activityThread.join();
+//    runningThread.join();
+//    activityThread.join();
 }
 
 personTracker::~personTracker()

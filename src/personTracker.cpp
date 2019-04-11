@@ -13,9 +13,12 @@ personTracker::personTracker(cv::Point3d defaultLocation, double _tolerance)//, 
     active = false;
     activity_timeout = .2; // number of seconds the controller is inactive before the class marks it as inactive
 
+    // initialize threads. They will not run continuously unless running == true.
     running = false;
     runningThread = std::thread(&personTracker::run, this);
     activityThread = std::thread(&personTracker::activityChecker, this);
+    runningThread.join()
+    activityThread.join();
 }
 
 personTracker::~personTracker()
@@ -26,6 +29,7 @@ personTracker::~personTracker()
 
 void personTracker::activityChecker()
 {
+//    std::cout << "personTracker thread starting" << std::endl;
     active = false;
     while(running)
     {
@@ -41,6 +45,7 @@ void personTracker::activityChecker()
 
 void personTracker::run()
 {
+//    std::cout << "personTracker Thread Started" << std::endl;
     // if I shouldn't be, don't run at all
     if(!running)
         return;

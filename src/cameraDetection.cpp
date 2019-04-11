@@ -31,7 +31,9 @@ cameraDetection::cameraDetection()
     show_color = false;
     show_depth = false;
     lastTime   = 0;
+    // initialize thread. It will not run continuously unless isRunning is true.
     runningThread = std::thread(&cameraDetection::run, this);
+    runningThread.join();
 }
 
 cameraDetection::~cameraDetection()

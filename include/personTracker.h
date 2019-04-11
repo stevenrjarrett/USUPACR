@@ -27,8 +27,8 @@ struct trackedPerson
     {
         last = newPerson;
         std::cout << "New centroid: ("
-                  << std::setw(5) << last.centroid.x
-                  << std::setw(5) << last.centroid.y
+                  << std::setw(5) << last.centroid.x << " , "
+                  << std::setw(5) << last.centroid.y << " , "
                   << std::setw(5) << last.centroid.z << ")" << std::endl;
     }
     int update(const std::vector<personFrame>& personList)
@@ -40,7 +40,7 @@ struct trackedPerson
         for(unsigned int i=0; i<personList.size(); i++)
         {
             dist = distance_xz(last.centroid, personList[i].centroid);
-            if(dist < tolerance && dist < bestDist)
+            if(dist < bestDist)
             {
                 bestDist = dist;
                 bestInd = i;
@@ -48,7 +48,7 @@ struct trackedPerson
             std::cout << "d=" << std::setw(5) << dist << ", ";
         }
         std::cout << "Best = " << bestDist << ", ";
-        if(bestInd > 0)
+        if(bestDist < tolerance && bestInd > 0)
         {
             update(personList[bestInd]);
         }

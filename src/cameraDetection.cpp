@@ -62,9 +62,9 @@ void cameraDetection::resetCamera()
 
 void cameraDetection::start()
 {
-    if(!isRunning && runningThread.joinable())
+    isRunning = true;
+    if(runningThread.joinable())
     {
-        isRunning = true;
         runningThread = std::thread(&cameraDetection::run, this);
     }
     else

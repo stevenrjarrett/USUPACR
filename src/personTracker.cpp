@@ -29,11 +29,12 @@ void personTracker::activityChecker()
     active = false;
     while(running)
     {
+        std::cout << "stopwatch loop" << std::endl;
         if(activityStopwatch.seconds() < activity_timeout)
             active = true;
         else
             active = false;
-        usleep(10000);
+        usleep(1000000);
     }
     active = false;
 }
@@ -101,15 +102,22 @@ void personTracker::setTolerance(double tol)
 void personTracker::start()
 {
     std::cout << "Starting person tracker" << std::endl;
-    if(!running && runningThread.joinable())
+
+    running = true;
+    if(runningThread.joinable())
     {
-        running = true;
         runningThread = std::thread(&personTracker::run, this);
-        activityThread = std::thread(&personTracker::activityChecker, this);
         std::cout << "Person tracker threads started" << std::endl;
     }
     else
         std::cout << "Attempted to start tracker, but it's already running.\n";
+    if(activityThread.joinable())
+    {
+        activityThread = std::thread(&personTracker::activityChecker, this);
+        std::cout << "Person tracker activity checker threads started" << std::endl;
+    }
+    else
+        std::cout << "Attempted to start tracker activity watcher, but it's already running.\n";
 }
 
 void personTracker::stop()

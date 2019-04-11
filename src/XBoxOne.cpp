@@ -79,14 +79,21 @@ void XBoxOne::start()
     wp_btn7 = false;
     wp_joyLTrigger = false;
     wp_joyRTrigger = false;
-    if(!running && pollingThread.joinable())
+
+    running = true;
+    if(pollingThread.joinable())
     {
-        running = true;
         pollingThread = std::thread(&XBoxOne::run, this);
-        activityThread = std::thread(&XBoxOne::activityChecker, this);
     }
     else
         std::cout << "Attempted to start xbox controller, but it's already running.\n";
+
+    if(activityThread.joinable())
+    {
+        activityThread = std::thread(&XBoxOne::activityChecker, this);
+    }
+    else
+        std::cout << "Attempted to start xbox controller activity checker, but it's already running.\n";
 }
 
 void XBoxOne::stop()

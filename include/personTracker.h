@@ -48,7 +48,7 @@ struct trackedPerson
 //            std::cout << "d=" << std::setw(5) << dist << ", ";
         }
         std::cout << "BestDist = " << bestDist << ", bestInd = " << bestInd << ", ";
-        if(bestDist < tolerance && bestInd > 0)
+        if(bestDist < tolerance && bestInd >= 0)
         {
             update(personList[bestInd]);
         }

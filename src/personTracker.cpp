@@ -109,14 +109,14 @@ void personTracker::start()
     std::cout << "Starting person tracker" << std::endl;
 
     running = true;
-    if(runningThread.joinable())
+    if(!runningThread.joinable())
     {
         runningThread = std::thread(&personTracker::run, this);
         std::cout << "Person tracker threads started" << std::endl;
     }
     else
         std::cout << "Attempted to start tracker, but it's already running.\n";
-    if(activityThread.joinable())
+    if(!activityThread.joinable())
     {
         activityThread = std::thread(&personTracker::activityChecker, this);
         std::cout << "Person tracker activity checker threads started" << std::endl;

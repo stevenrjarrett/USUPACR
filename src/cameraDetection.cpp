@@ -42,6 +42,9 @@ cameraDetection::~cameraDetection()
 {
     this->stop_signal_recieved = true;
     stop();
+    std::cout << "Stopping camera" << std::endl;
+    if(runningThread.joinable())
+        runningThread.join();
     //dtor
 }
 
@@ -175,7 +178,7 @@ void cameraDetection::run() try
 while(!(this->stop_signal_recieved))
 {
     // don't even try if I shouldn't be running
-    while(!isRunning)
+    while(!isRunning && !(this->stop_signal_recieved))
         usleep(1000);
     // Set up camera streams and realsense
 
@@ -291,7 +294,7 @@ while(!(this->stop_signal_recieved))
 	//////////////////////////////////////////////////////////////////////////
 	// main loop
 
-    while (isRunning)
+    while (isRunning && !(this->stop_signal_recieved))
     {
         if(cv::waitKey(1) == 27)
         {

@@ -26,12 +26,16 @@ personTracker::personTracker(cv::Point3d defaultLocation, double _tolerance)//, 
 personTracker::~personTracker()
 {
     //dtor
+    std::cout << "Stopping tracker:\n";
     stop_signal_recieved = true;
     stop();
-//    if(activityThread.joinable())
-//        activityThread.join();
-//    if(runningThread.joinable())
-//        runningThread.join();
+    std::cout << "\tActivity Thread..." << std::endl;
+    if(activityThread.joinable())
+        activityThread.join();
+    std::cout << "\tRunning Thread..." << std::endl;
+    if(runningThread.joinable())
+        runningThread.join();
+    std::cout << "\tDone." << std::endl;
 }
 
 void personTracker::activityChecker()
@@ -69,10 +73,10 @@ void personTracker::run()
     // wait a few seconds for the person to get in position
     usleep(init_wait_time*1000000);
 
-    while(running)
+    while(running && !(this->stop_signal_recieved))
     {
         // wait for input
-        while(camera.getLastTime() == lastTime)
+        while(camera.getLastTime() == lastTime && running && !(this->stop_signal_recieved))
             usleep(1000);
         lastTime = camera.getLastTime();
 

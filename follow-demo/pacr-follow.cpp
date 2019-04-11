@@ -35,7 +35,7 @@ bool EStop = false;
 bool Manual_Only = false;
 bool autonomous_mode = false;
 double follow_distance = 5.0;
-double distance_tolerance = .5;
+double distance_tolerance = 1.0;
 double max_speed = 255; // 255 is the max value you can send. Set this lower for slower
 double motor_speed_limiter = 1.0; // a value from 0-1, setting the maximum speed.
 

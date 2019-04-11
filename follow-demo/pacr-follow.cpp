@@ -123,6 +123,13 @@ int main()
             EStop = false;
         if(controller.wp_rTrigger())
             EStop = true;
+        if(controller.wp_lBumper())
+        {
+            motors.left = 0;
+            motors.right = 0;
+            sendMotorValues();
+            break;
+        }
         // if the e-stop was not pressed, do normal stuff
         if(!EStop)
         {
@@ -187,8 +194,6 @@ int main()
                     //read inputs
                     //decide what to do and set variables
                     motors = ConvertToArcade(controller.L_x()*255, -controller.L_y()*255);
-                    if(controller.wp_lBumper())
-                        break;
                 }
                 else
                 {
@@ -209,12 +214,11 @@ int main()
             if(wasRunning)
             {
                 wasRunning = false;
-                if(EStop)
-                    std::cout << "E-stop engaged" << std::endl;
-                if(!controller.isConnected())
-                    std::cout << "Controller disconnected, stopping motors" << std::endl;
-                if(!controller.isActive())
-                    std::cout << "Controller inactive, stopping motors" << std::endl;
+                std::cout << "E-stop engaged" << std::endl;
+//                if(!controller.isConnected())
+//                    std::cout << "Controller disconnected, stopping motors" << std::endl;
+//                if(!controller.isActive())
+//                    std::cout << "Controller inactive, stopping motors" << std::endl;
             }
         }
 
@@ -225,6 +229,7 @@ int main()
         //wait for a little bit
         usleep(EXECUTIVE_WAIT_TIME);
     }
+    std::cout << "Ending program. Goodbye!" << std::endl;
 //    cam.stop();
 //    controller.stop();
     return 0;

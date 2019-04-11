@@ -26,10 +26,10 @@ struct trackedPerson
     void update(personFrame newPerson)
     {
         last = newPerson;
-        std::cout << "New centroid: ("
-                  << std::setw(5) << last.centroid.x << " , "
-                  << std::setw(5) << last.centroid.y << " , "
-                  << std::setw(5) << last.centroid.z << ")" << std::endl;
+//        std::cout << "New centroid: ("
+//                  << std::setw(5) << last.centroid.x << " , "
+//                  << std::setw(5) << last.centroid.y << " , "
+//                  << std::setw(5) << last.centroid.z << ")" << std::endl;
     }
     int update(const std::vector<personFrame>& personList)
     {

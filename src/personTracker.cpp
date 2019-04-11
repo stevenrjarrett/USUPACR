@@ -4,6 +4,7 @@ double distance_xz(cv::Point3d pt1, cv::Point3d pt2) { return sqrt(pow(pt1.x-pt2
 
 personTracker::personTracker(cv::Point3d defaultLocation, double _tolerance)//, double _initial_tolerance = 1.0)
 {
+    std::cout << "Starting person tracker" << std::endl;
     show_color = true;
     show_depth = false;
     lastTime = camera.getLastTime();
@@ -16,6 +17,7 @@ personTracker::personTracker(cv::Point3d defaultLocation, double _tolerance)//, 
     running = false;
     runningThread = std::thread(&personTracker::run, this);
     activityThread = std::thread(&personTracker::activityChecker, this);
+    std::cout << "Person tracker threads started" << std::endl;
 }
 
 personTracker::~personTracker()

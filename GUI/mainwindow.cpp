@@ -87,7 +87,7 @@
 
  void MainWindow::handleButton()
  {
-    if(pushButton->click())
+    if(click())
     {
         // change the text
         pushButton->setText("ON");
@@ -95,7 +95,7 @@
         //pushButton->resize(100,100);
         //switch to autonomous mode
     }
-    if(pushButton->click())
+    if(click())
     {
         pushButton->setText("OFF");
     }

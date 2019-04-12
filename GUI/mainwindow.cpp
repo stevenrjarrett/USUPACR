@@ -2,7 +2,7 @@
 
  #include "mainwindow.h"
 
- #include <QtWidgets>
+ #include <QWidget>
 
  MainWindow::MainWindow(QWidget *parent)
     : QWidget(parent)

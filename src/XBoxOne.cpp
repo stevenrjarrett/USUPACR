@@ -206,6 +206,79 @@ void XBoxOne::run()
         printf("Failed!\n");
 }
 
+//usb
+//void XBoxOne::setAxis(int id, int val)
+//{
+//    activityStopwatch.reset();
+////    std::cout << "Pressed Axis " << id << ", val = " << val << std::endl;
+//    switch(id)
+//    {
+//    case 0:
+//        joyL_x = val;
+//        break;
+//    case 1:
+//        joyL_y = val;
+//        break;
+//    case 2:
+//        joyLTrigger = val;
+//        if(val > 0)
+//            wp_joyLTrigger = true;
+//        break;
+//    case 3:
+//        joyR_x = val;
+//        break;
+//    case 4:
+//        joyR_y = val;
+//        break;
+//    case 5:
+//        joyRTrigger = val;
+//        if(val > 0)
+//            wp_joyRTrigger = true;
+//        break;
+//    case 6:
+//        if(val<0) // left arrow
+//        {
+//            btnLEFT  = true;
+//            btnRIGHT = false;
+//            wp_btnLEFT = true;
+//        }
+//        else if(val>0) // right arrow
+//        {
+//            btnLEFT  = false;
+//            btnRIGHT = true;
+//            wp_btnRIGHT = true;
+//        }
+//        else // val==0 // no arrow pressed
+//        {
+//            btnLEFT  = false;
+//            btnRIGHT = false;
+//        }
+//        break;
+//    case 7:
+//        if(val<0) // up arrow
+//        {
+//            btnDOWN = false;
+//            btnUP   = true;
+//            wp_btnUP = true;
+//        }
+//        else if(val>0) // down arrow
+//        {
+//            btnDOWN = true;
+//            btnUP   = false;
+//            wp_btnDOWN = true;
+//        }
+//        else // val==0 // no arrow pressed
+//        {
+//            btnDOWN = false;
+//            btnUP   = false;
+//        }
+//        break;
+//    }
+//
+//}
+
+
+//bluetooth
 void XBoxOne::setAxis(int id, int val)
 {
     activityStopwatch.reset();
@@ -219,19 +292,21 @@ void XBoxOne::setAxis(int id, int val)
         joyL_y = val;
         break;
     case 2:
+        joyR_x = val;
+        break;
+    case 3:
+        joyR_y = val;
+        break;
+    case 4:
+        joyRTrigger = val;
+        if(val > 0)
+            wp_joyRTrigger = true;
+        break;
+    case 5:
         joyLTrigger = val;
         if(val > 0)
             wp_joyLTrigger = true;
         break;
-    case 3:
-        joyR_x = val;
-        break;
-    case 4:
-        joyR_y = val;
-    case 5:
-        joyRTrigger = val;
-        if(val > 0)
-            wp_joyRTrigger = true;
     case 6:
         if(val<0) // left arrow
         {
@@ -340,36 +415,36 @@ void XBoxOne::setBtn(int id, int val)
         if(val != 0)
             wp_btnB = true;
         break;
-    case 2: // X
+    case 3: // X
         btnX = val;
         if(val != 0)
             wp_btnX = true;
         break;
-    case 3: // Y
+    case 4: // Y
         btnY = val;
         if(val != 0)
             wp_btnY = true;
         break;
-    case 4: // left bumper
+    case 6: // left bumper
         btnLBumper = val;
         if(val != 0)
             wp_btnLBumper = true;
         break;
-    case 5: // right bumper
+    case 7: // right bumper
         btnRBumper = val;
         if(val != 0)
             wp_btnRBumper = true;
         break;
-    case 6:
+    case 11:
         btn6 = val;
         if(val != 0)
             wp_btn6 = true;
         break;
-    case 7:
-        btn7 = val;
-        if(val != 0)
-            wp_btn7 = true;
-        break;
+//    case 7:
+//        btn7 = val;
+//        if(val != 0)
+//            wp_btn7 = true;
+//        break;
 //    default:
 //        break;
     }

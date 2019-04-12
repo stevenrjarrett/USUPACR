@@ -122,115 +122,110 @@ int main()
     {
 //        std::cout << "Beginning of executive loop" << std::endl;
         // get input from controller for the E-stops
+        if(controller.wp_rBumper())
+            EStop = false;
+        if(controller.wp_rTrigger())
+            EStop = true;
+        if(controller.wp_lBumper())
+        {
+            motors.left = 0;
+            motors.right = 0;
+            sendMotorValues();
+            break;
+        }
+        // if the e-stop was not pressed, do normal stuff
+        if(!EStop)
+        {
+            // reset 1st stop signal (for reporting purposes
+            if(!wasRunning)
+            {
+                std::cout << "Running" << std::endl;
+                wasRunning = true;
+            }
+            // Act based on autonomous / user control
+            if(autonomous_mode)
+            {
+                if(controller.wp_B() || abs(controller.L_x()) > 0.1 || abs(controller.L_y()) > 0.1 || !controller.isActive() || !controller.isConnected())
+                {
+                    autonomous_mode = false;
+                    motors.left = 0;
+                    motors.right = 0;
+                    sendMotorValues();
+                    std::cout << "disabling autonomous mode. User control only." << std::endl;
+                    tracker.stop();
+                    controller.wp_A();
+                }
+                else if(tracker.found())
+                {
+                    /// TODO
+                    double turningVal = tracker.getCentroid().x *255 / 10; // positive to turn right, negative to turn left.
+                    double speedVal   = 0; // positive for forward, negative for backward
+                    if(tracker.getCentroid().z >= (follow_distance - distance_tolerance))
+                    {
+                        speedVal = (tracker.getCentroid().z - follow_distance + distance_tolerance) / (2*distance_tolerance);
+                        // speedVal should be in a value between 0 and 1 if the person is at the target following
+                        // distance +- the distance tolerance.
+                        speedVal *= max_speed;
 
-//
-//        if(controller.wp_rBumper())
-//            EStop = false;
-//        if(controller.wp_rTrigger())
-//            EStop = true;
-//        if(controller.wp_lBumper())
-//        {
-//            motors.left = 0;
-//            motors.right = 0;
-//            sendMotorValues();
-//            break;
-//        }
-//        // if the e-stop was not pressed, do normal stuff
-//        if(!EStop)
-//        {
-//            // reset 1st stop signal (for reporting purposes
-//            if(!wasRunning)
-//            {
-//                std::cout << "Running" << std::endl;
-//                wasRunning = true;
-//            }
-//            // Act based on autonomous / user control
-//            if(autonomous_mode)
-//            {
-//                if(controller.wp_B() || abs(controller.L_x()) > 0.1 || abs(controller.L_y()) > 0.1 || !controller.isActive() || !controller.isConnected())
-//                {
-//                    autonomous_mode = false;
-//                    motors.left = 0;
-//                    motors.right = 0;
-//                    sendMotorValues();
-//                    std::cout << "disabling autonomous mode. User control only." << std::endl;
-//                    tracker.stop();
-//                    controller.wp_A();
-//                }
-//                else if(tracker.found())
-//                {
-//                    /// TODO
-//                    double turningVal = tracker.getCentroid().x *255 / 10; // positive to turn right, negative to turn left.
-//                    double speedVal   = 0; // positive for forward, negative for backward
-//                    if(tracker.getCentroid().z >= (follow_distance - distance_tolerance))
-//                    {
-//                        speedVal = (tracker.getCentroid().z - follow_distance + distance_tolerance) / (2*distance_tolerance);
-//                        // speedVal should be in a value between 0 and 1 if the person is at the target following
-//                        // distance +- the distance tolerance.
-//                        speedVal *= max_speed;
-//
-//                        // If the person's farther away, fix the speed value.
-//                        if(speedVal > max_speed)
-//                            speedVal = max_speed;
-//                    }
-//                    motors = ConvertToArcade(turningVal, speedVal);
-//                }
-//                else
-//                {
-//                    motors.left = 0;
-//                    motors.right = 0;
-//                }
-//            }
-//            else
-//            {
-//                if(controller.wp_A())
-//                {
-//                    autonomous_mode = true;
-//                    motors.left = 0;
-//                    motors.right = 0;
-//                    sendMotorValues();
-//                    controller.wp_B();
-//                    std::cout << "Beginning autonomous mode" << std::endl;
-//                    tracker.start();
-//                }
-//                else if(controller.isConnected() && controller.isActive())
-//                {
-//                    wasActive = true;
-//                    //read inputs
-//                    //decide what to do and set variables
-//                    motors = ConvertToArcade(controller.L_x()*max_speed, -controller.L_y()*max_speed);
-//                }
-//                else
-//                {
-//                    if(wasActive)
-//                    {
-//                        wasActive = false;
-//                        std::cout << "Controller inactive or disconnected" << std::endl;
-//                    }
-//                    motors.left = 0;
-//                    motors.right = 0;
-//                }
-//            }
-//        }
-//        else
-//        {
-//            motors.left = 0;
-//            motors.right = 0;
-//            if(wasRunning)
-//            {
-//                wasRunning = false;
-//                std::cout << "E-stop engaged" << std::endl;
-////                if(!controller.isConnected())
-////                    std::cout << "Controller disconnected, stopping motors" << std::endl;
-////                if(!controller.isActive())
-////                    std::cout << "Controller inactive, stopping motors" << std::endl;
-//            }
-//        }
-//
-//        sendMotorValues();
+                        // If the person's farther away, fix the speed value.
+                        if(speedVal > max_speed)
+                            speedVal = max_speed;
+                    }
+                    motors = ConvertToArcade(turningVal, speedVal);
+                }
+                else
+                {
+                    motors.left = 0;
+                    motors.right = 0;
+                }
+            }
+            else
+            {
+                if(controller.wp_A())
+                {
+                    autonomous_mode = true;
+                    motors.left = 0;
+                    motors.right = 0;
+                    sendMotorValues();
+                    controller.wp_B();
+                    std::cout << "Beginning autonomous mode" << std::endl;
+                    tracker.start();
+                }
+                else if(controller.isConnected() && controller.isActive())
+                {
+                    wasActive = true;
+                    //read inputs
+                    //decide what to do and set variables
+                    motors = ConvertToArcade(controller.L_x()*max_speed, -controller.L_y()*max_speed);
+                }
+                else
+                {
+                    if(wasActive)
+                    {
+                        wasActive = false;
+                        std::cout << "Controller inactive or disconnected" << std::endl;
+                    }
+                    motors.left = 0;
+                    motors.right = 0;
+                }
+            }
+        }
+        else
+        {
+            motors.left = 0;
+            motors.right = 0;
+            if(wasRunning)
+            {
+                wasRunning = false;
+                std::cout << "E-stop engaged" << std::endl;
+//                if(!controller.isConnected())
+//                    std::cout << "Controller disconnected, stopping motors" << std::endl;
+//                if(!controller.isActive())
+//                    std::cout << "Controller inactive, stopping motors" << std::endl;
+            }
+        }
 
-
-
+        sendMotorValues();
 //            controller.printALL();
 //        std::cout << "Values sent: " << motors.left  << '\t' << motors.right << std::endl;
 

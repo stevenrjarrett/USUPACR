@@ -72,7 +72,7 @@
     pushButton = new QPushButton(tr("&OFF"));
 
     //set size for autonomous button
-    pushButton->resize(100,100);
+    //pushButton->resize(100,100);
 
     // Connect button signal to appropriate slot
     connect(pushButton, SIGNAL (released()), this, SLOT (handleButton()));

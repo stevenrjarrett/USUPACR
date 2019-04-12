@@ -273,6 +273,56 @@ void XBoxOne::setAxis(int id, int val)
 
 }
 
+// Button values for if it's connected via usb
+//void XBoxOne::setBtn(int id, int val)
+//{
+//    activityStopwatch.reset();
+//    switch(id)
+//    {
+//    case 0: // A
+//        btnA = val;
+//        if(val != 0)
+//            wp_btnA = true;
+//        break;
+//    case 1: // B
+//        btnB = val;
+//        if(val != 0)
+//            wp_btnB = true;
+//        break;
+//    case 2: // X
+//        btnX = val;
+//        if(val != 0)
+//            wp_btnX = true;
+//        break;
+//    case 3: // Y
+//        btnY = val;
+//        if(val != 0)
+//            wp_btnY = true;
+//        break;
+//    case 4: // left bumper
+//        btnLBumper = val;
+//        if(val != 0)
+//            wp_btnLBumper = true;
+//        break;
+//    case 5: // right bumper
+//        btnRBumper = val;
+//        if(val != 0)
+//            wp_btnRBumper = true;
+//        break;
+//    case 6:
+//        btn6 = val;
+//        if(val != 0)
+//            wp_btn6 = true;
+//        break;
+//    case 7:
+//        btn7 = val;
+//        if(val != 0)
+//            wp_btn7 = true;
+//        break;
+////    default:
+////        break;
+//    }
+//}
 void XBoxOne::setBtn(int id, int val)
 {
     activityStopwatch.reset();

@@ -68,8 +68,8 @@ void sendMotorValues()
 {
     motorArduino << (int)(motors.left  * motor_speed_limiter) << std::endl;
     motorArduino << (int)(motors.right * motor_speed_limiter) << std::endl;
-    std::cout << "sent values: l=" << (int)(motors.left  * motor_speed_limiter)
-                         << ", r=" << (int)(motors.right * motor_speed_limiter) << std::endl;
+//    std::cout << "sent values: l=" << (int)(motors.left  * motor_speed_limiter)
+//                         << ", r=" << (int)(motors.right * motor_speed_limiter) << std::endl;
 }
 
 

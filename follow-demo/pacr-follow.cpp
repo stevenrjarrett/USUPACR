@@ -123,9 +123,14 @@ int main()
 //        std::cout << "Beginning of executive loop" << std::endl;
         // get input from controller for the E-stops
         if(controller.wp_rBumper())
+        {
             EStop = false;
+        }
         if(controller.wp_rTrigger())
+        {
             EStop = true;
+            autonomous_mode = false;
+        }
         if(controller.wp_lBumper())
         {
             motors.left = 0;

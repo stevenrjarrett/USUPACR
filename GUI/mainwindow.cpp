@@ -71,7 +71,7 @@
     pushButton = new QPushButton(tr("&OFF"));
 
     //set size for autonomous button
-    pushButton->setSize(100,100);
+    pushButton->resize(100,100);
 
     // Connect button signal to appropriate slot
     connect(pushButton, SIGNAL (released()), this, SLOT (handleButton()));
@@ -87,7 +87,7 @@
 
  void MainWindow::handleButton()
  {
-    if(clicked() == true)
+    if(bool clicked() == true)
     {
         // change the text
         pushButton->setText("ON");
@@ -95,7 +95,7 @@
         //pushButton->resize(100,100);
         //switch to autonomous mode
     }
-    if(click() == true)
+    if(bool click() == true)
     {
         pushButton->setText("OFF");
     }

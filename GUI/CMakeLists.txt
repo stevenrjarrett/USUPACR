@@ -9,7 +9,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 # declaring files in your project
 
 set ( SOURCES
- main.cpp
+ pacr-gui.cpp
  mainwindow.cpp
 )
 

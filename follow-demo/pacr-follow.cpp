@@ -19,8 +19,8 @@
 
 struct motorValues
 {
-    int left;
-    int right;
+    double left;
+    double right;
     motorValues(int lm = 0, int rm = 0)
     {
         left = lm;
@@ -37,7 +37,7 @@ bool autonomous_mode = false;
 double follow_distance = 5.0;
 double distance_tolerance = 1.0;
 double max_speed = 255; // 255 is the max value you can send. Set this lower for slower
-double motor_speed_limiter = 0.1; // a value from 0-1, setting the maximum speed.
+double motor_speed_limiter = 0.5; // a value from 0-1, setting the maximum speed.
 
 std::fstream motorArduino;
 
@@ -66,8 +66,10 @@ void sig_handler(int signo)
 
 void sendMotorValues()
 {
-    motorArduino << motors.left * motor_speed_limiter << std::endl;
-    motorArduino << motors.right * motor_speed_limiter << std::endl;
+    motorArduino << (int)(motors.left  * motor_speed_limiter) << std::endl;
+    motorArduino << (int)(motors.right * motor_speed_limiter) << std::endl;
+    std::cout << "sent values: l=" << (int)(motors.left  * motor_speed_limiter)
+                         << ", r=" << (int)(motors.right * motor_speed_limiter) << std::endl;
 }
 
 
@@ -194,7 +196,7 @@ int main()
                     wasActive = true;
                     //read inputs
                     //decide what to do and set variables
-                    motors = ConvertToArcade(controller.L_x()*255, -controller.L_y()*255);
+                    motors = ConvertToArcade(controller.L_x()*max_speed, -controller.L_y()*max_speed);
                 }
                 else
                 {

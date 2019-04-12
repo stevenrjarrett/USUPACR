@@ -77,7 +77,7 @@
     //pushButton->resize(100,100);
 
     // Connect button signal to appropriate slot
-    connect(pushButton, SIGNAL (toggled()), this, SLOT (handleButton()));
+    connect(pushButton, SIGNAL (clicked()), this, SLOT (handleButton()));
 
     QVBoxLayout *vbox3 = new QVBoxLayout;
     vbox3->addWidget(pushButton);
@@ -91,8 +91,16 @@
  void MainWindow::handleButton()
  {
     pushButton->setText("ON");
-
-
     //activate autonomous mode
 
+
+    connect(pushButton, SIGNAL (clicked()), this, SLOT (handleButton2()));
+
+
+ }
+
+ void MainWindow::handleButton2()
+ {
+    pushButton->setText("OFF");
+    //deactivate autonomous mode
  }

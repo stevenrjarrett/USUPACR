@@ -81,66 +81,170 @@ CMakeFiles/pacr-follow.dir/pacr-follow.cpp.o.provides: CMakeFiles/pacr-follow.di
 CMakeFiles/pacr-follow.dir/pacr-follow.cpp.o.provides.build: CMakeFiles/pacr-follow.dir/pacr-follow.cpp.o
 
 
-CMakeFiles/pacr-follow.dir/src/cameraDetection.cpp.o: CMakeFiles/pacr-follow.dir/flags.make
-CMakeFiles/pacr-follow.dir/src/cameraDetection.cpp.o: ../src/cameraDetection.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nvidia/Documents/USUPACR/follow-demo/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/pacr-follow.dir/src/cameraDetection.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/pacr-follow.dir/src/cameraDetection.cpp.o -c /home/nvidia/Documents/USUPACR/follow-demo/src/cameraDetection.cpp
+CMakeFiles/pacr-follow.dir/home/nvidia/Documents/USUPACR/src/cameraDetection.cpp.o: CMakeFiles/pacr-follow.dir/flags.make
+CMakeFiles/pacr-follow.dir/home/nvidia/Documents/USUPACR/src/cameraDetection.cpp.o: /home/nvidia/Documents/USUPACR/src/cameraDetection.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nvidia/Documents/USUPACR/follow-demo/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/pacr-follow.dir/home/nvidia/Documents/USUPACR/src/cameraDetection.cpp.o"
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/pacr-follow.dir/home/nvidia/Documents/USUPACR/src/cameraDetection.cpp.o -c /home/nvidia/Documents/USUPACR/src/cameraDetection.cpp
 
-CMakeFiles/pacr-follow.dir/src/cameraDetection.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/pacr-follow.dir/src/cameraDetection.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/nvidia/Documents/USUPACR/follow-demo/src/cameraDetection.cpp > CMakeFiles/pacr-follow.dir/src/cameraDetection.cpp.i
+CMakeFiles/pacr-follow.dir/home/nvidia/Documents/USUPACR/src/cameraDetection.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/pacr-follow.dir/home/nvidia/Documents/USUPACR/src/cameraDetection.cpp.i"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/nvidia/Documents/USUPACR/src/cameraDetection.cpp > CMakeFiles/pacr-follow.dir/home/nvidia/Documents/USUPACR/src/cameraDetection.cpp.i
 
-CMakeFiles/pacr-follow.dir/src/cameraDetection.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/pacr-follow.dir/src/cameraDetection.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/nvidia/Documents/USUPACR/follow-demo/src/cameraDetection.cpp -o CMakeFiles/pacr-follow.dir/src/cameraDetection.cpp.s
+CMakeFiles/pacr-follow.dir/home/nvidia/Documents/USUPACR/src/cameraDetection.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/pacr-follow.dir/home/nvidia/Documents/USUPACR/src/cameraDetection.cpp.s"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/nvidia/Documents/USUPACR/src/cameraDetection.cpp -o CMakeFiles/pacr-follow.dir/home/nvidia/Documents/USUPACR/src/cameraDetection.cpp.s
 
-CMakeFiles/pacr-follow.dir/src/cameraDetection.cpp.o.requires:
+CMakeFiles/pacr-follow.dir/home/nvidia/Documents/USUPACR/src/cameraDetection.cpp.o.requires:
 
-.PHONY : CMakeFiles/pacr-follow.dir/src/cameraDetection.cpp.o.requires
+.PHONY : CMakeFiles/pacr-follow.dir/home/nvidia/Documents/USUPACR/src/cameraDetection.cpp.o.requires
 
-CMakeFiles/pacr-follow.dir/src/cameraDetection.cpp.o.provides: CMakeFiles/pacr-follow.dir/src/cameraDetection.cpp.o.requires
-	$(MAKE) -f CMakeFiles/pacr-follow.dir/build.make CMakeFiles/pacr-follow.dir/src/cameraDetection.cpp.o.provides.build
-.PHONY : CMakeFiles/pacr-follow.dir/src/cameraDetection.cpp.o.provides
+CMakeFiles/pacr-follow.dir/home/nvidia/Documents/USUPACR/src/cameraDetection.cpp.o.provides: CMakeFiles/pacr-follow.dir/home/nvidia/Documents/USUPACR/src/cameraDetection.cpp.o.requires
+	$(MAKE) -f CMakeFiles/pacr-follow.dir/build.make CMakeFiles/pacr-follow.dir/home/nvidia/Documents/USUPACR/src/cameraDetection.cpp.o.provides.build
+.PHONY : CMakeFiles/pacr-follow.dir/home/nvidia/Documents/USUPACR/src/cameraDetection.cpp.o.provides
 
-CMakeFiles/pacr-follow.dir/src/cameraDetection.cpp.o.provides.build: CMakeFiles/pacr-follow.dir/src/cameraDetection.cpp.o
+CMakeFiles/pacr-follow.dir/home/nvidia/Documents/USUPACR/src/cameraDetection.cpp.o.provides.build: CMakeFiles/pacr-follow.dir/home/nvidia/Documents/USUPACR/src/cameraDetection.cpp.o
 
 
-CMakeFiles/pacr-follow.dir/src/XBoxOne.cpp.o: CMakeFiles/pacr-follow.dir/flags.make
-CMakeFiles/pacr-follow.dir/src/XBoxOne.cpp.o: ../src/XBoxOne.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nvidia/Documents/USUPACR/follow-demo/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/pacr-follow.dir/src/XBoxOne.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/pacr-follow.dir/src/XBoxOne.cpp.o -c /home/nvidia/Documents/USUPACR/follow-demo/src/XBoxOne.cpp
+CMakeFiles/pacr-follow.dir/home/nvidia/Documents/USUPACR/src/XBoxOne.cpp.o: CMakeFiles/pacr-follow.dir/flags.make
+CMakeFiles/pacr-follow.dir/home/nvidia/Documents/USUPACR/src/XBoxOne.cpp.o: /home/nvidia/Documents/USUPACR/src/XBoxOne.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nvidia/Documents/USUPACR/follow-demo/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/pacr-follow.dir/home/nvidia/Documents/USUPACR/src/XBoxOne.cpp.o"
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/pacr-follow.dir/home/nvidia/Documents/USUPACR/src/XBoxOne.cpp.o -c /home/nvidia/Documents/USUPACR/src/XBoxOne.cpp
 
-CMakeFiles/pacr-follow.dir/src/XBoxOne.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/pacr-follow.dir/src/XBoxOne.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/nvidia/Documents/USUPACR/follow-demo/src/XBoxOne.cpp > CMakeFiles/pacr-follow.dir/src/XBoxOne.cpp.i
+CMakeFiles/pacr-follow.dir/home/nvidia/Documents/USUPACR/src/XBoxOne.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/pacr-follow.dir/home/nvidia/Documents/USUPACR/src/XBoxOne.cpp.i"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/nvidia/Documents/USUPACR/src/XBoxOne.cpp > CMakeFiles/pacr-follow.dir/home/nvidia/Documents/USUPACR/src/XBoxOne.cpp.i
 
-CMakeFiles/pacr-follow.dir/src/XBoxOne.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/pacr-follow.dir/src/XBoxOne.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/nvidia/Documents/USUPACR/follow-demo/src/XBoxOne.cpp -o CMakeFiles/pacr-follow.dir/src/XBoxOne.cpp.s
+CMakeFiles/pacr-follow.dir/home/nvidia/Documents/USUPACR/src/XBoxOne.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/pacr-follow.dir/home/nvidia/Documents/USUPACR/src/XBoxOne.cpp.s"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/nvidia/Documents/USUPACR/src/XBoxOne.cpp -o CMakeFiles/pacr-follow.dir/home/nvidia/Documents/USUPACR/src/XBoxOne.cpp.s
 
-CMakeFiles/pacr-follow.dir/src/XBoxOne.cpp.o.requires:
+CMakeFiles/pacr-follow.dir/home/nvidia/Documents/USUPACR/src/XBoxOne.cpp.o.requires:
 
-.PHONY : CMakeFiles/pacr-follow.dir/src/XBoxOne.cpp.o.requires
+.PHONY : CMakeFiles/pacr-follow.dir/home/nvidia/Documents/USUPACR/src/XBoxOne.cpp.o.requires
 
-CMakeFiles/pacr-follow.dir/src/XBoxOne.cpp.o.provides: CMakeFiles/pacr-follow.dir/src/XBoxOne.cpp.o.requires
-	$(MAKE) -f CMakeFiles/pacr-follow.dir/build.make CMakeFiles/pacr-follow.dir/src/XBoxOne.cpp.o.provides.build
-.PHONY : CMakeFiles/pacr-follow.dir/src/XBoxOne.cpp.o.provides
+CMakeFiles/pacr-follow.dir/home/nvidia/Documents/USUPACR/src/XBoxOne.cpp.o.provides: CMakeFiles/pacr-follow.dir/home/nvidia/Documents/USUPACR/src/XBoxOne.cpp.o.requires
+	$(MAKE) -f CMakeFiles/pacr-follow.dir/build.make CMakeFiles/pacr-follow.dir/home/nvidia/Documents/USUPACR/src/XBoxOne.cpp.o.provides.build
+.PHONY : CMakeFiles/pacr-follow.dir/home/nvidia/Documents/USUPACR/src/XBoxOne.cpp.o.provides
 
-CMakeFiles/pacr-follow.dir/src/XBoxOne.cpp.o.provides.build: CMakeFiles/pacr-follow.dir/src/XBoxOne.cpp.o
+CMakeFiles/pacr-follow.dir/home/nvidia/Documents/USUPACR/src/XBoxOne.cpp.o.provides.build: CMakeFiles/pacr-follow.dir/home/nvidia/Documents/USUPACR/src/XBoxOne.cpp.o
+
+
+CMakeFiles/pacr-follow.dir/home/nvidia/Documents/USUPACR/src/personTracker.cpp.o: CMakeFiles/pacr-follow.dir/flags.make
+CMakeFiles/pacr-follow.dir/home/nvidia/Documents/USUPACR/src/personTracker.cpp.o: /home/nvidia/Documents/USUPACR/src/personTracker.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nvidia/Documents/USUPACR/follow-demo/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/pacr-follow.dir/home/nvidia/Documents/USUPACR/src/personTracker.cpp.o"
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/pacr-follow.dir/home/nvidia/Documents/USUPACR/src/personTracker.cpp.o -c /home/nvidia/Documents/USUPACR/src/personTracker.cpp
+
+CMakeFiles/pacr-follow.dir/home/nvidia/Documents/USUPACR/src/personTracker.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/pacr-follow.dir/home/nvidia/Documents/USUPACR/src/personTracker.cpp.i"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/nvidia/Documents/USUPACR/src/personTracker.cpp > CMakeFiles/pacr-follow.dir/home/nvidia/Documents/USUPACR/src/personTracker.cpp.i
+
+CMakeFiles/pacr-follow.dir/home/nvidia/Documents/USUPACR/src/personTracker.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/pacr-follow.dir/home/nvidia/Documents/USUPACR/src/personTracker.cpp.s"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/nvidia/Documents/USUPACR/src/personTracker.cpp -o CMakeFiles/pacr-follow.dir/home/nvidia/Documents/USUPACR/src/personTracker.cpp.s
+
+CMakeFiles/pacr-follow.dir/home/nvidia/Documents/USUPACR/src/personTracker.cpp.o.requires:
+
+.PHONY : CMakeFiles/pacr-follow.dir/home/nvidia/Documents/USUPACR/src/personTracker.cpp.o.requires
+
+CMakeFiles/pacr-follow.dir/home/nvidia/Documents/USUPACR/src/personTracker.cpp.o.provides: CMakeFiles/pacr-follow.dir/home/nvidia/Documents/USUPACR/src/personTracker.cpp.o.requires
+	$(MAKE) -f CMakeFiles/pacr-follow.dir/build.make CMakeFiles/pacr-follow.dir/home/nvidia/Documents/USUPACR/src/personTracker.cpp.o.provides.build
+.PHONY : CMakeFiles/pacr-follow.dir/home/nvidia/Documents/USUPACR/src/personTracker.cpp.o.provides
+
+CMakeFiles/pacr-follow.dir/home/nvidia/Documents/USUPACR/src/personTracker.cpp.o.provides.build: CMakeFiles/pacr-follow.dir/home/nvidia/Documents/USUPACR/src/personTracker.cpp.o
+
+
+CMakeFiles/pacr-follow.dir/home/nvidia/Documents/USUPACR/src/stopwatch.cpp.o: CMakeFiles/pacr-follow.dir/flags.make
+CMakeFiles/pacr-follow.dir/home/nvidia/Documents/USUPACR/src/stopwatch.cpp.o: /home/nvidia/Documents/USUPACR/src/stopwatch.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nvidia/Documents/USUPACR/follow-demo/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/pacr-follow.dir/home/nvidia/Documents/USUPACR/src/stopwatch.cpp.o"
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/pacr-follow.dir/home/nvidia/Documents/USUPACR/src/stopwatch.cpp.o -c /home/nvidia/Documents/USUPACR/src/stopwatch.cpp
+
+CMakeFiles/pacr-follow.dir/home/nvidia/Documents/USUPACR/src/stopwatch.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/pacr-follow.dir/home/nvidia/Documents/USUPACR/src/stopwatch.cpp.i"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/nvidia/Documents/USUPACR/src/stopwatch.cpp > CMakeFiles/pacr-follow.dir/home/nvidia/Documents/USUPACR/src/stopwatch.cpp.i
+
+CMakeFiles/pacr-follow.dir/home/nvidia/Documents/USUPACR/src/stopwatch.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/pacr-follow.dir/home/nvidia/Documents/USUPACR/src/stopwatch.cpp.s"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/nvidia/Documents/USUPACR/src/stopwatch.cpp -o CMakeFiles/pacr-follow.dir/home/nvidia/Documents/USUPACR/src/stopwatch.cpp.s
+
+CMakeFiles/pacr-follow.dir/home/nvidia/Documents/USUPACR/src/stopwatch.cpp.o.requires:
+
+.PHONY : CMakeFiles/pacr-follow.dir/home/nvidia/Documents/USUPACR/src/stopwatch.cpp.o.requires
+
+CMakeFiles/pacr-follow.dir/home/nvidia/Documents/USUPACR/src/stopwatch.cpp.o.provides: CMakeFiles/pacr-follow.dir/home/nvidia/Documents/USUPACR/src/stopwatch.cpp.o.requires
+	$(MAKE) -f CMakeFiles/pacr-follow.dir/build.make CMakeFiles/pacr-follow.dir/home/nvidia/Documents/USUPACR/src/stopwatch.cpp.o.provides.build
+.PHONY : CMakeFiles/pacr-follow.dir/home/nvidia/Documents/USUPACR/src/stopwatch.cpp.o.provides
+
+CMakeFiles/pacr-follow.dir/home/nvidia/Documents/USUPACR/src/stopwatch.cpp.o.provides.build: CMakeFiles/pacr-follow.dir/home/nvidia/Documents/USUPACR/src/stopwatch.cpp.o
+
+
+CMakeFiles/pacr-follow.dir/home/nvidia/Documents/USUPACR/src/libenjoy_linux.c.o: CMakeFiles/pacr-follow.dir/flags.make
+CMakeFiles/pacr-follow.dir/home/nvidia/Documents/USUPACR/src/libenjoy_linux.c.o: /home/nvidia/Documents/USUPACR/src/libenjoy_linux.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nvidia/Documents/USUPACR/follow-demo/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building C object CMakeFiles/pacr-follow.dir/home/nvidia/Documents/USUPACR/src/libenjoy_linux.c.o"
+	/usr/bin/cc  $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/pacr-follow.dir/home/nvidia/Documents/USUPACR/src/libenjoy_linux.c.o   -c /home/nvidia/Documents/USUPACR/src/libenjoy_linux.c
+
+CMakeFiles/pacr-follow.dir/home/nvidia/Documents/USUPACR/src/libenjoy_linux.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/pacr-follow.dir/home/nvidia/Documents/USUPACR/src/libenjoy_linux.c.i"
+	/usr/bin/cc  $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvidia/Documents/USUPACR/src/libenjoy_linux.c > CMakeFiles/pacr-follow.dir/home/nvidia/Documents/USUPACR/src/libenjoy_linux.c.i
+
+CMakeFiles/pacr-follow.dir/home/nvidia/Documents/USUPACR/src/libenjoy_linux.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/pacr-follow.dir/home/nvidia/Documents/USUPACR/src/libenjoy_linux.c.s"
+	/usr/bin/cc  $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvidia/Documents/USUPACR/src/libenjoy_linux.c -o CMakeFiles/pacr-follow.dir/home/nvidia/Documents/USUPACR/src/libenjoy_linux.c.s
+
+CMakeFiles/pacr-follow.dir/home/nvidia/Documents/USUPACR/src/libenjoy_linux.c.o.requires:
+
+.PHONY : CMakeFiles/pacr-follow.dir/home/nvidia/Documents/USUPACR/src/libenjoy_linux.c.o.requires
+
+CMakeFiles/pacr-follow.dir/home/nvidia/Documents/USUPACR/src/libenjoy_linux.c.o.provides: CMakeFiles/pacr-follow.dir/home/nvidia/Documents/USUPACR/src/libenjoy_linux.c.o.requires
+	$(MAKE) -f CMakeFiles/pacr-follow.dir/build.make CMakeFiles/pacr-follow.dir/home/nvidia/Documents/USUPACR/src/libenjoy_linux.c.o.provides.build
+.PHONY : CMakeFiles/pacr-follow.dir/home/nvidia/Documents/USUPACR/src/libenjoy_linux.c.o.provides
+
+CMakeFiles/pacr-follow.dir/home/nvidia/Documents/USUPACR/src/libenjoy_linux.c.o.provides.build: CMakeFiles/pacr-follow.dir/home/nvidia/Documents/USUPACR/src/libenjoy_linux.c.o
+
+
+CMakeFiles/pacr-follow.dir/home/nvidia/Documents/USUPACR/src/libenjoy.c.o: CMakeFiles/pacr-follow.dir/flags.make
+CMakeFiles/pacr-follow.dir/home/nvidia/Documents/USUPACR/src/libenjoy.c.o: /home/nvidia/Documents/USUPACR/src/libenjoy.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nvidia/Documents/USUPACR/follow-demo/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building C object CMakeFiles/pacr-follow.dir/home/nvidia/Documents/USUPACR/src/libenjoy.c.o"
+	/usr/bin/cc  $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/pacr-follow.dir/home/nvidia/Documents/USUPACR/src/libenjoy.c.o   -c /home/nvidia/Documents/USUPACR/src/libenjoy.c
+
+CMakeFiles/pacr-follow.dir/home/nvidia/Documents/USUPACR/src/libenjoy.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/pacr-follow.dir/home/nvidia/Documents/USUPACR/src/libenjoy.c.i"
+	/usr/bin/cc  $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvidia/Documents/USUPACR/src/libenjoy.c > CMakeFiles/pacr-follow.dir/home/nvidia/Documents/USUPACR/src/libenjoy.c.i
+
+CMakeFiles/pacr-follow.dir/home/nvidia/Documents/USUPACR/src/libenjoy.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/pacr-follow.dir/home/nvidia/Documents/USUPACR/src/libenjoy.c.s"
+	/usr/bin/cc  $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvidia/Documents/USUPACR/src/libenjoy.c -o CMakeFiles/pacr-follow.dir/home/nvidia/Documents/USUPACR/src/libenjoy.c.s
+
+CMakeFiles/pacr-follow.dir/home/nvidia/Documents/USUPACR/src/libenjoy.c.o.requires:
+
+.PHONY : CMakeFiles/pacr-follow.dir/home/nvidia/Documents/USUPACR/src/libenjoy.c.o.requires
+
+CMakeFiles/pacr-follow.dir/home/nvidia/Documents/USUPACR/src/libenjoy.c.o.provides: CMakeFiles/pacr-follow.dir/home/nvidia/Documents/USUPACR/src/libenjoy.c.o.requires
+	$(MAKE) -f CMakeFiles/pacr-follow.dir/build.make CMakeFiles/pacr-follow.dir/home/nvidia/Documents/USUPACR/src/libenjoy.c.o.provides.build
+.PHONY : CMakeFiles/pacr-follow.dir/home/nvidia/Documents/USUPACR/src/libenjoy.c.o.provides
+
+CMakeFiles/pacr-follow.dir/home/nvidia/Documents/USUPACR/src/libenjoy.c.o.provides.build: CMakeFiles/pacr-follow.dir/home/nvidia/Documents/USUPACR/src/libenjoy.c.o
 
 
 # Object files for target pacr-follow
 pacr__follow_OBJECTS = \
 "CMakeFiles/pacr-follow.dir/pacr-follow.cpp.o" \
-"CMakeFiles/pacr-follow.dir/src/cameraDetection.cpp.o" \
-"CMakeFiles/pacr-follow.dir/src/XBoxOne.cpp.o"
+"CMakeFiles/pacr-follow.dir/home/nvidia/Documents/USUPACR/src/cameraDetection.cpp.o" \
+"CMakeFiles/pacr-follow.dir/home/nvidia/Documents/USUPACR/src/XBoxOne.cpp.o" \
+"CMakeFiles/pacr-follow.dir/home/nvidia/Documents/USUPACR/src/personTracker.cpp.o" \
+"CMakeFiles/pacr-follow.dir/home/nvidia/Documents/USUPACR/src/stopwatch.cpp.o" \
+"CMakeFiles/pacr-follow.dir/home/nvidia/Documents/USUPACR/src/libenjoy_linux.c.o" \
+"CMakeFiles/pacr-follow.dir/home/nvidia/Documents/USUPACR/src/libenjoy.c.o"
 
 # External object files for target pacr-follow
 pacr__follow_EXTERNAL_OBJECTS =
 
 pacr-follow: CMakeFiles/pacr-follow.dir/pacr-follow.cpp.o
-pacr-follow: CMakeFiles/pacr-follow.dir/src/cameraDetection.cpp.o
-pacr-follow: CMakeFiles/pacr-follow.dir/src/XBoxOne.cpp.o
+pacr-follow: CMakeFiles/pacr-follow.dir/home/nvidia/Documents/USUPACR/src/cameraDetection.cpp.o
+pacr-follow: CMakeFiles/pacr-follow.dir/home/nvidia/Documents/USUPACR/src/XBoxOne.cpp.o
+pacr-follow: CMakeFiles/pacr-follow.dir/home/nvidia/Documents/USUPACR/src/personTracker.cpp.o
+pacr-follow: CMakeFiles/pacr-follow.dir/home/nvidia/Documents/USUPACR/src/stopwatch.cpp.o
+pacr-follow: CMakeFiles/pacr-follow.dir/home/nvidia/Documents/USUPACR/src/libenjoy_linux.c.o
+pacr-follow: CMakeFiles/pacr-follow.dir/home/nvidia/Documents/USUPACR/src/libenjoy.c.o
 pacr-follow: CMakeFiles/pacr-follow.dir/build.make
 pacr-follow: /usr/local/cuda-9.0/lib64/libcudart_static.a
 pacr-follow: /usr/lib/aarch64-linux-gnu/librt.so
@@ -169,7 +273,7 @@ pacr-follow: /usr/lib/libopencv_imgcodecs.so.3.3.1
 pacr-follow: /usr/lib/libopencv_imgproc.so.3.3.1
 pacr-follow: /usr/lib/libopencv_core.so.3.3.1
 pacr-follow: CMakeFiles/pacr-follow.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/nvidia/Documents/USUPACR/follow-demo/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Linking CXX executable pacr-follow"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/nvidia/Documents/USUPACR/follow-demo/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Linking CXX executable pacr-follow"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/pacr-follow.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -178,8 +282,12 @@ CMakeFiles/pacr-follow.dir/build: pacr-follow
 .PHONY : CMakeFiles/pacr-follow.dir/build
 
 CMakeFiles/pacr-follow.dir/requires: CMakeFiles/pacr-follow.dir/pacr-follow.cpp.o.requires
-CMakeFiles/pacr-follow.dir/requires: CMakeFiles/pacr-follow.dir/src/cameraDetection.cpp.o.requires
-CMakeFiles/pacr-follow.dir/requires: CMakeFiles/pacr-follow.dir/src/XBoxOne.cpp.o.requires
+CMakeFiles/pacr-follow.dir/requires: CMakeFiles/pacr-follow.dir/home/nvidia/Documents/USUPACR/src/cameraDetection.cpp.o.requires
+CMakeFiles/pacr-follow.dir/requires: CMakeFiles/pacr-follow.dir/home/nvidia/Documents/USUPACR/src/XBoxOne.cpp.o.requires
+CMakeFiles/pacr-follow.dir/requires: CMakeFiles/pacr-follow.dir/home/nvidia/Documents/USUPACR/src/personTracker.cpp.o.requires
+CMakeFiles/pacr-follow.dir/requires: CMakeFiles/pacr-follow.dir/home/nvidia/Documents/USUPACR/src/stopwatch.cpp.o.requires
+CMakeFiles/pacr-follow.dir/requires: CMakeFiles/pacr-follow.dir/home/nvidia/Documents/USUPACR/src/libenjoy_linux.c.o.requires
+CMakeFiles/pacr-follow.dir/requires: CMakeFiles/pacr-follow.dir/home/nvidia/Documents/USUPACR/src/libenjoy.c.o.requires
 
 .PHONY : CMakeFiles/pacr-follow.dir/requires
 

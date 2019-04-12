@@ -6,21 +6,25 @@
 
 #IncludeRegexTransform: 
 
-.././include/XBoxOne.h
+../../include/XBoxOne.h
 thread
 -
 libenjoy.h
-.././include/libenjoy.h
+../../include/libenjoy.h
 libenjoy_linux.h
-.././include/libenjoy_linux.h
+../../include/libenjoy_linux.h
+stopwatch.h
+../../include/stopwatch.h
 
-.././include/cameraDetection.h
+../../include/cameraDetection.h
 librealsense2/rs.hpp
 -
 opencv2/opencv.hpp
 -
 string
 -
+stopwatch.h
+../../include/stopwatch.h
 signal.h
 -
 unistd.h
@@ -44,31 +48,51 @@ jetson-utils/cudaFont.h
 jetson-inference/detectNet.h
 -
 
-.././include/libenjoy.h
+../../include/libenjoy.h
 stdint.h
 -
 
-.././include/libenjoy_linux.h
+../../include/libenjoy_linux.h
 linux/joystick.h
 -
 stdint.h
 -
 
+../../include/personTracker.h
+cameraDetection.h
+../../include/cameraDetection.h
+stopwatch.h
+../../include/stopwatch.h
+opencv2/opencv.hpp
+-
+thread
+-
+string
+-
+vector
+-
+
+../../include/stopwatch.h
+chrono
+-
+
 /home/nvidia/Documents/USUPACR/follow-demo/pacr-follow.cpp
 iostream
+-
+opencv2/opencv.hpp
 -
 unistd.h
 -
 fstream
 -
-cameraDetection.h
-/home/nvidia/Documents/USUPACR/follow-demo/cameraDetection.h
+personTracker.h
+/home/nvidia/Documents/USUPACR/follow-demo/personTracker.h
 XBoxOne.h
 /home/nvidia/Documents/USUPACR/follow-demo/XBoxOne.h
 
-/home/nvidia/Documents/USUPACR/follow-demo/src/XBoxOne.cpp
+/home/nvidia/Documents/USUPACR/src/XBoxOne.cpp
 XBoxOne.h
-/home/nvidia/Documents/USUPACR/follow-demo/src/XBoxOne.h
+/home/nvidia/Documents/USUPACR/src/XBoxOne.h
 stdio.h
 -
 unistd.h
@@ -80,9 +104,17 @@ iostream
 pthread.h
 -
 
-/home/nvidia/Documents/USUPACR/follow-demo/src/cameraDetection.cpp
+/home/nvidia/Documents/USUPACR/src/cameraDetection.cpp
 cameraDetection.h
-/home/nvidia/Documents/USUPACR/follow-demo/src/cameraDetection.h
+/home/nvidia/Documents/USUPACR/src/cameraDetection.h
+
+/home/nvidia/Documents/USUPACR/src/personTracker.cpp
+personTracker.h
+/home/nvidia/Documents/USUPACR/src/personTracker.h
+
+/home/nvidia/Documents/USUPACR/src/stopwatch.cpp
+stopwatch.h
+/home/nvidia/Documents/USUPACR/src/stopwatch.h
 
 /usr/local/cuda-9.0/include/builtin_types.h
 device_types.h

@@ -123,6 +123,168 @@ pacr-follow/fast:
 	$(MAKE) -f CMakeFiles/pacr-follow.dir/build.make CMakeFiles/pacr-follow.dir/build
 .PHONY : pacr-follow/fast
 
+home/nvidia/Documents/USUPACR/src/XBoxOne.o: home/nvidia/Documents/USUPACR/src/XBoxOne.cpp.o
+
+.PHONY : home/nvidia/Documents/USUPACR/src/XBoxOne.o
+
+# target to build an object file
+home/nvidia/Documents/USUPACR/src/XBoxOne.cpp.o:
+	$(MAKE) -f CMakeFiles/pacr-follow.dir/build.make CMakeFiles/pacr-follow.dir/home/nvidia/Documents/USUPACR/src/XBoxOne.cpp.o
+.PHONY : home/nvidia/Documents/USUPACR/src/XBoxOne.cpp.o
+
+home/nvidia/Documents/USUPACR/src/XBoxOne.i: home/nvidia/Documents/USUPACR/src/XBoxOne.cpp.i
+
+.PHONY : home/nvidia/Documents/USUPACR/src/XBoxOne.i
+
+# target to preprocess a source file
+home/nvidia/Documents/USUPACR/src/XBoxOne.cpp.i:
+	$(MAKE) -f CMakeFiles/pacr-follow.dir/build.make CMakeFiles/pacr-follow.dir/home/nvidia/Documents/USUPACR/src/XBoxOne.cpp.i
+.PHONY : home/nvidia/Documents/USUPACR/src/XBoxOne.cpp.i
+
+home/nvidia/Documents/USUPACR/src/XBoxOne.s: home/nvidia/Documents/USUPACR/src/XBoxOne.cpp.s
+
+.PHONY : home/nvidia/Documents/USUPACR/src/XBoxOne.s
+
+# target to generate assembly for a file
+home/nvidia/Documents/USUPACR/src/XBoxOne.cpp.s:
+	$(MAKE) -f CMakeFiles/pacr-follow.dir/build.make CMakeFiles/pacr-follow.dir/home/nvidia/Documents/USUPACR/src/XBoxOne.cpp.s
+.PHONY : home/nvidia/Documents/USUPACR/src/XBoxOne.cpp.s
+
+home/nvidia/Documents/USUPACR/src/cameraDetection.o: home/nvidia/Documents/USUPACR/src/cameraDetection.cpp.o
+
+.PHONY : home/nvidia/Documents/USUPACR/src/cameraDetection.o
+
+# target to build an object file
+home/nvidia/Documents/USUPACR/src/cameraDetection.cpp.o:
+	$(MAKE) -f CMakeFiles/pacr-follow.dir/build.make CMakeFiles/pacr-follow.dir/home/nvidia/Documents/USUPACR/src/cameraDetection.cpp.o
+.PHONY : home/nvidia/Documents/USUPACR/src/cameraDetection.cpp.o
+
+home/nvidia/Documents/USUPACR/src/cameraDetection.i: home/nvidia/Documents/USUPACR/src/cameraDetection.cpp.i
+
+.PHONY : home/nvidia/Documents/USUPACR/src/cameraDetection.i
+
+# target to preprocess a source file
+home/nvidia/Documents/USUPACR/src/cameraDetection.cpp.i:
+	$(MAKE) -f CMakeFiles/pacr-follow.dir/build.make CMakeFiles/pacr-follow.dir/home/nvidia/Documents/USUPACR/src/cameraDetection.cpp.i
+.PHONY : home/nvidia/Documents/USUPACR/src/cameraDetection.cpp.i
+
+home/nvidia/Documents/USUPACR/src/cameraDetection.s: home/nvidia/Documents/USUPACR/src/cameraDetection.cpp.s
+
+.PHONY : home/nvidia/Documents/USUPACR/src/cameraDetection.s
+
+# target to generate assembly for a file
+home/nvidia/Documents/USUPACR/src/cameraDetection.cpp.s:
+	$(MAKE) -f CMakeFiles/pacr-follow.dir/build.make CMakeFiles/pacr-follow.dir/home/nvidia/Documents/USUPACR/src/cameraDetection.cpp.s
+.PHONY : home/nvidia/Documents/USUPACR/src/cameraDetection.cpp.s
+
+home/nvidia/Documents/USUPACR/src/libenjoy.o: home/nvidia/Documents/USUPACR/src/libenjoy.c.o
+
+.PHONY : home/nvidia/Documents/USUPACR/src/libenjoy.o
+
+# target to build an object file
+home/nvidia/Documents/USUPACR/src/libenjoy.c.o:
+	$(MAKE) -f CMakeFiles/pacr-follow.dir/build.make CMakeFiles/pacr-follow.dir/home/nvidia/Documents/USUPACR/src/libenjoy.c.o
+.PHONY : home/nvidia/Documents/USUPACR/src/libenjoy.c.o
+
+home/nvidia/Documents/USUPACR/src/libenjoy.i: home/nvidia/Documents/USUPACR/src/libenjoy.c.i
+
+.PHONY : home/nvidia/Documents/USUPACR/src/libenjoy.i
+
+# target to preprocess a source file
+home/nvidia/Documents/USUPACR/src/libenjoy.c.i:
+	$(MAKE) -f CMakeFiles/pacr-follow.dir/build.make CMakeFiles/pacr-follow.dir/home/nvidia/Documents/USUPACR/src/libenjoy.c.i
+.PHONY : home/nvidia/Documents/USUPACR/src/libenjoy.c.i
+
+home/nvidia/Documents/USUPACR/src/libenjoy.s: home/nvidia/Documents/USUPACR/src/libenjoy.c.s
+
+.PHONY : home/nvidia/Documents/USUPACR/src/libenjoy.s
+
+# target to generate assembly for a file
+home/nvidia/Documents/USUPACR/src/libenjoy.c.s:
+	$(MAKE) -f CMakeFiles/pacr-follow.dir/build.make CMakeFiles/pacr-follow.dir/home/nvidia/Documents/USUPACR/src/libenjoy.c.s
+.PHONY : home/nvidia/Documents/USUPACR/src/libenjoy.c.s
+
+home/nvidia/Documents/USUPACR/src/libenjoy_linux.o: home/nvidia/Documents/USUPACR/src/libenjoy_linux.c.o
+
+.PHONY : home/nvidia/Documents/USUPACR/src/libenjoy_linux.o
+
+# target to build an object file
+home/nvidia/Documents/USUPACR/src/libenjoy_linux.c.o:
+	$(MAKE) -f CMakeFiles/pacr-follow.dir/build.make CMakeFiles/pacr-follow.dir/home/nvidia/Documents/USUPACR/src/libenjoy_linux.c.o
+.PHONY : home/nvidia/Documents/USUPACR/src/libenjoy_linux.c.o
+
+home/nvidia/Documents/USUPACR/src/libenjoy_linux.i: home/nvidia/Documents/USUPACR/src/libenjoy_linux.c.i
+
+.PHONY : home/nvidia/Documents/USUPACR/src/libenjoy_linux.i
+
+# target to preprocess a source file
+home/nvidia/Documents/USUPACR/src/libenjoy_linux.c.i:
+	$(MAKE) -f CMakeFiles/pacr-follow.dir/build.make CMakeFiles/pacr-follow.dir/home/nvidia/Documents/USUPACR/src/libenjoy_linux.c.i
+.PHONY : home/nvidia/Documents/USUPACR/src/libenjoy_linux.c.i
+
+home/nvidia/Documents/USUPACR/src/libenjoy_linux.s: home/nvidia/Documents/USUPACR/src/libenjoy_linux.c.s
+
+.PHONY : home/nvidia/Documents/USUPACR/src/libenjoy_linux.s
+
+# target to generate assembly for a file
+home/nvidia/Documents/USUPACR/src/libenjoy_linux.c.s:
+	$(MAKE) -f CMakeFiles/pacr-follow.dir/build.make CMakeFiles/pacr-follow.dir/home/nvidia/Documents/USUPACR/src/libenjoy_linux.c.s
+.PHONY : home/nvidia/Documents/USUPACR/src/libenjoy_linux.c.s
+
+home/nvidia/Documents/USUPACR/src/personTracker.o: home/nvidia/Documents/USUPACR/src/personTracker.cpp.o
+
+.PHONY : home/nvidia/Documents/USUPACR/src/personTracker.o
+
+# target to build an object file
+home/nvidia/Documents/USUPACR/src/personTracker.cpp.o:
+	$(MAKE) -f CMakeFiles/pacr-follow.dir/build.make CMakeFiles/pacr-follow.dir/home/nvidia/Documents/USUPACR/src/personTracker.cpp.o
+.PHONY : home/nvidia/Documents/USUPACR/src/personTracker.cpp.o
+
+home/nvidia/Documents/USUPACR/src/personTracker.i: home/nvidia/Documents/USUPACR/src/personTracker.cpp.i
+
+.PHONY : home/nvidia/Documents/USUPACR/src/personTracker.i
+
+# target to preprocess a source file
+home/nvidia/Documents/USUPACR/src/personTracker.cpp.i:
+	$(MAKE) -f CMakeFiles/pacr-follow.dir/build.make CMakeFiles/pacr-follow.dir/home/nvidia/Documents/USUPACR/src/personTracker.cpp.i
+.PHONY : home/nvidia/Documents/USUPACR/src/personTracker.cpp.i
+
+home/nvidia/Documents/USUPACR/src/personTracker.s: home/nvidia/Documents/USUPACR/src/personTracker.cpp.s
+
+.PHONY : home/nvidia/Documents/USUPACR/src/personTracker.s
+
+# target to generate assembly for a file
+home/nvidia/Documents/USUPACR/src/personTracker.cpp.s:
+	$(MAKE) -f CMakeFiles/pacr-follow.dir/build.make CMakeFiles/pacr-follow.dir/home/nvidia/Documents/USUPACR/src/personTracker.cpp.s
+.PHONY : home/nvidia/Documents/USUPACR/src/personTracker.cpp.s
+
+home/nvidia/Documents/USUPACR/src/stopwatch.o: home/nvidia/Documents/USUPACR/src/stopwatch.cpp.o
+
+.PHONY : home/nvidia/Documents/USUPACR/src/stopwatch.o
+
+# target to build an object file
+home/nvidia/Documents/USUPACR/src/stopwatch.cpp.o:
+	$(MAKE) -f CMakeFiles/pacr-follow.dir/build.make CMakeFiles/pacr-follow.dir/home/nvidia/Documents/USUPACR/src/stopwatch.cpp.o
+.PHONY : home/nvidia/Documents/USUPACR/src/stopwatch.cpp.o
+
+home/nvidia/Documents/USUPACR/src/stopwatch.i: home/nvidia/Documents/USUPACR/src/stopwatch.cpp.i
+
+.PHONY : home/nvidia/Documents/USUPACR/src/stopwatch.i
+
+# target to preprocess a source file
+home/nvidia/Documents/USUPACR/src/stopwatch.cpp.i:
+	$(MAKE) -f CMakeFiles/pacr-follow.dir/build.make CMakeFiles/pacr-follow.dir/home/nvidia/Documents/USUPACR/src/stopwatch.cpp.i
+.PHONY : home/nvidia/Documents/USUPACR/src/stopwatch.cpp.i
+
+home/nvidia/Documents/USUPACR/src/stopwatch.s: home/nvidia/Documents/USUPACR/src/stopwatch.cpp.s
+
+.PHONY : home/nvidia/Documents/USUPACR/src/stopwatch.s
+
+# target to generate assembly for a file
+home/nvidia/Documents/USUPACR/src/stopwatch.cpp.s:
+	$(MAKE) -f CMakeFiles/pacr-follow.dir/build.make CMakeFiles/pacr-follow.dir/home/nvidia/Documents/USUPACR/src/stopwatch.cpp.s
+.PHONY : home/nvidia/Documents/USUPACR/src/stopwatch.cpp.s
+
 pacr-follow.o: pacr-follow.cpp.o
 
 .PHONY : pacr-follow.o
@@ -150,60 +312,6 @@ pacr-follow.cpp.s:
 	$(MAKE) -f CMakeFiles/pacr-follow.dir/build.make CMakeFiles/pacr-follow.dir/pacr-follow.cpp.s
 .PHONY : pacr-follow.cpp.s
 
-src/XBoxOne.o: src/XBoxOne.cpp.o
-
-.PHONY : src/XBoxOne.o
-
-# target to build an object file
-src/XBoxOne.cpp.o:
-	$(MAKE) -f CMakeFiles/pacr-follow.dir/build.make CMakeFiles/pacr-follow.dir/src/XBoxOne.cpp.o
-.PHONY : src/XBoxOne.cpp.o
-
-src/XBoxOne.i: src/XBoxOne.cpp.i
-
-.PHONY : src/XBoxOne.i
-
-# target to preprocess a source file
-src/XBoxOne.cpp.i:
-	$(MAKE) -f CMakeFiles/pacr-follow.dir/build.make CMakeFiles/pacr-follow.dir/src/XBoxOne.cpp.i
-.PHONY : src/XBoxOne.cpp.i
-
-src/XBoxOne.s: src/XBoxOne.cpp.s
-
-.PHONY : src/XBoxOne.s
-
-# target to generate assembly for a file
-src/XBoxOne.cpp.s:
-	$(MAKE) -f CMakeFiles/pacr-follow.dir/build.make CMakeFiles/pacr-follow.dir/src/XBoxOne.cpp.s
-.PHONY : src/XBoxOne.cpp.s
-
-src/cameraDetection.o: src/cameraDetection.cpp.o
-
-.PHONY : src/cameraDetection.o
-
-# target to build an object file
-src/cameraDetection.cpp.o:
-	$(MAKE) -f CMakeFiles/pacr-follow.dir/build.make CMakeFiles/pacr-follow.dir/src/cameraDetection.cpp.o
-.PHONY : src/cameraDetection.cpp.o
-
-src/cameraDetection.i: src/cameraDetection.cpp.i
-
-.PHONY : src/cameraDetection.i
-
-# target to preprocess a source file
-src/cameraDetection.cpp.i:
-	$(MAKE) -f CMakeFiles/pacr-follow.dir/build.make CMakeFiles/pacr-follow.dir/src/cameraDetection.cpp.i
-.PHONY : src/cameraDetection.cpp.i
-
-src/cameraDetection.s: src/cameraDetection.cpp.s
-
-.PHONY : src/cameraDetection.s
-
-# target to generate assembly for a file
-src/cameraDetection.cpp.s:
-	$(MAKE) -f CMakeFiles/pacr-follow.dir/build.make CMakeFiles/pacr-follow.dir/src/cameraDetection.cpp.s
-.PHONY : src/cameraDetection.cpp.s
-
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -213,15 +321,27 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... pacr-follow"
+	@echo "... home/nvidia/Documents/USUPACR/src/XBoxOne.o"
+	@echo "... home/nvidia/Documents/USUPACR/src/XBoxOne.i"
+	@echo "... home/nvidia/Documents/USUPACR/src/XBoxOne.s"
+	@echo "... home/nvidia/Documents/USUPACR/src/cameraDetection.o"
+	@echo "... home/nvidia/Documents/USUPACR/src/cameraDetection.i"
+	@echo "... home/nvidia/Documents/USUPACR/src/cameraDetection.s"
+	@echo "... home/nvidia/Documents/USUPACR/src/libenjoy.o"
+	@echo "... home/nvidia/Documents/USUPACR/src/libenjoy.i"
+	@echo "... home/nvidia/Documents/USUPACR/src/libenjoy.s"
+	@echo "... home/nvidia/Documents/USUPACR/src/libenjoy_linux.o"
+	@echo "... home/nvidia/Documents/USUPACR/src/libenjoy_linux.i"
+	@echo "... home/nvidia/Documents/USUPACR/src/libenjoy_linux.s"
+	@echo "... home/nvidia/Documents/USUPACR/src/personTracker.o"
+	@echo "... home/nvidia/Documents/USUPACR/src/personTracker.i"
+	@echo "... home/nvidia/Documents/USUPACR/src/personTracker.s"
+	@echo "... home/nvidia/Documents/USUPACR/src/stopwatch.o"
+	@echo "... home/nvidia/Documents/USUPACR/src/stopwatch.i"
+	@echo "... home/nvidia/Documents/USUPACR/src/stopwatch.s"
 	@echo "... pacr-follow.o"
 	@echo "... pacr-follow.i"
 	@echo "... pacr-follow.s"
-	@echo "... src/XBoxOne.o"
-	@echo "... src/XBoxOne.i"
-	@echo "... src/XBoxOne.s"
-	@echo "... src/cameraDetection.o"
-	@echo "... src/cameraDetection.i"
-	@echo "... src/cameraDetection.s"
 .PHONY : help
 
 

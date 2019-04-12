@@ -282,7 +282,7 @@ void XBoxOne::run()
 void XBoxOne::setAxis(int id, int val)
 {
     activityStopwatch.reset();
-    std::cout << "Pressed Axis " << id << ", val = " << val << std::endl;
+//    std::cout << "Pressed Axis " << id << ", val = " << val << std::endl;
     switch(id)
     {
     case 0:
@@ -402,7 +402,7 @@ void XBoxOne::setAxis(int id, int val)
 void XBoxOne::setBtn(int id, int val)
 {
     activityStopwatch.reset();
-    std::cout << "Pressed button " << id << ", val = " << val << std::endl;
+//    std::cout << "Pressed button " << id << ", val = " << val << std::endl;
     switch(id)
     {
     case 0: // A

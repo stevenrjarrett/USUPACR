@@ -75,7 +75,7 @@
     //pushButton->resize(100,100);
 
     // Connect button signal to appropriate slot
-    connect(pushButton, SIGNAL (released()), this, SLOT (handleButton()));
+    connect(pushButton, SIGNAL (clicked()), this, SLOT (handleButton()));
 
     QVBoxLayout *vbox3 = new QVBoxLayout;
     vbox3->addWidget(pushButton);
@@ -89,4 +89,9 @@
  void MainWindow::handleButton()
  {
     pushButton->setText("ON");
+
+    if(clicked() == true)
+    {
+        pushButoon->setText("OFF");
+    }
  }

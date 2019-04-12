@@ -71,7 +71,7 @@
     QPushButton *pushButton = new QPushButton(tr("&OFF"));
 
     // Connect button signal to appropriate slot
-    connect(p_button, SIGNAL (released()), this, SLOT (handleButton()));
+    connect(pushButton, SIGNAL (released()), this, SLOT (handleButton()));
 
     QVBoxLayout *vbox3 = new QVBoxLayout;
     vbox3->addWidget(pushButton);

@@ -32,7 +32,12 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
-		<Unit filename="main.cpp" />
+		<Unit filename="CMakeLists.txt" />
+		<Unit filename="main.qrc" />
+		<Unit filename="mainwindow.cpp" />
+		<Unit filename="mainwindow.h" />
+		<Unit filename="mainwindow.ui" />
+		<Unit filename="pacr-gui.cpp" />
 		<Extensions>
 			<code_completion />
 			<debugger />

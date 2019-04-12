@@ -89,9 +89,4 @@
  void MainWindow::handleButton()
  {
     pushButton->setText("ON");
-
-    if(clicked())
-    {
-        pushButton->setText("OFF");
-    }
  }

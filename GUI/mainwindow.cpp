@@ -89,6 +89,8 @@
  {
     // change the text
     pushButton->setText("ON");
+    //resize push button
+    pushButton->resize(200,200);
     //switch to autonomous mode
 
  }

@@ -98,6 +98,8 @@
  void MainWindow::handleButton2()
  {
     pushButton->setText("OFF");
+    //deactivate autonomous mode
+
 
     connect(pushButton, SIGNAL (clicked()), this, SLOT (handleButton()));
  }

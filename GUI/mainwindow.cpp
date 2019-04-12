@@ -3,6 +3,7 @@
  #include "mainwindow.h"
 
  #include <QWidget>
+ #include <QAbstractButton>
 
  MainWindow::MainWindow(QWidget *parent)
     : QWidget(parent)
@@ -87,18 +88,5 @@
 
  void MainWindow::handleButton()
  {
-    if(bool clicked() == true)
-    {
-        // change the text
-        pushButton->setText("ON");
-        //resize push button
-        //pushButton->resize(100,100);
-        //switch to autonomous mode
-    }
-    if(bool click() == true)
-    {
-        pushButton->setText("OFF");
-    }
-
-
+    pushButton->setText("ON");
  }

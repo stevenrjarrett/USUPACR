@@ -3,12 +3,6 @@
  #ifndef MAINWINDOW_H
  #define MAINWINDOW_H
 
- //#include <QMainWindow>
- //#include <QPushButton>
- //#include <QRadioButton>
- //#include <QGroupBox>
-
-// #include <QWidget>
  #include <QtGui>
 
  class QGroupBox;

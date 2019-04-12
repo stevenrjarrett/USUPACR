@@ -326,7 +326,7 @@ void XBoxOne::setAxis(int id, int val)
 void XBoxOne::setBtn(int id, int val)
 {
     activityStopwatch.reset();
-    std::cout << "Pressed button " << val << std::endl;
+    std::cout << "Pressed button " << id << std::endl;
     switch(id)
     {
     case 0: // A

@@ -6,11 +6,11 @@ set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
-# declare USUPACR project
-project(USUPACR)
+# declare pacr-gui project
+project(pacr-gui)
 
-file(GLOB USUPACR_Sources pacr-gui.cpp)
-# file(GLOB USUPACR_Includes *.h )
+file(GLOB pacr-gui_Sources pacr-gui.cpp)
+# file(GLOB pacr-gui_Includes *.h )
 
 # import jetson-inference and jetson-utils packages.
 # note that if you didn't do "sudo make install"
@@ -21,7 +21,7 @@ find_package(jetson-inference)
 # CUDA and Qt4 are required
 find_package(CUDA)
 find_package(Qt4)
-find_package (Threads REQUIRED)
+find_package (Threads)
 
 # Find gstreamer
 # find_package(gstreamer-1.0)
@@ -30,11 +30,11 @@ find_package (Threads REQUIRED)
 include(${QT_USE_FILE})
 add_definitions(${QT_DEFINITIONS})
 
-# compile the USUPACR program
-cuda_add_executable(USUPACR ${USUPACR_Sources})
-# cuda_add_executable(USUPACR USUPACR.cpp)
+# compile the pacr-gui program
+cuda_add_executable(pacr-gui ${pacr-gui_Sources})
+# cuda_add_executable(pacr-gui pacr-gui.cpp)
 
-# link USUPACR to jetson-inference library
+# link pacr-gui to jetson-inference library
 include_directories(/usr/include/gstreamer-1.0 /usr/lib/aarch64-linux-gnu/gstreamer-1.0/include /usr/include/glib-2.0 /usr/include/libxml2 /usr/lib/aarch64-linux-gnu/glib-2.0/include/)
-# target_include_directories(USUPACR PRIVATE ${GST_INCLUDE_DIRS})
-target_link_libraries(USUPACR jetson-inference ${CMAKE_THREAD_LIBS_INIT})
+# target_include_directories(pacr-gui PRIVATE ${GST_INCLUDE_DIRS})
+target_link_libraries(pacr-gui jetson-inference ${CMAKE_THREAD_LIBS_INIT})

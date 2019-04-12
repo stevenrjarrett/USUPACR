@@ -9,8 +9,8 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 # declare USUPACR project
 project(USUPACR)
 
-file(GLOB USUPACR_Sources main.cpp)
-file(GLOB USUPACR_Includes *.h )
+file(GLOB USUPACR_Sources pacr-gui.cpp)
+# file(GLOB USUPACR_Includes *.h )
 
 # import jetson-inference and jetson-utils packages.
 # note that if you didn't do "sudo make install"

@@ -70,6 +70,8 @@
     QGroupBox *groupBox3 = new QGroupBox(tr("Autonomous Mode"));
 
     pushButton = new QPushButton(tr("&OFF"));
+    pushButton->setCheckable(true);
+    pushButton->setChecked(true);
 
     //set size for autonomous button
     //pushButton->resize(100,100);
@@ -89,4 +91,7 @@
  void MainWindow::handleButton()
  {
     pushButton->setText("ON");
+
+    //activate autonomous mode
+
  }

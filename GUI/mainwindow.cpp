@@ -72,7 +72,6 @@
     pushButton = new QPushButton(tr("&OFF"));
     pushButton->setCheckable(true);
     pushButton->setChecked(true);
-    QPushButton {color: red}
 
     // Connect button signal to appropriate slot
     connect(pushButton, SIGNAL (clicked()), this, SLOT (handleButton()));
@@ -89,7 +88,6 @@
  void MainWindow::handleButton()
  {
     pushButton->setText("ON");
-    QPushButton {color: green}
     //activate autonomous mode
 
 
@@ -100,7 +98,6 @@
  void MainWindow::handleButton2()
  {
     pushButton->setText("OFF");
-    QPushButton {color: red}
 
     connect(pushButton, SIGNAL (clicked()), this, SLOT (handleButton()));
  }

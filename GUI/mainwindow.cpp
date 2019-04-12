@@ -73,6 +73,9 @@
     // Connect button signal to appropriate slot
     connect(pushButton, SIGNAL (released()), this, SLOT (handleButton()));
 
+    //set size for autonomous button
+    resize(100,100);
+
     QVBoxLayout *vbox3 = new QVBoxLayout;
     vbox3->addWidget(pushButton);
     vbox3->addStretch(1);

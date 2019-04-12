@@ -90,10 +90,6 @@
     pushButton->setText("ON");
     //activate autonomous mode
 
-    if(pushButton->clicked() == true)
-    {
-        pushButton->setText("OFF");
-    }
 
 
 

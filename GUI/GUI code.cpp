@@ -1,16 +1,16 @@
-*******Header*******
+//*******Header*******
 
  #ifndef MAINWINDOW_H
  #define MAINWINDOW_H
- 
+
  //#include <QMainWindow>
  //#include <QPushButton>
  //#include <QRadioButton>
  //#include <QGroupBox>
 
  #include <QtWidget>
- 
- class QGroupBox; 
+
+ class QGroupBox;
 
  class MainWindow : public QWidget
  {
@@ -27,15 +27,15 @@
     QGroupBox *createSpeedGroup();
     QGroupBox *createAutonomousGroup();
  };
- 
+
  #endif
 
-*******MainWindow*******
+//*******MainWindow*******
 
  #include "mainwindow.h"
- 
+
  #include <QtWidgets>
- 
+
  MainWindow::MainWindow(QWidget *parent)
     : QWidget(parent)
  {
@@ -99,9 +99,9 @@
  {
     // Create the button
     QGroupBox *groupBox3 = new QGroupBox(tr("Autonomous Mode"));
-    
+
     QPushButton *pushButton = new QPushButton(tr("&OFF"));
- 
+
     // Connect button signal to appropriate slot
     connect(p_button, SIGNAL (released()), this, SLOT (handleButton()));
 
@@ -112,22 +112,22 @@
 
     return groupBox3;
  }
-    
- 
+
+
  void MainWindow::handleButton()
  {
     // change the text
     pushButton->setText("ON");
     //switch to autonomous mode
-    
+
  }
 
-*******Main*******
+//*******Main*******
 
  #include "mainwindow.h"
  #include <QApplication>
- 
- int main(int argc, char *argv[]) 
+
+ int main(int argc, char *argv[])
  {
      QApplication app(argc, argv);
      MainWindow mainWindow;

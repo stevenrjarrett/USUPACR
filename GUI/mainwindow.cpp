@@ -78,6 +78,7 @@
 
     // Connect button signal to appropriate slot
     connect(pushButton, SIGNAL (clicked()), this, SLOT (handleButton()));
+    connect(pushButton, SIGNAL (clicked()), this, SLOT (handleButton2()));
 
     QVBoxLayout *vbox3 = new QVBoxLayout;
     vbox3->addWidget(pushButton);
@@ -94,7 +95,7 @@
     //activate autonomous mode
 
 
-    connect(pushButton, SIGNAL (clicked()), this, SLOT (handleButton2()));
+
 
 
  }

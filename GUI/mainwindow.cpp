@@ -68,7 +68,7 @@
     // Create the button
     QGroupBox *groupBox3 = new QGroupBox(tr("Autonomous Mode"));
 
-    QPushButton *pushButton = new QPushButton(tr("&OFF"));
+    pushButton = new QPushButton(tr("&OFF"));
 
     // Connect button signal to appropriate slot
     connect(pushButton, SIGNAL (released()), this, SLOT (handleButton()));

@@ -27,6 +27,7 @@
     QGroupBox *createDistanceGroup();
     QGroupBox *createSpeedGroup();
     QGroupBox *createAutonomousGroup();
+    QPushButton *pushButton;
  };
 
  #endif

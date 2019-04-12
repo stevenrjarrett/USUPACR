@@ -8,7 +8,8 @@
  //#include <QRadioButton>
  //#include <QGroupBox>
 
- #include <QWidget>
+// #include <QWidget>
+ #include <QtGui>
 
  class QGroupBox;
 

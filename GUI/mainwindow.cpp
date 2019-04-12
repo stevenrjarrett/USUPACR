@@ -90,7 +90,7 @@
  {
     pushButton->setText("ON");
 
-    if(clicked() == true)
+    if(clicked())
     {
         pushButoon->setText("OFF");
     }

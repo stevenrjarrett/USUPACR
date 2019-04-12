@@ -73,12 +73,8 @@
     pushButton->setCheckable(true);
     pushButton->setChecked(true);
 
-    //set size for autonomous button
-    //pushButton->resize(100,100);
-
     // Connect button signal to appropriate slot
     connect(pushButton, SIGNAL (clicked()), this, SLOT (handleButton()));
-    connect(pushButton, SIGNAL (clicked()), this, SLOT (handleButton2()));
 
     QVBoxLayout *vbox3 = new QVBoxLayout;
     vbox3->addWidget(pushButton);
@@ -94,14 +90,11 @@
     pushButton->setText("ON");
     //activate autonomous mode
 
+    if(pushButton->clicked() == true)
+    {
+        pushButton->setText("OFF");
+    }
 
 
 
-
- }
-
- void MainWindow::handleButton2()
- {
-    pushButton->setText("OFF");
-    //deactivate autonomous mode
  }

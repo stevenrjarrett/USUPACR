@@ -91,6 +91,13 @@
     //activate autonomous mode
 
 
+    connect(pushButton, SIGNAL (clicked()), this, SLOT (handleButton2()));
 
+ }
 
+ void MainWindow::handleButton2()
+ {
+    pushButton->setText("OFF");
+
+    connect(pushButton, SIGNAL (clicked()), this, SLOT (handleButton()));
  }

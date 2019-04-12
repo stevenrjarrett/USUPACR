@@ -16,6 +16,7 @@
 
  private slots:
     void handleButton();
+    void handleButton2();
 
  private:
     QGroupBox *createDistanceGroup();

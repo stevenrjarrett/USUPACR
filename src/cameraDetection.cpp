@@ -21,7 +21,7 @@ cameraDetection::cameraDetection()
     DEPTH_width  = 1280;
     DEPTH_height = 720;
     DEPTH_numPixels = DEPTH_height * DEPTH_width;
-    depth_scale;
+//    depth_scale;
 
     x_color_to_depth_conversion_factor = DEPTH_width /COL_width  * tan(COL_Hor_Field_of_View/2)/tan(DEPTH_Hor_Field_of_View/2);
     y_color_to_depth_conversion_factor = DEPTH_height/COL_height * tan(COL_Ver_Field_of_View/2)/tan(DEPTH_Ver_Field_of_View/2);
@@ -227,7 +227,7 @@ while(!(this->stop_signal_recieved))
 
         // Get depth scale
         auto sensor = selection.get_device().first<rs2::depth_sensor>();
-        depth_scale =  sensor.get_depth_scale();
+        depth_scale =  sensor.get_depth_scale() * FEET_TO_METERS;
 
 
 

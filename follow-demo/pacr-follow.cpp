@@ -163,7 +163,9 @@ int main()
                 else if(tracker.found())
                 {
                     /// TODO
-                    double turningVal = tracker.getCentroid().x *255 / 10; // positive to turn right, negative to turn left.
+                    double turningVal = (double)tracker.getCentroid().x * 255.0 / 2.0; // positive to turn right, negative to turn left.
+                    if(abs(turningVal) > 255)
+                        turningVal = turningVal / abs(turningVal) * 255;
                     double speedVal   = 0; // positive for forward, negative for backward
                     if(tracker.getCentroid().z >= (follow_distance - distance_tolerance))
                     {

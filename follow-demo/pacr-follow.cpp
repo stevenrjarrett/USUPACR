@@ -46,19 +46,19 @@ struct motorValues
                (right != rhs.right) ||
                (brake != rhs.brake);
     }
-    motorValues& operator-(const motorValues& lhs, const motorValues& rhs)
+    motorValues& operator-(const motorValues& rhs)
     {
         motorValues result;
-        result = lhs;
+        result = *this;
         result.left -= rhs.left;
         result.right -= rhs.right;
         result.brake -= rhs.brake;
         return result;
     }
-    motorValues& operator+(const motorValues& lhs, const motorValues& rhs)
+    motorValues& operator+(const motorValues& rhs)
     {
         motorValues result;
-        result = lhs;
+        result = *this;
         result.left += rhs.left;
         result.right += rhs.right;
         result.brake += rhs.brake;
@@ -115,32 +115,32 @@ void sendMotorValues()
 
 
 
-    //set needed values
-
-    for( n = 0 ; n < 4 ; n++ )
-    {
-        MDiff[n] = MTarget[n] - MActual[n];
-        AMDiff[n] = abs(MDiff[n]);
-    }
-    ArmDiff = ArmTarget - ArmActual;
-    AArmDiff = abs(ArmDiff);
-    IntakeDiff = IntakeTarget - IntakeActual;
-    AIntakeDiff = abs(IntakeDiff);
-
-    //Drive
-		if ( (AMDiff[0] > Drive_Increment || AMDiff[1] > Drive_Increment || AMDiff[2] > Drive_Increment || AMDiff[3] > Drive_Increment) && SSMode )//
-		{
-			A = (AMDiff[0]>AMDiff[1] && AMDiff[0]>AMDiff[2] && AMDiff[0]>AMDiff[3]) ? 0 : ((AMDiff[1]>AMDiff[2] && AMDiff[1]>AMDiff[3]) ? 1 : ((AMDiff[2]>AMDiff[3]) ? 2 : 3));//Find the greatest value
-			for( n = 0 ; n < 4 ; n++ )
-				MActual[n] += ( Drive_Increment * MDiff[n]) / AMDiff[A];
-		}
-		else
-		{
-			for( n = 0 ; n < 4 ; n++ )
-				MActual[n] = MTarget[n];
-			ArmActual = ArmTarget;
-			IntakeActual = IntakeTarget;
-		}
+//    //set needed values
+//
+//    for( n = 0 ; n < 4 ; n++ )
+//    {
+//        MDiff[n] = MTarget[n] - MActual[n];
+//        AMDiff[n] = abs(MDiff[n]);
+//    }
+//    ArmDiff = ArmTarget - ArmActual;
+//    AArmDiff = abs(ArmDiff);
+//    IntakeDiff = IntakeTarget - IntakeActual;
+//    AIntakeDiff = abs(IntakeDiff);
+//
+//    //Drive
+//		if ( (AMDiff[0] > Drive_Increment || AMDiff[1] > Drive_Increment || AMDiff[2] > Drive_Increment || AMDiff[3] > Drive_Increment) && SSMode )//
+//		{
+//			A = (AMDiff[0]>AMDiff[1] && AMDiff[0]>AMDiff[2] && AMDiff[0]>AMDiff[3]) ? 0 : ((AMDiff[1]>AMDiff[2] && AMDiff[1]>AMDiff[3]) ? 1 : ((AMDiff[2]>AMDiff[3]) ? 2 : 3));//Find the greatest value
+//			for( n = 0 ; n < 4 ; n++ )
+//				MActual[n] += ( Drive_Increment * MDiff[n]) / AMDiff[A];
+//		}
+//		else
+//		{
+//			for( n = 0 ; n < 4 ; n++ )
+//				MActual[n] = MTarget[n];
+//			ArmActual = ArmTarget;
+//			IntakeActual = IntakeTarget;
+//		}
 
 
 

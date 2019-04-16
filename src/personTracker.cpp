@@ -42,9 +42,9 @@ void personTracker::activityChecker()
 {
 //    std::cout << "personTracker thread starting" << std::endl;
     active = false;
+    bool wasActive = false;
     while(!(this->stop_signal_recieved))
     {
-        bool wasActive = false;
 //        std::cout << "stopwatch loop" << std::endl;
         if(activityStopwatch.seconds() < activity_timeout)
         {

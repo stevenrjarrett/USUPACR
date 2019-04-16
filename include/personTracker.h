@@ -52,6 +52,10 @@ struct trackedPerson
         {
             update(personList[bestInd]);
         }
+        else
+        {
+            bestInd = -1;
+        }
 //        else
 //            std::cout << std::endl;
         return bestInd;

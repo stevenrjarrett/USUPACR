@@ -37,7 +37,7 @@ void loop()
 //    lMotor = Serial.parseInt();
 //    rMotor = Serial.parseInt();
 //  }
-  Estop_engaged = digitalRead(ESTOP);
+  Estop_engaged = !digitalRead(ESTOP);
   while(Serial.available() > 1)
   {
     shouldWrite = true;

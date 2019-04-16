@@ -12,7 +12,7 @@ personTracker::personTracker(cv::Point3d defaultLocation, double _tolerance)//, 
     default_person = trackedPerson(personFrame(defaultLocation, cv::Rect2d(camera.GetCOL_width()/2-30, camera.GetCOL_height()/2-45, 60, 90), 1.0), _tolerance);
 //    tolerance = _tolerance;
     active = false;
-    activity_timeout = .3; // number of seconds the controller is inactive before the class marks it as inactive
+    activity_timeout = .15; // number of seconds the controller is inactive before the class marks it as inactive
 
     // initialize threads. They will not run continuously unless running == true.
     this->stop_signal_recieved = false;

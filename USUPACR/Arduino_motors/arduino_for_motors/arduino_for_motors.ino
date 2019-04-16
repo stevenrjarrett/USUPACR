@@ -1,7 +1,7 @@
 // Simple program to verify that stuff is working. This will send how much time has elapsed every .5 seconds.
 
 #include <Servo.h>
-#define DELAYTIME 200
+#define DELAYTIME      100
 #define ESTOP          2
 #define LMOTOR         5
 #define RMOTOR         6

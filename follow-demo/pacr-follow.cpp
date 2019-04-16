@@ -10,7 +10,7 @@
 ///////////////////////////////////////// Macros ////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////
 
-#define EXECUTIVE_WAIT_TIME 200000 // microseconds
+#define EXECUTIVE_WAIT_TIME 100000 // microseconds
 #define Max_Drive_Speed 255
 
 /////////////////////////////////////////////////////////////////////////////////////////
@@ -36,9 +36,11 @@ bool EStop = false;
 bool Manual_Only = false;
 bool autonomous_mode = false;
 double follow_distance = 5.0;
-double distance_tolerance = 1.0;
+double distance_tolerance = 2.0;
 double max_speed = 255; // 255 is the max value you can send. Set this lower for slower
+double autonomous_max_speed = 127; // 255 is the max value you can send. Set this lower for slower
 double motor_speed_limiter = 0.5; // a value from 0-1, setting the maximum speed.
+double autonomous_x_tolerance = 1.0;
 
 std::fstream motorArduino;
 
@@ -164,9 +166,9 @@ int main()
                 else if(tracker.found())
                 {
                     /// TODO
-                    double turningVal = (double)tracker.getCentroid().x * 255.0 / 0.7; // positive to turn right, negative to turn left.
-                    if(abs(turningVal) > 255)
-                        turningVal = turningVal / abs(turningVal) * 255;
+                    double turningVal = (double)tracker.getCentroid().x * autonomous_max_speed / autonomous_x_tolerance; // positive to turn right, negative to turn left.
+                    if(abs(turningVal) > autonomous_max_speed)
+                        turningVal = turningVal / abs(turningVal) * autonomous_max_speed;
                     double speedVal   = 0; // positive for forward, negative for backward
                     if(tracker.getCentroid().z >= (follow_distance - distance_tolerance))
                     {

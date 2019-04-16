@@ -21,6 +21,7 @@ struct motorValues
 {
     double left;
     double right;
+    double brake;
     motorValues(int lm = 0, int rm = 0)
     {
         left = lm;
@@ -163,7 +164,7 @@ int main()
                 else if(tracker.found())
                 {
                     /// TODO
-                    double turningVal = (double)tracker.getCentroid().x * 255.0 / 2.0; // positive to turn right, negative to turn left.
+                    double turningVal = (double)tracker.getCentroid().x * 255.0 / 0.7; // positive to turn right, negative to turn left.
                     if(abs(turningVal) > 255)
                         turningVal = turningVal / abs(turningVal) * 255;
                     double speedVal   = 0; // positive for forward, negative for backward

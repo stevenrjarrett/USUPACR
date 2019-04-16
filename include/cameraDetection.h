@@ -27,7 +27,7 @@
 #define CVT_COLOR_TO_DEPTH 0
 #define CVT_DEPTH_TO_COLOR 1
 
-#define COL_TEXT_COLOR cv::Scalar(0, 0, 0)
+#define COL_TEXT_COLOR cv::Scalar(0, 0, 255)
 #define DEPTH_TEXT_COLOR cv::Scalar( 65535/2, 65535/2, 65535/2 )
 
 #define DISTANCE_CORRECTION 0.45

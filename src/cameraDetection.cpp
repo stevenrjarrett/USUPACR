@@ -20,10 +20,10 @@ cameraDetection::cameraDetection()
     std::string depthWindowName = "Depth Video Feed";
     DEPTH_Hor_Field_of_View = 91.2*M_PI/180;
     DEPTH_Ver_Field_of_View = 65.5*M_PI/180;
-//    DEPTH_width  = 1280;
-//    DEPTH_height = 720;
-    DEPTH_width  = 720;
-    DEPTH_height = 480;
+    DEPTH_width  = 1280;
+    DEPTH_height = 720;
+//    DEPTH_width  = 720;
+//    DEPTH_height = 480;
     DEPTH_numPixels = DEPTH_height * DEPTH_width;
 //    depth_scale;
 

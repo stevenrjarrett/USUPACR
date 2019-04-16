@@ -47,11 +47,11 @@ void loop()
     if(sign(lMotor_raw) == -sign(lMotor) || sign(rMotor_raw) == -sign(rMotor))
       waitReverse = true;
     if(abs(lMotor_raw) > 15)
-      lMotor = map(abs(lMotor_raw), 0, 255, 50, 200);
+      lMotor = map(abs(lMotor_raw), 0, 255, 40, 200);
     else
       lMotor = 0;
     if(abs(rMotor_raw) > 15)
-      rMotor = map(abs(rMotor_raw), 0, 255, 50, 200);
+      rMotor = map(abs(rMotor_raw), 0, 255, 40, 200);
     else
       rMotor = 0;
     if(lMotor_raw<0) lMotor = -lMotor;

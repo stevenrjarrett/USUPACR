@@ -227,7 +227,7 @@ while(!(this->stop_signal_recieved))
 
         // Get depth scale
         auto sensor = selection.get_device().first<rs2::depth_sensor>();
-        depth_scale =  sensor.get_depth_scale() * FEET_TO_METERS;
+        depth_scale =  sensor.get_depth_scale() * DISTANCE_CORRECTION;
 
 
 

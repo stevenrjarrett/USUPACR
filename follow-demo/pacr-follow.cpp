@@ -27,9 +27,47 @@ struct motorValues
         left = lm;
         right = rm;
     }
+    motorValues& operator=(const motorValues& rhs)
+    {
+        left = rhs.left;
+        right = rhs.right;
+        brake = rhs.brake;
+        return *this;
+    }
+    bool operator==(const motorValues& rhs)
+    {
+        return (left == rhs.left) &&
+               (right == rhs.right) &&
+               (brake == rhs.brake);
+    }
+    bool operator!=(const motorValues& rhs)
+    {
+        return (left != rhs.left) ||
+               (right != rhs.right) ||
+               (brake != rhs.brake);
+    }
+    motorValues& operator-(const motorValues& lhs, const motorValues& rhs)
+    {
+        motorValues result;
+        result = lhs;
+        result.left -= rhs.left;
+        result.right -= rhs.right;
+        result.brake -= rhs.brake;
+        return result;
+    }
+    motorValues& operator+(const motorValues& lhs, const motorValues& rhs)
+    {
+        motorValues result;
+        result = lhs;
+        result.left += rhs.left;
+        result.right += rhs.right;
+        result.brake += rhs.brake;
+        return result;
+    }
 };
 
-motorValues motors;
+motorValues motors_target;
+motorValues prevMotors;
 double lSpeed = 0;
 double rSpeed = 0;
 bool EStop = false;
@@ -69,10 +107,56 @@ void sig_handler(int signo)
 
 void sendMotorValues()
 {
-    motorArduino << (int)(motors.left  * motor_speed_limiter) << std::endl;
-    motorArduino << (int)(motors.right * motor_speed_limiter) << std::endl;
-//    std::cout << "sent values: l=" << (int)(motors.left  * motor_speed_limiter)
-//                         << ", r=" << (int)(motors.right * motor_speed_limiter) << std::endl;
+    if(motors_actual != motors_target)
+    {
+        motorValues motor_difference,
+                    abs_motor_difference;
+        motors_actual.brake = motors_target.brake;
+
+
+
+    //set needed values
+
+    for( n = 0 ; n < 4 ; n++ )
+    {
+        MDiff[n] = MTarget[n] - MActual[n];
+        AMDiff[n] = abs(MDiff[n]);
+    }
+    ArmDiff = ArmTarget - ArmActual;
+    AArmDiff = abs(ArmDiff);
+    IntakeDiff = IntakeTarget - IntakeActual;
+    AIntakeDiff = abs(IntakeDiff);
+
+    //Drive
+		if ( (AMDiff[0] > Drive_Increment || AMDiff[1] > Drive_Increment || AMDiff[2] > Drive_Increment || AMDiff[3] > Drive_Increment) && SSMode )//
+		{
+			A = (AMDiff[0]>AMDiff[1] && AMDiff[0]>AMDiff[2] && AMDiff[0]>AMDiff[3]) ? 0 : ((AMDiff[1]>AMDiff[2] && AMDiff[1]>AMDiff[3]) ? 1 : ((AMDiff[2]>AMDiff[3]) ? 2 : 3));//Find the greatest value
+			for( n = 0 ; n < 4 ; n++ )
+				MActual[n] += ( Drive_Increment * MDiff[n]) / AMDiff[A];
+		}
+		else
+		{
+			for( n = 0 ; n < 4 ; n++ )
+				MActual[n] = MTarget[n];
+			ArmActual = ArmTarget;
+			IntakeActual = IntakeTarget;
+		}
+
+
+
+
+
+
+
+
+        motors_actual.left = motors_target.left;
+        motors_actual.right = motors_target.right;
+    }
+    motorArduino << (int)(motors_actual.left  * motor_speed_limiter) << std::endl;
+    motorArduino << (int)(motors_actual.right * motor_speed_limiter) << std::endl;
+//    motors_actual = motors_target;
+//    std::cout << "sent values: l=" << (int)(motors_target.left  * motor_speed_limiter)
+//                         << ", r=" << (int)(motors_target.right * motor_speed_limiter) << std::endl;
 }
 
 
@@ -136,8 +220,8 @@ int main()
         }
         if(controller.wp_lBumper())
         {
-            motors.left = 0;
-            motors.right = 0;
+            motors_target.left = 0;
+            motors_target.right = 0;
             sendMotorValues();
             break;
         }
@@ -156,8 +240,8 @@ int main()
                 if(controller.wp_B() || abs(controller.L_x()) > 0.1 || abs(controller.L_y()) > 0.1 || !controller.isActive() || !controller.isConnected())
                 {
                     autonomous_mode = false;
-                    motors.left = 0;
-                    motors.right = 0;
+                    motors_target.left = 0;
+                    motors_target.right = 0;
                     sendMotorValues();
                     std::cout << "disabling autonomous mode. User control only." << std::endl;
                     tracker.stop();
@@ -181,12 +265,12 @@ int main()
                         if(speedVal > max_speed)
                             speedVal = max_speed;
                     }
-                    motors = ConvertToArcade(turningVal, speedVal);
+                    motors_target = ConvertToArcade(turningVal, speedVal);
                 }
                 else
                 {
-                    motors.left = 0;
-                    motors.right = 0;
+                    motors_target.left = 0;
+                    motors_target.right = 0;
                 }
             }
             else
@@ -194,8 +278,8 @@ int main()
                 if(controller.wp_A())
                 {
                     autonomous_mode = true;
-                    motors.left = 0;
-                    motors.right = 0;
+                    motors_target.left = 0;
+                    motors_target.right = 0;
                     sendMotorValues();
                     controller.wp_B();
                     std::cout << "Beginning autonomous mode" << std::endl;
@@ -206,7 +290,7 @@ int main()
                     wasActive = true;
                     //read inputs
                     //decide what to do and set variables
-                    motors = ConvertToArcade(controller.L_x()*max_speed, -controller.L_y()*max_speed);
+                    motors_target = ConvertToArcade(controller.L_x()*max_speed, -controller.L_y()*max_speed);
                 }
                 else
                 {
@@ -215,29 +299,29 @@ int main()
                         wasActive = false;
                         std::cout << "Controller inactive or disconnected" << std::endl;
                     }
-                    motors.left = 0;
-                    motors.right = 0;
+                    motors_target.left = 0;
+                    motors_target.right = 0;
                 }
             }
         }
         else
         {
-            motors.left = 0;
-            motors.right = 0;
+            motors_target.left = 0;
+            motors_target.right = 0;
             if(wasRunning)
             {
                 wasRunning = false;
                 std::cout << "E-stop engaged" << std::endl;
 //                if(!controller.isConnected())
-//                    std::cout << "Controller disconnected, stopping motors" << std::endl;
+//                    std::cout << "Controller disconnected, stopping motors_target" << std::endl;
 //                if(!controller.isActive())
-//                    std::cout << "Controller inactive, stopping motors" << std::endl;
+//                    std::cout << "Controller inactive, stopping motors_target" << std::endl;
             }
         }
 
         sendMotorValues();
 //            controller.printALL();
-//        std::cout << "Values sent: " << motors.left  << '\t' << motors.right << std::endl;
+//        std::cout << "Values sent: " << motors_target.left  << '\t' << motors_target.right << std::endl;
 
         //wait for a little bit
         usleep(EXECUTIVE_WAIT_TIME);

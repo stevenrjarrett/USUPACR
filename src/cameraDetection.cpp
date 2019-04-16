@@ -11,19 +11,19 @@ cameraDetection::cameraDetection()
     std::string colorWindowName = "Color Video Feed";
     COL_Hor_Field_of_View = 69.4*M_PI/180;
     COL_Ver_Field_of_View = 42.5*M_PI/180;
-    COL_width  = 1280;
-    COL_height = 720;
-//    COL_width  = 720;
-//    COL_height = 480;
+//    COL_width  = 1280;
+//    COL_height = 720;
+    COL_width  = 720;
+    COL_height = 480;
     COL_numPixels = COL_height * COL_width;
 
     std::string depthWindowName = "Depth Video Feed";
     DEPTH_Hor_Field_of_View = 91.2*M_PI/180;
     DEPTH_Ver_Field_of_View = 65.5*M_PI/180;
-    DEPTH_width  = 1280;
-    DEPTH_height = 720;
-//    DEPTH_width  = 720;
-//    DEPTH_height = 480;
+//    DEPTH_width  = 1280;
+//    DEPTH_height = 720;
+    DEPTH_width  = 720;
+    DEPTH_height = 480;
     DEPTH_numPixels = DEPTH_height * DEPTH_width;
 //    depth_scale;
 

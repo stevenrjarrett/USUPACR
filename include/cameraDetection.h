@@ -30,7 +30,7 @@
 #define COL_TEXT_COLOR cv::Scalar(0, 0, 0)
 #define DEPTH_TEXT_COLOR cv::Scalar( 65535/2, 65535/2, 65535/2 )
 
-#define DISTANCE_CORRECTION 0.5
+#define DISTANCE_CORRECTION 0.45
 
 struct personFrame
 {

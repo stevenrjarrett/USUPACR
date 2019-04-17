@@ -37,7 +37,6 @@ void loop()
 //    lMotor = Serial.parseInt();
 //    rMotor = Serial.parseInt();
 //  }
-  Estop_engaged = !digitalRead(ESTOP);
   while(Serial.available() > 1)
   {
     shouldWrite = true;
@@ -63,6 +62,7 @@ void loop()
 //    Serial.parseInt();
 
   // Safety: If I haven't heard anything from Serial for a while, 
+  Estop_engaged = !digitalRead(ESTOP);
   if(lastTime - millis() > 500 || Estop_engaged)
   {
     analogWrite(LMOTOR, 0);

@@ -123,9 +123,9 @@ void updateMotorValues()
     motorValues mtrDiff = motors_target,
                 aMtrDiff;
     mtrDiff -= motors_actual;
-    aMtrDiff.left  = abs_val(MtrDiff.left );
-    aMtrDiff.right = abs_val(MtrDiff.right);
-    aMtrDiff.brake = abs_val(MtrDiff.brake);
+    aMtrDiff.left  = abs_val(mtrDiff.left );
+    aMtrDiff.right = abs_val(mtrDiff.right);
+    aMtrDiff.brake = abs_val(mtrDiff.brake);
 
 //Drive
     if ( (aMtrDiff.left > drive_increment || aMtrDiff.right > drive_increment ) && enable_soft_start)

@@ -96,7 +96,7 @@ bool stop_signal_recieved = false;
 //# include "XBoxOne.hpp"
 
 template<class T>
-T abs(T val)
+T abs_val(T val)
 {
     if(val < 0)
         val *= -1;
@@ -123,9 +123,9 @@ void updateMotorValues()
     motorValues mtrDiff = motors_target,
                 aMtrDiff;
     mtrDiff -= motors_actual;
-    aMtrDiff.left  = abs(aMtrDiff.left );
-    aMtrDiff.right = abs(aMtrDiff.right);
-    aMtrDiff.brake = abs(aMtrDiff.brake);
+    aMtrDiff.left  = abs_val(MtrDiff.left );
+    aMtrDiff.right = abs_val(MtrDiff.right);
+    aMtrDiff.brake = abs_val(MtrDiff.brake);
 
 //Drive
     if ( (aMtrDiff.left > drive_increment || aMtrDiff.right > drive_increment ) && enable_soft_start)
@@ -240,7 +240,7 @@ int main()
             // Act based on autonomous / user control
             if(autonomous_mode)
             {
-                if(controller.wp_B() || abs(controller.L_x()) > 0.1 || abs(controller.L_y()) > 0.1 || !controller.isActive() || !controller.isConnected())
+                if(controller.wp_B() || abs_val(controller.L_x()) > 0.1 || abs_val(controller.L_y()) > 0.1 || !controller.isActive() || !controller.isConnected())
                 {
                     autonomous_mode = false;
                     motors_target.left = 0;
@@ -254,8 +254,8 @@ int main()
                 {
                     /// TODO
                     double turningVal = (double)tracker.getCentroid().x * autonomous_max_speed / autonomous_x_tolerance; // positive to turn right, negative to turn left.
-                    if(abs(turningVal) > autonomous_max_speed)
-                        turningVal = turningVal / abs(turningVal) * autonomous_max_speed;
+                    if(abs_val(turningVal) > autonomous_max_speed)
+                        turningVal = turningVal / abs_val(turningVal) * autonomous_max_speed;
                     double speedVal   = 0; // positive for forward, negative for backward
                     if(tracker.getCentroid().z >= (follow_distance - distance_tolerance))
                     {
@@ -359,8 +359,8 @@ motorValues ConvertToArcade ( int x1 , int y1 ) // Converts joystick input to ho
   int B;
   int Ax1;
   int Ay1;
-  Ax1 = abs(x1);//Getting absolute values so I can use them in if-statements
-  Ay1 = abs(y1);
+  Ax1 = abs_val(x1);//Getting absolute values so I can use them in if-statements
+  Ay1 = abs_val(y1);
   A = Ax1 + Ay1;//The Common Divisor
   if (A > 3) // This if-statemend does two things: First, if you'll notice, A is a divisor later on. if A = 0, then the program would stop working. Second, setting the minimum value to 3 eliminates motor hum.
   {

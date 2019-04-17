@@ -73,12 +73,12 @@ bool autonomous_mode = false;
 double follow_distance = 5.0;
 double distance_tolerance = 2.0;
 double max_speed = 255; // 255 is the max value you can send. Set this lower for slower
-double max_acceleration = 0.2; // 1 is for 0 to max_speed in 1 second;
+double max_acceleration = 1.0; // 1 is for 0 to max_speed in 1 second;
 double autonomous_max_speed = 127; // 255 is the max value you can send. Set this lower for slower
 double motor_speed_limiter = 0.5; // a value from 0-1, setting the maximum speed.
 double autonomous_x_tolerance = 0.5;
 bool enable_soft_start = true;
-double drive_increment = max_acceleration * ((double)MOTORS_WAIT_TIME / 1000000.0);
+double drive_increment = max_speed * max_acceleration * ((double)MOTORS_WAIT_TIME / 1000000.0);
 
 std::fstream motorArduino;
 
@@ -132,6 +132,7 @@ void updateMotorValues()
         motors_actual.left = motors_target.left;
         motors_actual.right = motors_target.right;
     }
+    std::cout << "ltarget = " << motors_target.left << ", lActual = " << motors_actual.left << ", mtrDiff = " << mtrDiff.left << ", aMtrDiff = " << aMtrDiff.left << std::endl;
 }
 
 void sendMotorValues()

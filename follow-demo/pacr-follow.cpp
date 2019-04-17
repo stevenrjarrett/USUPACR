@@ -127,8 +127,8 @@ void updateMotorValues()
     aMtrDiff.right = abs_val(mtrDiff.right);
     aMtrDiff.brake = abs_val(mtrDiff.brake);
 
-    bool accelerating = (  (mtrDiff.left  > 0 && motors_actual.left  > 0) || (mtrDiff.left  < 0 && motors_actual.left  < 0)
-                        || (mtrDiff.right > 0 && motors_actual.right > 0) || (mtrDiff.right < 0 && motors_actual.right < 0) );
+    bool accelerating = (  (mtrDiff.left  > 0 && motors_target.left  > 0) || (mtrDiff.left  < 0 && motors_target.left  < 0)
+                        || (mtrDiff.right > 0 && motors_target.right > 0) || (mtrDiff.right < 0 && motors_target.right < 0) );
 
 
 //Drive

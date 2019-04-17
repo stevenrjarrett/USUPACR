@@ -95,7 +95,7 @@ bool stop_signal_recieved = false;
 
 //# include "XBoxOne.hpp"
 
-std::template<class T>
+template<class T>
 T abs(T val)
 {
     if(val < 0)

@@ -12,7 +12,7 @@
 
 #define EXECUTIVE_WAIT_TIME 200000 // microseconds
 #define MOTORS_WAIT_TIME    200000 // microseconds
-#define Max_Drive_Speed 255
+#define Max_Drive_Speed     255
 
 /////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////// Global Variables ////////////////////////////////////
@@ -76,8 +76,8 @@ double max_speed = 255; // 255 is the max value you can send. Set this lower for
 double max_acceleration = 1.0; // 1 is for 0 to max_speed in 1 second;
 double autonomous_max_speed = 127; // 255 is the max value you can send. Set this lower for slower
 double motor_speed_limiter = 0.5; // a value from 0-1, setting the maximum speed.
-double autonomous_x_tolerance = 1.0;
-bool enable_soft_start = false;
+double autonomous_x_tolerance = 0.5;
+bool enable_soft_start = true;
 double drive_increment = max_acceleration * (MOTORS_WAIT_TIME / 1000000.0);
 
 std::fstream motorArduino;

@@ -10,7 +10,8 @@
 ///////////////////////////////////////// Macros ////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////
 
-#define EXECUTIVE_WAIT_TIME 100000 // microseconds
+#define EXECUTIVE_WAIT_TIME 200000 // microseconds
+#define MOTORS_WAIT_TIME    200000 // microseconds
 #define Max_Drive_Speed 255
 
 /////////////////////////////////////////////////////////////////////////////////////////
@@ -46,39 +47,38 @@ struct motorValues
                (right != rhs.right) ||
                (brake != rhs.brake);
     }
-    motorValues& operator-(const motorValues& rhs)
+    motorValues& operator-=(const motorValues& rhs)
     {
-        motorValues result;
-        result = *this;
-        result.left -= rhs.left;
-        result.right -= rhs.right;
-        result.brake -= rhs.brake;
-        return result;
+        left -= rhs.left;
+        right -= rhs.right;
+        brake -= rhs.brake;
+        return *this;
     }
-    motorValues& operator+(const motorValues& rhs)
+    motorValues& operator+=(const motorValues& rhs)
     {
-        motorValues result;
-        result = *this;
-        result.left += rhs.left;
-        result.right += rhs.right;
-        result.brake += rhs.brake;
-        return result;
+        left += rhs.left;
+        right += rhs.right;
+        brake += rhs.brake;
+        return *this;
     }
 };
 
 motorValues motors_target;
-motorValues prevMotors;
-double lSpeed = 0;
-double rSpeed = 0;
+motorValues motors_actual;
+//double lSpeed = 0;
+//double rSpeed = 0;
 bool EStop = false;
 bool Manual_Only = false;
 bool autonomous_mode = false;
 double follow_distance = 5.0;
 double distance_tolerance = 2.0;
 double max_speed = 255; // 255 is the max value you can send. Set this lower for slower
+double max_acceleration = 1.0; // 1 is for 0 to max_speed in 1 second;
 double autonomous_max_speed = 127; // 255 is the max value you can send. Set this lower for slower
 double motor_speed_limiter = 0.5; // a value from 0-1, setting the maximum speed.
 double autonomous_x_tolerance = 1.0;
+bool enable_soft_start = false;
+double drive_increment = max_acceleration * (MOTORS_WAIT_TIME / 1000000.0);
 
 std::fstream motorArduino;
 
@@ -105,53 +105,37 @@ void sig_handler(int signo)
 	}
 }
 
-void sendMotorValues()
+
+void updateMotorValues()
 {
-    if(motors_actual != motors_target)
+    // Set brake
+    motors_actual.brake = motors_target.brake;
+
+    //use soft-start to set motors
+    motorValues mtrDiff = motors_target,
+                aMtrDiff;
+    mtrDiff -= motors_actual;
+    aMtrDiff.left  = abs(aMtrDiff.left );
+    aMtrDiff.right = abs(aMtrDiff.right);
+    aMtrDiff.brake = abs(aMtrDiff.brake);
+
+//Drive
+    if ( (aMtrDiff.left > drive_increment || aMtrDiff.right > drive_increment ) && enable_soft_start)
     {
-        motorValues motor_difference,
-                    abs_motor_difference;
-        motors_actual.brake = motors_target.brake;
+        double max_aDiff = max(aMtrDiff.left, aMtrDiff.right);
 
-
-
-//    //set needed values
-//
-//    for( n = 0 ; n < 4 ; n++ )
-//    {
-//        MDiff[n] = MTarget[n] - MActual[n];
-//        AMDiff[n] = abs(MDiff[n]);
-//    }
-//    ArmDiff = ArmTarget - ArmActual;
-//    AArmDiff = abs(ArmDiff);
-//    IntakeDiff = IntakeTarget - IntakeActual;
-//    AIntakeDiff = abs(IntakeDiff);
-//
-//    //Drive
-//		if ( (AMDiff[0] > Drive_Increment || AMDiff[1] > Drive_Increment || AMDiff[2] > Drive_Increment || AMDiff[3] > Drive_Increment) && SSMode )//
-//		{
-//			A = (AMDiff[0]>AMDiff[1] && AMDiff[0]>AMDiff[2] && AMDiff[0]>AMDiff[3]) ? 0 : ((AMDiff[1]>AMDiff[2] && AMDiff[1]>AMDiff[3]) ? 1 : ((AMDiff[2]>AMDiff[3]) ? 2 : 3));//Find the greatest value
-//			for( n = 0 ; n < 4 ; n++ )
-//				MActual[n] += ( Drive_Increment * MDiff[n]) / AMDiff[A];
-//		}
-//		else
-//		{
-//			for( n = 0 ; n < 4 ; n++ )
-//				MActual[n] = MTarget[n];
-//			ArmActual = ArmTarget;
-//			IntakeActual = IntakeTarget;
-//		}
-
-
-
-
-
-
-
-
+        motors_actual.left += ( drive_increment * mtrDiff.left) / max_aDiff;
+        motors_actual.right += ( drive_increment * mtrDiff.right) / max_aDiff;
+    }
+    else
+    {
         motors_actual.left = motors_target.left;
         motors_actual.right = motors_target.right;
     }
+}
+
+void sendMotorValues()
+{
     motorArduino << (int)(motors_actual.left  * motor_speed_limiter) << std::endl;
     motorArduino << (int)(motors_actual.right * motor_speed_limiter) << std::endl;
 //    motors_actual = motors_target;
@@ -159,6 +143,16 @@ void sendMotorValues()
 //                         << ", r=" << (int)(motors_target.right * motor_speed_limiter) << std::endl;
 }
 
+void motorUpdator()
+{
+    motorArduino.open("/dev/ttyACM0", std::ios_base::out );
+    while(!stop_signal_recieved)
+    {
+        updateMotorValues();
+        sendMotorValues();
+        usleep(MOTORS_WAIT_TIME);
+    }
+}
 
 
 
@@ -188,7 +182,7 @@ int main()
 //        cameraDetection cam;
         personTracker tracker(cv::Point3d(0, 0, follow_distance));
         // Communication with Arduino
-        motorArduino.open("/dev/ttyACM0", std::ios_base::out );
+        std::thread motorThread = std::thread(motorUpdator);
 
         // enable signal catcher
         if( signal(SIGINT, sig_handler) == SIG_ERR )
@@ -222,7 +216,7 @@ int main()
         {
             motors_target.left = 0;
             motors_target.right = 0;
-            sendMotorValues();
+//            sendMotorValues();
             break;
         }
         // if the e-stop was not pressed, do normal stuff
@@ -242,7 +236,7 @@ int main()
                     autonomous_mode = false;
                     motors_target.left = 0;
                     motors_target.right = 0;
-                    sendMotorValues();
+//                    sendMotorValues();
                     std::cout << "disabling autonomous mode. User control only." << std::endl;
                     tracker.stop();
                     controller.wp_A();
@@ -280,7 +274,7 @@ int main()
                     autonomous_mode = true;
                     motors_target.left = 0;
                     motors_target.right = 0;
-                    sendMotorValues();
+//                    sendMotorValues();
                     controller.wp_B();
                     std::cout << "Beginning autonomous mode" << std::endl;
                     tracker.start();
@@ -319,7 +313,7 @@ int main()
             }
         }
 
-        sendMotorValues();
+//        sendMotorValues();
 //            controller.printALL();
 //        std::cout << "Values sent: " << motors_target.left  << '\t' << motors_target.right << std::endl;
 
@@ -327,6 +321,9 @@ int main()
         usleep(EXECUTIVE_WAIT_TIME);
     }
     std::cout << "Ending program. Goodbye!" << std::endl;
+    stop_signal_recieved = true;
+    if(motorThread.joinable())
+        motorThread.join();
 //    cam.stop();
 //    controller.stop();
     return 0;

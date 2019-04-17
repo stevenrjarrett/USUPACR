@@ -19,6 +19,11 @@ int sign(int val) { return val==0 ? 1 : val / abs(val);}
 void setup()
 {
   Serial.begin(9600);
+  pinMode(LMOTOR, OUTPUT);
+  pinMode(RMOTOR, OUTPUT);
+  pinMode(LMOTOR_REVERSE, OUTPUT);
+  pinMode(RMOTOR_REVERSE, OUTPUT);
+  pinMode(ESTOP, INPUT);
   analogWrite(LMOTOR, 0);
   analogWrite(RMOTOR, 0);
   digitalWrite(LMOTOR_REVERSE,false);

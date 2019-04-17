@@ -122,7 +122,7 @@ void updateMotorValues()
 //Drive
     if ( (aMtrDiff.left > drive_increment || aMtrDiff.right > drive_increment ) && enable_soft_start)
     {
-        double max_aDiff = max(aMtrDiff.left, aMtrDiff.right);
+        double max_aDiff = std::max(aMtrDiff.left, aMtrDiff.right);
 
         motors_actual.left += ( drive_increment * mtrDiff.left) / max_aDiff;
         motors_actual.right += ( drive_increment * mtrDiff.right) / max_aDiff;

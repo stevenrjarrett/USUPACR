@@ -70,7 +70,7 @@ struct trackedPerson
 class personTracker
 {
     public:
-        personTracker(cv::Point3d defaultLocation, double _tolerance = 0.8);
+        personTracker(cv::Point3d defaultLocation, double _tolerance = 1.5);
         ~personTracker();
 
         /// User control functions

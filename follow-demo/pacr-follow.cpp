@@ -127,8 +127,14 @@ void updateMotorValues()
     aMtrDiff.right = abs_val(mtrDiff.right);
     aMtrDiff.brake = abs_val(mtrDiff.brake);
 
+    bool accelerating = (  (mtrDiff.left  > 0 && motors_actual.left  > 0) || (mtrDiff.left  < 0 && motors_actual.left  < 0)
+                        || (mtrDiff.right > 0 && motors_actual.right > 0) || (mtrDiff.right < 0 && motors_actual.right < 0) );
+
+
 //Drive
-    if ( (aMtrDiff.left > drive_increment || aMtrDiff.right > drive_increment ) && enable_soft_start)
+    if ( accelerating
+         && (aMtrDiff.left > drive_increment || aMtrDiff.right > drive_increment )
+         && enable_soft_start)
     {
         double max_aDiff = std::max(aMtrDiff.left, aMtrDiff.right);
 

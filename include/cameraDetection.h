@@ -162,6 +162,9 @@ class cameraDetection
         std::vector<personFrame> lastPeople;
 //        bool wasUpdated;
         long long lastTime;
+
+        /// Detectnet
+        detectNet* net;
 };
 
 #endif // CAMERADETECTION_H

@@ -37,6 +37,8 @@ cameraDetection::cameraDetection()
     show_boxes = false;
     this->stop_signal_recieved = false;
     lastTime   = 0;
+    // Initialize detectnet
+    net = detectNet::Create();
     // initialize thread. It will not run continuously unless isRunning is true.
     runningThread = std::thread(&cameraDetection::run, this);
 //    runningThread.join();
@@ -188,7 +190,7 @@ while(!(this->stop_signal_recieved))
     // Set up camera streams and realsense
 
         // Declare depth colorizer for pretty visualization of depth data
-        rs2::colorizer color_map;
+//        rs2::colorizer color_map;
 
         // Set up resolution and other variables
 //        int COL_width = COL_width;
@@ -256,7 +258,7 @@ while(!(this->stop_signal_recieved))
         /*
          * create detectNet
          */
-        detectNet* net = detectNet::Create();
+//        detectNet* net = detectNet::Create();
 
         if( !net )
         {

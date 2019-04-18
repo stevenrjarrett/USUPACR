@@ -1,0 +1,10 @@
+-I/usr/include/qt4
+-I/usr/include/qt4/QtGui
+-I/usr/include/qt4/QtCore
+-I/home/nvidia/Documents/USUPACR/GUI/build
+-D$<$<NOT:$<CONFIG:Debug>>:QT_NO_DEBUG>
+-DQT_GUI_LIB
+-DQT_CORE_LIB
+-o
+/home/nvidia/Documents/USUPACR/GUI/build/moc_mainwindow.cxx
+/home/nvidia/Documents/USUPACR/GUI/mainwindow.h

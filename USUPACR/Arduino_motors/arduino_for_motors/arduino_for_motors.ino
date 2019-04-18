@@ -14,14 +14,18 @@
 #define ID             1
 #define ID2            2
 
-int lMotor = 0;
-int rMotor = 0;
+int lMotor     = 0;
+int rMotor     = 0;
+float lBrake   = 0;
+//float rBrake   = 0;
 unsigned long lastTime = 0;
 bool Estop_engaged = false;
 
 int brake_engaged = 400;
 int brake_disengaged = 900;
 int brake_pos = brake_disengaged;
+bool shouldWrite = false;
+bool waitReverse = false;
 
 int sign(int val) { return val==0 ? 1 : val / abs(val);}
 
@@ -45,8 +49,8 @@ void setup()
 
 void loop()
 {
-  bool shouldWrite = false;
-  bool waitReverse = false;
+  shouldWrite = false;
+  waitReverse = false;
   // Input value from console
 //  int in_val = 0;
 //  while (Serial.available()>2)
@@ -54,7 +58,6 @@ void loop()
 //    lMotor = Serial.parseInt();
 //    rMotor = Serial.parseInt();
 //  }
-  Estop_engaged = !digitalRead(ESTOP);
   while(Serial.available() > 2)
   {
     shouldWrite = true;
@@ -82,6 +85,7 @@ void loop()
     
     lastTime = millis();
   }
+  Estop_engaged = !digitalRead(ESTOP);
 //  if(Serial.available() == 1)
 //    Serial.parseInt();
 
@@ -118,5 +122,64 @@ void loop()
   Serial.print("\n");
   delay(DELAYTIME);
   */
+}
+
+void getSerial()
+{
+  while(Serial.available() > 2)
+  {
+    String msg_type = Serial.readStringUntil('\n');
+    if(msg_type == "motors")
+    {
+      shouldWrite = true;
+      int lMotor_raw = -500;
+      int rMotor_raw = -500;
+      float lBrake_raw = -500;
+      
+      while(msg_type != "END")
+      {
+        msg_type = Serial.readStringUntil('\n');
+        switch(msg_type)
+        {
+          case "lMotor":
+            lMotor_raw = Serial.parseInt();
+            break;
+          case "rMotor":
+            rMotor_raw = Serial.parseInt();
+            break;
+          case "lBrake":
+            lBrake_raw = Serial.parseFloat();
+            break;
+          default:
+            break;
+        }
+        // get motor input
+        
+      }
+      
+      // Process motors
+      if(lMotor_raw != -500)
+      {
+        if( sign(lMotor_raw) == -sign(lMotor) )
+          waitReverse = true;
+        lMotor = map(abs(lMotor_raw), 0, 255, 40, 200);
+        if(lMotor_raw<0)
+          lMotor = -lMotor;
+      }
+      if(rMotor_raw != -500)
+      {
+        if(sign(rMotor_raw) == -sign(rMotor))
+          waitReverse = true;
+        rMotor = map(abs(rMotor_raw), 0, 255, 40, 200);
+        if(rMotor_raw<0)
+          rMotor = -rMotor;
+      }
+      if(lBrake_raw != -500)
+        lBrake = 900 - lBrake_raw*500;
+      
+      lastTime = millis();
+    }
+  }
+  Estop_engaged = !digitalRead(ESTOP);
 }
 

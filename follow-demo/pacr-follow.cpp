@@ -73,7 +73,7 @@ bool autonomous_mode = false;
 double follow_distance = 5.0;
 double distance_tolerance = 2.0;
 double max_speed = 255; // 255 is the max value you can send. Set this lower for slower
-double max_acceleration = 0.2; // 1 is for 0 to max_speed in 1 second;
+double max_acceleration = 0.8; // 1 is for 0 to max_speed in 1 second;
 double autonomous_max_speed = 127; // 255 is the max value you can send. Set this lower for slower
 double motor_speed_limiter = 0.5; // a value from 0-1, setting the maximum speed.
 double autonomous_x_tolerance = 0.5;
@@ -151,8 +151,9 @@ void updateMotorValues()
 
 void sendMotorValues()
 {
-    motorArduino << (int)(motors_actual.left  * motor_speed_limiter) << std::endl;
-    motorArduino << (int)(motors_actual.right * motor_speed_limiter) << std::endl;
+    motorArduino << (int)(motors_actual.left  * motor_speed_limiter) << '\n';
+    motorArduino << (int)(motors_actual.right * motor_speed_limiter) << '\n';
+    motorArduino << (float)motors_actual.brake << std::endl;
 //    motors_actual = motors_target;
 //    std::cout << "sent values: l=" << (int)(motors_target.left  * motor_speed_limiter)
 //                         << ", r=" << (int)(motors_target.right * motor_speed_limiter) << std::endl;
@@ -258,28 +259,50 @@ int main()
                 }
                 else if(tracker.found())
                 {
-                    /// TODO
-                    double turningVal = (double)tracker.getCentroid().x * autonomous_max_speed / autonomous_x_tolerance; // positive to turn right, negative to turn left.
-                    if(abs_val(turningVal) > autonomous_max_speed)
-                        turningVal = turningVal / abs_val(turningVal) * autonomous_max_speed;
+                    double turningVal = 0;
                     double speedVal   = 0; // positive for forward, negative for backward
+                    double brakeVal   = 0; // 0 for no brakes, 1 for all brakes
+
+
                     if(tracker.getCentroid().z >= (follow_distance - distance_tolerance))
                     {
+                        //Turning
+                        double turningVal = (double)tracker.getCentroid().x * autonomous_max_speed / autonomous_x_tolerance; // positive to turn right, negative to turn left.
+                        if(abs_val(turningVal) > autonomous_max_speed)
+                            turningVal = turningVal / abs_val(turningVal) * autonomous_max_speed;
+
+
+                        // Speed:
                         speedVal = (tracker.getCentroid().z - follow_distance + distance_tolerance) / (2*distance_tolerance);
+                        if(speedVal > 1.0)
+                            speedVal = 1.0;
+                        if(speedVal < 0.0)
+                            speedVal = 0.0;
                         // speedVal should be in a value between 0 and 1 if the person is at the target following
                         // distance +- the distance tolerance.
-                        speedVal *= max_speed;
+                        if(speedVal > 0.25)
+                        {
+                            brakeVal = 0;
+                            speedVal -= 0.25;
+                            speedVal *= 1.0/0.75;
+                            speedVal *= max_speed;
+                        }
+                        else
+                        {
+                            brakeVal = (0.25 - speedVal) * (1.0 / 0.25);
+                            speedVal = 0;
+                        }
 
                         // If the person's farther away, fix the speed value.
-                        if(speedVal > max_speed)
-                            speedVal = max_speed;
                     }
                     motors_target = ConvertToArcade(turningVal, speedVal);
+                    motors_target.brake = brakeVal;
                 }
                 else
                 {
                     motors_target.left = 0;
                     motors_target.right = 0;
+                    motors_target.brake = 0;
                 }
             }
             else

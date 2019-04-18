@@ -146,7 +146,7 @@ void updateMotorValues()
         motors_actual.left = motors_target.left;
         motors_actual.right = motors_target.right;
     }
-    std::cout << "ltarget = " << motors_target.left << ", lActual = " << motors_actual.left << ", mtrDiff = " << mtrDiff.left << ", aMtrDiff = " << aMtrDiff.left << std::endl;
+//    std::cout << "ltarget = " << motors_target.left << ", lActual = " << motors_actual.left << ", mtrDiff = " << mtrDiff.left << ", aMtrDiff = " << aMtrDiff.left << std::endl;
 }
 
 void sendMotorValues()

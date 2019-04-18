@@ -31,7 +31,12 @@ int sign(int val) { return val==0 ? 1 : val / abs(val);}
 
 void setup()
 {
-  Serial.begin(BaudRate);
+  pinMode(LMOTOR, OUTPUT);
+  pinMode(RMOTOR, OUTPUT);
+  pinMode(LMOTOR_REVERSE, OUTPUT);
+  pinMode(RMOTOR_REVERSE, OUTPUT);
+  pinMode(ESTOP, INPUT);
+//  Serial.begin(BaudRate);
   
   // Default motor values
   analogWrite(LMOTOR, 0);
@@ -41,9 +46,8 @@ void setup()
   
   // Set up servos
   ax12a.begin(BaudRate, DirectionPin, &Serial);
-  ax12a.reset(ID);
-  ax12a.torqueStatus(ID, ON);
-  ax12a.setMaxTorque(ID, 1023);
+//  ax12a.torqueStatus(ID, ON);
+//  ax12a.setMaxTorque(ID, 1023);
 }
 
 
@@ -58,13 +62,15 @@ void loop()
 //    lMotor = Serial.parseInt();
 //    rMotor = Serial.parseInt();
 //  }
-  while(Serial.available() > 2)
+  while(Serial.available() > 1)
   {
     shouldWrite = true;
     // get motor input
-    int lMotor_raw = Serial.parseInt();
-    int rMotor_raw = Serial.parseInt();
-    float brake_raw = Serial.parseFloat();
+//    lMotor_raw = 0;
+//    rMotor_raw = 0;
+    lMotor_raw = Serial.parseInt();
+    rMotor_raw = Serial.parseInt();
+//    float brake_raw = Serial.parseFloat();
     
     // Process motors
     if(sign(lMotor_raw) == -sign(lMotor) || sign(rMotor_raw) == -sign(rMotor))
@@ -81,7 +87,7 @@ void loop()
     if(rMotor_raw<0) rMotor = -rMotor;
     
     // Process brakes
-    brake_pos = 900 - brake_raw*500;
+//    brake_pos = 900 - brake_raw*500;
     
     lastTime = millis();
   }
@@ -89,11 +95,22 @@ void loop()
 //  if(Serial.available() == 1)
 //    Serial.parseInt();
 
+
+  // Estop
+  if(Estop_engaged)
+  {
+    brake_pos = brake_engaged;
+  }
+  else
+  {
+    brake_pos = brake_disengaged;
+  }
   // Safety: If I haven't heard anything from Serial for a while, 
   if(lastTime - millis() > 500 || Estop_engaged)
   {
     analogWrite(LMOTOR, 0);
     analogWrite(RMOTOR, 0);
+//    brake_pos = brake_engaged;
   }
   else if(shouldWrite)
   {
@@ -105,7 +122,10 @@ void loop()
     analogWrite(RMOTOR, abs(rMotor));
     
   }
+  ax12a.reset(ID);
   ax12a.move(ID, brake_pos);
+//  Serial.print("brake_pos");
+//  Serial.println(brake_pos);
   
   delay(DELAYTIME);
   
@@ -124,62 +144,61 @@ void loop()
   */
 }
 
-void getSerial()
-{
-  while(Serial.available() > 2)
-  {
-    String msg_type = Serial.readStringUntil('\n');
-    if(msg_type == "motors")
-    {
-      shouldWrite = true;
-      int lMotor_raw = -500;
-      int rMotor_raw = -500;
-      float lBrake_raw = -500;
-      
-      while(msg_type != "END")
-      {
-        msg_type = Serial.readStringUntil('\n');
-        switch(msg_type)
-        {
-          case "lMotor":
-            lMotor_raw = Serial.parseInt();
-            break;
-          case "rMotor":
-            rMotor_raw = Serial.parseInt();
-            break;
-          case "lBrake":
-            lBrake_raw = Serial.parseFloat();
-            break;
-          default:
-            break;
-        }
-        // get motor input
-        
-      }
-      
-      // Process motors
-      if(lMotor_raw != -500)
-      {
-        if( sign(lMotor_raw) == -sign(lMotor) )
-          waitReverse = true;
-        lMotor = map(abs(lMotor_raw), 0, 255, 40, 200);
-        if(lMotor_raw<0)
-          lMotor = -lMotor;
-      }
-      if(rMotor_raw != -500)
-      {
-        if(sign(rMotor_raw) == -sign(rMotor))
-          waitReverse = true;
-        rMotor = map(abs(rMotor_raw), 0, 255, 40, 200);
-        if(rMotor_raw<0)
-          rMotor = -rMotor;
-      }
-      if(lBrake_raw != -500)
-        lBrake = 900 - lBrake_raw*500;
-      
-      lastTime = millis();
-    }
-  }
-  Estop_engaged = !digitalRead(ESTOP);
-}
-
+//void getSerial()
+//{
+//  while(Serial.available() > 2)
+//  {
+//    String msg_type = Serial.readStringUntil('\n');
+//    if(msg_type == "motors")
+//    {
+//      shouldWrite = true;
+//      int lMotor_raw = -500;
+//      int rMotor_raw = -500;
+//      float lBrake_raw = -500;
+//      
+//      while(msg_type != "END")
+//      {
+//        msg_type = Serial.readStringUntil('\n');
+//        switch(msg_type)
+//        {
+//          case "lMotor":
+//            lMotor_raw = Serial.parseInt();
+//            break;
+//          case "rMotor":
+//            rMotor_raw = Serial.parseInt();
+//            break;
+//          case "lBrake":
+//            lBrake_raw = Serial.parseFloat();
+//            break;
+//          default:
+//            break;
+//        }
+//        // get motor input
+//        
+//      }
+//      
+//      // Process motors
+//      if(lMotor_raw != -500)
+//      {
+//        if( sign(lMotor_raw) == -sign(lMotor) )
+//          waitReverse = true;
+//        lMotor = map(abs(lMotor_raw), 0, 255, 40, 200);
+//        if(lMotor_raw<0)
+//          lMotor = -lMotor;
+//      }
+//      if(rMotor_raw != -500)
+//      {
+//        if(sign(rMotor_raw) == -sign(rMotor))
+//          waitReverse = true;
+//        rMotor = map(abs(rMotor_raw), 0, 255, 40, 200);
+//        if(rMotor_raw<0)
+//          rMotor = -rMotor;
+//      }
+//      if(lBrake_raw != -500)
+//        lBrake = 900 - lBrake_raw*500;
+//      
+//      lastTime = millis();
+//    }
+//  }
+//  Estop_engaged = !digitalRead(ESTOP);
+//}

@@ -152,7 +152,7 @@ void updateMotorValues()
 void sendMotorValues()
 {
     motorArduino << (int)(motors_actual.left  * motor_speed_limiter) << '\n';
-    motorArduino << (int)(motors_actual.right * motor_speed_limiter) << '\n';
+    motorArduino << (int)(motors_actual.right * motor_speed_limiter) << std::endl;
 //    motorArduino << (float)motors_actual.brake << std::endl;
 //    motors_actual = motors_target;
 //    std::cout << "sent values: l=" << (int)(motors_target.left  * motor_speed_limiter)

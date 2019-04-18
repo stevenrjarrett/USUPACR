@@ -1,8 +1,8 @@
 // Simple program to verify that stuff is working. This will send how much time has elapsed every .5 seconds.
 
 #include <Servo.h>
-#include <Serial.h>
-#include "AX12A.h"
+//#include <Serial.h>
+#include "/home/nvidia/sketchbook/libraries/AX-12A-servo-library/src/AX12A.h"
 #define DELAYTIME      100
 #define ESTOP          2
 #define LMOTOR         5

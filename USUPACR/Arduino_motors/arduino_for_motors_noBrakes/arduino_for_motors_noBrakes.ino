@@ -68,6 +68,7 @@ void loop()
 
   // Safety: If I haven't heard anything from Serial for a while, 
   Estop_engaged = !digitalRead(ESTOP);
+//  Estop_engaged = false;
   if(lastTime - millis() > 500 || Estop_engaged)
   {
     analogWrite(LMOTOR, 0);
@@ -83,7 +84,8 @@ void loop()
     analogWrite(RMOTOR, abs(rMotor));
     
   }
-  
+//  Serial.print("Estop = ");
+//  Serial.println(Estop_engaged);
   delay(DELAYTIME);
   
   

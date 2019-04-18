@@ -1,0 +1,1 @@
+/usr/bin/c++      CMakeFiles/pacr-gui.dir/pacr-gui.cpp.o CMakeFiles/pacr-gui.dir/mainwindow.cpp.o CMakeFiles/pacr-gui.dir/moc_mainwindow.cxx.o  -o pacr-gui -rdynamic -lQtGui -lQtCore 

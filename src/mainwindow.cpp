@@ -21,14 +21,14 @@
     //resize(XXX,XXX);
  }
 
- MainWindow::~MainWindow()
- {
-//    delete QGridLayout;
-//    delete autonomousGroup;
-//    delete distanceGroup;
-//    delete speedGroup;
-//    delete pushButton;
- }
+// MainWindow::~MainWindow()
+// {
+////    delete QGridLayout;
+////    delete autonomousGroup;
+////    delete distanceGroup;
+////    delete speedGroup;
+////    delete pushButton;
+// }
 
  QGroupBox *MainWindow::createDistanceGroup()
  {
@@ -58,18 +58,18 @@
     // Create the group of radial buttons for speed
     QGroupBox *groupBox2 = new QGroupBox(tr("Speed"));
 
-    QRadioButton *radio5 = new QRadioButton(tr("&5 kph"));
-    QRadioButton *radio6 = new QRadioButton(tr("&10 kph"));
-    QRadioButton *radio7 = new QRadioButton(tr("&15 kph"));
-    QRadioButton *radio8 = new QRadioButton(tr("&20 kph"));
+    speedRadios[0] = new QRadioButton(tr("&Max Speed"));
+    speedRadios[1] = new QRadioButton(tr("&3/4 Speed"));
+    speedRadios[2] = new QRadioButton(tr("&2/4 Speed"));
+    speedRadios[3] = new QRadioButton(tr("&1/4 Speed"));
 
-    radio5->setChecked(true);
+    speedRadios[0]->setChecked(true);
 
     QVBoxLayout *vbox2 = new QVBoxLayout;
-    vbox2->addWidget(radio5);
-    vbox2->addWidget(radio6);
-    vbox2->addWidget(radio7);
-    vbox2->addWidget(radio8);
+    vbox2->addWidget(speedRadios[0]);
+    vbox2->addWidget(speedRadios[1]);
+    vbox2->addWidget(speedRadios[2]);
+    vbox2->addWidget(speedRadios[3]);
     vbox2->addStretch(1);
     groupBox2->setLayout(vbox2);
 
@@ -99,7 +99,15 @@
 
 double MainWindow::getMaxSpeed()
 {
-    return 1.0;
+    if(distRadios[0]->isChecked())
+        return 1.0;
+    if(distRadios[1]->isChecked())
+        return .75;
+    if(distRadios[2]->isChecked())
+        return .5;
+    if(distRadios[3]->isChecked())
+        return .25;
+    return 0.0;
 }
 double MainWindow::getFollowDistance()
 {

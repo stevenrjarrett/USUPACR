@@ -43,6 +43,7 @@
 		</Unit>
 		<Unit filename="include/XBoxOne.h" />
 		<Unit filename="include/cameraDetection.h" />
+		<Unit filename="include/mainwindow.h" />
 		<Unit filename="libenjoy/src/libenjoy.c">
 			<Option compilerVar="CC" />
 			<Option compile="0" />

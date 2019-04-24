@@ -37,9 +37,8 @@
     QGroupBox *speedGroup;
 
     QRadioButton *distRadios[NUM_DISTANCE_RADIOS];
-    QRadioButtion *speedRadios[NUM_SPEED_RADIOS];
+    QRadioButton *speedRadios[NUM_SPEED_RADIOS];
 
-    QPushButton *pushButton;
     bool autonomousEngaged;
     double maxSpeed;
     double followDistance;

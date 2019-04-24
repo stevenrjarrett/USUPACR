@@ -16,7 +16,7 @@
 
  public:
     MainWindow(QWidget *parent = 0);
-    ~MainWindow();
+//    ~MainWindow();
     bool getAutonomousEngaged() { return autonomousEngaged; }
     double getMaxSpeed();
     double getFollowDistance();

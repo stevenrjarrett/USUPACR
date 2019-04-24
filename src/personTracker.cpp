@@ -88,7 +88,7 @@ void personTracker::run()
 
 
     // wait a few seconds for the person to get in position
-    usleep(init_wait_time*1000000);
+//    usleep(init_wait_time*1000000);
 
     while(running && !(this->stop_signal_recieved))
     {

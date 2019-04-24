@@ -50,8 +50,8 @@ cameraDetection::~cameraDetection()
     isRunning = false;
 //    stop();
     std::cout << "Stopping camera..." << std::endl;
-//    if(runningThread.joinable())
-//        runningThread.join();
+    if(runningThread.joinable())
+        runningThread.join();
     std::cout << "\tDone" << std::endl;
     //dtor
 }

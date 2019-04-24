@@ -36,6 +36,7 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
+		<Unit filename="CMakeLists.txt" />
 		<Unit filename="XBoxController.cpp">
 			<Option compile="0" />
 			<Option link="0" />

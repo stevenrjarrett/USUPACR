@@ -183,7 +183,7 @@ void motorUpdator()
 /////////////////////////////////////////  Main  ////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////
 
-void mainProgram(QApplication *GUI_app, MainWindow GUI);
+void mainProgram(QApplication *GUI_app, void _GUI);
 
 int main(int argc, char** argv)
 {
@@ -205,9 +205,10 @@ int main(int argc, char** argv)
     return returnMsg;
 }
 
-void mainProgram(QApplication *GUI_app, MainWindow *GUI)
+void mainProgram(QApplication *GUI_app, void *_GUI)
 {
     bool wasActive = false;
+    MainWindow *GUI = (MainWindow*)_GUI
 
     std::cout << "USU PACR Control Program" << std::endl;
     usleep(10000); // wait to make sure the main window is set up.

@@ -8,6 +8,8 @@
  MainWindow::MainWindow(QWidget *parent)
     : QWidget(parent)
  {
+    // initialize variables
+    autonomousEngaged = false;
     //create grid for group boxes
     QGridLayout *grid = new QGridLayout;
     distanceGroup   = createDistanceGroup();
@@ -99,13 +101,13 @@
 
 double MainWindow::getMaxSpeed()
 {
-    if(distRadios[0]->isChecked())
+    if(speedRadios[0]->isChecked())
         return 1.0;
-    if(distRadios[1]->isChecked())
+    if(speedRadios[1]->isChecked())
         return .75;
-    if(distRadios[2]->isChecked())
+    if(speedRadios[2]->isChecked())
         return .5;
-    if(distRadios[3]->isChecked())
+    if(speedRadios[3]->isChecked())
         return .25;
     return 0.0;
 }

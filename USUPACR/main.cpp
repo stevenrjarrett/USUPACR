@@ -76,7 +76,7 @@ double follow_distance = 5.0;
 double distance_tolerance = 2.0;
 double max_speed = 255; // 255 is the max value you can send. Set this lower for slower
 double max_acceleration = 0.8; // 1 is for 0 to max_speed in 1 second;
-double autonomous_max_speed = 127; // 255 is the max value you can send. Set this lower for slower
+double autonomous_max_speed = 200; // 255 is the max value you can send. Set this lower for slower
 double motor_speed_limiter = 1.0; // a value from 0-1, setting the maximum speed.
 double autonomous_x_tolerance = 0.5;
 bool enable_soft_start = true;
@@ -237,9 +237,18 @@ void mainProgram(QApplication *GUI_app, MainWindow *GUI)
 
     while(!stop_signal_recieved)
     {
-        std::cout << "maxSpeed = " << GUI->getMaxSpeed()
-                  << ", followDistance = " << GUI->getFollowDistance()
-                  << ", autonomousMode = " << GUI->getAutonomousEngaged() << std::endl;
+        motor_speed_limiter = GUI->getMaxSpeed();
+        follow_distance     = GUI->getFollowDistance();
+//        bool autonomous_mode_new = GUI->getAutonomousEngaged();
+//        if(autonomous_mode != autonomous_mode_new)
+//        {
+//            motors_target.left = 0;
+//            motors_target.right = 0;
+//            autonomous_mode = autonomous_mode_new;
+//        }
+        std::cout << "maxSpeed = "         <<  motor_speed_limiter
+                  << ", followDistance = " <<  follow_distance
+                  << ", autonomousMode = " <<  autonomous_mode     << std::endl;
 //        std::cout << "Beginning of executive loop" << std::endl;
         // Get closing signal from GUI
 //        if(GUI_app.lastWindowClosed())
@@ -276,7 +285,7 @@ void mainProgram(QApplication *GUI_app, MainWindow *GUI)
             // Act based on autonomous / user control
             if(autonomous_mode)
             {
-                if(controller.wp_B() || abs_val(controller.L_x()) > 0.1 || abs_val(controller.L_y()) > 0.1 || !controller.isActive() || !controller.isConnected())
+                if(controller.wp_B() || !(GUI->getAutonomousEngaged()))
                 {
                     autonomous_mode = false;
                     motors_target.left = 0;
@@ -334,9 +343,9 @@ void mainProgram(QApplication *GUI_app, MainWindow *GUI)
                     motors_target.brake = 0;
                 }
             }
-            else
+            else // manual control
             {
-                if(controller.wp_A())
+                if(controller.wp_A() || (GUI->getAutonomousEngaged()))
                 {
                     autonomous_mode = true;
                     motors_target.left = 0;

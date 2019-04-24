@@ -10,11 +10,11 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 set ( SOURCES
  pacr-gui.cpp
- mainwindow.cpp
+ ../src/mainwindow.cpp
 )
 
 set ( MOC_HEADERS
- mainwindow.h
+ ../include/mainwindow.h
 )
 
 #set ( UIS
@@ -29,7 +29,7 @@ set ( MOC_HEADERS
 find_package( Qt4 REQUIRED )
 include( ${QT_USE_FILE} )
 add_definitions( ${QT_DEFINITIONS} )
-include_directories( ${CMAKE_BINARY_DIR} )
+include_directories( ${CMAKE_BINARY_DIR} ../include/)
 
 
 # Next, using precompiler, compiler and linker

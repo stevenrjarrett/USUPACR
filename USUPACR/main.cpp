@@ -2,7 +2,7 @@
 #include <opencv2/opencv.hpp>
 #include <unistd.h>
 #include <fstream>
-#include <QApplication>
+//#include <QApplication>
 
 #include "personTracker.h"
 #include "XBoxOne.h"

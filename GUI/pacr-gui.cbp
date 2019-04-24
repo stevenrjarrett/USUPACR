@@ -32,15 +32,16 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
+		<Unit filename="../include/mainwindow.h" />
+		<Unit filename="../src/mainwindow.cpp" />
 		<Unit filename="CMakeLists.txt" />
 		<Unit filename="main.qrc" />
-		<Unit filename="mainwindow.cpp" />
-		<Unit filename="mainwindow.h" />
 		<Unit filename="mainwindow.ui" />
 		<Unit filename="pacr-gui.cpp" />
 		<Extensions>
 			<code_completion />
 			<debugger />
+			<envvars />
 		</Extensions>
 	</Project>
 </CodeBlocks_project_file>

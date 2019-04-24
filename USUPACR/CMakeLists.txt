@@ -17,18 +17,20 @@ find_package(CUDA)
 find_package(Qt4)
 
 # setup Qt4 for build
-include(${QT_USE_FILE})
-add_definitions(${QT_DEFINITIONS})
+include( ${QT_USE_FILE} )
+add_definitions( ${QT_DEFINITIONS} )
+#include_directories( ${CMAKE_BINARY_DIR} ../include/)
+QT4_WRAP_CPP( MOC_SRCS ${MOC_HEADERS} )
 
 set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_CXX_STANDARD_REQUIRED TRUE)
 
-include_directories(${realsense2_INCLUDE_DIRS} ${OpenCV_INCLUDE_DIRS} ../include ./include)
+include_directories(${CMAKE_BINARY_DIR} ${realsense2_INCLUDE_DIRS} ${OpenCV_INCLUDE_DIRS} ../include ./include)
 # include_directories(/usr/include/gstreamer-1.0 /usr/lib/aarch64-linux-gnu/gstreamer-1.0/include /usr/include/glib-2.0 /usr/include/libxml2 /usr/lib/aarch64-linux-gnu/glib-2.0/include/)
 
 # cuda_add_executable(USUPACR ${USUPACR_Sources})
-cuda_add_executable(USUPACR ${USUPACR_SOURCES})
+cuda_add_executable(USUPACR ${USUPACR_SOURCES} ${MOC_SRCS})
 
-target_link_libraries(USUPACR Threads::Threads jetson-inference ${realsense2_LIBRARY} ${OpenCV_LIBS} ${CMAKE_THREAD_LIBS_INIT})
+target_link_libraries(USUPACR Threads::Threads jetson-inference ${realsense2_LIBRARY} ${OpenCV_LIBS} ${CMAKE_THREAD_LIBS_INIT} ${QT_LIBRARIES})
 # target_link_libraries(USUPACR jetson-inference ${CMAKE_THREAD_LIBS_INIT})
 

@@ -5,7 +5,11 @@ cmake_minimum_required(VERSION 3.1.0)
 
 project(USUPACR)
 
+# files / directories
 file(GLOB USUPACR_SOURCES main.cpp ../src/*.cpp ../src/*.c ./src/*.cpp ./src/*.c)
+set ( MOC_HEADERS ../include/mainwindow.h )
+
+include_directories(${CMAKE_BINARY_DIR} ${realsense2_INCLUDE_DIRS} ${OpenCV_INCLUDE_DIRS} ../include ./include)
 # file(GLOB pacr-follow_INCLUDES ../include/*.hpp ../include/*.h )
 
 find_package(Threads REQUIRED)
@@ -25,7 +29,6 @@ QT4_WRAP_CPP( MOC_SRCS ${MOC_HEADERS} )
 set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_CXX_STANDARD_REQUIRED TRUE)
 
-include_directories(${CMAKE_BINARY_DIR} ${realsense2_INCLUDE_DIRS} ${OpenCV_INCLUDE_DIRS} ../include ./include)
 # include_directories(/usr/include/gstreamer-1.0 /usr/lib/aarch64-linux-gnu/gstreamer-1.0/include /usr/include/glib-2.0 /usr/include/libxml2 /usr/lib/aarch64-linux-gnu/glib-2.0/include/)
 
 # cuda_add_executable(USUPACR ${USUPACR_Sources})

@@ -401,7 +401,9 @@ void mainProgram(QApplication *GUI_app, MainWindow *GUI)
     stop_signal_recieved = true;
     if(motorThread.joinable())
         motorThread.join();
-    GUI_app->quit();
+//    bool hasGuiApp = (qobject_cast<QApplication*>(QCoreApplication::instance())!=0);
+//    if(GUI_app.instance()!=0)
+//        GUI_app->quit();
 
 //    return 0;
 }

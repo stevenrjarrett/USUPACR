@@ -187,6 +187,8 @@ while(!(this->stop_signal_recieved))
     // don't even try if I shouldn't be running
     while(!isRunning && !(this->stop_signal_recieved))
         usleep(1000);
+    if(this->stop_signal_recieved)
+        break;
     // Set up camera streams and realsense
 
         // Declare depth colorizer for pretty visualization of depth data

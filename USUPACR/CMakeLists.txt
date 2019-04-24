@@ -15,10 +15,10 @@ include_directories(${CMAKE_BINARY_DIR} ${realsense2_INCLUDE_DIRS} ${OpenCV_INCL
 find_package(Threads REQUIRED)
 find_package(realsense2 REQUIRED)
 find_package(OpenCV REQUIRED)
-find_package(jetson-utils)
-find_package(jetson-inference)
-find_package(CUDA)
-find_package(Qt4)
+find_package(jetson-utils REQUIRED)
+find_package(jetson-inference REQUIRED)
+find_package(CUDA REQUIRED)
+find_package(Qt4 REQUIRED)
 
 # setup Qt4 for build
 include( ${QT_USE_FILE} )

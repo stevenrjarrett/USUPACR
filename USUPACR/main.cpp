@@ -2,6 +2,7 @@
 #include <opencv2/opencv.hpp>
 #include <unistd.h>
 #include <fstream>
+#include <QApplication>
 
 #include "personTracker.h"
 #include "XBoxOne.h"
@@ -81,6 +82,7 @@ double autonomous_x_tolerance = 0.5;
 bool enable_soft_start = true;
 double drive_increment = max_speed * max_acceleration * ((double)MOTORS_WAIT_TIME / 1000000.0);
 double controllerTimeout = 1.5; // seconds
+QApplication GUI_app;
 
 std::fstream motorArduino;
 
@@ -184,17 +186,30 @@ void motorUpdator()
 
 int main(int argc, char** argv)
 {
+    GUI_app.QApplication(argc, argv);
+
+    std::thread mainThread = std::thread(mainProgram);
+
+    //Run GUI
+     MainWindow GUI;
+     GUI.showMaximized();
+//         std::thread guiThread = std::thread(GUI_app.exec, &GUI_app);
+    int returnMsg = GUI_app.exec();
+
+    // stop main program
+    stop_signal_recieved = true;
+    mainThread.join();
+    return returnMsg;
+}
+
+int mainProgram()
+{
     bool wasActive = false;
 
     std::cout << "USU PACR Control Program" << std::endl;
+    usleep(10000) // wait to make sure the main window is set up.
 
     /// Initialize
-        // GUI
-         QApplication GUI_app(argc, argv);
-         MainWindow GUI;
-         GUI.showMaximized();
-//         std::thread guiThread = std::thread(GUI_app.exec, &GUI_app);
-         GUI_app.exec();
         // Joystick
         XBoxOne controller;
         controller.setTimeout(controllerTimeout);

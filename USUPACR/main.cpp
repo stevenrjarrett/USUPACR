@@ -246,9 +246,9 @@ void mainProgram(QApplication *GUI_app, MainWindow *GUI)
 //            motors_target.right = 0;
 //            autonomous_mode = autonomous_mode_new;
 //        }
-        std::cout << "maxSpeed = "         <<  motor_speed_limiter
-                  << ", followDistance = " <<  follow_distance
-                  << ", autonomousMode = " <<  autonomous_mode     << std::endl;
+//        std::cout << "maxSpeed = "         <<  motor_speed_limiter
+//                  << ", followDistance = " <<  follow_distance
+//                  << ", autonomousMode = " <<  autonomous_mode     << std::endl;
 //        std::cout << "Beginning of executive loop" << std::endl;
         // Get closing signal from GUI
 //        if(GUI_app.lastWindowClosed())

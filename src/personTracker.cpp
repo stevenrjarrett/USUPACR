@@ -115,7 +115,7 @@ void personTracker::run()
 
         if(show_color)
         {
-                    cv::putText(camera.colorMat, std::string("z =  ") + std::to_string(people[0].last.centroid.z), cv::Point(people[0].last.bb.x,people[0].last.bb.y+20), cv::FONT_HERSHEY_SIMPLEX, 0.75, COL_TEXT_COLOR,2);
+            cv::putText(camera.colorMat, std::string("z =  ") + std::to_string(people[0].last.centroid.z), cv::Point(people[0].last.bb.x,people[0].last.bb.y+20), cv::FONT_HERSHEY_SIMPLEX, 0.75, COL_TEXT_COLOR,2);
             cv::rectangle(camera.colorMat, people[0].last.bb, COL_TEXT_COLOR, 5);
             cv::imshow(colorWindowName, camera.colorMat);
         }
@@ -143,10 +143,10 @@ void personTracker::start()
 {
     std::cout << "Starting person tracker" << std::endl;
 
-//    if(show_color)
-//        cv::namedWindow(colorWindowName);
-//    if(show_depth)
-//        cv::namedWindow(depthWindowName);
+    if(show_color)
+        cv::namedWindow(colorWindowName);
+    if(show_depth)
+        cv::namedWindow(depthWindowName);
     running = true;
 //    if(!runningThread.joinable())
 //    {
@@ -167,10 +167,10 @@ void personTracker::start()
 void personTracker::stop()
 {
     running = false;
-//    if(show_color)
-//        cv::destroyWindow(colorWindowName);
-//    if(show_depth)
-//        cv::destroyWindow(depthWindowName);
+    if(show_color)
+        cv::destroyWindow(colorWindowName);
+    if(show_depth)
+        cv::destroyWindow(depthWindowName);
 //    std::cout << "Stopping tracker" << std::endl;
 //    if(runningThread.joinable())
 //        runningThread.join();

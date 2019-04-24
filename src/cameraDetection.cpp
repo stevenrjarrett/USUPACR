@@ -306,12 +306,12 @@ while(!(this->stop_signal_recieved))
 
     while (isRunning && !(this->stop_signal_recieved))
     {
-        if(cv::waitKey(1) == 27)
-        {
-            isRunning = false;
-            return;
-//            stop_signal_recieved = true;
-        }
+//        if(cv::waitKey(1) == 27)
+//        {
+//            isRunning = false;
+//            return;
+////            stop_signal_recieved = true;
+//        }
         rs2::frameset data = pipe.wait_for_frames(); // Wait for next set of frames from the camera
 
         // get frames

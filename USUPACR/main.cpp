@@ -196,7 +196,7 @@ int main(int argc, char** argv)
 //         std::thread guiThread = std::thread(GUI_app.exec, &GUI_app);
         // Joystick
         XBoxOne controller;
-        controller.setTimeout();
+        controller.setTimeout(controllerTimeout);
         // Cameras/autonomous function
         personTracker tracker(cv::Point3d(0, 0, follow_distance));
         // Communication with Arduino
@@ -220,11 +220,11 @@ int main(int argc, char** argv)
     {
 //        std::cout << "Beginning of executive loop" << std::endl;
         // Get closing signal from GUI
-        if(GUI_app.lastWindowClosed())
-        {
-            stop_signal_recieved = true;
-            break;
-        }
+//        if(GUI_app.lastWindowClosed())
+//        {
+//            stop_signal_recieved = true;
+//            break;
+//        }
         // get input from controller for the E-stops
         if(controller.wp_rBumper())
         {

@@ -82,7 +82,6 @@ double autonomous_x_tolerance = 0.5;
 bool enable_soft_start = true;
 double drive_increment = max_speed * max_acceleration * ((double)MOTORS_WAIT_TIME / 1000000.0);
 double controllerTimeout = 1.5; // seconds
-QApplication GUI_app;
 
 std::fstream motorArduino;
 
@@ -186,9 +185,9 @@ void motorUpdator()
 
 int main(int argc, char** argv)
 {
-    GUI_app.QApplication(argc, argv);
+    QApplication GUI_app(argc, argv);
 
-    std::thread mainThread = std::thread(mainProgram);
+    std::thread mainThread = std::thread(mainProgram, &GUI_app);
 
     //Run GUI
      MainWindow GUI;
@@ -202,7 +201,7 @@ int main(int argc, char** argv)
     return returnMsg;
 }
 
-int mainProgram()
+int mainProgram(QApplication *GUI_app)
 {
     bool wasActive = false;
 

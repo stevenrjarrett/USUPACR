@@ -194,6 +194,7 @@ int main(int argc, char** argv)
          MainWindow GUI;
          GUI.showMaximized();
 //         std::thread guiThread = std::thread(GUI_app.exec, &GUI_app);
+         GUI_app.exec();
         // Joystick
         XBoxOne controller;
         controller.setTimeout(controllerTimeout);

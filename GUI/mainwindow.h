@@ -5,6 +5,9 @@
 
  #include <QtGui>
 
+ #define NUM_DISTANCE_RADIOS 4
+ #define NUM_SPEED_RADIOS    4
+
  class QGroupBox;
 
  class MainWindow : public QWidget
@@ -13,6 +16,10 @@
 
  public:
     MainWindow(QWidget *parent = 0);
+    ~MainWindow();
+    bool getAutonomousEngaged() { return autonomousEngaged; }
+    double getMaxSpeed();
+    double getFollowDistance();
 
  private slots:
     void handleButton();
@@ -23,6 +30,20 @@
     QGroupBox *createSpeedGroup();
     QGroupBox *createAutonomousGroup();
     QPushButton *pushButton;
+
+    // variables
+    QGroupBox *autonomousGroup;
+    QGroupBox *distanceGroup;
+    QGroupBox *speedGroup;
+
+    QRadioButton *distRadios[NUM_DISTANCE_RADIOS];
+    QRadioButtion *speedRadios[NUM_SPEED_RADIOS];
+
+    QPushButton *pushButton;
+    bool autonomousEngaged;
+    double maxSpeed;
+    double followDistance;
+
  };
 
  #endif

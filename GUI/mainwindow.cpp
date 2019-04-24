@@ -10,12 +10,24 @@
  {
     //create grid for group boxes
     QGridLayout *grid = new QGridLayout;
-    grid->addWidget(createDistanceGroup(), 0, 0);
-    grid->addWidget(createSpeedGroup(), 1, 0);
-    grid->addWidget(createAutonomousGroup(), 0, 1);
+    distanceGroup   = createDistanceGroup();
+    speedGroup      = createSpeedGroup();
+    autonomousGroup = createAutonomousGroup();
+    grid->addWidget(distanceGroup, 0, 0);
+    grid->addWidget(speedGroup, 1, 0);
+    grid->addWidget(autonomousGroup, 0, 1);
     setLayout(grid);
 
     //resize(XXX,XXX);
+ }
+
+ MainWindow::~MainWindow()
+ {
+//    delete QGridLayout;
+//    delete autonomousGroup;
+//    delete distanceGroup;
+//    delete speedGroup;
+//    delete pushButton;
  }
 
  QGroupBox *MainWindow::createDistanceGroup()
@@ -23,18 +35,18 @@
     // Create the group of radial buttons for distance
     QGroupBox *groupBox1 = new QGroupBox(tr("Distance"));
 
-    QRadioButton *radio1 = new QRadioButton(tr("&1.5 m"));
-    QRadioButton *radio2 = new QRadioButton(tr("&3 m"));
-    QRadioButton *radio3 = new QRadioButton(tr("&4.5 m"));
-    QRadioButton *radio4 = new QRadioButton(tr("&6 m"));
+    distRadios[0] = new QRadioButton(tr("&1.5 m"));
+    distRadios[1] = new QRadioButton(tr("&3 m"));
+    distRadios[2] = new QRadioButton(tr("&4.5 m"));
+    distRadios[3] = new QRadioButton(tr("&6 m"));
 
     radio1->setChecked(true);
 
     QVBoxLayout *vbox1 = new QVBoxLayout;
-    vbox1->addWidget(radio1);
-    vbox1->addWidget(radio2);
-    vbox1->addWidget(radio3);
-    vbox1->addWidget(radio4);
+    vbox1->addWidget(distRadios[0]);
+    vbox1->addWidget(distRadios[1]);
+    vbox1->addWidget(distRadios[2]);
+    vbox1->addWidget(distRadios[3]);
     vbox1->addStretch(1);
     groupBox1->setLayout(vbox1);
 
@@ -85,11 +97,28 @@
  }
 
 
+double MainWindow::getMaxSpeed()
+{
+    return 1.0;
+}
+double MainWindow::getFollowDistance()
+{
+    if(distRadios[0]->isChecked())
+        return 1.5;
+    if(distRadios[1]->isChecked())
+        return 3.0;
+    if(distRadios[2]->isChecked())
+        return 4.5;
+    if(distRadios[3]->isChecked())
+        return 6.0;
+    return 0.0;
+}
+
  void MainWindow::handleButton()
  {
     pushButton->setText("ON");
     //activate autonomous mode
-
+    autonomousEngaged = true;
 
     connect(pushButton, SIGNAL (clicked()), this, SLOT (handleButton2()));
 
@@ -99,7 +128,7 @@
  {
     pushButton->setText("OFF");
     //deactivate autonomous mode
-
+    autonomousEngaged = false;
 
     connect(pushButton, SIGNAL (clicked()), this, SLOT (handleButton()));
  }

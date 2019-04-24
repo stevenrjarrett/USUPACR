@@ -47,7 +47,7 @@ cameraDetection::cameraDetection()
 cameraDetection::~cameraDetection()
 {
     this->stop_signal_recieved = true;
-    running = false;
+    isRunning = false;
 //    stop();
     std::cout << "Stopping camera..." << std::endl;
 //    if(runningThread.joinable())

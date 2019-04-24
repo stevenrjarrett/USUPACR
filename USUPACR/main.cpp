@@ -183,6 +183,8 @@ void motorUpdator()
 /////////////////////////////////////////  Main  ////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////
 
+void mainProgram(QApplication *GUI_app);
+
 int main(int argc, char** argv)
 {
     QApplication GUI_app(argc, argv);
@@ -386,9 +388,8 @@ void mainProgram(QApplication *GUI_app)
     if(motorThread.joinable())
         motorThread.join();
     GUI_app.quit();
-//    cam.stop();
-//    controller.stop();
-    return 0;
+
+//    return 0;
 }
 
 

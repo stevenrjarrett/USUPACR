@@ -387,7 +387,7 @@ void mainProgram(QApplication *GUI_app)
     stop_signal_recieved = true;
     if(motorThread.joinable())
         motorThread.join();
-    GUI_app.quit();
+    GUI_app->quit();
 
 //    return 0;
 }

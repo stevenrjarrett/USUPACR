@@ -183,25 +183,25 @@ void motorUpdator()
 /////////////////////////////////////////  Main  ////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////
 
-int main(int argc, char** argv)
-{
-    QApplication GUI_app(argc, argv);
+//int main(int argc, char** argv)
+//{
+//    QApplication GUI_app(argc, argv);
+//
+//    std::thread mainThread = std::thread(mainProgram, &GUI_app);
+//
+//    //Run GUI
+//     MainWindow GUI;
+//     GUI.showMaximized();
+////         std::thread guiThread = std::thread(GUI_app.exec, &GUI_app);
+//    int returnMsg = GUI_app.exec();
+//
+//    // stop main program
+//    stop_signal_recieved = true;
+//    mainThread.join();
+//    return returnMsg;
+//}
 
-    std::thread mainThread = std::thread(mainProgram, &GUI_app);
-
-    //Run GUI
-     MainWindow GUI;
-     GUI.showMaximized();
-//         std::thread guiThread = std::thread(GUI_app.exec, &GUI_app);
-    int returnMsg = GUI_app.exec();
-
-    // stop main program
-    stop_signal_recieved = true;
-    mainThread.join();
-    return returnMsg;
-}
-
-int mainProgram(QApplication *GUI_app)
+int main()//(QApplication *GUI_app)
 {
     bool wasActive = false;
 

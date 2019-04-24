@@ -40,7 +40,7 @@
     distRadios[2] = new QRadioButton(tr("&4.5 m"));
     distRadios[3] = new QRadioButton(tr("&6 m"));
 
-    radio1->setChecked(true);
+    distRadios[0]->setChecked(true);
 
     QVBoxLayout *vbox1 = new QVBoxLayout;
     vbox1->addWidget(distRadios[0]);

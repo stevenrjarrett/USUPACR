@@ -80,6 +80,7 @@ double motor_speed_limiter = 1.0; // a value from 0-1, setting the maximum speed
 double autonomous_x_tolerance = 0.5;
 bool enable_soft_start = true;
 double drive_increment = max_speed * max_acceleration * ((double)MOTORS_WAIT_TIME / 1000000.0);
+double controllerTimeout = 1.5; // seconds
 
 std::fstream motorArduino;
 
@@ -181,28 +182,25 @@ void motorUpdator()
 /////////////////////////////////////////  Main  ////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////
 
-int main()
+int main(int argc, char** argv)
 {
     bool wasActive = false;
 
     std::cout << "USU PACR Control Program" << std::endl;
 
     /// Initialize
+        // GUI
+         QApplication GUI_app(argc, argv);
+         MainWindow GUI;
+         GUI.showMaximized();
+//         std::thread guiThread = std::thread(GUI_app.exec, &GUI_app);
         // Joystick
         XBoxOne controller;
-        controller.setTimeout(1.5);
-//        controller.start();
-//        int controller = open("/dev/input/event8", 0_RDONLY);
-//        if(controller == 0)
-//        {
-//            }
-        // IMU
+        controller.setTimeout();
         // Cameras/autonomous function
-//        cameraDetection cam;
         personTracker tracker(cv::Point3d(0, 0, follow_distance));
         // Communication with Arduino
         std::thread motorThread = std::thread(motorUpdator);
-
         // enable signal catcher
         if( signal(SIGINT, sig_handler) == SIG_ERR )
             printf("\ncan't catch SIGINT\n");
@@ -221,6 +219,12 @@ int main()
     while(!stop_signal_recieved)
     {
 //        std::cout << "Beginning of executive loop" << std::endl;
+        // Get closing signal from GUI
+        if(GUI_app.lastWindowClosed())
+        {
+            stop_signal_recieved = true;
+            break;
+        }
         // get input from controller for the E-stops
         if(controller.wp_rBumper())
         {
@@ -366,6 +370,7 @@ int main()
     stop_signal_recieved = true;
     if(motorThread.joinable())
         motorThread.join();
+    GUI_app.quit();
 //    cam.stop();
 //    controller.stop();
     return 0;

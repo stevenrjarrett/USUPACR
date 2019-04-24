@@ -183,19 +183,21 @@ void motorUpdator()
 /////////////////////////////////////////  Main  ////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////
 
-void mainProgram(QApplication *GUI_app);
+void mainProgram(QApplication *GUI_app, MainWindow GUI);
 
 int main(int argc, char** argv)
 {
     QApplication GUI_app(argc, argv);
-
-    std::thread mainThread = std::thread(mainProgram, &GUI_app);
-
-    //Run GUI
      MainWindow GUI;
      GUI.showMaximized();
+
+    std::thread mainThread = std::thread(mainProgram, &GUI_app, &GUI);
+
+    //Run GUI
 //         std::thread guiThread = std::thread(GUI_app.exec, &GUI_app);
-    int returnMsg = GUI_app.exec();
+//    int returnMsg = GUI_app.exec();
+    int returnMsg = 1;
+    GUI_app.exec();
 
     // stop main program
     stop_signal_recieved = true;
@@ -203,7 +205,7 @@ int main(int argc, char** argv)
     return returnMsg;
 }
 
-void mainProgram(QApplication *GUI_app)
+void mainProgram(QApplication *GUI_app, MainWindow *GUI)
 {
     bool wasActive = false;
 
@@ -235,6 +237,9 @@ void mainProgram(QApplication *GUI_app)
 
     while(!stop_signal_recieved)
     {
+        std::cout << "maxSpeed = " << GUI->getMaxSpeed()
+                  << ", followDistance = " << GUI->getFollowDistance()
+                  << ", autonomousMode = " << GUI->getAutonomousEngaged() << std::endl;
 //        std::cout << "Beginning of executive loop" << std::endl;
         // Get closing signal from GUI
 //        if(GUI_app.lastWindowClosed())

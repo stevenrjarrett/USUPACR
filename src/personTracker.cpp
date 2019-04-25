@@ -8,7 +8,7 @@ personTracker::personTracker(cv::Point3d defaultLocation, double _tolerance)//, 
     show_depth = false;
     camera.showBoxes();
     lastTime = camera.getLastTime();
-    init_wait_time = 1.0;
+    init_wait_time = 5.0;
     default_person = trackedPerson(personFrame(defaultLocation, cv::Rect2d(camera.GetCOL_width()/2-30, camera.GetCOL_height()/2-45, 60, 90), 1.0), _tolerance);
 //    tolerance = _tolerance;
     active = false;
@@ -93,6 +93,7 @@ void personTracker::run()
 
 
     // wait a few seconds for the person to get in position
+    std::cout << "Will begin following in " << init_wait_time << " seconds." << std::endl;
     usleep(init_wait_time*1000000);
 
     while(running && !(this->stop_signal_recieved))

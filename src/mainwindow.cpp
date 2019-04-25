@@ -309,13 +309,13 @@ int mainProgram(MainWindow *GUI)
             EStop = true;
             autonomous_mode = false;
         }
-        if(controller.wp_lBumper())
-        {
-            motors_target.left = 0;
-            motors_target.right = 0;
-//            sendMotorValues();
-            break;
-        }
+//        if(controller.wp_lBumper())
+//        {
+//            motors_target.left = 0;
+//            motors_target.right = 0;
+////            sendMotorValues();
+//            break;
+//        }
         // if the e-stop was not pressed, do normal stuff
         if(!EStop)
         {

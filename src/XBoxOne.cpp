@@ -109,7 +109,7 @@ void XBoxOne::stop()
     {
         std::cout << "ERROR: Controller stopped twice (caught)" << std::endl;
     }
-//    std::cout << "Controller stopped" << std::endl;
+    std::cout << "Controller stopped" << std::endl;
 }
 
 bool XBoxOne::isConnected()

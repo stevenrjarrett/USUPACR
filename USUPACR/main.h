@@ -6,9 +6,9 @@
 #include <unistd.h>
 #include <fstream>
 
-#include "mainwindow.h"
 #include "personTracker.h"
 #include "XBoxOne.h"
+#include "mainwindow.h"
 //#include <QApplication>
 
 /////////////////////////////////////////////////////////////////////////////////////////

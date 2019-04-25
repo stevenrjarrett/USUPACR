@@ -219,9 +219,16 @@ void sendMotorValues()
 
 void motorUpdator()
 {
-    motorArduino.open("/dev/ttyACM0", std::ios_base::out | std::ios_base::in | std::ios_base::trunc );
-    usleep(1000);
-    std::cout << "Motor arduino is_open() = " << motorArduino.is_open() << std::endl;
+    std::string serialPortPath;
+    std::cout << "Opening serial connection with motor arduino" << std::endl;
+    for(int serialPortNumber = 0; !(motorArduino.is_open()); serialPortNumber = (serialPortNumber + 1) % 20)
+    {
+        serialPortPath = std::string("/dev/ttyACM")+std::to_string(serialPortNumber);
+        motorArduino.open(serialPortPath, std::ios_base::out | std::ios_base::in | std::ios_base::trunc );
+        usleep(1000);
+    }
+    usleep(100000);
+    std::cout << "Serial port for motors successfully opened at " << serialPortPath << std::endl;
     while(!stop_signal_recieved)
     {
         updateMotorValues();

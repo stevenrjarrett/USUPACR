@@ -6,6 +6,8 @@
  #include <QWidget>
  #include <QAbstractButton>
 
+std::fstream motorArduino;
+
  MainWindow::MainWindow(QWidget *parent)
     : QWidget(parent)
  {

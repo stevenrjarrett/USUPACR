@@ -1,6 +1,5 @@
 #include "mainwindow.h"
 
-std::fstream motorArduino;
 
 
 int main(int argc, char** argv)

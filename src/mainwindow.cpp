@@ -233,7 +233,7 @@ void motorUpdator()
     while(!stop_signal_recieved)
     {
         // Check for connection
-        if(!(motorArduino.is_open())
+        if(!(motorArduino.is_open()))
         {
             std::cout << "Lost connection to motor Arduino. Attempting to recover..." << std::endl;
             for( ; !(motorArduino.is_open()); serialPortNumber = (serialPortNumber + 1) % 20)

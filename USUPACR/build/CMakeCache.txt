@@ -904,6 +904,9 @@ jetson-inference_DIR:PATH=/usr/local/share/jetson-inference/cmake
 //The directory containing a CMake configuration file for jetson-utils.
 jetson-utils_DIR:PATH=/usr/local/share/jetson-utils/cmake
 
+//The directory containing a CMake configuration file for realsense2.
+realsense2_DIR:PATH=/usr/local/lib/cmake/realsense2
+
 
 ########################
 # INTERNAL cache entries

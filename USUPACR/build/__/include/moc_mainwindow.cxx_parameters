@@ -1,0 +1,13 @@
+-I/home/nvidia/Documents/USUPACR/USUPACR/build
+-I/home/nvidia/Documents/USUPACR/USUPACR/../include
+-I/home/nvidia/Documents/USUPACR/USUPACR/./include
+-I/home/nvidia/Documents/USUPACR/USUPACR/.
+-I/usr/include/qt4
+-I/usr/include/qt4/QtGui
+-I/usr/include/qt4/QtCore
+-D$<$<NOT:$<CONFIG:Debug>>:QT_NO_DEBUG>
+-DQT_GUI_LIB
+-DQT_CORE_LIB
+-o
+/home/nvidia/Documents/USUPACR/USUPACR/build/__/include/moc_mainwindow.cxx
+/home/nvidia/Documents/USUPACR/include/mainwindow.h

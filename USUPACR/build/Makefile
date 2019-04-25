@@ -123,6 +123,249 @@ USUPACR/fast:
 	$(MAKE) -f CMakeFiles/USUPACR.dir/build.make CMakeFiles/USUPACR.dir/build
 .PHONY : USUPACR/fast
 
+__/include/moc_mainwindow.o: __/include/moc_mainwindow.cxx.o
+
+.PHONY : __/include/moc_mainwindow.o
+
+# target to build an object file
+__/include/moc_mainwindow.cxx.o:
+	$(MAKE) -f CMakeFiles/USUPACR.dir/build.make CMakeFiles/USUPACR.dir/__/include/moc_mainwindow.cxx.o
+.PHONY : __/include/moc_mainwindow.cxx.o
+
+__/include/moc_mainwindow.i: __/include/moc_mainwindow.cxx.i
+
+.PHONY : __/include/moc_mainwindow.i
+
+# target to preprocess a source file
+__/include/moc_mainwindow.cxx.i:
+	$(MAKE) -f CMakeFiles/USUPACR.dir/build.make CMakeFiles/USUPACR.dir/__/include/moc_mainwindow.cxx.i
+.PHONY : __/include/moc_mainwindow.cxx.i
+
+__/include/moc_mainwindow.s: __/include/moc_mainwindow.cxx.s
+
+.PHONY : __/include/moc_mainwindow.s
+
+# target to generate assembly for a file
+__/include/moc_mainwindow.cxx.s:
+	$(MAKE) -f CMakeFiles/USUPACR.dir/build.make CMakeFiles/USUPACR.dir/__/include/moc_mainwindow.cxx.s
+.PHONY : __/include/moc_mainwindow.cxx.s
+
+home/nvidia/Documents/USUPACR/src/XBoxOne.o: home/nvidia/Documents/USUPACR/src/XBoxOne.cpp.o
+
+.PHONY : home/nvidia/Documents/USUPACR/src/XBoxOne.o
+
+# target to build an object file
+home/nvidia/Documents/USUPACR/src/XBoxOne.cpp.o:
+	$(MAKE) -f CMakeFiles/USUPACR.dir/build.make CMakeFiles/USUPACR.dir/home/nvidia/Documents/USUPACR/src/XBoxOne.cpp.o
+.PHONY : home/nvidia/Documents/USUPACR/src/XBoxOne.cpp.o
+
+home/nvidia/Documents/USUPACR/src/XBoxOne.i: home/nvidia/Documents/USUPACR/src/XBoxOne.cpp.i
+
+.PHONY : home/nvidia/Documents/USUPACR/src/XBoxOne.i
+
+# target to preprocess a source file
+home/nvidia/Documents/USUPACR/src/XBoxOne.cpp.i:
+	$(MAKE) -f CMakeFiles/USUPACR.dir/build.make CMakeFiles/USUPACR.dir/home/nvidia/Documents/USUPACR/src/XBoxOne.cpp.i
+.PHONY : home/nvidia/Documents/USUPACR/src/XBoxOne.cpp.i
+
+home/nvidia/Documents/USUPACR/src/XBoxOne.s: home/nvidia/Documents/USUPACR/src/XBoxOne.cpp.s
+
+.PHONY : home/nvidia/Documents/USUPACR/src/XBoxOne.s
+
+# target to generate assembly for a file
+home/nvidia/Documents/USUPACR/src/XBoxOne.cpp.s:
+	$(MAKE) -f CMakeFiles/USUPACR.dir/build.make CMakeFiles/USUPACR.dir/home/nvidia/Documents/USUPACR/src/XBoxOne.cpp.s
+.PHONY : home/nvidia/Documents/USUPACR/src/XBoxOne.cpp.s
+
+home/nvidia/Documents/USUPACR/src/cameraDetection.o: home/nvidia/Documents/USUPACR/src/cameraDetection.cpp.o
+
+.PHONY : home/nvidia/Documents/USUPACR/src/cameraDetection.o
+
+# target to build an object file
+home/nvidia/Documents/USUPACR/src/cameraDetection.cpp.o:
+	$(MAKE) -f CMakeFiles/USUPACR.dir/build.make CMakeFiles/USUPACR.dir/home/nvidia/Documents/USUPACR/src/cameraDetection.cpp.o
+.PHONY : home/nvidia/Documents/USUPACR/src/cameraDetection.cpp.o
+
+home/nvidia/Documents/USUPACR/src/cameraDetection.i: home/nvidia/Documents/USUPACR/src/cameraDetection.cpp.i
+
+.PHONY : home/nvidia/Documents/USUPACR/src/cameraDetection.i
+
+# target to preprocess a source file
+home/nvidia/Documents/USUPACR/src/cameraDetection.cpp.i:
+	$(MAKE) -f CMakeFiles/USUPACR.dir/build.make CMakeFiles/USUPACR.dir/home/nvidia/Documents/USUPACR/src/cameraDetection.cpp.i
+.PHONY : home/nvidia/Documents/USUPACR/src/cameraDetection.cpp.i
+
+home/nvidia/Documents/USUPACR/src/cameraDetection.s: home/nvidia/Documents/USUPACR/src/cameraDetection.cpp.s
+
+.PHONY : home/nvidia/Documents/USUPACR/src/cameraDetection.s
+
+# target to generate assembly for a file
+home/nvidia/Documents/USUPACR/src/cameraDetection.cpp.s:
+	$(MAKE) -f CMakeFiles/USUPACR.dir/build.make CMakeFiles/USUPACR.dir/home/nvidia/Documents/USUPACR/src/cameraDetection.cpp.s
+.PHONY : home/nvidia/Documents/USUPACR/src/cameraDetection.cpp.s
+
+home/nvidia/Documents/USUPACR/src/libenjoy.o: home/nvidia/Documents/USUPACR/src/libenjoy.c.o
+
+.PHONY : home/nvidia/Documents/USUPACR/src/libenjoy.o
+
+# target to build an object file
+home/nvidia/Documents/USUPACR/src/libenjoy.c.o:
+	$(MAKE) -f CMakeFiles/USUPACR.dir/build.make CMakeFiles/USUPACR.dir/home/nvidia/Documents/USUPACR/src/libenjoy.c.o
+.PHONY : home/nvidia/Documents/USUPACR/src/libenjoy.c.o
+
+home/nvidia/Documents/USUPACR/src/libenjoy.i: home/nvidia/Documents/USUPACR/src/libenjoy.c.i
+
+.PHONY : home/nvidia/Documents/USUPACR/src/libenjoy.i
+
+# target to preprocess a source file
+home/nvidia/Documents/USUPACR/src/libenjoy.c.i:
+	$(MAKE) -f CMakeFiles/USUPACR.dir/build.make CMakeFiles/USUPACR.dir/home/nvidia/Documents/USUPACR/src/libenjoy.c.i
+.PHONY : home/nvidia/Documents/USUPACR/src/libenjoy.c.i
+
+home/nvidia/Documents/USUPACR/src/libenjoy.s: home/nvidia/Documents/USUPACR/src/libenjoy.c.s
+
+.PHONY : home/nvidia/Documents/USUPACR/src/libenjoy.s
+
+# target to generate assembly for a file
+home/nvidia/Documents/USUPACR/src/libenjoy.c.s:
+	$(MAKE) -f CMakeFiles/USUPACR.dir/build.make CMakeFiles/USUPACR.dir/home/nvidia/Documents/USUPACR/src/libenjoy.c.s
+.PHONY : home/nvidia/Documents/USUPACR/src/libenjoy.c.s
+
+home/nvidia/Documents/USUPACR/src/libenjoy_linux.o: home/nvidia/Documents/USUPACR/src/libenjoy_linux.c.o
+
+.PHONY : home/nvidia/Documents/USUPACR/src/libenjoy_linux.o
+
+# target to build an object file
+home/nvidia/Documents/USUPACR/src/libenjoy_linux.c.o:
+	$(MAKE) -f CMakeFiles/USUPACR.dir/build.make CMakeFiles/USUPACR.dir/home/nvidia/Documents/USUPACR/src/libenjoy_linux.c.o
+.PHONY : home/nvidia/Documents/USUPACR/src/libenjoy_linux.c.o
+
+home/nvidia/Documents/USUPACR/src/libenjoy_linux.i: home/nvidia/Documents/USUPACR/src/libenjoy_linux.c.i
+
+.PHONY : home/nvidia/Documents/USUPACR/src/libenjoy_linux.i
+
+# target to preprocess a source file
+home/nvidia/Documents/USUPACR/src/libenjoy_linux.c.i:
+	$(MAKE) -f CMakeFiles/USUPACR.dir/build.make CMakeFiles/USUPACR.dir/home/nvidia/Documents/USUPACR/src/libenjoy_linux.c.i
+.PHONY : home/nvidia/Documents/USUPACR/src/libenjoy_linux.c.i
+
+home/nvidia/Documents/USUPACR/src/libenjoy_linux.s: home/nvidia/Documents/USUPACR/src/libenjoy_linux.c.s
+
+.PHONY : home/nvidia/Documents/USUPACR/src/libenjoy_linux.s
+
+# target to generate assembly for a file
+home/nvidia/Documents/USUPACR/src/libenjoy_linux.c.s:
+	$(MAKE) -f CMakeFiles/USUPACR.dir/build.make CMakeFiles/USUPACR.dir/home/nvidia/Documents/USUPACR/src/libenjoy_linux.c.s
+.PHONY : home/nvidia/Documents/USUPACR/src/libenjoy_linux.c.s
+
+home/nvidia/Documents/USUPACR/src/mainwindow.o: home/nvidia/Documents/USUPACR/src/mainwindow.cpp.o
+
+.PHONY : home/nvidia/Documents/USUPACR/src/mainwindow.o
+
+# target to build an object file
+home/nvidia/Documents/USUPACR/src/mainwindow.cpp.o:
+	$(MAKE) -f CMakeFiles/USUPACR.dir/build.make CMakeFiles/USUPACR.dir/home/nvidia/Documents/USUPACR/src/mainwindow.cpp.o
+.PHONY : home/nvidia/Documents/USUPACR/src/mainwindow.cpp.o
+
+home/nvidia/Documents/USUPACR/src/mainwindow.i: home/nvidia/Documents/USUPACR/src/mainwindow.cpp.i
+
+.PHONY : home/nvidia/Documents/USUPACR/src/mainwindow.i
+
+# target to preprocess a source file
+home/nvidia/Documents/USUPACR/src/mainwindow.cpp.i:
+	$(MAKE) -f CMakeFiles/USUPACR.dir/build.make CMakeFiles/USUPACR.dir/home/nvidia/Documents/USUPACR/src/mainwindow.cpp.i
+.PHONY : home/nvidia/Documents/USUPACR/src/mainwindow.cpp.i
+
+home/nvidia/Documents/USUPACR/src/mainwindow.s: home/nvidia/Documents/USUPACR/src/mainwindow.cpp.s
+
+.PHONY : home/nvidia/Documents/USUPACR/src/mainwindow.s
+
+# target to generate assembly for a file
+home/nvidia/Documents/USUPACR/src/mainwindow.cpp.s:
+	$(MAKE) -f CMakeFiles/USUPACR.dir/build.make CMakeFiles/USUPACR.dir/home/nvidia/Documents/USUPACR/src/mainwindow.cpp.s
+.PHONY : home/nvidia/Documents/USUPACR/src/mainwindow.cpp.s
+
+home/nvidia/Documents/USUPACR/src/motorController.o: home/nvidia/Documents/USUPACR/src/motorController.cpp.o
+
+.PHONY : home/nvidia/Documents/USUPACR/src/motorController.o
+
+# target to build an object file
+home/nvidia/Documents/USUPACR/src/motorController.cpp.o:
+	$(MAKE) -f CMakeFiles/USUPACR.dir/build.make CMakeFiles/USUPACR.dir/home/nvidia/Documents/USUPACR/src/motorController.cpp.o
+.PHONY : home/nvidia/Documents/USUPACR/src/motorController.cpp.o
+
+home/nvidia/Documents/USUPACR/src/motorController.i: home/nvidia/Documents/USUPACR/src/motorController.cpp.i
+
+.PHONY : home/nvidia/Documents/USUPACR/src/motorController.i
+
+# target to preprocess a source file
+home/nvidia/Documents/USUPACR/src/motorController.cpp.i:
+	$(MAKE) -f CMakeFiles/USUPACR.dir/build.make CMakeFiles/USUPACR.dir/home/nvidia/Documents/USUPACR/src/motorController.cpp.i
+.PHONY : home/nvidia/Documents/USUPACR/src/motorController.cpp.i
+
+home/nvidia/Documents/USUPACR/src/motorController.s: home/nvidia/Documents/USUPACR/src/motorController.cpp.s
+
+.PHONY : home/nvidia/Documents/USUPACR/src/motorController.s
+
+# target to generate assembly for a file
+home/nvidia/Documents/USUPACR/src/motorController.cpp.s:
+	$(MAKE) -f CMakeFiles/USUPACR.dir/build.make CMakeFiles/USUPACR.dir/home/nvidia/Documents/USUPACR/src/motorController.cpp.s
+.PHONY : home/nvidia/Documents/USUPACR/src/motorController.cpp.s
+
+home/nvidia/Documents/USUPACR/src/personTracker.o: home/nvidia/Documents/USUPACR/src/personTracker.cpp.o
+
+.PHONY : home/nvidia/Documents/USUPACR/src/personTracker.o
+
+# target to build an object file
+home/nvidia/Documents/USUPACR/src/personTracker.cpp.o:
+	$(MAKE) -f CMakeFiles/USUPACR.dir/build.make CMakeFiles/USUPACR.dir/home/nvidia/Documents/USUPACR/src/personTracker.cpp.o
+.PHONY : home/nvidia/Documents/USUPACR/src/personTracker.cpp.o
+
+home/nvidia/Documents/USUPACR/src/personTracker.i: home/nvidia/Documents/USUPACR/src/personTracker.cpp.i
+
+.PHONY : home/nvidia/Documents/USUPACR/src/personTracker.i
+
+# target to preprocess a source file
+home/nvidia/Documents/USUPACR/src/personTracker.cpp.i:
+	$(MAKE) -f CMakeFiles/USUPACR.dir/build.make CMakeFiles/USUPACR.dir/home/nvidia/Documents/USUPACR/src/personTracker.cpp.i
+.PHONY : home/nvidia/Documents/USUPACR/src/personTracker.cpp.i
+
+home/nvidia/Documents/USUPACR/src/personTracker.s: home/nvidia/Documents/USUPACR/src/personTracker.cpp.s
+
+.PHONY : home/nvidia/Documents/USUPACR/src/personTracker.s
+
+# target to generate assembly for a file
+home/nvidia/Documents/USUPACR/src/personTracker.cpp.s:
+	$(MAKE) -f CMakeFiles/USUPACR.dir/build.make CMakeFiles/USUPACR.dir/home/nvidia/Documents/USUPACR/src/personTracker.cpp.s
+.PHONY : home/nvidia/Documents/USUPACR/src/personTracker.cpp.s
+
+home/nvidia/Documents/USUPACR/src/stopwatch.o: home/nvidia/Documents/USUPACR/src/stopwatch.cpp.o
+
+.PHONY : home/nvidia/Documents/USUPACR/src/stopwatch.o
+
+# target to build an object file
+home/nvidia/Documents/USUPACR/src/stopwatch.cpp.o:
+	$(MAKE) -f CMakeFiles/USUPACR.dir/build.make CMakeFiles/USUPACR.dir/home/nvidia/Documents/USUPACR/src/stopwatch.cpp.o
+.PHONY : home/nvidia/Documents/USUPACR/src/stopwatch.cpp.o
+
+home/nvidia/Documents/USUPACR/src/stopwatch.i: home/nvidia/Documents/USUPACR/src/stopwatch.cpp.i
+
+.PHONY : home/nvidia/Documents/USUPACR/src/stopwatch.i
+
+# target to preprocess a source file
+home/nvidia/Documents/USUPACR/src/stopwatch.cpp.i:
+	$(MAKE) -f CMakeFiles/USUPACR.dir/build.make CMakeFiles/USUPACR.dir/home/nvidia/Documents/USUPACR/src/stopwatch.cpp.i
+.PHONY : home/nvidia/Documents/USUPACR/src/stopwatch.cpp.i
+
+home/nvidia/Documents/USUPACR/src/stopwatch.s: home/nvidia/Documents/USUPACR/src/stopwatch.cpp.s
+
+.PHONY : home/nvidia/Documents/USUPACR/src/stopwatch.s
+
+# target to generate assembly for a file
+home/nvidia/Documents/USUPACR/src/stopwatch.cpp.s:
+	$(MAKE) -f CMakeFiles/USUPACR.dir/build.make CMakeFiles/USUPACR.dir/home/nvidia/Documents/USUPACR/src/stopwatch.cpp.s
+.PHONY : home/nvidia/Documents/USUPACR/src/stopwatch.cpp.s
+
 main.o: main.cpp.o
 
 .PHONY : main.o
@@ -159,6 +402,33 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... USUPACR"
+	@echo "... __/include/moc_mainwindow.o"
+	@echo "... __/include/moc_mainwindow.i"
+	@echo "... __/include/moc_mainwindow.s"
+	@echo "... home/nvidia/Documents/USUPACR/src/XBoxOne.o"
+	@echo "... home/nvidia/Documents/USUPACR/src/XBoxOne.i"
+	@echo "... home/nvidia/Documents/USUPACR/src/XBoxOne.s"
+	@echo "... home/nvidia/Documents/USUPACR/src/cameraDetection.o"
+	@echo "... home/nvidia/Documents/USUPACR/src/cameraDetection.i"
+	@echo "... home/nvidia/Documents/USUPACR/src/cameraDetection.s"
+	@echo "... home/nvidia/Documents/USUPACR/src/libenjoy.o"
+	@echo "... home/nvidia/Documents/USUPACR/src/libenjoy.i"
+	@echo "... home/nvidia/Documents/USUPACR/src/libenjoy.s"
+	@echo "... home/nvidia/Documents/USUPACR/src/libenjoy_linux.o"
+	@echo "... home/nvidia/Documents/USUPACR/src/libenjoy_linux.i"
+	@echo "... home/nvidia/Documents/USUPACR/src/libenjoy_linux.s"
+	@echo "... home/nvidia/Documents/USUPACR/src/mainwindow.o"
+	@echo "... home/nvidia/Documents/USUPACR/src/mainwindow.i"
+	@echo "... home/nvidia/Documents/USUPACR/src/mainwindow.s"
+	@echo "... home/nvidia/Documents/USUPACR/src/motorController.o"
+	@echo "... home/nvidia/Documents/USUPACR/src/motorController.i"
+	@echo "... home/nvidia/Documents/USUPACR/src/motorController.s"
+	@echo "... home/nvidia/Documents/USUPACR/src/personTracker.o"
+	@echo "... home/nvidia/Documents/USUPACR/src/personTracker.i"
+	@echo "... home/nvidia/Documents/USUPACR/src/personTracker.s"
+	@echo "... home/nvidia/Documents/USUPACR/src/stopwatch.o"
+	@echo "... home/nvidia/Documents/USUPACR/src/stopwatch.i"
+	@echo "... home/nvidia/Documents/USUPACR/src/stopwatch.s"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"

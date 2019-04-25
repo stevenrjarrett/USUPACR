@@ -141,9 +141,10 @@ void XBoxOne::run()
     info = libenjoy_get_info_list(ctx);
 
     //Wait until you have a connection
+    std::cout << "XBox Controller: Polling for connection..." << std::endl;
     while(info->count == 0 && running)
     {
-        std::cout << "Waiting for connection:" << std::endl;
+//        std::cout << "Waiting for connection:" << std::endl;
         usleep(1000000);
         libenjoy_enumerate(ctx);
         info = libenjoy_get_info_list(ctx);

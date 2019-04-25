@@ -78,6 +78,7 @@
 		</Unit>
 		<Unit filename="libenjoy/src/libenjoy_linux.h" />
 		<Unit filename="main.cpp" />
+		<Unit filename="main.h" />
 		<Unit filename="src/XBoxOne.cpp" />
 		<Unit filename="src/cameraDetection.cpp" />
 		<Extensions>

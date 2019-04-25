@@ -3,6 +3,7 @@
  #ifndef MAINWINDOW_H
  #define MAINWINDOW_H
 
+ #include "main.h"
  #include <QtGui>
 
  #define NUM_DISTANCE_RADIOS 4
@@ -42,6 +43,9 @@
     bool autonomousEngaged;
     double maxSpeed;
     double followDistance;
+
+    // main program
+    std::thread mainThread;
 
  };
 

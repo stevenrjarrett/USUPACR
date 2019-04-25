@@ -20,17 +20,22 @@
     grid->addWidget(autonomousGroup, 0, 1);
     setLayout(grid);
 
+    // Start main program
+    mainThread = std::thread(mainProgram, this);
+
     //resize(XXX,XXX);
  }
 
-// MainWindow::~MainWindow()
-// {
-////    delete QGridLayout;
-////    delete autonomousGroup;
-////    delete distanceGroup;
-////    delete speedGroup;
-////    delete pushButton;
-// }
+ MainWindow::~MainWindow()
+ {
+//    delete QGridLayout;
+//    delete autonomousGroup;
+//    delete distanceGroup;
+//    delete speedGroup;
+//    delete pushButton;
+    stop_signal_recieved = true;
+    mainThread.join();
+ }
 
  QGroupBox *MainWindow::createDistanceGroup()
  {

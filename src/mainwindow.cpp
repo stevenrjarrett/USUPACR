@@ -463,6 +463,7 @@ int mainProgram(MainWindow *GUI)
 //        GUI_app->quit();
 
 //    return 0;
+    terminate();
 }
 
 

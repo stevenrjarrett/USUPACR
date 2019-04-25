@@ -1,3 +1,23 @@
+///////////////////////////////////////////////////////////////////
+//                                                               //
+//                   Utah State University                       //
+//              Personal Assist Cargo Relay (PACR)               //
+//                        Final Code                             //
+//                           2019                                //
+//                                                               //
+//                                                               //
+// This software is public domain, and may be copied and used    //
+// free of charge by any party.                                  //
+//                                                               //
+// Note that this file does not contain the primary control and  //
+// communication functions for the PACR. That code is contained  //
+// in "../src/mainwindow.cpp" in order to prevent collisions     //
+// between the QT and librealsense2 libraries.                   //
+//                                                               //
+///////////////////////////////////////////////////////////////////
+
+
+
 #include "mainwindow.h"
 
 

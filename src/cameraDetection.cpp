@@ -32,7 +32,7 @@ cameraDetection::cameraDetection()
 
 
     isRunning  = false;
-    show_color = false;
+    show_color = true;
     show_depth = false;
     show_boxes = false;
     this->stop_signal_recieved = false;
@@ -475,6 +475,14 @@ while(!(this->stop_signal_recieved))
 //    std::cout << "Camera: Freeing colorData_flt_CPU" << std::endl;
 //    std::cout << "Camera: Freeing colorData_flt_CUDA" << std::endl;
 //    std::cout << "Camera: Freeing bbCPU" << std::endl;
+
+    if(show_depth)
+    {
+        cv::destroyWindow(depthWindowName);
+    }
+    if(show_color)
+        cv::destroyWindow(colorWindowName);
+
     cudaFree(colorData_flt_CPU);
     cudaFree(colorData_flt_CUDA);
     cudaFree(bbCPU   );

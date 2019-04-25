@@ -24,7 +24,7 @@ std::fstream motorArduino;
     setLayout(grid);
 
     // Start main program
-//    mainThread = std::thread(mainProgram, this);
+    mainThread = std::thread(mainProgram, this);
 
     //resize(XXX,XXX);
  }
@@ -36,8 +36,8 @@ std::fstream motorArduino;
 //    delete distanceGroup;
 //    delete speedGroup;
 //    delete pushButton;
-//    stop_signal_recieved = true;
-//    mainThread.join();
+    stop_signal_recieved = true;
+    mainThread.join();
  }
 
  QGroupBox *MainWindow::createDistanceGroup()

@@ -34,7 +34,7 @@ cameraDetection::cameraDetection()
     isRunning  = false;
     show_color = false;
     show_depth = false;
-    show_boxes = false;
+    show_boxes = true;
     this->stop_signal_recieved = false;
     lastTime   = 0;
     // Initialize detectnet

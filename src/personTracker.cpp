@@ -4,11 +4,11 @@ double distance_xz(cv::Point3d pt1, cv::Point3d pt2) { return sqrt(pow(pt1.x-pt2
 
 personTracker::personTracker(cv::Point3d defaultLocation, double _tolerance)//, double _initial_tolerance = 1.0)
 {
-    show_color = true;
+    show_color = false;
     show_depth = false;
     camera.showBoxes();
     lastTime = camera.getLastTime();
-    init_wait_time = 3.0;
+    init_wait_time = 1.0;
     default_person = trackedPerson(personFrame(defaultLocation, cv::Rect2d(camera.GetCOL_width()/2-30, camera.GetCOL_height()/2-45, 60, 90), 1.0), _tolerance);
 //    tolerance = _tolerance;
     active = false;
@@ -79,6 +79,11 @@ void personTracker::run()
     // if I shouldn't be, don't run at all
     while(!running && !(this->stop_signal_recieved))
         usleep(1000);
+    if((this->stop_signal_recieved))
+    {
+        camera.stop();
+        return;
+    }
 
     // initialize
     camera.start();
@@ -88,7 +93,7 @@ void personTracker::run()
 
 
     // wait a few seconds for the person to get in position
-//    usleep(init_wait_time*1000000);
+    usleep(init_wait_time*1000000);
 
     while(running && !(this->stop_signal_recieved))
     {

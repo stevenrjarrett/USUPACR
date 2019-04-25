@@ -1,7 +1,7 @@
 //*******MainWindow*******
 
+ #include "main.h"
  #include "mainwindow.h"
-// #include "main.h"
 
  #include <QWidget>
  #include <QAbstractButton>

@@ -3,7 +3,7 @@
  #ifndef MAINWINDOW_H
  #define MAINWINDOW_H
 
-// #include "main.h"
+ #include "main.h"
  #include <QtGui>
  #include <thread>
 

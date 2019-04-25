@@ -239,7 +239,7 @@ void motorUpdator()
 //void mainProgram(QApplication *GUI_app, MainWindow *GUI);
 
 
-int mainProgram(QApplication *GUI_app, MainWindow *GUI)
+int mainProgram(MainWindow *GUI)
 {
     bool wasActive = false;
 

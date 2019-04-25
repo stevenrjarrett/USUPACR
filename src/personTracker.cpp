@@ -4,7 +4,7 @@ double distance_xz(cv::Point3d pt1, cv::Point3d pt2) { return sqrt(pow(pt1.x-pt2
 
 personTracker::personTracker(cv::Point3d defaultLocation, double _tolerance)//, double _initial_tolerance = 1.0)
 {
-    show_color = true;
+    show_color = false;
     show_depth = false;
     camera.showBoxes();
     lastTime = camera.getLastTime();

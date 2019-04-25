@@ -91,9 +91,6 @@ double controllerTimeout = 1.5; // seconds
 ///////////////////////////////////////// Header ////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////
 
-
-motorValues ConvertToArcade ( int x1 , int y1 );
-
 bool stop_signal_recieved = false;
 
 //# include "XBoxOne.hpp"
@@ -127,7 +124,7 @@ void mainProgram(QApplication *GUI_app, MainWindow *GUI);
 
 int main(int argc, char** argv);
 
-motorValues ConvertToArcade ( int x1 , int y1 ) // Converts joystick input to holonomic drive output in the array MTarget[]
+motorValues ConvertToArcade ( int x1 , int y1 ); // Converts joystick input to holonomic drive output in the array MTarget[]
 
 
 #endif // USUPACR_MAIN

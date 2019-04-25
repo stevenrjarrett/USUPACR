@@ -3,9 +3,6 @@
 std::fstream motorArduino;
 
 
-
-
-
 int main(int argc, char** argv)
 {
     QApplication GUI_app(argc, argv);

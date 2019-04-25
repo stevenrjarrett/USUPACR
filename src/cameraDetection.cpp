@@ -32,7 +32,7 @@ cameraDetection::cameraDetection()
 
 
     isRunning  = false;
-    show_color = true;
+    show_color = false;
     show_depth = false;
     show_boxes = false;
     this->stop_signal_recieved = false;
@@ -469,7 +469,7 @@ while(!(this->stop_signal_recieved))
         }
         if(show_color)
             imshow(colorWindowName, colorMat);
-//        usleep(500000);
+        usleep(1000);
     }
 
 //    std::cout << "Camera: Freeing colorData_flt_CPU" << std::endl;

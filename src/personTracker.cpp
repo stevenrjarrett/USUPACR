@@ -4,7 +4,7 @@ double distance_xz(cv::Point3d pt1, cv::Point3d pt2) { return sqrt(pow(pt1.x-pt2
 
 personTracker::personTracker(cv::Point3d defaultLocation, double _tolerance)//, double _initial_tolerance = 1.0)
 {
-    show_color = false;
+    show_color = true;
     show_depth = false;
     camera.showBoxes();
     lastTime = camera.getLastTime();
@@ -115,7 +115,7 @@ void personTracker::run()
 
         if(show_color)
         {
-            cv::putText(camera.colorMat, std::string("z =  ") + std::to_string(people[0].last.centroid.z), cv::Point(people[0].last.bb.x,people[0].last.bb.y+20), cv::FONT_HERSHEY_SIMPLEX, 0.75, COL_TEXT_COLOR,2);
+//            cv::putText(camera.colorMat, std::string("z =  ") + std::to_string(people[0].last.centroid.z), cv::Point(people[0].last.bb.x,people[0].last.bb.y+20), cv::FONT_HERSHEY_SIMPLEX, 0.75, COL_TEXT_COLOR,2);
             cv::rectangle(camera.colorMat, people[0].last.bb, COL_TEXT_COLOR, 5);
             cv::imshow(colorWindowName, camera.colorMat);
         }

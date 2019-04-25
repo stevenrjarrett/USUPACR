@@ -219,7 +219,9 @@ void sendMotorValues()
 
 void motorUpdator()
 {
-    motorArduino.open("/dev/ttyACM0", std::ios_base::out );
+    motorArduino.open("/dev/ttyACM0", std::ios_base::out | std::ios_base::in | std::ios_base::trunc );
+    usleep(1000);
+    std::cout << "Motor arduino is_open() = " << motorArduino.is_open() << std::endl;
     while(!stop_signal_recieved)
     {
         updateMotorValues();

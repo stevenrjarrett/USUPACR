@@ -5,6 +5,7 @@
 
 // #include "main.h"
  #include <QtGui>
+ #include <thread>
 
  #define NUM_DISTANCE_RADIOS 4
  #define NUM_SPEED_RADIOS    4

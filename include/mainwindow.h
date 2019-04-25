@@ -3,8 +3,8 @@
  #ifndef MAINWINDOW_H
  #define MAINWINDOW_H
 
- #include "main.h"
  #include <QtGui>
+ #include "main.h"
 
  #define NUM_DISTANCE_RADIOS 4
  #define NUM_SPEED_RADIOS    4

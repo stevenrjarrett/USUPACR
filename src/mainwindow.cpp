@@ -463,7 +463,7 @@ int mainProgram(MainWindow *GUI)
 //        GUI_app->quit();
 
 //    return 0;
-    std::terminate();
+    std::exit();
 }
 
 

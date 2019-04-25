@@ -169,7 +169,7 @@ void XBoxOne::run()
             // them, you have to store them
 
             // That's right, only polling available
-            while(libenjoy_poll(ctx, &ev))
+            while(libenjoy_poll(ctx, &ev) && running)
             {
                 switch(ev.type)
                 {

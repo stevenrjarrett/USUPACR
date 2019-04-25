@@ -9,7 +9,7 @@ project(USUPACR)
 file(GLOB USUPACR_SOURCES main.cpp ../src/*.cpp ../src/*.c ./src/*.cpp ./src/*.c)
 set ( MOC_HEADERS ../include/mainwindow.h )
 
-include_directories(${CMAKE_BINARY_DIR} ${realsense2_INCLUDE_DIRS} ${OpenCV_INCLUDE_DIRS} ../include ./include)
+include_directories(${CMAKE_BINARY_DIR} ${realsense2_INCLUDE_DIRS} ${OpenCV_INCLUDE_DIRS} ../include ./include ./)
 # file(GLOB pacr-follow_INCLUDES ../include/*.hpp ../include/*.h )
 
 find_package(Threads REQUIRED)

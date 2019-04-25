@@ -2,14 +2,14 @@
 #define USUPACR_MAIN
 
 #include <iostream>
-#include <opencv2/opencv.hpp>
+//#include <opencv2/opencv.hpp>
 #include <unistd.h>
 #include <fstream>
 
 #include "personTracker.h"
 #include "XBoxOne.h"
 #include "mainwindow.h"
-//#include <QApplication>
+#include <QApplication>
 
 /////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////// Macros ////////////////////////////////////////

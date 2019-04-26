@@ -1,3 +1,6 @@
+// xboxone is a wrapper for the libenjoy class, handling an XBox One controller over bluetooth.
+// note that it will work for the xboxOne controller over USB, but the buttons will be off.
+
 #ifndef XBOXONE_H
 #define XBOXONE_H
 

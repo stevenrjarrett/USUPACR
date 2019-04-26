@@ -1,3 +1,6 @@
+// Cameradetection is a class to run a realsense D435 camera and track the 3D coordinates of all people in each frame.
+
+
 #ifndef CAMERADETECTION_H
 #define CAMERADETECTION_H
 

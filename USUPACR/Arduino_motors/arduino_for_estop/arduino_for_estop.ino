@@ -34,6 +34,7 @@ void setup()
   // Set up servos
   ax12a.begin(BaudRate, DirectionPin, &Serial);
   ax12a.reset(ID);
+//  ax12a.reset(ID2);
 //  ax12a.torqueStatus(ID, ON);
 //  ax12a.setMaxTorque(ID, 1023);
 }
@@ -54,6 +55,7 @@ void loop()
   }
 //  ax12a.reset(ID);
   ax12a.move(ID, brake_pos);
+//  ax12a.move(ID2, brake_pos);
 //  Serial.print("brake_pos");
 //  Serial.println(brake_pos);
   

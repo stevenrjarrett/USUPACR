@@ -1,3 +1,5 @@
+// personTracker is a class that will track a single person using a realsense camera device.
+
 #ifndef PERSONTRACKER_H
 #define PERSONTRACKER_H
 

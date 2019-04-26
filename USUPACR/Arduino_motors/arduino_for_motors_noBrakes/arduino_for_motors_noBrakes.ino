@@ -3,8 +3,8 @@
 #include <Servo.h>
 #define DELAYTIME      200
 #define ESTOP          2
-#define LMOTOR         5
-#define RMOTOR         6
+#define LMOTOR         9
+#define RMOTOR         10
 #define LMOTOR_REVERSE 7
 #define RMOTOR_REVERSE 8
 
@@ -79,13 +79,17 @@ void loop()
     digitalWrite(LMOTOR_REVERSE,lMotor<0);
     digitalWrite(RMOTOR_REVERSE,rMotor<0);
     if(waitReverse)
-      delay(50);
+    {
+      analogWrite(LMOTOR, 0);
+      analogWrite(RMOTOR, 0);
+      delay(150);
+    }
     analogWrite(LMOTOR, abs(lMotor));
     analogWrite(RMOTOR, abs(rMotor));
     
   }
-  Serial.print("Estop = ");
-  Serial.println(Estop_engaged);
+//  Serial.print("Estop = ");
+//  Serial.println(Estop_engaged);
   delay(DELAYTIME);
   
   

@@ -1,3 +1,5 @@
+// MainWindow is a Qt based class that runs the GUI for the PACR. It will also start the main control program.
+
 //*******Header*******
 
  #ifndef MAINWINDOW_H

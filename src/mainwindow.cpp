@@ -1,5 +1,9 @@
 //*******MainWindow*******
 
+// Contains the class for the main GUI window
+//
+// Also contains the main program code below the class declaration.
+
  #include "main.h"
  #include "mainwindow.h"
 
@@ -50,7 +54,7 @@ std::fstream motorArduino;
     distRadios[2] = new QRadioButton(tr("&4.5 m"));
     distRadios[3] = new QRadioButton(tr("&6 m"));
 
-    distRadios[0]->setChecked(true);
+    distRadios[3]->setChecked(true);
 
     QVBoxLayout *vbox1 = new QVBoxLayout;
     vbox1->addWidget(distRadios[0]);
@@ -207,8 +211,8 @@ void updateMotorValues()
 
 void sendMotorValues()
 {
-    motorArduino << (int)(motors_actual.left  * motor_speed_limiter) << '\n'
-                 << (int)(motors_actual.right * motor_speed_limiter) << std::endl;
+    motorArduino << (int)(motors_actual.left  * motor_speed_limiter) << std::endl;
+    motorArduino << (int)(motors_actual.right * motor_speed_limiter) << std::endl;
 //    motorArduino << (int)(motors_actual.left  * motor_speed_limiter) << '\n'
 //                 << (int)(motors_actual.right * motor_speed_limiter) << '\n';
 //    motorArduino << (float)motors_actual.brake << std::endl;

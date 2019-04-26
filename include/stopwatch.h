@@ -1,3 +1,5 @@
+// stopwatch is a class that uses the chrono library to perform a stopwatch function.
+
 #ifndef STOPWATCH
 #define STOPWATCH
 

@@ -234,6 +234,9 @@ void motorUpdator()
     }
     usleep(100000);
     std::cout << "Serial port for motors successfully opened at " << serialPortPath << std::endl;
+
+    // main loop
+    std::string msg;
     while(!stop_signal_recieved)
     {
         // Check for connection
@@ -251,6 +254,11 @@ void motorUpdator()
         // update motor values
         updateMotorValues();
         sendMotorValues();
+        motorArduino >> msg;
+        if(msg != "")
+        {
+            std::cout << "Arduino: " << msg;
+        }
         usleep(MOTORS_WAIT_TIME);
     }
 }

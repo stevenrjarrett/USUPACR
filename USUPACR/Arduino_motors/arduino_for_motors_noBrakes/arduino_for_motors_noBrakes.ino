@@ -114,7 +114,7 @@ void loop()
       Serial.print(rMotor_raw);
       Serial.print("->");
       Serial.print(rMotor);
-      Serial.print(")\n");
+      Serial.print(")");
       Serial.print(", EStop = ");
       Serial.print(Estop_engaged);
       Serial.println("");

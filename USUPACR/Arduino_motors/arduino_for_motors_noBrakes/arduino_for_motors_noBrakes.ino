@@ -8,7 +8,7 @@
 #define LMOTOR_REVERSE 7
 #define RMOTOR_REVERSE 8
 
-#define VERBOSE true
+#define VERBOSE false
 
 
 int lMotor = 0;
@@ -46,22 +46,18 @@ void loop()
 //    rMotor = Serial.parseInt();
 //  }
   int av = Serial.available();
-  if(VERBOSE)
-  {
-    if(av<22)
-    {
-      Serial.print("Bytes = ");
-      Serial.print(av);
-    }
-  }
+  String lMotorString;
+  String rMotorString;
+  int lMotor_raw;
+  int rMotor_raw;
   while(Serial.available() >= 22)
   {
     shouldWrite = true;
     // get motor input
-    String lMotorString = Serial.readStringUntil('\n');
-    String rMotorString = Serial.readStringUntil('\n');
-    int lMotor_raw = lMotorString.toInt();
-    int rMotor_raw = rMotorString.toInt();
+    lMotorString = Serial.readStringUntil('\n');
+    rMotorString = Serial.readStringUntil('\n');
+    lMotor_raw = lMotorString.toInt();
+    rMotor_raw = rMotorString.toInt();
     if(sign(lMotor_raw) == -sign(lMotor) || sign(rMotor_raw) == -sign(rMotor))
       waitReverse = true;
     if(abs(lMotor_raw) > 0)
@@ -75,20 +71,6 @@ void loop()
     if(lMotor_raw<0) lMotor = -lMotor;
     if(rMotor_raw<0) rMotor = -rMotor;
 
-    if(VERBOSE)
-    {
-      Serial.print("Bytes = ");
-      Serial.print(av);
-      Serial.print("lMotor = (");
-      Serial.print(lMotor_raw);
-      Serial.print("->");
-      Serial.print(lMotor);
-      Serial.print("), rMotor = ");
-      Serial.print(rMotor_raw);
-      Serial.print("->");
-      Serial.print(rMotor);
-      Serial.print(")\n");
-    }
     lastTime = millis();
   }
 //  if(Serial.available() == 1)
@@ -115,12 +97,23 @@ void loop()
     analogWrite(LMOTOR, abs(lMotor));
     analogWrite(RMOTOR, abs(rMotor));
     
-  }
-  if(VERBOSE)
-  {
+    if(VERBOSE)
+    {
+      Serial.print("Bytes = ");
+      Serial.print(av);
+      Serial.print("lMotor = (");
+      Serial.print(lMotor_raw);
+      Serial.print("->");
+      Serial.print(lMotor);
+      Serial.print("), rMotor = ");
+      Serial.print(rMotor_raw);
+      Serial.print("->");
+      Serial.print(rMotor);
+      Serial.print(")\n");
       Serial.print(", EStop = ");
       Serial.print(Estop_engaged);
       Serial.println("");
+    }
   }
 //  Serial.print("Estop = ");
 //  Serial.println(Estop_engaged);

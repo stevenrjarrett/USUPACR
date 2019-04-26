@@ -20,7 +20,7 @@ int sign(int val) { return val==0 ? 1 : val / abs(val);}
 
 void setup()
 {
-//  Serial.begin(9600);
+  Serial.begin(1000000);
   Serial.println("Hi");
   pinMode(LMOTOR, OUTPUT);
   pinMode(RMOTOR, OUTPUT);

@@ -1,7 +1,7 @@
 // Simple program to verify that stuff is working. This will send how much time has elapsed every .5 seconds.
 
 #include <Servo.h>
-#define DELAYTIME      10
+#define DELAYTIME      200
 #define ESTOP          2
 #define LMOTOR         9
 #define RMOTOR         10
@@ -83,6 +83,11 @@ void loop()
   {
     analogWrite(LMOTOR, 0);
     analogWrite(RMOTOR, 0);
+    if(VERBOSE)
+    {
+      Serial.print("Setting to 0. Estop = ");
+      Serial.println(Estop_engaged);
+    }
   }
   else if(shouldWrite)
   {

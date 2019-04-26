@@ -229,7 +229,7 @@ void motorUpdator()
     for( ; !(motorArduino.is_open()); serialPortNumber = (serialPortNumber + 1) % 20)
     {
         serialPortPath = std::string("/dev/ttyACM")+std::to_string(serialPortNumber);
-        motorArduino.open(serialPortPath, std::ios_base::out | std::ios_base::in | std::ios_base::trunc );
+        motorArduino.open(serialPortPath, std::ios_base::out);// | std::ios_base::in | std::ios_base::trunc );
         usleep(1000);
     }
     usleep(100000);
@@ -254,11 +254,11 @@ void motorUpdator()
         // update motor values
         updateMotorValues();
         sendMotorValues();
-        motorArduino >> msg;
-        if(msg != "")
-        {
-            std::cout << "Arduino: " << msg;
-        }
+//        motorArduino >> msg;
+//        if(msg != "")
+//        {
+//            std::cout << "Arduino: " << msg;
+//        }
         usleep(MOTORS_WAIT_TIME);
     }
 }

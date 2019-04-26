@@ -8,7 +8,7 @@
 #define LMOTOR_REVERSE 7
 #define RMOTOR_REVERSE 8
 
-#define VERBOSE false
+#define VERBOSE true
 
 
 int lMotor = 0;

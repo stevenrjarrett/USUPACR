@@ -85,7 +85,9 @@ void loop()
     analogWrite(RMOTOR, 0);
     if(VERBOSE)
     {
-      Serial.print("Setting to 0. Estop = ");
+      Serial.print("Bytes = ");
+      Serial.print(av);
+      Serial.print(" - Setting to 0. Estop = ");
       Serial.println(Estop_engaged);
     }
   }
@@ -106,7 +108,7 @@ void loop()
     {
       Serial.print("Bytes = ");
       Serial.print(av);
-      Serial.print("lMotor = (");
+      Serial.print(" lMotor = (");
       Serial.print(lMotor_raw);
       Serial.print("->");
       Serial.print(lMotor);

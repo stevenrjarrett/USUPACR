@@ -235,7 +235,7 @@ void motorUpdator()
     }
     usleep(100000);
     std::cout << "Serial port for motors successfully opened at " << serialPortPath << std::endl;
-    motorArduino.peek();
+//    motorArduino.peek();
     // main loop
     while(!stop_signal_recieved)
     {

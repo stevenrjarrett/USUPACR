@@ -57,9 +57,14 @@ include CMakeFiles/USUPACR.dir/progress.make
 # Include the compile flags for this target's objects.
 include CMakeFiles/USUPACR.dir/flags.make
 
+__/include/moc_mainwindow.cxx: /home/nvidia/Documents/USUPACR/include/mainwindow.h
+__/include/moc_mainwindow.cxx: __/include/moc_mainwindow.cxx_parameters
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/nvidia/Documents/USUPACR/USUPACR/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Generating __/include/moc_mainwindow.cxx"
+	cd /home/nvidia/Documents/USUPACR/USUPACR/build/__/include && /usr/lib/aarch64-linux-gnu/qt4/bin/moc @/home/nvidia/Documents/USUPACR/USUPACR/build/__/include/moc_mainwindow.cxx_parameters
+
 CMakeFiles/USUPACR.dir/main.cpp.o: CMakeFiles/USUPACR.dir/flags.make
 CMakeFiles/USUPACR.dir/main.cpp.o: ../main.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nvidia/Documents/USUPACR/USUPACR/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/USUPACR.dir/main.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nvidia/Documents/USUPACR/USUPACR/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/USUPACR.dir/main.cpp.o"
 	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/USUPACR.dir/main.cpp.o -c /home/nvidia/Documents/USUPACR/USUPACR/main.cpp
 
 CMakeFiles/USUPACR.dir/main.cpp.i: cmake_force
@@ -81,25 +86,279 @@ CMakeFiles/USUPACR.dir/main.cpp.o.provides: CMakeFiles/USUPACR.dir/main.cpp.o.re
 CMakeFiles/USUPACR.dir/main.cpp.o.provides.build: CMakeFiles/USUPACR.dir/main.cpp.o
 
 
+CMakeFiles/USUPACR.dir/home/nvidia/Documents/USUPACR/src/motorController.cpp.o: CMakeFiles/USUPACR.dir/flags.make
+CMakeFiles/USUPACR.dir/home/nvidia/Documents/USUPACR/src/motorController.cpp.o: /home/nvidia/Documents/USUPACR/src/motorController.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nvidia/Documents/USUPACR/USUPACR/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/USUPACR.dir/home/nvidia/Documents/USUPACR/src/motorController.cpp.o"
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/USUPACR.dir/home/nvidia/Documents/USUPACR/src/motorController.cpp.o -c /home/nvidia/Documents/USUPACR/src/motorController.cpp
+
+CMakeFiles/USUPACR.dir/home/nvidia/Documents/USUPACR/src/motorController.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/USUPACR.dir/home/nvidia/Documents/USUPACR/src/motorController.cpp.i"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/nvidia/Documents/USUPACR/src/motorController.cpp > CMakeFiles/USUPACR.dir/home/nvidia/Documents/USUPACR/src/motorController.cpp.i
+
+CMakeFiles/USUPACR.dir/home/nvidia/Documents/USUPACR/src/motorController.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/USUPACR.dir/home/nvidia/Documents/USUPACR/src/motorController.cpp.s"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/nvidia/Documents/USUPACR/src/motorController.cpp -o CMakeFiles/USUPACR.dir/home/nvidia/Documents/USUPACR/src/motorController.cpp.s
+
+CMakeFiles/USUPACR.dir/home/nvidia/Documents/USUPACR/src/motorController.cpp.o.requires:
+
+.PHONY : CMakeFiles/USUPACR.dir/home/nvidia/Documents/USUPACR/src/motorController.cpp.o.requires
+
+CMakeFiles/USUPACR.dir/home/nvidia/Documents/USUPACR/src/motorController.cpp.o.provides: CMakeFiles/USUPACR.dir/home/nvidia/Documents/USUPACR/src/motorController.cpp.o.requires
+	$(MAKE) -f CMakeFiles/USUPACR.dir/build.make CMakeFiles/USUPACR.dir/home/nvidia/Documents/USUPACR/src/motorController.cpp.o.provides.build
+.PHONY : CMakeFiles/USUPACR.dir/home/nvidia/Documents/USUPACR/src/motorController.cpp.o.provides
+
+CMakeFiles/USUPACR.dir/home/nvidia/Documents/USUPACR/src/motorController.cpp.o.provides.build: CMakeFiles/USUPACR.dir/home/nvidia/Documents/USUPACR/src/motorController.cpp.o
+
+
+CMakeFiles/USUPACR.dir/home/nvidia/Documents/USUPACR/src/cameraDetection.cpp.o: CMakeFiles/USUPACR.dir/flags.make
+CMakeFiles/USUPACR.dir/home/nvidia/Documents/USUPACR/src/cameraDetection.cpp.o: /home/nvidia/Documents/USUPACR/src/cameraDetection.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nvidia/Documents/USUPACR/USUPACR/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/USUPACR.dir/home/nvidia/Documents/USUPACR/src/cameraDetection.cpp.o"
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/USUPACR.dir/home/nvidia/Documents/USUPACR/src/cameraDetection.cpp.o -c /home/nvidia/Documents/USUPACR/src/cameraDetection.cpp
+
+CMakeFiles/USUPACR.dir/home/nvidia/Documents/USUPACR/src/cameraDetection.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/USUPACR.dir/home/nvidia/Documents/USUPACR/src/cameraDetection.cpp.i"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/nvidia/Documents/USUPACR/src/cameraDetection.cpp > CMakeFiles/USUPACR.dir/home/nvidia/Documents/USUPACR/src/cameraDetection.cpp.i
+
+CMakeFiles/USUPACR.dir/home/nvidia/Documents/USUPACR/src/cameraDetection.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/USUPACR.dir/home/nvidia/Documents/USUPACR/src/cameraDetection.cpp.s"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/nvidia/Documents/USUPACR/src/cameraDetection.cpp -o CMakeFiles/USUPACR.dir/home/nvidia/Documents/USUPACR/src/cameraDetection.cpp.s
+
+CMakeFiles/USUPACR.dir/home/nvidia/Documents/USUPACR/src/cameraDetection.cpp.o.requires:
+
+.PHONY : CMakeFiles/USUPACR.dir/home/nvidia/Documents/USUPACR/src/cameraDetection.cpp.o.requires
+
+CMakeFiles/USUPACR.dir/home/nvidia/Documents/USUPACR/src/cameraDetection.cpp.o.provides: CMakeFiles/USUPACR.dir/home/nvidia/Documents/USUPACR/src/cameraDetection.cpp.o.requires
+	$(MAKE) -f CMakeFiles/USUPACR.dir/build.make CMakeFiles/USUPACR.dir/home/nvidia/Documents/USUPACR/src/cameraDetection.cpp.o.provides.build
+.PHONY : CMakeFiles/USUPACR.dir/home/nvidia/Documents/USUPACR/src/cameraDetection.cpp.o.provides
+
+CMakeFiles/USUPACR.dir/home/nvidia/Documents/USUPACR/src/cameraDetection.cpp.o.provides.build: CMakeFiles/USUPACR.dir/home/nvidia/Documents/USUPACR/src/cameraDetection.cpp.o
+
+
+CMakeFiles/USUPACR.dir/home/nvidia/Documents/USUPACR/src/XBoxOne.cpp.o: CMakeFiles/USUPACR.dir/flags.make
+CMakeFiles/USUPACR.dir/home/nvidia/Documents/USUPACR/src/XBoxOne.cpp.o: /home/nvidia/Documents/USUPACR/src/XBoxOne.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nvidia/Documents/USUPACR/USUPACR/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/USUPACR.dir/home/nvidia/Documents/USUPACR/src/XBoxOne.cpp.o"
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/USUPACR.dir/home/nvidia/Documents/USUPACR/src/XBoxOne.cpp.o -c /home/nvidia/Documents/USUPACR/src/XBoxOne.cpp
+
+CMakeFiles/USUPACR.dir/home/nvidia/Documents/USUPACR/src/XBoxOne.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/USUPACR.dir/home/nvidia/Documents/USUPACR/src/XBoxOne.cpp.i"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/nvidia/Documents/USUPACR/src/XBoxOne.cpp > CMakeFiles/USUPACR.dir/home/nvidia/Documents/USUPACR/src/XBoxOne.cpp.i
+
+CMakeFiles/USUPACR.dir/home/nvidia/Documents/USUPACR/src/XBoxOne.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/USUPACR.dir/home/nvidia/Documents/USUPACR/src/XBoxOne.cpp.s"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/nvidia/Documents/USUPACR/src/XBoxOne.cpp -o CMakeFiles/USUPACR.dir/home/nvidia/Documents/USUPACR/src/XBoxOne.cpp.s
+
+CMakeFiles/USUPACR.dir/home/nvidia/Documents/USUPACR/src/XBoxOne.cpp.o.requires:
+
+.PHONY : CMakeFiles/USUPACR.dir/home/nvidia/Documents/USUPACR/src/XBoxOne.cpp.o.requires
+
+CMakeFiles/USUPACR.dir/home/nvidia/Documents/USUPACR/src/XBoxOne.cpp.o.provides: CMakeFiles/USUPACR.dir/home/nvidia/Documents/USUPACR/src/XBoxOne.cpp.o.requires
+	$(MAKE) -f CMakeFiles/USUPACR.dir/build.make CMakeFiles/USUPACR.dir/home/nvidia/Documents/USUPACR/src/XBoxOne.cpp.o.provides.build
+.PHONY : CMakeFiles/USUPACR.dir/home/nvidia/Documents/USUPACR/src/XBoxOne.cpp.o.provides
+
+CMakeFiles/USUPACR.dir/home/nvidia/Documents/USUPACR/src/XBoxOne.cpp.o.provides.build: CMakeFiles/USUPACR.dir/home/nvidia/Documents/USUPACR/src/XBoxOne.cpp.o
+
+
+CMakeFiles/USUPACR.dir/home/nvidia/Documents/USUPACR/src/personTracker.cpp.o: CMakeFiles/USUPACR.dir/flags.make
+CMakeFiles/USUPACR.dir/home/nvidia/Documents/USUPACR/src/personTracker.cpp.o: /home/nvidia/Documents/USUPACR/src/personTracker.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nvidia/Documents/USUPACR/USUPACR/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/USUPACR.dir/home/nvidia/Documents/USUPACR/src/personTracker.cpp.o"
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/USUPACR.dir/home/nvidia/Documents/USUPACR/src/personTracker.cpp.o -c /home/nvidia/Documents/USUPACR/src/personTracker.cpp
+
+CMakeFiles/USUPACR.dir/home/nvidia/Documents/USUPACR/src/personTracker.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/USUPACR.dir/home/nvidia/Documents/USUPACR/src/personTracker.cpp.i"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/nvidia/Documents/USUPACR/src/personTracker.cpp > CMakeFiles/USUPACR.dir/home/nvidia/Documents/USUPACR/src/personTracker.cpp.i
+
+CMakeFiles/USUPACR.dir/home/nvidia/Documents/USUPACR/src/personTracker.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/USUPACR.dir/home/nvidia/Documents/USUPACR/src/personTracker.cpp.s"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/nvidia/Documents/USUPACR/src/personTracker.cpp -o CMakeFiles/USUPACR.dir/home/nvidia/Documents/USUPACR/src/personTracker.cpp.s
+
+CMakeFiles/USUPACR.dir/home/nvidia/Documents/USUPACR/src/personTracker.cpp.o.requires:
+
+.PHONY : CMakeFiles/USUPACR.dir/home/nvidia/Documents/USUPACR/src/personTracker.cpp.o.requires
+
+CMakeFiles/USUPACR.dir/home/nvidia/Documents/USUPACR/src/personTracker.cpp.o.provides: CMakeFiles/USUPACR.dir/home/nvidia/Documents/USUPACR/src/personTracker.cpp.o.requires
+	$(MAKE) -f CMakeFiles/USUPACR.dir/build.make CMakeFiles/USUPACR.dir/home/nvidia/Documents/USUPACR/src/personTracker.cpp.o.provides.build
+.PHONY : CMakeFiles/USUPACR.dir/home/nvidia/Documents/USUPACR/src/personTracker.cpp.o.provides
+
+CMakeFiles/USUPACR.dir/home/nvidia/Documents/USUPACR/src/personTracker.cpp.o.provides.build: CMakeFiles/USUPACR.dir/home/nvidia/Documents/USUPACR/src/personTracker.cpp.o
+
+
+CMakeFiles/USUPACR.dir/home/nvidia/Documents/USUPACR/src/mainwindow.cpp.o: CMakeFiles/USUPACR.dir/flags.make
+CMakeFiles/USUPACR.dir/home/nvidia/Documents/USUPACR/src/mainwindow.cpp.o: /home/nvidia/Documents/USUPACR/src/mainwindow.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nvidia/Documents/USUPACR/USUPACR/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/USUPACR.dir/home/nvidia/Documents/USUPACR/src/mainwindow.cpp.o"
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/USUPACR.dir/home/nvidia/Documents/USUPACR/src/mainwindow.cpp.o -c /home/nvidia/Documents/USUPACR/src/mainwindow.cpp
+
+CMakeFiles/USUPACR.dir/home/nvidia/Documents/USUPACR/src/mainwindow.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/USUPACR.dir/home/nvidia/Documents/USUPACR/src/mainwindow.cpp.i"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/nvidia/Documents/USUPACR/src/mainwindow.cpp > CMakeFiles/USUPACR.dir/home/nvidia/Documents/USUPACR/src/mainwindow.cpp.i
+
+CMakeFiles/USUPACR.dir/home/nvidia/Documents/USUPACR/src/mainwindow.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/USUPACR.dir/home/nvidia/Documents/USUPACR/src/mainwindow.cpp.s"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/nvidia/Documents/USUPACR/src/mainwindow.cpp -o CMakeFiles/USUPACR.dir/home/nvidia/Documents/USUPACR/src/mainwindow.cpp.s
+
+CMakeFiles/USUPACR.dir/home/nvidia/Documents/USUPACR/src/mainwindow.cpp.o.requires:
+
+.PHONY : CMakeFiles/USUPACR.dir/home/nvidia/Documents/USUPACR/src/mainwindow.cpp.o.requires
+
+CMakeFiles/USUPACR.dir/home/nvidia/Documents/USUPACR/src/mainwindow.cpp.o.provides: CMakeFiles/USUPACR.dir/home/nvidia/Documents/USUPACR/src/mainwindow.cpp.o.requires
+	$(MAKE) -f CMakeFiles/USUPACR.dir/build.make CMakeFiles/USUPACR.dir/home/nvidia/Documents/USUPACR/src/mainwindow.cpp.o.provides.build
+.PHONY : CMakeFiles/USUPACR.dir/home/nvidia/Documents/USUPACR/src/mainwindow.cpp.o.provides
+
+CMakeFiles/USUPACR.dir/home/nvidia/Documents/USUPACR/src/mainwindow.cpp.o.provides.build: CMakeFiles/USUPACR.dir/home/nvidia/Documents/USUPACR/src/mainwindow.cpp.o
+
+
+CMakeFiles/USUPACR.dir/home/nvidia/Documents/USUPACR/src/stopwatch.cpp.o: CMakeFiles/USUPACR.dir/flags.make
+CMakeFiles/USUPACR.dir/home/nvidia/Documents/USUPACR/src/stopwatch.cpp.o: /home/nvidia/Documents/USUPACR/src/stopwatch.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nvidia/Documents/USUPACR/USUPACR/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/USUPACR.dir/home/nvidia/Documents/USUPACR/src/stopwatch.cpp.o"
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/USUPACR.dir/home/nvidia/Documents/USUPACR/src/stopwatch.cpp.o -c /home/nvidia/Documents/USUPACR/src/stopwatch.cpp
+
+CMakeFiles/USUPACR.dir/home/nvidia/Documents/USUPACR/src/stopwatch.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/USUPACR.dir/home/nvidia/Documents/USUPACR/src/stopwatch.cpp.i"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/nvidia/Documents/USUPACR/src/stopwatch.cpp > CMakeFiles/USUPACR.dir/home/nvidia/Documents/USUPACR/src/stopwatch.cpp.i
+
+CMakeFiles/USUPACR.dir/home/nvidia/Documents/USUPACR/src/stopwatch.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/USUPACR.dir/home/nvidia/Documents/USUPACR/src/stopwatch.cpp.s"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/nvidia/Documents/USUPACR/src/stopwatch.cpp -o CMakeFiles/USUPACR.dir/home/nvidia/Documents/USUPACR/src/stopwatch.cpp.s
+
+CMakeFiles/USUPACR.dir/home/nvidia/Documents/USUPACR/src/stopwatch.cpp.o.requires:
+
+.PHONY : CMakeFiles/USUPACR.dir/home/nvidia/Documents/USUPACR/src/stopwatch.cpp.o.requires
+
+CMakeFiles/USUPACR.dir/home/nvidia/Documents/USUPACR/src/stopwatch.cpp.o.provides: CMakeFiles/USUPACR.dir/home/nvidia/Documents/USUPACR/src/stopwatch.cpp.o.requires
+	$(MAKE) -f CMakeFiles/USUPACR.dir/build.make CMakeFiles/USUPACR.dir/home/nvidia/Documents/USUPACR/src/stopwatch.cpp.o.provides.build
+.PHONY : CMakeFiles/USUPACR.dir/home/nvidia/Documents/USUPACR/src/stopwatch.cpp.o.provides
+
+CMakeFiles/USUPACR.dir/home/nvidia/Documents/USUPACR/src/stopwatch.cpp.o.provides.build: CMakeFiles/USUPACR.dir/home/nvidia/Documents/USUPACR/src/stopwatch.cpp.o
+
+
+CMakeFiles/USUPACR.dir/home/nvidia/Documents/USUPACR/src/libenjoy_linux.c.o: CMakeFiles/USUPACR.dir/flags.make
+CMakeFiles/USUPACR.dir/home/nvidia/Documents/USUPACR/src/libenjoy_linux.c.o: /home/nvidia/Documents/USUPACR/src/libenjoy_linux.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nvidia/Documents/USUPACR/USUPACR/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building C object CMakeFiles/USUPACR.dir/home/nvidia/Documents/USUPACR/src/libenjoy_linux.c.o"
+	/usr/bin/cc  $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/USUPACR.dir/home/nvidia/Documents/USUPACR/src/libenjoy_linux.c.o   -c /home/nvidia/Documents/USUPACR/src/libenjoy_linux.c
+
+CMakeFiles/USUPACR.dir/home/nvidia/Documents/USUPACR/src/libenjoy_linux.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/USUPACR.dir/home/nvidia/Documents/USUPACR/src/libenjoy_linux.c.i"
+	/usr/bin/cc  $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvidia/Documents/USUPACR/src/libenjoy_linux.c > CMakeFiles/USUPACR.dir/home/nvidia/Documents/USUPACR/src/libenjoy_linux.c.i
+
+CMakeFiles/USUPACR.dir/home/nvidia/Documents/USUPACR/src/libenjoy_linux.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/USUPACR.dir/home/nvidia/Documents/USUPACR/src/libenjoy_linux.c.s"
+	/usr/bin/cc  $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvidia/Documents/USUPACR/src/libenjoy_linux.c -o CMakeFiles/USUPACR.dir/home/nvidia/Documents/USUPACR/src/libenjoy_linux.c.s
+
+CMakeFiles/USUPACR.dir/home/nvidia/Documents/USUPACR/src/libenjoy_linux.c.o.requires:
+
+.PHONY : CMakeFiles/USUPACR.dir/home/nvidia/Documents/USUPACR/src/libenjoy_linux.c.o.requires
+
+CMakeFiles/USUPACR.dir/home/nvidia/Documents/USUPACR/src/libenjoy_linux.c.o.provides: CMakeFiles/USUPACR.dir/home/nvidia/Documents/USUPACR/src/libenjoy_linux.c.o.requires
+	$(MAKE) -f CMakeFiles/USUPACR.dir/build.make CMakeFiles/USUPACR.dir/home/nvidia/Documents/USUPACR/src/libenjoy_linux.c.o.provides.build
+.PHONY : CMakeFiles/USUPACR.dir/home/nvidia/Documents/USUPACR/src/libenjoy_linux.c.o.provides
+
+CMakeFiles/USUPACR.dir/home/nvidia/Documents/USUPACR/src/libenjoy_linux.c.o.provides.build: CMakeFiles/USUPACR.dir/home/nvidia/Documents/USUPACR/src/libenjoy_linux.c.o
+
+
+CMakeFiles/USUPACR.dir/home/nvidia/Documents/USUPACR/src/libenjoy.c.o: CMakeFiles/USUPACR.dir/flags.make
+CMakeFiles/USUPACR.dir/home/nvidia/Documents/USUPACR/src/libenjoy.c.o: /home/nvidia/Documents/USUPACR/src/libenjoy.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nvidia/Documents/USUPACR/USUPACR/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building C object CMakeFiles/USUPACR.dir/home/nvidia/Documents/USUPACR/src/libenjoy.c.o"
+	/usr/bin/cc  $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/USUPACR.dir/home/nvidia/Documents/USUPACR/src/libenjoy.c.o   -c /home/nvidia/Documents/USUPACR/src/libenjoy.c
+
+CMakeFiles/USUPACR.dir/home/nvidia/Documents/USUPACR/src/libenjoy.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/USUPACR.dir/home/nvidia/Documents/USUPACR/src/libenjoy.c.i"
+	/usr/bin/cc  $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/nvidia/Documents/USUPACR/src/libenjoy.c > CMakeFiles/USUPACR.dir/home/nvidia/Documents/USUPACR/src/libenjoy.c.i
+
+CMakeFiles/USUPACR.dir/home/nvidia/Documents/USUPACR/src/libenjoy.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/USUPACR.dir/home/nvidia/Documents/USUPACR/src/libenjoy.c.s"
+	/usr/bin/cc  $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/nvidia/Documents/USUPACR/src/libenjoy.c -o CMakeFiles/USUPACR.dir/home/nvidia/Documents/USUPACR/src/libenjoy.c.s
+
+CMakeFiles/USUPACR.dir/home/nvidia/Documents/USUPACR/src/libenjoy.c.o.requires:
+
+.PHONY : CMakeFiles/USUPACR.dir/home/nvidia/Documents/USUPACR/src/libenjoy.c.o.requires
+
+CMakeFiles/USUPACR.dir/home/nvidia/Documents/USUPACR/src/libenjoy.c.o.provides: CMakeFiles/USUPACR.dir/home/nvidia/Documents/USUPACR/src/libenjoy.c.o.requires
+	$(MAKE) -f CMakeFiles/USUPACR.dir/build.make CMakeFiles/USUPACR.dir/home/nvidia/Documents/USUPACR/src/libenjoy.c.o.provides.build
+.PHONY : CMakeFiles/USUPACR.dir/home/nvidia/Documents/USUPACR/src/libenjoy.c.o.provides
+
+CMakeFiles/USUPACR.dir/home/nvidia/Documents/USUPACR/src/libenjoy.c.o.provides.build: CMakeFiles/USUPACR.dir/home/nvidia/Documents/USUPACR/src/libenjoy.c.o
+
+
+CMakeFiles/USUPACR.dir/__/include/moc_mainwindow.cxx.o: CMakeFiles/USUPACR.dir/flags.make
+CMakeFiles/USUPACR.dir/__/include/moc_mainwindow.cxx.o: __/include/moc_mainwindow.cxx
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nvidia/Documents/USUPACR/USUPACR/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Building CXX object CMakeFiles/USUPACR.dir/__/include/moc_mainwindow.cxx.o"
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/USUPACR.dir/__/include/moc_mainwindow.cxx.o -c /home/nvidia/Documents/USUPACR/USUPACR/build/__/include/moc_mainwindow.cxx
+
+CMakeFiles/USUPACR.dir/__/include/moc_mainwindow.cxx.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/USUPACR.dir/__/include/moc_mainwindow.cxx.i"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/nvidia/Documents/USUPACR/USUPACR/build/__/include/moc_mainwindow.cxx > CMakeFiles/USUPACR.dir/__/include/moc_mainwindow.cxx.i
+
+CMakeFiles/USUPACR.dir/__/include/moc_mainwindow.cxx.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/USUPACR.dir/__/include/moc_mainwindow.cxx.s"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/nvidia/Documents/USUPACR/USUPACR/build/__/include/moc_mainwindow.cxx -o CMakeFiles/USUPACR.dir/__/include/moc_mainwindow.cxx.s
+
+CMakeFiles/USUPACR.dir/__/include/moc_mainwindow.cxx.o.requires:
+
+.PHONY : CMakeFiles/USUPACR.dir/__/include/moc_mainwindow.cxx.o.requires
+
+CMakeFiles/USUPACR.dir/__/include/moc_mainwindow.cxx.o.provides: CMakeFiles/USUPACR.dir/__/include/moc_mainwindow.cxx.o.requires
+	$(MAKE) -f CMakeFiles/USUPACR.dir/build.make CMakeFiles/USUPACR.dir/__/include/moc_mainwindow.cxx.o.provides.build
+.PHONY : CMakeFiles/USUPACR.dir/__/include/moc_mainwindow.cxx.o.provides
+
+CMakeFiles/USUPACR.dir/__/include/moc_mainwindow.cxx.o.provides.build: CMakeFiles/USUPACR.dir/__/include/moc_mainwindow.cxx.o
+
+
 # Object files for target USUPACR
 USUPACR_OBJECTS = \
-"CMakeFiles/USUPACR.dir/main.cpp.o"
+"CMakeFiles/USUPACR.dir/main.cpp.o" \
+"CMakeFiles/USUPACR.dir/home/nvidia/Documents/USUPACR/src/motorController.cpp.o" \
+"CMakeFiles/USUPACR.dir/home/nvidia/Documents/USUPACR/src/cameraDetection.cpp.o" \
+"CMakeFiles/USUPACR.dir/home/nvidia/Documents/USUPACR/src/XBoxOne.cpp.o" \
+"CMakeFiles/USUPACR.dir/home/nvidia/Documents/USUPACR/src/personTracker.cpp.o" \
+"CMakeFiles/USUPACR.dir/home/nvidia/Documents/USUPACR/src/mainwindow.cpp.o" \
+"CMakeFiles/USUPACR.dir/home/nvidia/Documents/USUPACR/src/stopwatch.cpp.o" \
+"CMakeFiles/USUPACR.dir/home/nvidia/Documents/USUPACR/src/libenjoy_linux.c.o" \
+"CMakeFiles/USUPACR.dir/home/nvidia/Documents/USUPACR/src/libenjoy.c.o" \
+"CMakeFiles/USUPACR.dir/__/include/moc_mainwindow.cxx.o"
 
 # External object files for target USUPACR
 USUPACR_EXTERNAL_OBJECTS =
 
 USUPACR: CMakeFiles/USUPACR.dir/main.cpp.o
+USUPACR: CMakeFiles/USUPACR.dir/home/nvidia/Documents/USUPACR/src/motorController.cpp.o
+USUPACR: CMakeFiles/USUPACR.dir/home/nvidia/Documents/USUPACR/src/cameraDetection.cpp.o
+USUPACR: CMakeFiles/USUPACR.dir/home/nvidia/Documents/USUPACR/src/XBoxOne.cpp.o
+USUPACR: CMakeFiles/USUPACR.dir/home/nvidia/Documents/USUPACR/src/personTracker.cpp.o
+USUPACR: CMakeFiles/USUPACR.dir/home/nvidia/Documents/USUPACR/src/mainwindow.cpp.o
+USUPACR: CMakeFiles/USUPACR.dir/home/nvidia/Documents/USUPACR/src/stopwatch.cpp.o
+USUPACR: CMakeFiles/USUPACR.dir/home/nvidia/Documents/USUPACR/src/libenjoy_linux.c.o
+USUPACR: CMakeFiles/USUPACR.dir/home/nvidia/Documents/USUPACR/src/libenjoy.c.o
+USUPACR: CMakeFiles/USUPACR.dir/__/include/moc_mainwindow.cxx.o
 USUPACR: CMakeFiles/USUPACR.dir/build.make
 USUPACR: /usr/local/cuda-9.0/lib64/libcudart_static.a
 USUPACR: /usr/lib/aarch64-linux-gnu/librt.so
 USUPACR: /usr/local/lib/libjetson-inference.so
+USUPACR: /usr/local/lib/librealsense2.so.2.10.4
+USUPACR: /usr/lib/libopencv_dnn.so.3.3.1
+USUPACR: /usr/lib/libopencv_ml.so.3.3.1
+USUPACR: /usr/lib/libopencv_objdetect.so.3.3.1
+USUPACR: /usr/lib/libopencv_shape.so.3.3.1
+USUPACR: /usr/lib/libopencv_stitching.so.3.3.1
+USUPACR: /usr/lib/libopencv_superres.so.3.3.1
+USUPACR: /usr/lib/libopencv_videostab.so.3.3.1
+USUPACR: /usr/lib/aarch64-linux-gnu/libQtGui.so
+USUPACR: /usr/lib/aarch64-linux-gnu/libQtCore.so
 USUPACR: /usr/local/lib/libjetson-utils.so
 USUPACR: /usr/local/cuda-9.0/lib64/libcudart_static.a
 USUPACR: /usr/lib/aarch64-linux-gnu/librt.so
 USUPACR: /usr/lib/aarch64-linux-gnu/libQtGui.so
 USUPACR: /usr/lib/aarch64-linux-gnu/libQtCore.so
+USUPACR: /usr/lib/libopencv_calib3d.so.3.3.1
+USUPACR: /usr/lib/libopencv_features2d.so.3.3.1
+USUPACR: /usr/lib/libopencv_flann.so.3.3.1
+USUPACR: /usr/lib/libopencv_highgui.so.3.3.1
+USUPACR: /usr/lib/libopencv_photo.so.3.3.1
+USUPACR: /usr/lib/libopencv_video.so.3.3.1
+USUPACR: /usr/lib/libopencv_videoio.so.3.3.1
+USUPACR: /usr/lib/libopencv_imgcodecs.so.3.3.1
+USUPACR: /usr/lib/libopencv_imgproc.so.3.3.1
+USUPACR: /usr/lib/libopencv_core.so.3.3.1
 USUPACR: CMakeFiles/USUPACR.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/nvidia/Documents/USUPACR/USUPACR/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX executable USUPACR"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/nvidia/Documents/USUPACR/USUPACR/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Linking CXX executable USUPACR"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/USUPACR.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -108,6 +367,15 @@ CMakeFiles/USUPACR.dir/build: USUPACR
 .PHONY : CMakeFiles/USUPACR.dir/build
 
 CMakeFiles/USUPACR.dir/requires: CMakeFiles/USUPACR.dir/main.cpp.o.requires
+CMakeFiles/USUPACR.dir/requires: CMakeFiles/USUPACR.dir/home/nvidia/Documents/USUPACR/src/motorController.cpp.o.requires
+CMakeFiles/USUPACR.dir/requires: CMakeFiles/USUPACR.dir/home/nvidia/Documents/USUPACR/src/cameraDetection.cpp.o.requires
+CMakeFiles/USUPACR.dir/requires: CMakeFiles/USUPACR.dir/home/nvidia/Documents/USUPACR/src/XBoxOne.cpp.o.requires
+CMakeFiles/USUPACR.dir/requires: CMakeFiles/USUPACR.dir/home/nvidia/Documents/USUPACR/src/personTracker.cpp.o.requires
+CMakeFiles/USUPACR.dir/requires: CMakeFiles/USUPACR.dir/home/nvidia/Documents/USUPACR/src/mainwindow.cpp.o.requires
+CMakeFiles/USUPACR.dir/requires: CMakeFiles/USUPACR.dir/home/nvidia/Documents/USUPACR/src/stopwatch.cpp.o.requires
+CMakeFiles/USUPACR.dir/requires: CMakeFiles/USUPACR.dir/home/nvidia/Documents/USUPACR/src/libenjoy_linux.c.o.requires
+CMakeFiles/USUPACR.dir/requires: CMakeFiles/USUPACR.dir/home/nvidia/Documents/USUPACR/src/libenjoy.c.o.requires
+CMakeFiles/USUPACR.dir/requires: CMakeFiles/USUPACR.dir/__/include/moc_mainwindow.cxx.o.requires
 
 .PHONY : CMakeFiles/USUPACR.dir/requires
 
@@ -115,7 +383,7 @@ CMakeFiles/USUPACR.dir/clean:
 	$(CMAKE_COMMAND) -P CMakeFiles/USUPACR.dir/cmake_clean.cmake
 .PHONY : CMakeFiles/USUPACR.dir/clean
 
-CMakeFiles/USUPACR.dir/depend:
+CMakeFiles/USUPACR.dir/depend: __/include/moc_mainwindow.cxx
 	cd /home/nvidia/Documents/USUPACR/USUPACR/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/nvidia/Documents/USUPACR/USUPACR /home/nvidia/Documents/USUPACR/USUPACR /home/nvidia/Documents/USUPACR/USUPACR/build /home/nvidia/Documents/USUPACR/USUPACR/build /home/nvidia/Documents/USUPACR/USUPACR/build/CMakeFiles/USUPACR.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/USUPACR.dir/depend
 

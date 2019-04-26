@@ -11,13 +11,22 @@ set(CMAKE_MAKEFILE_DEPENDS
   "CMakeFiles/3.5.1/CMakeCCompiler.cmake"
   "CMakeFiles/3.5.1/CMakeCXXCompiler.cmake"
   "CMakeFiles/3.5.1/CMakeSystem.cmake"
+  "/usr/local/lib/cmake/realsense2/realsense2Config.cmake"
+  "/usr/local/lib/cmake/realsense2/realsense2ConfigVersion.cmake"
+  "/usr/local/lib/cmake/realsense2/realsense2Targets-noconfig.cmake"
+  "/usr/local/lib/cmake/realsense2/realsense2Targets.cmake"
   "/usr/local/share/jetson-inference/cmake/jetson-inferenceConfig-noconfig.cmake"
   "/usr/local/share/jetson-inference/cmake/jetson-inferenceConfig.cmake"
   "/usr/local/share/jetson-utils/cmake/jetson-utilsConfig-noconfig.cmake"
   "/usr/local/share/jetson-utils/cmake/jetson-utilsConfig.cmake"
+  "/usr/share/OpenCV/OpenCVConfig-version.cmake"
+  "/usr/share/OpenCV/OpenCVConfig.cmake"
+  "/usr/share/OpenCV/OpenCVModules-release.cmake"
+  "/usr/share/OpenCV/OpenCVModules.cmake"
   "/usr/share/cmake-3.5/Modules/CMakeCInformation.cmake"
   "/usr/share/cmake-3.5/Modules/CMakeCXXInformation.cmake"
   "/usr/share/cmake-3.5/Modules/CMakeCommonLanguageInclude.cmake"
+  "/usr/share/cmake-3.5/Modules/CMakeConfigurableFile.in"
   "/usr/share/cmake-3.5/Modules/CMakeGenericSystem.cmake"
   "/usr/share/cmake-3.5/Modules/CMakeLanguageInformation.cmake"
   "/usr/share/cmake-3.5/Modules/CMakeParseArguments.cmake"
@@ -55,6 +64,7 @@ set(CMAKE_MAKEFILE_OUTPUTS
 
 # Byproducts of CMake generate step:
 set(CMAKE_MAKEFILE_PRODUCTS
+  "__/include/moc_mainwindow.cxx_parameters"
   "CMakeFiles/CMakeDirectoryInformation.cmake"
   )
 

@@ -10,7 +10,7 @@
  #include <QWidget>
  #include <QAbstractButton>
 
-std::iostream motorArduino;
+std::fstream motorArduino;
 
  MainWindow::MainWindow(QWidget *parent)
     : QWidget(parent)

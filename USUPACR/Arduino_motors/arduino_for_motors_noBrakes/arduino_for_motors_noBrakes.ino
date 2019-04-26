@@ -1,12 +1,14 @@
 // Simple program to verify that stuff is working. This will send how much time has elapsed every .5 seconds.
 
 #include <Servo.h>
-#define DELAYTIME      200
+#define DELAYTIME      10
 #define ESTOP          2
 #define LMOTOR         9
 #define RMOTOR         10
 #define LMOTOR_REVERSE 7
 #define RMOTOR_REVERSE 8
+
+#define VERBOSE true
 
 
 int lMotor = 0;
@@ -28,6 +30,7 @@ void setup()
   analogWrite(RMOTOR, 0);
   digitalWrite(LMOTOR_REVERSE,false);
   digitalWrite(RMOTOR_REVERSE,false);
+  delay(DELAYTIME);
 }
 
 
@@ -42,25 +45,50 @@ void loop()
 //    lMotor = Serial.parseInt();
 //    rMotor = Serial.parseInt();
 //  }
-  while(Serial.available() > 1)
+  int av = Serial.available();
+  if(VERBOSE)
+  {
+    if(av<22)
+    {
+      Serial.print("Bytes = ");
+      Serial.print(av);
+    }
+  }
+  while(Serial.available() >= 22)
   {
     shouldWrite = true;
     // get motor input
-    int lMotor_raw = Serial.parseInt();
-    int rMotor_raw = Serial.parseInt();
+    String lMotorString = Serial.readStringUntil('\n');
+    String rMotorString = Serial.readStringUntil('\n');
+    int lMotor_raw = lMotorString.toInt();
+    int rMotor_raw = rMotorString.toInt();
     if(sign(lMotor_raw) == -sign(lMotor) || sign(rMotor_raw) == -sign(rMotor))
       waitReverse = true;
-    if(abs(lMotor_raw) > 15)
+    if(abs(lMotor_raw) > 0)
       lMotor = map(abs(lMotor_raw), 0, 255, 40, 200);
     else
       lMotor = 0;
-    if(abs(rMotor_raw) > 15)
+    if(abs(rMotor_raw) > 0)
       rMotor = map(abs(rMotor_raw), 0, 255, 40, 200);
     else
       rMotor = 0;
     if(lMotor_raw<0) lMotor = -lMotor;
     if(rMotor_raw<0) rMotor = -rMotor;
-    
+
+    if(VERBOSE)
+    {
+      Serial.print("Bytes = ");
+      Serial.print(av);
+      Serial.print("lMotor = (");
+      Serial.print(lMotor_raw);
+      Serial.print("->");
+      Serial.print(lMotor);
+      Serial.print("), rMotor = ");
+      Serial.print(rMotor_raw);
+      Serial.print("->");
+      Serial.print(rMotor);
+      Serial.print(")\n");
+    }
     lastTime = millis();
   }
 //  if(Serial.available() == 1)
@@ -87,6 +115,12 @@ void loop()
     analogWrite(LMOTOR, abs(lMotor));
     analogWrite(RMOTOR, abs(rMotor));
     
+  }
+  if(VERBOSE)
+  {
+      Serial.print(", EStop = ");
+      Serial.print(Estop_engaged);
+      Serial.println("");
   }
 //  Serial.print("Estop = ");
 //  Serial.println(Estop_engaged);

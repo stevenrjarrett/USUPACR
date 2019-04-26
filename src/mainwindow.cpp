@@ -230,12 +230,12 @@ void motorUpdator()
     for( ; !(motorArduino.is_open()); serialPortNumber = (serialPortNumber + 1) % 20)
     {
         serialPortPath = std::string("/dev/ttyACM")+std::to_string(serialPortNumber);
-        motorArduino.open(serialPortPath, std::ios_base::out | std::ios_base::in | std::ios_base::trunc );
+        motorArduino.open(serialPortPath, std::ios_base::out | std::ios_base::in);
         usleep(1000);
     }
     usleep(100000);
     std::cout << "Serial port for motors successfully opened at " << serialPortPath << std::endl;
-    motorArduino >> msg;
+    motorArduino.peek();
     // main loop
     while(!stop_signal_recieved)
     {

@@ -355,7 +355,11 @@ int mainProgram(MainWindow *GUI)
             // Act based on autonomous / user control
             if(autonomous_mode)
             {
-                if(controller.wp_B() || !(GUI->getAutonomousEngaged()))
+                if(controller.wp_B() && (GUI->getAutonomousEngaged()))
+                {
+                    GUI->pushButton->animateClick();
+                }
+                if(!(GUI->getAutonomousEngaged()))
                 {
                     autonomous_mode = false;
                     motors_target.left = 0;

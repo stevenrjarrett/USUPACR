@@ -355,10 +355,10 @@ int mainProgram(MainWindow *GUI)
             // Act based on autonomous / user control
             if(autonomous_mode)
             {
-                if(controller.wp_B() && (GUI->getAutonomousEngaged()))
-                {
-                    GUI->pushButton->animateClick();
-                }
+//                if(controller.wp_B() && (GUI->getAutonomousEngaged()))
+//                {
+//                    GUI->pushButton->animateClick();
+//                }
                 if(!(GUI->getAutonomousEngaged()))
                 {
                     autonomous_mode = false;
@@ -419,10 +419,10 @@ int mainProgram(MainWindow *GUI)
             }
             else // manual control
             {
-                if(controller.wp_A() && !(GUI->getAutonomousEngaged()))
-                {
-                    GUI->pushButton->animateClick();
-                }
+//                if(controller.wp_A() && !(GUI->getAutonomousEngaged()))
+//                {
+//                    GUI->pushButton->animateClick();
+//                }
                 if((GUI->getAutonomousEngaged()))
                 {
                     autonomous_mode = true;

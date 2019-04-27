@@ -24,6 +24,7 @@
     bool getAutonomousEngaged() { return autonomousEngaged; }
     double getMaxSpeed();
     double getFollowDistance();
+    QPushButton *pushButton;
 
  private slots:
     void handleButton();
@@ -33,7 +34,6 @@
     QGroupBox *createDistanceGroup();
     QGroupBox *createSpeedGroup();
     QGroupBox *createAutonomousGroup();
-    QPushButton *pushButton;
 
     // variables
     QGroupBox *autonomousGroup;

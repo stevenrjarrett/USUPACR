@@ -415,7 +415,11 @@ int mainProgram(MainWindow *GUI)
             }
             else // manual control
             {
-                if(controller.wp_A() || (GUI->getAutonomousEngaged()))
+                if(controller.wp_A() && !(GUI->getAutonomousEngaged()))
+                {
+                    GUI->pushButton->animateClick();
+                }
+                if((GUI->getAutonomousEngaged()))
                 {
                     autonomous_mode = true;
                     motors_target.left = 0;

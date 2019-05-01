@@ -20,8 +20,8 @@
 ///////////////////////////////////////// Macros ////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////
 
-#define EXECUTIVE_WAIT_TIME 200000 // microseconds
-#define MOTORS_WAIT_TIME    200000 // microseconds
+#define EXECUTIVE_WAIT_TIME 10000 // microseconds
+#define MOTORS_WAIT_TIME    10000 // microseconds
 #define Max_Drive_Speed     255
 
 /////////////////////////////////////////////////////////////////////////////////////////
@@ -85,7 +85,7 @@ bool autonomous_mode = false;
 double follow_distance = 5.0;
 double distance_tolerance = 2.0;
 double max_speed = 255; // 255 is the max value you can send. Set this lower for slower
-double max_acceleration = 0.8; // 1 is for 0 to max_speed in 1 second;
+double max_acceleration = 2.0; // 1 is for 0 to max_speed in 1 second;
 double autonomous_max_speed = 200; // 255 is the max value you can send. Set this lower for slower
 double motor_speed_limiter = 1.0; // a value from 0-1, setting the maximum speed.
 double autonomous_x_tolerance = 0.5;

@@ -8,7 +8,8 @@
 #define VAR_RMOTOR      1
 #define VAR_AUTONOMOUS  2
 
-template<class T> T sign(T val) { return (val<0) ? -1 : 1; }
+int sign(int val) { return (val<0) ? -1 : 1; }
+float sign(float val) { return (val<0) ? -1 : 1; }
 
 class motorValueReciever
 {

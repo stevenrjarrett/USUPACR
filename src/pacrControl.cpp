@@ -1,5 +1,36 @@
 #include "pacrControl.h"
 
+
+
+motorValues ConvertToArcade ( int x1 , int y1 ) // Converts joystick input to holonomic drive output in the array MTarget[]
+{
+  motorValues mtrs;
+  int A;
+  int B;
+  int Ax1;
+  int Ay1;
+  Ax1 = abs_val(x1);//Getting absolute values so I can use them in if-statements
+  Ay1 = abs_val(y1);
+  A = Ax1 + Ay1;//The Common Divisor
+  if (A > 3) // This if-statemend does two things: First, if you'll notice, A is a divisor later on. if A = 0, then the program would stop working. Second, setting the minimum value to 3 eliminates motor hum.
+  {
+    B = (Ax1 > Ay1)?(Ax1):(Ay1);//Finds the greatest value of the variables Ax1 and Ay1, and stores it in B. Done using ternary if-else statements.
+		B = (B > Max_Drive_Speed)?(Max_Drive_Speed):(B);//If B is greater than the maximum drive speed, then set it to the max value.
+    mtrs.left = (( y1 + x1) * B) / A; //These four lines of code are the meat of this function. everything else is just to make them work.
+    mtrs.right = (( y1 - x1) * B) / A;// Multiplying by B / A ensures that no motor value exceeds the greatest input value (which is 127 or -127 for joystick input).
+  }
+  else
+  {
+    mtrs.left = 0;
+    mtrs.right = 0;
+  }
+  return mtrs;
+}
+
+
+
+
+
 pacrControl::pacrControl(bool _enable_soft_start = true, double _max_acceleration = 0.8)
   : stop_signal_recieved(false),
     max_speed(255),
@@ -7,7 +38,8 @@ pacrControl::pacrControl(bool _enable_soft_start = true, double _max_acceleratio
     autonomous_max_speed(200),
     motor_speed_limiter(1.0),
     enable_soft_start(true),
-    drive_increment(max_speed * max_acceleration * ((double)MOTORS_WAIT_TIME / 1000000.0))
+    drive_increment(max_speed * max_acceleration * ((double)delayTime / 1000000.0)),
+    delayTime(200000)
 {
     runningThread = std::thread(motorUpdator, this);
 }
@@ -27,20 +59,20 @@ pacrControl::~pacrControl()
 void pacrControl::updateMotorValues()
 {
     // Set brake
-    motors_actual.brake = motors_target.brake;
-    motors_actual.autonomous = motors_target.autonomous;
+    actual.brake = target.brake;
+    actual.autonomous = target.autonomous;
 
 
     //use soft-start to set motors
-    motorValues mtrDiff = motors_target,
+    motorValues mtrDiff = target,
                 aMtrDiff;
-    mtrDiff -= motors_actual;
+    mtrDiff -= actual;
     aMtrDiff.left  = abs_val(mtrDiff.left );
     aMtrDiff.right = abs_val(mtrDiff.right);
     aMtrDiff.brake = abs_val(mtrDiff.brake);
 
-    bool accelerating = (  (mtrDiff.left  > 0 && motors_target.left  > 0) || (mtrDiff.left  < 0 && motors_target.left  < 0)
-                        || (mtrDiff.right > 0 && motors_target.right > 0) || (mtrDiff.right < 0 && motors_target.right < 0) );
+    bool accelerating = (  (mtrDiff.left  > 0 && target.left  > 0) || (mtrDiff.left  < 0 && target.left  < 0)
+                        || (mtrDiff.right > 0 && target.right > 0) || (mtrDiff.right < 0 && target.right < 0) );
 
 
 //Drive
@@ -50,27 +82,22 @@ void pacrControl::updateMotorValues()
     {
         double max_aDiff = std::max(aMtrDiff.left, aMtrDiff.right);
 
-        motors_actual.left += ( drive_increment * mtrDiff.left) / max_aDiff;
-        motors_actual.right += ( drive_increment * mtrDiff.right) / max_aDiff;
+        actual.left += ( drive_increment * mtrDiff.left) / max_aDiff;
+        actual.right += ( drive_increment * mtrDiff.right) / max_aDiff;
     }
     else
     {
-        motors_actual.left = motors_target.left;
-        motors_actual.right = motors_target.right;
+        actual.left = target.left;
+        actual.right = target.right;
     }
-//    std::cout << "ltarget = " << motors_target.left << ", lActual = " << motors_actual.left << ", mtrDiff = " << mtrDiff.left << ", aMtrDiff = " << aMtrDiff.left << std::endl;
+//    std::cout << "ltarget = " << target.left << ", lActual = " << actual.left << ", mtrDiff = " << mtrDiff.left << ", aMtrDiff = " << aMtrDiff.left << std::endl;
 }
 
 void pacrControl::sendMotorValues()
 {
-    motorArduino << std::setw(10) << (int)(motors_actual.left  * motor_speed_limiter) << std::endl;
-    motorArduino << std::setw(10) << (int)(motors_actual.right * motor_speed_limiter) << std::endl;
-//    motorArduino << (int)(motors_actual.left  * motor_speed_limiter) << '\n'
-//                 << (int)(motors_actual.right * motor_speed_limiter) << '\n';
-//    motorArduino << (float)motors_actual.brake << std::endl;
-//    motors_actual = motors_target;
-//    std::cout << "sent values: l=" << (int)(motors_target.left  * motor_speed_limiter)
-//                         << ", r=" << (int)(motors_target.right * motor_speed_limiter) << std::endl;
+    motorArduino << std::setw(10) << (int)(actual.left  * motor_speed_limiter) << std::endl;
+    motorArduino << std::setw(10) << (int)(actual.right * motor_speed_limiter) << std::endl;
+//    motorArduino << (int)actual.autonomous << std::endl;
 }
 
 void pacrControl::motorUpdator()
@@ -112,7 +139,7 @@ void pacrControl::motorUpdator()
 //        {
 //            std::cout << "Arduino: " << msg;
 //        }
-        usleep(MOTORS_WAIT_TIME);
+        usleep(delayTime);
     }
 
 

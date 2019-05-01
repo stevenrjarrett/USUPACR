@@ -1,18 +1,21 @@
+
 // based on the code from the tutorial found here:
 // http://forum.arduino.cc/index.php?topic=288234.0
 
-#define BAUDRATE 115200
 #define NUMCHARS 128
 
 #define VAR_LMOTOR      0
 #define VAR_RMOTOR      1
 #define VAR_AUTONOMOUS  2
 
+template<class T> T sign(T val) { return (val<0) ? -1 : 1; }
+
 class motorValueReciever
 {
 public:
+    bool verbose;
 
-    motorValueReciever(_numChars = NUMCHARS, _verbose = false)
+    motorValueReciever( char _endMarker = '\n', int _numChars = NUMCHARS, bool _verbose = false)
     : newData(false),
       verbose(_verbose),
       numChars(_numChars),
@@ -22,8 +25,10 @@ public:
       rMotorValue(0),
       autonomous(false),
       newValues(true),
-      lastTime(0)
+      lastTime(0),
+      endMarker(_endMarker)
     {
+        receivedChars[numChars-1] = '\0';
 //        Serial.begin(baud);
 //        Serial.println("<Arduino is ready>");
     }
@@ -39,10 +44,11 @@ public:
     int rMotor() { newValues = false;  return rMotorValue; }
     int autonomousEngaged() { newValues = false;  return autonomous; }
     long getLastTime() { return lastTime; }
-    long elapsedTime() { return millis() - lastTime }
+    long elapsedTime() { return millis() - lastTime; }
     bool hasNewValues() { return newValues; }
 
-    void showNewData() {
+    void showNewData()
+    {
         if (newData == true) {
             Serial.print("This just in ... ");
             Serial.println(receivedChars);
@@ -51,7 +57,7 @@ public:
 
     bool update()
     {
-        recvWithStartEndMarkers();
+        recvWithEndMarker();
         if(newData)
         {
             if(verbose)
@@ -63,7 +69,6 @@ public:
 
 private:
     int numChars;
-    bool verbose;
     char *receivedChars;
     bool newData;
     int lMotorValue;
@@ -73,92 +78,60 @@ private:
 
     char *variableName;
     long lastTime;
+    char endMarker;
 
 
 
     void parseData() {
+        static int varToWrite = VAR_LMOTOR;
         if(!newData)
             return;
-        // split the data into its parts
-        bool eos = false;
-
-        char * strtokIndx; // this is used by strtok() as an index
-        int varToWrite = -1;
-
-        strtokIndx = strtok(receivedChars,"=");      // get the first part
-
-        while(!eos)
+        // Parse a value
+        int value = atoi(receivedChars);
+        switch(varToWrite)
         {
-            strcpy(variableName, strtokIndx); // copy it to variableName
-            if(strcmp(variableName, "lMotor") == 0)
-                varToWrite = VAR_LMOTOR;
-            else if(strcmp(variableName, "rMotor") == 0)
-                varToWrite = VAR_RMOTOR;
-            else if(strcmp(variableName, "autonomous") == 0)
-                varToWrite = VAR_AUTONOMOUS;
-            else if(strcmp(variableName, "end") == 0)
-                eos = true;
-
-//            if(eos)
-//                break;
-            if(varToWrite != -1)
-            {
-                strtokIndx = strtok(NULL, "\n");
-                int value = atoi(strtokIndx);
-                switch(varToWrite)
-                {
-                case VAR_LMOTOR:
-                    lMotorValue = value;
-                    break;
-                case VAR_RMOTOR:
-                    rMotorValue = value;
-                    break;
-                case VAR_AUTONOMOUS:
-                    autonomous = (value==0) ? false : true;
-                    break;
-                }
-            }
-            if(!eos)
-                strtokIndx = strtok(NULL,"=");      // get the next part
+        case VAR_LMOTOR:
+            lMotorValue = value;
+            varToWrite = VAR_RMOTOR;
+            break;
+        case VAR_RMOTOR:
+            rMotorValue = value;
+            varToWrite = VAR_LMOTOR;
+            newValues = true;
+            lastTime = millis();
+            break;
+//        case VAR_AUTONOMOUS:
+//            autonomous = (value==0) ? false : true;
+//            break;
         }
-        newValues = true;
+
         newData   = false;
     }
 
-    void recvWithStartEndMarkers() {
-        static boolean recvInProgress = false;
+
+    void recvWithEndMarker()
+    {
         static byte ndx = 0;
-        char startMarker = '<';
-        char endMarker = '>';
         char rc;
 
-     // if (Serial.available() > 0) {
-        while (Serial.available() > 0 && newData == false) {
+        while (Serial.available() > 0 && newData == false)
+        {
             rc = Serial.read();
 
-            if (recvInProgress == true) {
-                if (rc != endMarker) {
-                    receivedChars[ndx] = rc;
-                    ndx++;
-                    if (ndx >= numChars) {
-                        ndx = numChars - 1;
-                    }
-                }
-                else {
-
-                    receivedChars[ndx] = 'e'; // terminate the string
-                    receivedChars[(ndx+1)%numChars] = 'n'; // terminate the string
-                    receivedChars[(ndx+2)%numChars] = 'd'; // terminate the string
-                    receivedChars[(ndx+3)%numChars] = '\0'; // terminate the string
-                    recvInProgress = false;
-                    ndx = 0;
-                    newData = true;
-                    lastTime = millis();
+            if (rc != endMarker)
+            {
+                receivedChars[ndx] = rc;
+                ndx++;
+                if (ndx >= numChars)
+                {
+                    ndx = numChars - 1;
                 }
             }
-
-            else if (rc == startMarker) {
-                recvInProgress = true;
+            else
+            {
+                receivedChars[ndx] = '\0'; // terminate the string
+                ndx = 0;
+                newData = true;
             }
         }
     }
@@ -170,13 +143,33 @@ private:
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 //#define DELAYTIME      200
+#define BAUDRATE       115200
 #define ESTOP          2
 #define LMOTOR         9
 #define RMOTOR         10
 #define LMOTOR_REVERSE 7
 #define RMOTOR_REVERSE 8
 #define AUTONOMOUS     3
+#define SEND_DELAY     1000
 
 #define VERBOSE true
 
@@ -192,14 +185,28 @@ long lastSend = 0;
 motorValueReciever motors;
 
 void setup() {
-    Serial.begin(115200);
+    Serial.begin(BAUDRATE);
     Serial.println("<Arduino is ready>");
+    pinMode(LMOTOR, OUTPUT);
+    pinMode(RMOTOR, OUTPUT);
+    pinMode(LMOTOR_REVERSE, OUTPUT);
+    pinMode(RMOTOR_REVERSE, OUTPUT);
+    pinMode(ESTOP, INPUT);
+    analogWrite(LMOTOR, 0);
+    analogWrite(RMOTOR, 0);
+    digitalWrite(LMOTOR_REVERSE,false);
+    digitalWrite(RMOTOR_REVERSE,false);
+//      delay(100);
 }
 
 
 void loop() {
     motors.update();
-    if(motors.elapsedTime() < 500)
+    bool Estop_engaged = !(digitalRead(ESTOP));
+    long tm = motors.elapsedTime();
+
+    // Parse motor information and set appropriate pin values.
+    if(tm < MAX_INACTIVE_TIME && !Estop_engaged)
     {
         if(motors.hasNewValues())
         {
@@ -212,7 +219,7 @@ void loop() {
                 analogWrite(RMOTOR, 0);
                 digitalWrite(LMOTOR_REVERSE, lMotor_raw < 0);
                 digitalWrite(RMOTOR_REVERSE, rMotor_raw < 0);
-                digitalWrite(AUTONOMOUS, autonomous)
+                digitalWrite(AUTONOMOUS, autonomous);
                 pauseUntil = millis() + REVERSE_PAUSE_TIME;
             }
             if(abs(lMotor_raw) > 0)
@@ -232,11 +239,11 @@ void loop() {
         {
             digitalWrite(LMOTOR_REVERSE,lMotor<0);
             digitalWrite(RMOTOR_REVERSE,rMotor<0);
-            analogWrite(LMOTOR, abs(lMotor);
-            analogWrite(RMOTOR, abs(rMotor);
+            analogWrite(LMOTOR, abs(lMotor));
+            analogWrite(RMOTOR, abs(rMotor));
             digitalWrite(AUTONOMOUS, autonomous);
 
-            if(VERBOSE && (millis() - lastSend > 1000))
+            if(VERBOSE && (millis() - lastSend > SEND_DELAY))
             {
               Serial.print(" lMotor = ");
               Serial.print(lMotor);
@@ -248,18 +255,26 @@ void loop() {
               Serial.println(autonomous);
               lastSend = millis();
             }
+
+            newMotorValues = false;
         }
     }
-}
+    else
+    {
+        analogWrite(LMOTOR, 0);
+        analogWrite(RMOTOR, 0);
+        if(VERBOSE && (millis() - lastSend > SEND_DELAY))
+        {
+            Serial.print("Setting to 0. Estop = ");
+            Serial.print(Estop_engaged);
+//            Serial.print(", elapsed time = ");
+//            Serial.print(tm);
+//            Serial.print("/");
+//            Serial.print(MAX_INACTIVE_TIME);
+            Serial.print("\n");
+            lastSend = millis();
+        }
+    }
 
-
-
-
-void showParsedData() {
- Serial.print("Message ");
- Serial.println(variableName);
- Serial.print("Integer ");
- Serial.println(integerFromPC);
- Serial.print("Float ");
- Serial.println(floatFromPC);
+    //delay(DELAYTIME);
 }

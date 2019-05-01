@@ -2,6 +2,7 @@
 #define PACRCONTROL_H
 
 #include <thread>
+#include <unistd.h>
 
 struct motorValues
 {
@@ -49,32 +50,42 @@ struct motorValues
 };
 
 
+motorValues ConvertToArcade ( int x1 , int y1 );
+
+
+
+
 class pacrControl
 {
-    public:
-        pacrControl();
-        virtual ~pacrControl();
-        motorValues motors_target;
+public:
+    pacrControl();
+    virtual ~pacrControl();
+    motorValues target;
+    bool enable_soft_start;
 
-    protected:
+    void set_max_speed(double _max_speed) { max_speed = _max_speed; }
+    void set_max_acceleration(double _max_acceleration) { max_acceleration = _max_acceleration; }
+    void set_autonomous_max_speed(double _autonomous_max_speed) { autonomous_max_speed = _autonomous_max_speed; }
+    void set_motor_speed_limiter(double _motor_speed_limiter) { motor_speed_limiter = _motor_speed_limiter; }
 
-    private:
-        motorValues motors_actual;
-        double max_speed; // 255 is the max value you can send. Set this lower for slower
-        double max_acceleration; // 1 is for 0 to max_speed in 1 second;
-        double autonomous_max_speed; // 255 is the max value you can send. Set this lower for slower
-        double motor_speed_limiter; // a value from 0-1, setting the maximum speed.
-        bool enable_soft_start;
-        double drive_increment;
+protected:
+
+private:
+    motorValues actual;
+    double max_speed; // 255 is the max value you can send. Set this lower for slower
+    double max_acceleration; // 1 is for 0 to max_speed in 1 second;
+    double autonomous_max_speed; // 255 is the max value you can send. Set this lower for slower
+    double motor_speed_limiter; // a value from 0-1, setting the maximum speed.
+    double drive_increment;
 
 
-        void updateMotorValues();
-        void sendMotorValues();
-        void motorUpdator();
+    void updateMotorValues();
+    void sendMotorValues();
+    void motorUpdator();
 
-        std::thread runningThread;
-        bool stop_signal_recieved;
-
+    std::thread runningThread;
+    bool stop_signal_recieved;
+    long delayTime;// Delay time for the serial interface, in us
 
 };
 

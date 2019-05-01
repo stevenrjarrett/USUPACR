@@ -1,3 +1,4 @@
+
 // based on the code from the tutorial found here:
 // http://forum.arduino.cc/index.php?topic=288234.0
 
@@ -12,7 +13,7 @@ class motorValueReciever
 {
 public:
 
-    motorValueReciever(_numChars = NUMCHARS, _verbose = false)
+    motorValueReciever( char _endMarker = '\n', _numChars = NUMCHARS, _verbose = false)
     : newData(false),
       verbose(_verbose),
       numChars(_numChars),
@@ -22,8 +23,10 @@ public:
       rMotorValue(0),
       autonomous(false),
       newValues(true),
-      lastTime(0)
+      lastTime(0),
+      endMarker(_endMarker)
     {
+        receivedChars[numChars-1] = '\0';
 //        Serial.begin(baud);
 //        Serial.println("<Arduino is ready>");
     }
@@ -42,7 +45,8 @@ public:
     long elapsedTime() { return millis() - lastTime }
     bool hasNewValues() { return newValues; }
 
-    void showNewData() {
+    void showNewData()
+    {
         if (newData == true) {
             Serial.print("This just in ... ");
             Serial.println(receivedChars);
@@ -51,7 +55,7 @@ public:
 
     bool update()
     {
-        recvWithStartEndMarkers();
+        recvWithEndMarker();
         if(newData)
         {
             if(verbose)
@@ -73,96 +77,81 @@ private:
 
     char *variableName;
     long lastTime;
+    char endMarker;
 
 
 
     void parseData() {
+        static int varToWrite = VAR_LMOTOR;
         if(!newData)
             return;
-        // split the data into its parts
-        bool eos = false;
-
-        char * strtokIndx; // this is used by strtok() as an index
-        int varToWrite = -1;
-
-        strtokIndx = strtok(receivedChars,"=");      // get the first part
-
-        while(!eos)
+        // Parse a value
+        int value = atoi(recievedChars);
+        switch(varToWrite)
         {
-            strcpy(variableName, strtokIndx); // copy it to variableName
-            if(strcmp(variableName, "lMotor") == 0)
-                varToWrite = VAR_LMOTOR;
-            else if(strcmp(variableName, "rMotor") == 0)
-                varToWrite = VAR_RMOTOR;
-            else if(strcmp(variableName, "autonomous") == 0)
-                varToWrite = VAR_AUTONOMOUS;
-            else if(strcmp(variableName, "end") == 0)
-                eos = true;
-
-//            if(eos)
-//                break;
-            if(varToWrite != -1)
-            {
-                strtokIndx = strtok(NULL, "\n");
-                int value = atoi(strtokIndx);
-                switch(varToWrite)
-                {
-                case VAR_LMOTOR:
-                    lMotorValue = value;
-                    break;
-                case VAR_RMOTOR:
-                    rMotorValue = value;
-                    break;
-                case VAR_AUTONOMOUS:
-                    autonomous = (value==0) ? false : true;
-                    break;
-                }
-            }
-            if(!eos)
-                strtokIndx = strtok(NULL,"=");      // get the next part
+        case VAR_LMOTOR:
+            lMotorValue = value;
+            varToWrite = VAR_RMOTOR;
+            break;
+        case VAR_RMOTOR:
+            rMotorValue = value;
+            varToWrite = VAR_LMOTOR;
+            newValues = true;
+            break;
+//        case VAR_AUTONOMOUS:
+//            autonomous = (value==0) ? false : true;
+//            break;
         }
-        newValues = true;
+
         newData   = false;
     }
 
-    void recvWithStartEndMarkers() {
-        static boolean recvInProgress = false;
+
+    void recvWithEndMarker()
+    {
         static byte ndx = 0;
-        char startMarker = '<';
-        char endMarker = '>';
         char rc;
 
-     // if (Serial.available() > 0) {
-        while (Serial.available() > 0 && newData == false) {
+        while (Serial.available() > 0 && newData == false)
+        {
             rc = Serial.read();
 
-            if (recvInProgress == true) {
-                if (rc != endMarker) {
-                    receivedChars[ndx] = rc;
-                    ndx++;
-                    if (ndx >= numChars) {
-                        ndx = numChars - 1;
-                    }
-                }
-                else {
-
-                    receivedChars[ndx] = 'e'; // terminate the string
-                    receivedChars[(ndx+1)%numChars] = 'n'; // terminate the string
-                    receivedChars[(ndx+2)%numChars] = 'd'; // terminate the string
-                    receivedChars[(ndx+3)%numChars] = '\0'; // terminate the string
-                    recvInProgress = false;
-                    ndx = 0;
-                    newData = true;
-                    lastTime = millis();
+            if (rc != endMarker)
+            {
+                receivedChars[ndx] = rc;
+                ndx++;
+                if (ndx >= numChars)
+                {
+                    ndx = numChars - 1;
                 }
             }
-
-            else if (rc == startMarker) {
-                recvInProgress = true;
+            else
+            {
+                receivedChars[ndx] = '\0'; // terminate the string
+                ndx = 0;
+                newData = true;
             }
         }
     }
 };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -250,16 +239,4 @@ void loop() {
             }
         }
     }
-}
-
-
-
-
-void showParsedData() {
- Serial.print("Message ");
- Serial.println(variableName);
- Serial.print("Integer ");
- Serial.println(integerFromPC);
- Serial.print("Float ");
- Serial.println(floatFromPC);
 }

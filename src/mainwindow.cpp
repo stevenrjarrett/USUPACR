@@ -392,18 +392,18 @@ int mainProgram(MainWindow *GUI)
                             speedVal = 0.0;
                         // speedVal should be in a value between 0 and 1 if the person is at the target following
                         // distance +- the distance tolerance.
-                        if(speedVal > 0.25)
-                        {
-                            brakeVal = 0;
-                            speedVal -= 0.25;
-                            speedVal *= 1.0/0.75;
-                            speedVal *= max_speed;
-                        }
-                        else
-                        {
-                            brakeVal = (0.25 - speedVal) * (1.0 / 0.25);
-                            speedVal = 0;
-                        }
+//                        if(speedVal > 0.25)
+//                        {
+//                            brakeVal = 0;
+//                            speedVal -= 0.25;
+//                            speedVal *= 1.0/0.75;
+                        speedVal *= autonomous_max_speed;
+//                        }
+//                        else
+//                        {
+//                            brakeVal = (0.25 - speedVal) * (1.0 / 0.25);
+//                            speedVal = 0;
+//                        }
 
                         // If the person's farther away, fix the speed value.
                     }
